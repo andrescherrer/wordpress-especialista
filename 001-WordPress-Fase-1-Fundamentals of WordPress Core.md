@@ -7,6 +7,10 @@
 
 ---
 
+**Navegação:** [📚 Índice](000-WordPress-Topicos-Index.md) | [Fase 2 →](002-WordPress-Fase-2-WordPress%20REST%20API%20Fundamentals.md)
+
+---
+
 ## 📑 Índice
 
 1. [Arquitetura e Estrutura](#arquitetura-e-estrutura)

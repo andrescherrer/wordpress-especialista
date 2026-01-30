@@ -7,6 +7,10 @@
 
 ---
 
+**Navegação:** [📚 Índice](000-WordPress-Topicos-Index.md) | [← Fase 7](007-WordPress-Fase-7-WP-CLI-Fundamentals.md) | [Fase 9 →](009-WordPress-Fase-9-WP-CLI-Ferramentas.md)
+
+---
+
 ## 📑 Índice
 
 1. [Fundamentos de Performance](#fundamentos-de-performance)

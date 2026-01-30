@@ -7,6 +7,10 @@
 
 ---
 
+**Navegação:** [📚 Índice](000-WordPress-Topicos-Index.md) | [← Fase 3](003-WordPress-Fase-3-REST-API-Advanced.md) | [Fase 5 →](005-WordPress-Fase-5-Custom-Post-Types-Taxonomies.md)
+
+---
+
 ## 📑 Índice
 
 1. [Fundamentos da Settings API](#fundamentos-da-settings-api)

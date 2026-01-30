@@ -3,6 +3,8 @@
 **Data da análise:** Janeiro 2026  
 **Escopo:** Roadmap completo (14 fases + índice)
 
+**Navegação:** [📚 Índice do repositório](000-WordPress-Topicos-Index.md) | [README](README.md)
+
 ---
 
 ## 1. O que é o projeto

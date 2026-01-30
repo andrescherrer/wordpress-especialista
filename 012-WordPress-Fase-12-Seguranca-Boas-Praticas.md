@@ -7,6 +7,10 @@
 
 ---
 
+**Navegação:** [📚 Índice](000-WordPress-Topicos-Index.md) | [← Fase 11](011-WordPress-Fase-11-Multisite-Internacionalizacao.md) | [Fase 13 →](013-WordPress-Fase-13-Arquitetura-Avancada.md)
+
+---
+
 ## 📑 Índice
 
 1. [Fundamentos de Segurança WordPress](#fundamentos-de-segurança-wordpress)

@@ -7,6 +7,10 @@
 
 ---
 
+**Navegação:** [📚 Índice](000-WordPress-Topicos-Index.md) | [← Fase 12](012-WordPress-Fase-12-Seguranca-Boas-Praticas.md) | [Fase 14 →](014-WordPress-Fase-14-Deployment-DevOps.md)
+
+---
+
 ## 📑 Índice
 
 1. [13.1 - SOLID Principles em WordPress](#131-solid-principles-em-wordpress)

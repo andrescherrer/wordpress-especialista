@@ -7,6 +7,10 @@
 
 ---
 
+**Navegação:** [📚 Índice](000-WordPress-Topicos-Index.md) | [← Fase 1](001-WordPress-Fase-1-Fundamentals%20of%20WordPress%20Core.md) | [Fase 3 →](003-WordPress-Fase-3-REST-API-Advanced.md)
+
+---
+
 ## 📑 Índice
 
 1. [Conceitos Básicos da REST API](#conceitos-básicos-da-rest-api)

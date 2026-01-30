@@ -6,6 +6,30 @@
 
 ---
 
+## 📂 Navegação do repositório
+
+| Fase | Documento |
+|:----:|-----------|
+| — | [📚 Índice (este arquivo)](000-WordPress-Topicos-Index.md) |
+| 1 | [Fundamentos do WordPress Core](001-WordPress-Fase-1-Fundamentals%20of%20WordPress%20Core.md) |
+| 2 | [REST API Fundamentals](002-WordPress-Fase-2-WordPress%20REST%20API%20Fundamentals.md) |
+| 3 | [REST API Advanced](003-WordPress-Fase-3-REST-API-Advanced.md) |
+| 4 | [Settings API e Admin](004-WordPress-Fase-4-Settings-Admin.md) |
+| 5 | [Custom Post Types e Taxonomies](005-WordPress-Fase-5-Custom-Post-Types-Taxonomies.md) |
+| 6 | [Shortcodes, Widgets e Gutenberg](006-WordPress-Fase-6-Shortcodes-Widgets-Gutenberg.md) |
+| 7 | [WP-CLI Fundamentals](007-WordPress-Fase-7-WP-CLI-Fundamentals.md) |
+| 8 | [Performance e Caching](008-WordPress-Fase-8-Performance-Cache-Otimizacao.md) |
+| 9 | [WP-CLI Ferramentas](009-WordPress-Fase-9-WP-CLI-Ferramentas.md) |
+| 10 | [Testing, Debugging e Deploy](010-WordPress-Fase-10-Testing-Debugging-Deploy.md) |
+| 11 | [Multisite e Internacionalização](011-WordPress-Fase-11-Multisite-Internacionalizacao.md) |
+| 12 | [Segurança e Boas Práticas](012-WordPress-Fase-12-Seguranca-Boas-Praticas.md) |
+| 13 | [Arquitetura Avançada](013-WordPress-Fase-13-Arquitetura-Avancada.md) |
+| 14 | [Deployment e DevOps](014-WordPress-Fase-14-Deployment-DevOps.md) |
+| + | [Tópicos complementares](015-WordPress-Topicos-Complementares-Avancados.md) |
+| — | [📊 Análise do projeto](ANALISE-PROJETO-WORDPRESS-ESPECIALISTA.md) · [README](README.md) |
+
+---
+
 ## 🎯 FASE 1: Fundamentos do WordPress Core
 
 ### 1.1 Arquitetura e Estrutura do WordPress

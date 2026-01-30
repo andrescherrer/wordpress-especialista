@@ -7,6 +7,10 @@
 
 ---
 
+**Navegação:** [📚 Índice](000-WordPress-Topicos-Index.md) | [← Fase 8](008-WordPress-Fase-8-Performance-Cache-Otimizacao.md) | [Fase 10 →](010-WordPress-Fase-10-Testing-Debugging-Deploy.md)
+
+---
+
 ## 📑 Índice
 
 1. [Fundamentos do WP-CLI](#fundamentos-do-wp-cli)

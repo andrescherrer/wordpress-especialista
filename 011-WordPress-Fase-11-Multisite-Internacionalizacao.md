@@ -7,6 +7,10 @@
 
 ---
 
+**Navegação:** [📚 Índice](000-WordPress-Topicos-Index.md) | [← Fase 10](010-WordPress-Fase-10-Testing-Debugging-Deploy.md) | [Fase 12 →](012-WordPress-Fase-12-Seguranca-Boas-Praticas.md)
+
+---
+
 ## 📑 Índice
 
 1. [Fundamentos do WordPress Multisite](#fundamentos-do-wordpress-multisite)

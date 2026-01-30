@@ -4,6 +4,10 @@
 
 ---
 
+**Navegação:** [📚 Índice](000-WordPress-Topicos-Index.md) | [← Fase 14](014-WordPress-Fase-14-Deployment-DevOps.md)
+
+---
+
 ## 📑 Índice
 
 1. [Advanced API Topics](#advanced-api-topics)

@@ -7,6 +7,10 @@
 
 ---
 
+**Navegação:** [📚 Índice](000-WordPress-Topicos-Index.md) | [← Fase 5](005-WordPress-Fase-5-Custom-Post-Types-Taxonomies.md) | [Fase 7 →](007-WordPress-Fase-7-WP-CLI-Fundamentals.md)
+
+---
+
 ## 📑 Índice
 
 1. [Fundamentos de Shortcodes](#fundamentos-de-shortcodes)

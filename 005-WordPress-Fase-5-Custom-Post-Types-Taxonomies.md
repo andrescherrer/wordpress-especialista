@@ -7,6 +7,10 @@
 
 ---
 
+**Navegação:** [📚 Índice](000-WordPress-Topicos-Index.md) | [← Fase 4](004-WordPress-Fase-4-Settings-Admin.md) | [Fase 6 →](006-WordPress-Fase-6-Shortcodes-Widgets-Gutenberg.md)
+
+---
+
 ## 📑 Índice
 
 1. [Fundamentos de Custom Post Types (CPT)](#fundamentos-de-custom-post-types-cpt)

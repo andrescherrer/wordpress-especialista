@@ -7,6 +7,10 @@
 
 ---
 
+**Navegação:** [📚 Índice](000-WordPress-Topicos-Index.md) | [← Fase 9](009-WordPress-Fase-9-WP-CLI-Ferramentas.md) | [Fase 11 →](011-WordPress-Fase-11-Multisite-Internacionalizacao.md)
+
+---
+
 ## 📑 Índice
 
 1. [Fundamentos de Testing](#fundamentos-de-testing)
