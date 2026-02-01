@@ -6,6 +6,7 @@ Roadmap completo para especialista em desenvolvimento WordPress (PHP).
 
 - [📚 Índice de tópicos](000-WordPress-Topicos-Index.md) — visão geral de todas as fases
 - [📊 Análise do projeto](ANALISE-PROJETO-WORDPRESS-ESPECIALISTA.md) — resumo e profundidade do conteúdo
+- [📋 Planejamento: projeto que usa todos os recursos](PLANEJAMENTO-PROJETO-APLICACAO-WORDPRESS.md) — aplicação que integra as 14 fases + aprofundamento por tópico
 - [Fase 1](001-WordPress-Fase-1-Fundamentals%20of%20WordPress%20Core.md) 
 - [Fase 2](002-WordPress-Fase-2-WordPress%20REST%20API%20Fundamentals.md) 
 - [Fase 3](003-WordPress-Fase-3-REST-API-Advanced.md) 
