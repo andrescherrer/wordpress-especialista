@@ -7,7 +7,7 @@
 
 ---
 
-**Navegação:** [Índice](000-WordPress-Indice-Topicos.md) | [← Fase 17](017-WordPress-Fase-17-Testes-Em-Toda-Fase.md) | [Fase 19 →](019-WordPress-Fase-19-Anti-padroes-Seguranca.md)
+**Navegação:** [Índice](./000-WordPress-Indice-Topicos.md) | [← Fase 17](./017-WordPress-Fase-17-Testes-Em-Toda-Fase.md) | [Fase 19 →](./019-WordPress-Fase-19-Anti-padroes-Seguranca.md)
 
 ---
 
@@ -870,4 +870,4 @@ Fase 12 (Segurança Avançada)
 
 ---
 
-**Navegação:** [Índice](000-WordPress-Indice-Topicos.md) | [← Fase 17](017-WordPress-Fase-17-Testes-Em-Toda-Fase.md) | [Fase 19 →](019-WordPress-Fase-19-Anti-padroes-Seguranca.md)
+**Navegação:** [Índice](./000-WordPress-Indice-Topicos.md) | [← Fase 17](./017-WordPress-Fase-17-Testes-Em-Toda-Fase.md) | [Fase 19 →](./019-WordPress-Fase-19-Anti-padroes-Seguranca.md)

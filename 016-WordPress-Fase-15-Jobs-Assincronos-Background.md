@@ -7,7 +7,7 @@
 
 ---
 
-**Navegação:** [Índice](000-WordPress-Indice-Topicos.md) | [← Fase 14](014-WordPress-Fase-14-Implantacao-DevOps.md) | [Fase 16 →](015-WordPress-Fase-16-Topicos-Complementares-Avancados.md)
+**Navegação:** [Índice](./000-WordPress-Indice-Topicos.md) | [← Fase 14](./014-WordPress-Fase-14-Implantacao-DevOps.md) | [Fase 16 →](./015-WordPress-Fase-16-Topicos-Complementares-Avancados.md)
 
 ---
 
@@ -3437,4 +3437,4 @@ add_action('generate_metadata', function($attachment_id) {
 
 ---
 
-**Navegação:** [Índice](000-WordPress-Indice-Topicos.md) | [← Fase 14](014-WordPress-Fase-14-Implantacao-DevOps.md) | [Fase 16 →](015-WordPress-Fase-16-Topicos-Complementares-Avancados.md)
+**Navegação:** [Índice](./000-WordPress-Indice-Topicos.md) | [← Fase 14](./014-WordPress-Fase-14-Implantacao-DevOps.md) | [Fase 16 →](./015-WordPress-Fase-16-Topicos-Complementares-Avancados.md)

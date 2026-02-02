@@ -1,6 +1,6 @@
 # 🚀 FASE 14: Deployment e DevOps - Guia Completo
 
-**Navegação:** [Índice](000-WordPress-Indice-Topicos.md) | [← Fase 13](013-WordPress-Fase-13-Arquitetura-Avancada.md) | [Fase 15 →](016-WordPress-Fase-15-Jobs-Assincronos-Background.md)
+**Navegação:** [Índice](./000-WordPress-Indice-Topicos.md) | [← Fase 13](./013-WordPress-Fase-13-Arquitetura-Avancada.md) | [Fase 15 →](./016-WordPress-Fase-15-Jobs-Assincronos-Background.md)
 
 ---
 

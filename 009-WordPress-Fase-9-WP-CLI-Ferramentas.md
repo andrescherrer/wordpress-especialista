@@ -7,7 +7,7 @@
 
 ---
 
-**Navegação:** [Índice](000-WordPress-Indice-Topicos.md) | [← Fase 8](008-WordPress-Fase-8-Performance-Cache-Otimizacao.md) | [Fase 10 →](010-WordPress-Fase-10-Testes-Debug-Implantacao.md)
+**Navegação:** [Índice](./000-WordPress-Indice-Topicos.md) | [← Fase 8](./008-WordPress-Fase-8-Performance-Cache-Otimizacao.md) | [Fase 10 →](./010-WordPress-Fase-10-Testes-Debug-Implantacao.md)
 
 ---
 

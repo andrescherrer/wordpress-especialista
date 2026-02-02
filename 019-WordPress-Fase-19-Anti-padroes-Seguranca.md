@@ -7,7 +7,7 @@
 
 ---
 
-**Navegação:** [Índice](000-WordPress-Indice-Topicos.md) | [← Fase 18](018-WordPress-Fase-18-Caminhos-Aprendizado.md) | [Fase 12: Segurança](012-WordPress-Fase-12-Seguranca-Boas-Praticas.md) | [Fase 20 →](020-WordPress-Fase-20-Boas-Praticas-Tratamento-Erros.md)
+**Navegação:** [Índice](./000-WordPress-Indice-Topicos.md) | [← Fase 18](./018-WordPress-Fase-18-Caminhos-Aprendizado.md) | [Fase 12: Segurança](./012-WordPress-Fase-12-Seguranca-Boas-Praticas.md) | [Fase 20 →](./020-WordPress-Fase-20-Boas-Praticas-Tratamento-Erros.md)
 
 ---
 
@@ -1726,10 +1726,10 @@ define('DB_NAME', 'wordpress_db');
 
 ### Recursos Adicionais
 
-- [Fase 12: Segurança Avançada](012-WordPress-Fase-12-Seguranca-Boas-Praticas.md)
+- [Fase 12: Segurança Avançada](./012-WordPress-Fase-12-Seguranca-Boas-Praticas.md)
 - [OWASP Top 10](https://owasp.org/www-project-top-ten/)
 - [WordPress Security Handbook](https://developer.wordpress.org/advanced-administration/security/)
 
 ---
 
-**Navegação:** [Índice](000-WordPress-Indice-Topicos.md) | [← Fase 18](018-WordPress-Fase-18-Caminhos-Aprendizado.md) | [Fase 12: Segurança](012-WordPress-Fase-12-Seguranca-Boas-Praticas.md) | [Fase 20 →](020-WordPress-Fase-20-Boas-Praticas-Tratamento-Erros.md)
+**Navegação:** [Índice](./000-WordPress-Indice-Topicos.md) | [← Fase 18](./018-WordPress-Fase-18-Caminhos-Aprendizado.md) | [Fase 12: Segurança](./012-WordPress-Fase-12-Seguranca-Boas-Praticas.md) | [Fase 20 →](./020-WordPress-Fase-20-Boas-Praticas-Tratamento-Erros.md)

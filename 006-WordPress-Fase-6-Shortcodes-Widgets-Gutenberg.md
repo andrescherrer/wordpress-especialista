@@ -7,7 +7,7 @@
 
 ---
 
-**Navegação:** [Índice](000-WordPress-Indice-Topicos.md) | [← Fase 5](005-WordPress-Fase-5-CPT-Taxonomias.md) | [Fase 7 →](007-WordPress-Fase-7-WP-CLI-Fundamentos.md)
+**Navegação:** [Índice](./000-WordPress-Indice-Topicos.md) | [← Fase 5](./005-WordPress-Fase-5-CPT-Taxonomias.md) | [Fase 7 →](./007-WordPress-Fase-7-WP-CLI-Fundamentos.md)
 
 ---
 
