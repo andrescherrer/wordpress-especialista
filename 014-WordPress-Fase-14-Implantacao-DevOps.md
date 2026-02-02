@@ -1,33 +1,33 @@
 # 🚀 FASE 14: Deployment e DevOps - Guia Completo
 
-**Navegação:** [Índice](./000-WordPress-Indice-Topicos.md) | [← Fase 13](./013-WordPress-Fase-13-Arquitetura-Avancada.md) | [Fase 15 →](./016-WordPress-Fase-15-Jobs-Assincronos-Background.md)
+**Navegação:** [Índice](./000-WordPress-Indice-Topicos.md) | [← Fase 13](./013-WordPress-Fase-13-Arquitetura-Avancada.md) | [Fase 15 →](./015-WordPress-Fase-15-Topicos-Complementares-Avancados.md)
 
 ---
 
 ## 📑 Índice
 
 1. [Objetivos de Aprendizado](#objetivos-de-aprendizado)
-2. [Autoavaliação](#autoavaliacao)
-3. [Projeto Prático](#projeto-pratico)
-4. [Equívocos Comuns](#equivocos-comuns)
-5. [14.1 - Development Environment (Docker)](#141-development-environment-docker-para-wordpress)
-6. [14.2 - Staging Environment](#142-staging-environment-replicar-production)
-7. [14.3 - Production Environment](#143-production-environment-configuracao-de-production)
-8. [14.4 - Version Control (Git)](#144-version-control-git-estrategias-e-configuracoes)
-9. [14.5 - CI/CD Pipeline](#145-cicd-pipeline)
-10. [14.6 - Automated Testing in Pipeline](#146-automated-testing-in-pipeline)
-11. [14.7 - Automated Deployment](#147-automated-deployment)
-12. [14.8 - Monitoring e Logging](#148-monitoring-e-logging)
-13. [14.9 - Backup Strategy](#149-backup-strategy)
-14. [14.10 - Disaster Recovery](#1410-disaster-recovery)
-15. [RTO - Recovery Time Objective](#rto-recovery-time-objective-tempo-para-recuperacao)
-16. [RPO - Recovery Point Objective](#rpo-recovery-point-objective-perda-maxima-aceitavel-de-dados)
-17. [Informações Críticas](#informacoes-criticas)
-18. [Localizações de Backups](#localizacoes-de-backups)
-19. [Contatos de Emergência](#contatos-de-emergencia)
-20. [Recovery Checklists](#recovery-checklists)
-21. [Scripts Críticos](#scripts-criticos)
-22. [Lições Aprendidas](#licoes-aprendidas)
+2. [14.1 - Development Environment (Docker)](#141-development-environment-docker-para-wordpress)
+3. [14.2 - Staging Environment](#142-staging-environment-replicar-production)
+4. [14.3 - Production Environment](#143-production-environment-configuracao-de-production)
+5. [14.4 - Version Control (Git)](#144-version-control-git-estrategias-e-configuracoes)
+6. [14.5 - CI/CD Pipeline](#145-cicd-pipeline)
+7. [14.6 - Automated Testing in Pipeline](#146-automated-testing-in-pipeline)
+8. [14.7 - Automated Deployment](#147-automated-deployment)
+9. [14.8 - Monitoring e Logging](#148-monitoring-e-logging)
+10. [14.9 - Backup Strategy](#149-backup-strategy)
+11. [14.10 - Disaster Recovery](#1410-disaster-recovery)
+12. [RTO - Recovery Time Objective](#rto-recovery-time-objective-tempo-para-recuperacao)
+13. [RPO - Recovery Point Objective](#rpo-recovery-point-objective-perda-maxima-aceitavel-de-dados)
+14. [Informações Críticas](#informacoes-criticas)
+15. [Localizações de Backups](#localizacoes-de-backups)
+16. [Contatos de Emergência](#contatos-de-emergencia)
+17. [Recovery Checklists](#recovery-checklists)
+18. [Scripts Críticos](#scripts-criticos)
+19. [Lições Aprendidas](#licoes-aprendidas)
+20. [Autoavaliação](#autoavaliacao)
+21. [Projeto Prático](#projeto-pratico)
+22. [Equívocos Comuns](#equivocos-comuns)
 23. [Resumo - Checklist Fase 14](#resumo-checklist-fase-14)
 24. [Próximos Passos](#proximos-passos)
 25. [Referências Úteis](#referencias-uteis)
@@ -47,78 +47,6 @@ Ao final desta fase, você será capaz de:
 6. ✅ Implementar estratégias de backup incluindo Point-in-Time Recovery (PITR)
 7. ✅ Testar restaurações de backup automaticamente para garantir validade do backup
 8. ✅ Aplicar boas práticas DevOps para deployments WordPress em produção
-
-<a id="autoavaliacao"></a>
-## 📝 Autoavaliação
-
-Teste seu entendimento:
-
-- [ ] Como você gerencia secrets com segurança em ambientes Docker e CI/CD?
-- [ ] Qual é a diferença entre ambientes de desenvolvimento, staging e produção?
-- [ ] Como você implementa health checks para serviços WordPress?
-- [ ] O que é Point-in-Time Recovery e como funciona com binlogs MySQL?
-- [ ] Por que é importante testar restaurações de backup regularmente?
-- [ ] Como você configura pipelines de deployment automatizados?
-- [ ] O que deve ser incluído em um checklist de deployment?
-- [ ] Como você trata migrações de banco de dados durante deployment?
-
-<a id="projeto-pratico"></a>
-## 🛠️ Projeto Prático
-
-**Construir:** Setup DevOps Completo
-
-Crie um setup DevOps completo que inclua:
-- Ambiente de desenvolvimento Docker
-- Pipeline CI/CD com testes automatizados
-- Sistema de gerenciamento de secrets
-- Health checks para todos os serviços
-- Estratégia de backup com PITR
-- Testes automatizados de restauração
-- Scripts de automação de deployment
-- Monitoramento e alertas
-
-**Tempo estimado:** 20-25 horas  
-**Dificuldade:** Avançado
-
----
-
-<a id="equivocos-comuns"></a>
-## ❌ Equívocos Comuns
-
-### Equívoco 1: "Docker é apenas para produção"
-**Realidade:** Docker é excelente para desenvolvimento (ambientes consistentes) e produção (containerização). Use em ambos.
-
-**Por que é importante:** Docker em desenvolvimento previne problemas de "funciona na minha máquina" e corresponde à produção.
-
-**Como lembrar:** Docker = ambientes consistentes em todos os lugares (dev, staging, prod).
-
-### Equívoco 2: "Arquivos .env são seguros"
-**Realidade:** Arquivos .env são convenientes mas não são seguros se commitados no controle de versão. Use gerenciamento de secrets em produção.
-
-**Por que é importante:** Arquivos .env commitados expõem secrets. Use gerenciamento adequado de secrets.
-
-**Como lembrar:** .env = conveniência de desenvolvimento. Gerenciador de secrets = segurança de produção.
-
-### Equívoco 3: "Health checks são opcionais"
-**Realidade:** Health checks são essenciais para orquestração de containers, load balancing e monitoramento. Sem eles, containers não saudáveis continuam recebendo tráfego.
-
-**Por que é importante:** Health checks permitem recuperação automática e previnem servir tráfego de containers quebrados.
-
-**Como lembrar:** Health checks = recuperação automática + roteamento de tráfego.
-
-### Equívoco 4: "Backups são suficientes para disaster recovery"
-**Realidade:** Backups são inúteis se você não pode restaurá-los. Você precisa de procedimentos de restauração testados, alvos RTO/RPO e planos de recuperação documentados.
-
-**Por que é importante:** Backups não testados frequentemente falham quando necessários. Teste restaurações regularmente.
-
-**Como lembrar:** Backups + restaurações testadas + plano de recuperação = disaster recovery.
-
-### Equívoco 5: "CI/CD é apenas para equipes grandes"
-**Realidade:** CI/CD beneficia qualquer tamanho de equipe ao capturar erros cedo, automatizar deployments e garantir consistência.
-
-**Por que é importante:** Mesmo desenvolvedores solo se beneficiam de testes e deployment automatizados.
-
-**Como lembrar:** CI/CD = automação + consistência, independente do tamanho da equipe.
 
 ---
 

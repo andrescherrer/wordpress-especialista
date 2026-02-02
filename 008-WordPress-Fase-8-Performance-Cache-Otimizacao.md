@@ -14,20 +14,20 @@
 ## 📑 Índice
 
 1. [Objetivos de Aprendizado](#objetivos-de-aprendizado)
-2. [Autoavaliação](#autoavaliacao)
-3. [Projeto Prático](#projeto-pratico)
-4. [Equívocos Comuns](#equivocos-comuns)
-5. [Fundamentos de Performance no WordPress](#fundamentos-de-performance-no-wordpress)
-6. [Object Cache](#object-cache)
-7. [Transients API](#transients-api)
-8. [Fragment Caching](#fragment-caching)
-9. [Query Optimization](#query-optimization)
-10. [Page Caching](#page-caching)
-11. [CDN Integration](#cdn-integration)
-12. [Asset Optimization](#asset-optimization)
-13. [Database Optimization](#database-optimization)
-14. [Performance Monitoring](#performance-monitoring)
-15. [Boas Práticas de Performance](#boas-praticas-de-performance)
+2. [Fundamentos de Performance no WordPress](#fundamentos-de-performance-no-wordpress)
+3. [Object Cache](#object-cache)
+4. [Transients API](#transients-api)
+5. [Fragment Caching](#fragment-caching)
+6. [Query Optimization](#query-optimization)
+7. [Page Caching](#page-caching)
+8. [CDN Integration](#cdn-integration)
+9. [Asset Optimization](#asset-optimization)
+10. [Database Optimization](#database-optimization)
+11. [Performance Monitoring](#performance-monitoring)
+12. [Boas Práticas de Performance](#boas-praticas-de-performance)
+13. [Autoavaliação](#autoavaliacao)
+14. [Projeto Prático](#projeto-pratico)
+15. [Equívocos Comuns](#equivocos-comuns)
 
 ---
 
@@ -44,70 +44,6 @@ Ao final desta fase, você será capaz de:
 6. ✅ Otimizar queries de banco de dados para reduzir carga
 7. ✅ Implementar page caching e integração CDN
 8. ✅ Aplicar boas práticas de monitoramento e otimização de performance
-
-<a id="autoavaliacao"></a>
-## 📝 Autoavaliação
-
-Teste seu entendimento:
-
-- [ ] Qual é a diferença entre Object Cache e Transients API?
-- [ ] Como você previne cache stampede quando múltiplos processos tentam regenerar cache?
-- [ ] O que é o padrão stale-while-revalidate e quando você deve usá-lo?
-- [ ] Como você implementa invalidação em cascata quando dados relacionados mudam?
-- [ ] Quais são os trade-offs entre taxa de cache hit e frescor do cache?
-- [ ] Como você otimiza queries lentas usando `EXPLAIN` e indexação?
-- [ ] Qual é a diferença entre page caching e object caching?
-- [ ] Como você mede e monitora performance de cache?
-
-<a id="projeto-pratico"></a>
-## 🛠️ Projeto Prático
-
-**Construir:** Plugin de Otimização de Performance
-
-Crie um plugin que:
-- Implemente Object Cache com Redis
-- Use Transients API para queries caras
-- Implemente padrões de invalidação de cache
-- Inclua cache warming para conteúdo popular
-- Monitore taxas de cache hit/miss
-- Otimize queries de banco de dados
-- Forneça dashboard admin para estatísticas de cache
-
-**Tempo estimado:** 12-15 horas  
-**Dificuldade:** Avançado
-
----
-
-<a id="equivocos-comuns"></a>
-## ❌ Equívocos Comuns
-
-### Equívoco 1: "Mais cache é sempre melhor"
-**Realidade:** Excesso de cache pode causar dados desatualizados, problemas de memória e dificuldades de debugging. Cache estrategicamente, não em todos os lugares.
-
-**Por que é importante:** Cache inadequado pode causar bugs, problemas de performance e pesadelos de manutenção.
-
-**Como lembrar:** Cache = equilíbrio entre frescor e performance. Cache o que faz sentido.
-
-### Equívoco 2: "Object Cache e Transients são a mesma coisa"
-**Realidade:** Object Cache é em memória (Redis/Memcached), Transients usam banco de dados. Diferentes casos de uso e características de performance.
-
-**Por que é importante:** Escolher o método de cache errado pode prejudicar performance ou causar perda de dados.
-
-**Como lembrar:** Object Cache = rápido, volátil. Transients = persistente, mais lento.
-
-### Equívoco 3: "Invalidação de cache é simples"
-**Realidade:** Invalidação de cache é um dos problemas mais difíceis em ciência da computação. Você precisa de estratégias como versionamento, invalidação em cascata e TTL.
-
-**Por que é importante:** Invalidação ruim leva a dados desatualizados e bugs difíceis de debugar.
-
-**Como lembrar:** Invalidação de cache = problema complexo. Use padrões comprovados (versionamento, cascata).
-
-### Equívoco 4: "Page caching elimina a necessidade de otimização de queries"
-**Realidade:** Page caching ajuda, mas queries lentas ainda impactam geração de cache, páginas admin e usuários logados. Otimize queries também.
-
-**Por que é importante:** Queries lentas afetam cache warming, performance admin e experiência de usuários logados.
-
-**Como lembrar:** Page cache + otimização de queries = solução completa.
 
 ---
 
@@ -322,7 +258,7 @@ if (wp_using_persistent_cache()) {
 }
 ```
 
-### 8.4 Cache Invalidation Patterns
+### 3.4 Cache Invalidation Patterns
 
 **Problema:** Cache desatualizado pode servir dados incorretos ou obsoletos aos usuários.
 
@@ -770,7 +706,7 @@ class Meu_Plugin_Complex_Cache {
 new Meu_Plugin_Complex_Cache();
 ```
 
-### 8.5 Cache Warming Strategies
+### 4.1 Cache Warming Strategies
 
 **Problema:** Cache vazio após deploy ou restart causa lentidão inicial.
 
@@ -967,7 +903,7 @@ add_action('publish_post', function($post_id) {
 });
 ```
 
-### 8.6 Cache Monitoring e Debugging
+### 4.2 Cache Monitoring e Debugging
 
 **Problema:** Difícil diagnosticar problemas de cache sem ferramentas adequadas.
 
@@ -1197,7 +1133,7 @@ class Cache_Debug_Tool {
 new Cache_Debug_Tool();
 ```
 
-### 8.7 Exemplos Reais: WooCommerce, Blog, etc.
+### 4.3 Exemplos Reais: WooCommerce, Blog, etc.
 
 #### 8.7.1 WooCommerce: Cache de Produtos
 
@@ -2379,6 +2315,72 @@ TTI           | Interactive   | < 3.8 s
 CLS           | Layout Shift  | < 0.1
 Total Size    | Page Weight   | < 5 MB
 ```
+
+---
+
+<a id="autoavaliacao"></a>
+## 📝 Autoavaliação
+
+Teste seu entendimento:
+
+- [ ] Qual é a diferença entre Object Cache e Transients API?
+- [ ] Como você previne cache stampede quando múltiplos processos tentam regenerar cache?
+- [ ] O que é o padrão stale-while-revalidate e quando você deve usá-lo?
+- [ ] Como você implementa invalidação em cascata quando dados relacionados mudam?
+- [ ] Quais são os trade-offs entre taxa de cache hit e frescor do cache?
+- [ ] Como você otimiza queries lentas usando `EXPLAIN` e indexação?
+- [ ] Qual é a diferença entre page caching e object caching?
+- [ ] Como você mede e monitora performance de cache?
+
+<a id="projeto-pratico"></a>
+## 🛠️ Projeto Prático
+
+**Construir:** Plugin de Otimização de Performance
+
+Crie um plugin que:
+- Implemente Object Cache com Redis
+- Use Transients API para queries caras
+- Implemente padrões de invalidação de cache
+- Inclua cache warming para conteúdo popular
+- Monitore taxas de cache hit/miss
+- Otimize queries de banco de dados
+- Forneça dashboard admin para estatísticas de cache
+
+**Tempo estimado:** 12-15 horas  
+**Dificuldade:** Avançado
+
+---
+
+<a id="equivocos-comuns"></a>
+## ❌ Equívocos Comuns
+
+### Equívoco 1: "Mais cache é sempre melhor"
+**Realidade:** Excesso de cache pode causar dados desatualizados, problemas de memória e dificuldades de debugging. Cache estrategicamente, não em todos os lugares.
+
+**Por que é importante:** Cache inadequado pode causar bugs, problemas de performance e pesadelos de manutenção.
+
+**Como lembrar:** Cache = equilíbrio entre frescor e performance. Cache o que faz sentido.
+
+### Equívoco 2: "Object Cache e Transients são a mesma coisa"
+**Realidade:** Object Cache é em memória (Redis/Memcached), Transients usam banco de dados. Diferentes casos de uso e características de performance.
+
+**Por que é importante:** Escolher o método de cache errado pode prejudicar performance ou causar perda de dados.
+
+**Como lembrar:** Object Cache = rápido, volátil. Transients = persistente, mais lento.
+
+### Equívoco 3: "Invalidação de cache é simples"
+**Realidade:** Invalidação de cache é um dos problemas mais difíceis em ciência da computação. Você precisa de estratégias como versionamento, invalidação em cascata e TTL.
+
+**Por que é importante:** Invalidação ruim leva a dados desatualizados e bugs difíceis de debugar.
+
+**Como lembrar:** Invalidação de cache = problema complexo. Use padrões comprovados (versionamento, cascata).
+
+### Equívoco 4: "Page caching elimina a necessidade de otimização de queries"
+**Realidade:** Page caching ajuda, mas queries lentas ainda impactam geração de cache, páginas admin e usuários logados. Otimize queries também.
+
+**Por que é importante:** Queries lentas afetam cache warming, performance admin e experiência de usuários logados.
+
+**Como lembrar:** Page cache + otimização de queries = solução completa.
 
 ---
 

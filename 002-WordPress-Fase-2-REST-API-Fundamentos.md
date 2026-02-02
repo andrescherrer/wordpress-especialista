@@ -14,19 +14,19 @@
 ## 📑 Índice
 
 1. [Objetivos de Aprendizado](#objetivos-de-aprendizado)
-2. [Autoavaliação](#autoavaliacao)
-3. [Projeto Prático](#projeto-pratico)
-4. [Equívocos Comuns](#equivocos-comuns)
-5. [Conceitos Básicos da REST API](#conceitos-basicos-da-rest-api)
-6. [Registrar Rotas Customizadas](#registrar-rotas-customizadas)
-7. [REST Controllers (OOP)](#rest-controllers-oop)
-8. [Validação e Sanitização](#validacao-e-sanitizacao)
-9. [Security Essentials](#security-essentials)
-10. [REST Authentication](#rest-authentication)
-11. [REST Permissions](#rest-permissions)
-12. [REST Response e Error Handling](#rest-response-e-error-handling)
-13. [Documentação e Schema](#documentacao-e-schema)
-14. [REST Filters Avançados](#rest-filters-avancados)
+2. [Conceitos Básicos da REST API](#conceitos-basicos-da-rest-api)
+3. [Registrar Rotas Customizadas](#registrar-rotas-customizadas)
+4. [REST Controllers (OOP)](#rest-controllers-oop)
+5. [Validação e Sanitização](#validacao-e-sanitizacao)
+6. [Security Essentials](#security-essentials)
+7. [REST Authentication](#rest-authentication)
+8. [REST Permissions](#rest-permissions)
+9. [REST Response e Error Handling](#rest-response-e-error-handling)
+10. [Documentação e Schema](#documentacao-e-schema)
+11. [REST Filters Avançados](#rest-filters-avancados)
+12. [Autoavaliação](#autoavaliacao)
+13. [Projeto Prático](#projeto-pratico)
+14. [Equívocos Comuns](#equivocos-comuns)
 15. [Resumo da Fase 2](#resumo-da-fase-2)
 
 ---
@@ -44,76 +44,6 @@ Ao final desta fase, você será capaz de:
 6. ✅ Tratar erros adequadamente e retornar respostas de erro estruturadas
 7. ✅ Documentar APIs usando schemas OpenAPI/Swagger
 8. ✅ Usar filters REST para customizar parâmetros de coleção e comportamento de queries
-
-<a id="autoavaliacao"></a>
-## 📝 Autoavaliação
-
-Teste seu entendimento:
-
-- [ ] Qual é a diferença entre `validate_callback` e `sanitize_callback` na REST API?
-- [ ] Como você previne SQL injection em endpoints da REST API?
-- [ ] Quais códigos de status HTTP você deve usar para diferentes cenários (200, 201, 400, 401, 404)?
-- [ ] Como a autenticação JWT funciona e como você verifica tokens?
-- [ ] Qual é o propósito de `permission_callback` em rotas REST?
-- [ ] Como você adiciona parâmetros de query customizados em endpoints de coleção da REST API?
-- [ ] Qual é a diferença entre `WP_REST_Response` e `WP_Error`?
-- [ ] Como você implementa idempotência em endpoints da REST API?
-
-<a id="projeto-pratico"></a>
-## 🛠️ Projeto Prático
-
-**Construir:** API de Produtos E-commerce
-
-Crie uma REST API para gerenciar produtos que:
-- Suporte operações CRUD (Create, Read, Update, Delete)
-- Implemente autenticação JWT
-- Inclua validação e sanitização adequadas
-- Retorne documentação OpenAPI/Swagger
-- Trate erros graciosamente com códigos de status apropriados
-- Suporte filtragem, ordenação e paginação
-
-**Tempo estimado:** 10-12 horas  
-**Dificuldade:** Intermediário
-
----
-
-<a id="equivocos-comuns"></a>
-## ❌ Equívocos Comuns
-
-### Equívoco 1: "Endpoints da REST API são automaticamente seguros"
-**Realidade:** Endpoints da REST API requerem verificações explícitas de permissão, validação de entrada e sanitização de saída. Por padrão, eles não são seguros.
-
-**Por que é importante:** Sem segurança adequada, sua API pode ser explorada para acesso não autorizado, vazamento de dados ou ataques.
-
-**Como lembrar:** Sempre implemente `permission_callback`, valide entradas e sanitize saídas para cada endpoint.
-
-### Equívoco 2: "Sanitização e validação são a mesma coisa"
-**Realidade:** Validação verifica se os dados estão corretos (ex: é um email?), sanitização limpa/transforma dados (ex: remove tags HTML). Você precisa de ambos.
-
-**Por que é importante:** Validação previne dados ruins, sanitização previne problemas de segurança. Usar apenas um deixa vulnerabilidades.
-
-**Como lembrar:** Validar = "Está correto?", Sanitizar = "Tornar seguro".
-
-### Equívoco 3: "Tokens JWT não expiram"
-**Realidade:** Tokens JWT devem ter tempos de expiração (claim `exp`) e ser validados em cada requisição. Tokens sem expiração são um risco de segurança.
-
-**Por que é importante:** Tokens roubados sem expiração podem ser usados indefinidamente. Expiração limita a janela de dano.
-
-**Como lembrar:** Sempre defina o claim `exp` e valide-o. Renove tokens antes da expiração.
-
-### Equívoco 4: "REST API não precisa de nonces"
-**Realidade:** Embora a REST API use autenticação diferente (Application Passwords, JWT), você ainda precisa proteger contra CSRF em certos cenários, especialmente para operações que alteram estado.
-
-**Por que é importante:** Endpoints da REST API ainda podem ser vulneráveis a ataques CSRF se não protegidos adequadamente.
-
-**Como lembrar:** REST API = método de autenticação diferente, mas ainda precisa de proteção para operações que alteram estado.
-
-### Equívoco 5: "Todos os endpoints REST devem retornar JSON"
-**Realidade:** Embora JSON seja comum, a REST API pode retornar diferentes formatos. O importante é consistência e headers de content-type adequados.
-
-**Por que é importante:** Diferentes clientes podem precisar de diferentes formatos. Sempre defina headers `Content-Type` apropriados.
-
-**Como lembrar:** REST = Representação, não necessariamente JSON. Use tipos de conteúdo apropriados.
 
 ---
 
@@ -245,7 +175,7 @@ curl -X POST https://seusite.com/wp-json/wp/v2/posts \
 <a id="registrar-rotas-customizadas"></a>
 ## 🛣️ Registrar Rotas Customizadas
 
-### 2.5 Função `register_rest_route()`
+### 3.1 Função `register_rest_route()`
 
 ```php
 <?php
@@ -263,7 +193,7 @@ function registrar_rotas_meu_plugin() {
 ?>
 ```
 
-### 2.6 Exemplo Prático Completo
+### 3.2 Exemplo Prático Completo
 
 ```php
 <?php
@@ -704,7 +634,7 @@ function verificar_permissao_deletar(WP_REST_Request $request) {
 <a id="rest-controllers-oop"></a>
 ## 🏗️ REST Controllers (OOP)
 
-### 2.7 Classe Base WP_REST_Controller
+### 4.1 Classe Base WP_REST_Controller
 
 Para APIs mais robustas e profissionais, use o padrão **Controller** estendendo `WP_REST_Controller`:
 
@@ -1007,7 +937,7 @@ new Product_Controller();
 <a id="validacao-e-sanitizacao"></a>
 ## ✅ Validação e Sanitização
 
-### 2.8 Conceitos Essenciais
+### 5.1 Conceitos Essenciais
 
 - **Validação**: Verifica se o dado está no formato correto
 - **Sanitização**: Remove/escapa dados perigosos
@@ -1167,7 +1097,7 @@ $args = [
 <a id="security-essentials"></a>
 ## 🔒 Security Essentials
 
-### 2.9 Por Que Segurança Desde o Início?
+### 6.1 Por Que Segurança Desde o Início?
 
 **Problema:** Desenvolvedores aprendem padrões inseguros primeiro e depois precisam "desaprender".
 
@@ -1179,7 +1109,7 @@ $args = [
 - ✅ Menos vulnerabilidades em produção
 - ✅ Menos retrabalho
 
-### 2.9.1 Input Validation vs Sanitization vs Escaping
+### 6.1.1 Input Validation vs Sanitization vs Escaping
 
 É fundamental entender a diferença entre esses três conceitos:
 
@@ -1332,7 +1262,7 @@ echo $user_input; // PERIGOSO! Pode conter XSS
 echo esc_html($user_input); // SEGURO!
 ```
 
-### 2.9.2 Regra de Ouro: Validate, Sanitize, Escape
+### 6.1.2 Regra de Ouro: Validate, Sanitize, Escape
 
 ```
 ENTRADA (Input)
@@ -1377,7 +1307,7 @@ function processar_formulario(): void {
 }
 ```
 
-### 2.9.3 Funções de Sanitização Comuns
+### 6.1.3 Funções de Sanitização Comuns
 
 ```php
 <?php
@@ -1415,7 +1345,7 @@ sanitize_title($title);             // Para slugs, títulos
 array_map('sanitize_text_field', $array);  // Sanitiza cada item
 ```
 
-### 2.9.4 Funções de Escaping Comuns
+### 6.1.4 Funções de Escaping Comuns
 
 ```php
 <?php
@@ -1446,7 +1376,7 @@ esc_textarea($text);                // Escapa para textarea
 wp_json_encode($data);              // Codifica JSON seguro
 ```
 
-### 2.9.5 Nonces Básico
+### 6.1.5 Nonces Básico
 
 **Nonce** = "Number Used Once" - Token único para prevenir CSRF (Cross-Site Request Forgery)
 
@@ -1606,7 +1536,7 @@ function processar_user_form(): void {
 }
 ```
 
-### 2.9.6 Capability Checks
+### 6.1.6 Capability Checks
 
 **Capabilities** = Permissões específicas que usuários podem ter  
 **Roles** = Grupos de capabilities (administrator, editor, author, etc.)
@@ -1809,7 +1739,7 @@ function atualizar_post_seguro(WP_REST_Request $request): WP_REST_Response {
 }
 ```
 
-### 2.9.7 Checklist de Segurança
+### 6.1.7 Checklist de Segurança
 
 Use este checklist ao desenvolver qualquer funcionalidade:
 
@@ -1851,7 +1781,7 @@ function minha_funcao(): void {
 }
 ```
 
-### 2.9.8 Erros Comuns de Segurança
+### 6.1.8 Erros Comuns de Segurança
 
 ```php
 <?php
@@ -1915,7 +1845,7 @@ global $wpdb;
 $wpdb->prepare("SELECT * FROM posts WHERE id = %d", $_GET['id']);
 ```
 
-### 2.9.9 Diagrama de Decisão: Quando Usar Qual Função
+### 6.1.9 Diagrama de Decisão: Quando Usar Qual Função
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -1963,11 +1893,11 @@ $wpdb->prepare("SELECT * FROM posts WHERE id = %d", $_GET['id']);
 | **JavaScript** | `sanitize_text_field()` | - | `esc_js()` |
 | **JSON** | `wp_json_encode()` | `json_decode()` | `esc_html()` |
 
-### 2.9.10 Exemplos Práticos Completos por Cenário
+### 6.1.10 Exemplos Práticos Completos por Cenário
 
 Veja exemplos completos de formulário de contato, upload de arquivo e busca na seção [Fase 19 - Anti-padrões de Segurança](./019-WordPress-Fase-19-Anti-padroes-Seguranca.md#fase-2-rest-api-security-mistakes).
 
-### 2.9.11 Code Review Checklist Expandido
+### 6.1.11 Code Review Checklist Expandido
 
 **Input Validation:**
 - [ ] Todos os parâmetros obrigatórios são validados?
@@ -2003,7 +1933,7 @@ Veja exemplos completos de formulário de contato, upload de arquivo e busca na 
 <a id="rest-authentication"></a>
 ## 🔐 REST Authentication
 
-### 2.10 Métodos de Autenticação
+### 7.1 Métodos de Autenticação
 
 ```php
 <?php
@@ -2177,7 +2107,7 @@ function verificar_jwt(WP_REST_Request $request) {
 }
 ```
 
-### 2.10.1 JWT Verification Completo - Implementação Production-Ready
+### 7.1.1 JWT Verification Completo - Implementação Production-Ready
 
 **Instalação:**
 
@@ -2531,7 +2461,7 @@ async function refreshToken() {
 <a id="rest-permissions"></a>
 ## 👮 REST Permissions
 
-### 2.11 Verificação de Permissões
+### 8.1 Verificação de Permissões
 
 ```php
 <?php
@@ -2677,7 +2607,7 @@ if (current_user_can('manage_preco')) {
 <a id="rest-response-e-error-handling"></a>
 ## 📦 REST Response e Error Handling
 
-### 2.12 WP_REST_Response e WP_Error
+### 9.1 WP_REST_Response e WP_Error
 
 ```php
 <?php
@@ -2790,7 +2720,7 @@ return new WP_Error('server_error', 'Erro do servidor', ['status' => 500]);
 ?>
 ```
 
-### 2.12.1 Error Handling Patterns Completos
+### 9.1.1 Error Handling Patterns Completos
 
 **Padrão 1: Try-Catch em Controllers**
 
@@ -2983,9 +2913,9 @@ if (is_wp_error($result)) {
 <a id="documentacao-e-schema"></a>
 ## 📖 Documentação e Schema
 
-### 2.13 Schema JSON e Documentação
+### 10.1 Schema JSON e Documentação
 
-### 2.13.1 Schema Validation Completo (OpenAPI/Swagger)
+### 10.1.1 Schema Validation Completo (OpenAPI/Swagger)
 
 **Instalação:**
 
@@ -3115,7 +3045,7 @@ register_rest_route('myapp/v1', '/openapi.json', [
 </html>
 ```
 
-### 2.13 Schema JSON e Documentação
+### 10.1 Schema JSON e Documentação
 
 ```php
 <?php
@@ -3227,7 +3157,7 @@ add_action('rest_api_init', function() {
 <a id="rest-filters-avancados"></a>
 ## 🎨 REST Filters Avançados
 
-### 2.14 Modificar Respostas com Filters
+### 11.1 Modificar Respostas com Filters
 
 ```php
 <?php
@@ -3297,7 +3227,7 @@ add_filter('rest_post_collection_params', function($params, $post_type) {
 }, 10, 2);
 ```
 
-### 2.14.1 rest_post_collection_params - Guia Completo
+### 11.1.1 rest_post_collection_params - Guia Completo
 
 O filter `rest_post_collection_params` permite adicionar parâmetros customizados ao schema de endpoints de coleção (GET /wp-json/wp/v2/posts).
 
@@ -3484,6 +3414,78 @@ add_action('rest_post_dispatch', function($result, $server, $request) {
 }, 10, 3);
 ?>
 ```
+
+---
+
+<a id="autoavaliacao"></a>
+## 📝 Autoavaliação
+
+Teste seu entendimento:
+
+- [ ] Qual é a diferença entre `validate_callback` e `sanitize_callback` na REST API?
+- [ ] Como você previne SQL injection em endpoints da REST API?
+- [ ] Quais códigos de status HTTP você deve usar para diferentes cenários (200, 201, 400, 401, 404)?
+- [ ] Como a autenticação JWT funciona e como você verifica tokens?
+- [ ] Qual é o propósito de `permission_callback` em rotas REST?
+- [ ] Como você adiciona parâmetros de query customizados em endpoints de coleção da REST API?
+- [ ] Qual é a diferença entre `WP_REST_Response` e `WP_Error`?
+- [ ] Como você implementa idempotência em endpoints da REST API?
+
+<a id="projeto-pratico"></a>
+## 🛠️ Projeto Prático
+
+**Construir:** API de Produtos E-commerce
+
+Crie uma REST API para gerenciar produtos que:
+- Suporte operações CRUD (Create, Read, Update, Delete)
+- Implemente autenticação JWT
+- Inclua validação e sanitização adequadas
+- Retorne documentação OpenAPI/Swagger
+- Trate erros graciosamente com códigos de status apropriados
+- Suporte filtragem, ordenação e paginação
+
+**Tempo estimado:** 10-12 horas  
+**Dificuldade:** Intermediário
+
+---
+
+<a id="equivocos-comuns"></a>
+## ❌ Equívocos Comuns
+
+### Equívoco 1: "Endpoints da REST API são automaticamente seguros"
+**Realidade:** Endpoints da REST API requerem verificações explícitas de permissão, validação de entrada e sanitização de saída. Por padrão, eles não são seguros.
+
+**Por que é importante:** Sem segurança adequada, sua API pode ser explorada para acesso não autorizado, vazamento de dados ou ataques.
+
+**Como lembrar:** Sempre implemente `permission_callback`, valide entradas e sanitize saídas para cada endpoint.
+
+### Equívoco 2: "Sanitização e validação são a mesma coisa"
+**Realidade:** Validação verifica se os dados estão corretos (ex: é um email?), sanitização limpa/transforma dados (ex: remove tags HTML). Você precisa de ambos.
+
+**Por que é importante:** Validação previne dados ruins, sanitização previne problemas de segurança. Usar apenas um deixa vulnerabilidades.
+
+**Como lembrar:** Validar = "Está correto?", Sanitizar = "Tornar seguro".
+
+### Equívoco 3: "Tokens JWT não expiram"
+**Realidade:** Tokens JWT devem ter tempos de expiração (claim `exp`) e ser validados em cada requisição. Tokens sem expiração são um risco de segurança.
+
+**Por que é importante:** Tokens roubados sem expiração podem ser usados indefinidamente. Expiração limita a janela de dano.
+
+**Como lembrar:** Sempre defina o claim `exp` e valide-o. Renove tokens antes da expiração.
+
+### Equívoco 4: "REST API não precisa de nonces"
+**Realidade:** Embora a REST API use autenticação diferente (Application Passwords, JWT), você ainda precisa proteger contra CSRF em certos cenários, especialmente para operações que alteram estado.
+
+**Por que é importante:** Endpoints da REST API ainda podem ser vulneráveis a ataques CSRF se não protegidos adequadamente.
+
+**Como lembrar:** REST API = método de autenticação diferente, mas ainda precisa de proteção para operações que alteram estado.
+
+### Equívoco 5: "Todos os endpoints REST devem retornar JSON"
+**Realidade:** Embora JSON seja comum, a REST API pode retornar diferentes formatos. O importante é consistência e headers de content-type adequados.
+
+**Por que é importante:** Diferentes clientes podem precisar de diferentes formatos. Sempre defina headers `Content-Type` apropriados.
+
+**Como lembrar:** REST = Representação, não necessariamente JSON. Use tipos de conteúdo apropriados.
 
 ---
 

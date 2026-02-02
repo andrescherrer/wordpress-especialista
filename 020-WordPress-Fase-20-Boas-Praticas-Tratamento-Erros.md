@@ -377,7 +377,7 @@ WordPressErrorHandler::register();
 
 ```php
 <?php
-// Ver Fase 15 - Error Handling em Async Jobs
+// Ver Fase 16 - Error Handling em Async Jobs
 // Padrões: Retry logic, Dead Letter Queue, Circuit Breaker
 ```
 
@@ -550,7 +550,7 @@ class StructuredLogger {
 
 ```php
 <?php
-// Ver Fase 15 - Error Recovery e Compensation
+// Ver Fase 16 - Error Recovery e Compensation
 ```
 
 ---
@@ -699,4 +699,4 @@ class StructuredLogger {
 - [Fase 2 - REST API Error Handling](./002-WordPress-Fase-2-REST-API-Fundamentos.md#2121-error-handling-patterns-completos)
 - [Fase 3 - Advanced Error Handling](./003-WordPress-Fase-3-REST-API-Avancado.md#tratamento-de-erros)
 - [Fase 13 - Architecture Error Handling](./013-WordPress-Fase-13-Arquitetura-Avancada.md#1312-error-handling-em-arquitetura-avançada)
-- [Fase 15 - Async Jobs Error Handling](./016-WordPress-Fase-15-Jobs-Assincronos-Background.md#error-handling-em-async-jobs)
+- [Fase 16 - Async Jobs Error Handling](./016-WordPress-Fase-16-Jobs-Assincronos-Background.md#error-handling-em-async-jobs)

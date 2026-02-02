@@ -14,17 +14,17 @@
 ## 📑 Índice
 
 1. [Objetivos de Aprendizado](#objetivos-de-aprendizado)
-2. [Autoavaliação](#autoavaliacao)
-3. [Projeto Prático](#projeto-pratico)
-4. [Equívocos Comuns](#equivocos-comuns)
-5. [Fundamentos de Custom Post Types (CPT)](#fundamentos-de-custom-post-types-cpt)
-6. [Registrar Custom Post Types](#registrar-custom-post-types)
-7. [Custom Post Type Avançado](#custom-post-type-avancado)
-8. [Fundamentos de Taxonomias](#fundamentos-de-taxonomias)
-9. [Registrar Taxonomias Customizadas](#registrar-taxonomias-customizadas)
-10. [Integração de CPT e Taxonomias](#integracao-de-cpt-e-taxonomias)
-11. [Funções Essenciais](#funcoes-essenciais)
-12. [Boas Práticas](#boas-praticas)
+2. [Fundamentos de Custom Post Types (CPT)](#fundamentos-de-custom-post-types-cpt)
+3. [Registrar Custom Post Types](#registrar-custom-post-types)
+4. [Custom Post Type Avançado](#custom-post-type-avancado)
+5. [Fundamentos de Taxonomias](#fundamentos-de-taxonomias)
+6. [Registrar Taxonomias Customizadas](#registrar-taxonomias-customizadas)
+7. [Integração de CPT e Taxonomias](#integracao-de-cpt-e-taxonomias)
+8. [Funções Essenciais](#funcoes-essenciais)
+9. [Boas Práticas](#boas-praticas)
+10. [Autoavaliação](#autoavaliacao)
+11. [Projeto Prático](#projeto-pratico)
+12. [Equívocos Comuns](#equivocos-comuns)
 
 ---
 
@@ -42,83 +42,12 @@ Ao final desta fase, você será capaz de:
 7. ✅ Tratar arquivos e templates single de CPTs no tema
 8. ✅ Aplicar verificações de capability adequadas para ações de CPT (edit, delete, publish)
 
-<a id="autoavaliacao"></a>
-## 📝 Autoavaliação
-
-Teste seu entendimento:
-
-- [ ] Qual é a diferença entre taxonomias hierárquicas e não-hierárquicas?
-- [ ] Como você consulta posts por termos de taxonomia customizada?
-- [ ] Quais são as implicações de segurança de expor posts em rascunho na REST API?
-- [ ] Como você adiciona colunas customizadas à tabela de listagem admin para um CPT?
-- [ ] Qual é o propósito de `capability_type` em `register_post_type()`?
-- [ ] Como você filtra queries de CPT usando `pre_get_posts`?
-- [ ] Qual é a diferença entre `register_post_type()` e o filter `register_post_type_args`?
-- [ ] Como você remove meta boxes padrão e adiciona customizadas?
-
-<a id="projeto-pratico"></a>
-## 🛠️ Projeto Prático
-
-**Construir:** Sistema de Gerenciamento de Eventos
-
-Crie um sistema completo de gerenciamento de eventos com:
-- Custom Post Type "Event" com campos customizados (data, localização, preço)
-- Taxonomia customizada "Event Category" (hierárquica)
-- Taxonomia customizada "Event Tag" (não-hierárquica)
-- Meta boxes customizadas para detalhes do evento
-- Colunas admin customizadas mostrando informações-chave
-- Templates de arquivo e single para eventos
-- Suporte REST API para eventos
-
-**Tempo estimado:** 10-12 horas  
-**Dificuldade:** Intermediário
-
----
-
-<a id="equivocos-comuns"></a>
-## ❌ Equívocos Comuns
-
-### Equívoco 1: "Custom Post Types precisam de tabelas de banco de dados customizadas"
-**Realidade:** CPTs usam as mesmas tabelas `wp_posts` e `wp_postmeta` que posts regulares. A coluna `post_type` os diferencia.
-
-**Por que é importante:** Entender isso ajuda com queries e otimização de performance. Você não precisa de tabelas separadas.
-
-**Como lembrar:** CPTs = mesmas tabelas, valor diferente de `post_type`.
-
-### Equívoco 2: "Taxonomias são apenas categorias"
-**Realidade:** Taxonomias são um sistema geral. Categorias e tags são taxonomias built-in. Você pode criar taxonomias customizadas para qualquer propósito.
-
-**Por que é importante:** Taxonomias são poderosas para organizar qualquer tipo de conteúdo, não apenas posts.
-
-**Como lembrar:** Taxonomia = sistema de classificação. Categorias/tags = exemplos de taxonomias.
-
-### Equívoco 3: "Taxonomias hierárquicas são sempre melhores"
-**Realidade:** Taxonomias hierárquicas (como categorias) são boas para relacionamentos pai-filho. Não-hierárquicas (como tags) são melhores para organização plana.
-
-**Por que é importante:** Escolher o tipo errado torna a organização de conteúdo difícil e queries ineficientes.
-
-**Como lembrar:** Hierárquica = estrutura de árvore (categorias). Não-hierárquica = lista plana (tags).
-
-### Equívoco 4: "CPTs aparecem automaticamente na REST API"
-**Realidade:** Você precisa definir `'show_in_rest' => true` ao registrar o CPT. Por padrão, custom post types não são expostos na REST API.
-
-**Por que é importante:** Sem essa configuração, seu CPT não será acessível via REST API, limitando possibilidades de integração.
-
-**Como lembrar:** REST API = recurso opt-in. Defina `show_in_rest` para habilitar.
-
-### Equívoco 5: "register_post_type() deve ser chamado no hook init"
-**Realidade:** Embora `init` seja o hook padrão, você pode usar `after_setup_theme` para CPTs baseados em tema. O importante é chamá-lo antes do WordPress precisar saber sobre o CPT.
-
-**Por que é importante:** Entender quando registrar dá flexibilidade na arquitetura de plugin/tema.
-
-**Como lembrar:** Registre antes do WordPress consultar conteúdo. `init` = padrão seguro.
-
 ---
 
 <a id="fundamentos-de-custom-post-types-cpt"></a>
 ## Fundamentos de Custom Post Types (CPT)
 
-### 1.1 O que são Custom Post Types?
+### 2.1 O que são Custom Post Types?
 
 **Custom Post Types** são extensões do sistema de posts do WordPress que permitem criar tipos de conteúdo personalizados:
 
@@ -127,7 +56,7 @@ Crie um sistema completo de gerenciamento de eventos com:
 - **Armazenamento**: Mesma tabela `wp_posts` (diferenciado por coluna `post_type`)
 - **Isolamento**: Aparecem separados no menu admin e nas listagens
 
-### 1.2 Hierarquia de Post Types no WordPress
+### 2.2 Hierarquia de Post Types no WordPress
 
 ```
 post          - Posts do blog (padrão)
@@ -142,7 +71,7 @@ user_request  - Requisições GDPR (interno)
 wp_block      - Blocos reutilizáveis (block editor)
 ```
 
-### 1.3 Quando Usar CPT vs Post vs Page
+### 2.3 Quando Usar CPT vs Post vs Page
 
 | Situação | Tipo | Razão |
 |----------|------|-------|
@@ -158,7 +87,7 @@ wp_block      - Blocos reutilizáveis (block editor)
 <a id="registrar-custom-post-types"></a>
 ## Registrar Custom Post Types
 
-### 2.1 CPT Simples - Portfólio
+### 3.1 CPT Simples - Portfólio
 
 ```php
 <?php
@@ -281,7 +210,7 @@ new Meu_Plugin_CPT();
 ?>
 ```
 
-### 2.2 Argumentos Detalhados do register_post_type()
+### 3.2 Argumentos Detalhados do register_post_type()
 
 ```php
 <?php
@@ -363,7 +292,7 @@ $args = [
 <a id="custom-post-type-avancado"></a>
 ## Custom Post Type Avançado
 
-### 3.1 CPT com Suporte Completo e Hooks
+### 4.1 CPT com Suporte Completo e Hooks
 
 ```php
 <?php
@@ -445,7 +374,7 @@ new Advanced_CPT();
 <a id="fundamentos-de-taxonomias"></a>
 ## Fundamentos de Taxonomias
 
-### 4.1 O que são Taxonomias?
+### 5.1 O que são Taxonomias?
 
 **Taxonomias** são sistemas de categorização no WordPress:
 
@@ -457,7 +386,7 @@ new Advanced_CPT();
 
 **Custom Taxonomies**: Você cria novas taxonomias para categorizar seus CPTs
 
-### 4.2 Tipo: Hierárquica vs Não-Hierárquica
+### 5.2 Tipo: Hierárquica vs Não-Hierárquica
 
 ```
 Hierárquica (como Categorias)      Não-Hierárquica (como Tags)
@@ -476,7 +405,7 @@ Hierárquica (como Categorias)      Não-Hierárquica (como Tags)
 <a id="registrar-taxonomias-customizadas"></a>
 ## Registrar Taxonomias Customizadas
 
-### 5.1 Taxonomia Básica - Categoria de Produtos
+### 6.1 Taxonomia Básica - Categoria de Produtos
 
 ```php
 <?php
@@ -556,7 +485,7 @@ new Meu_Plugin_Taxonomies();
 ?>
 ```
 
-### 5.2 Argumentos Detalhados do register_taxonomy()
+### 6.2 Argumentos Detalhados do register_taxonomy()
 
 ```php
 <?php
@@ -598,7 +527,7 @@ $args = [
 <a id="integracao-de-cpt-e-taxonomias"></a>
 ## Integração de CPT e Taxonomias
 
-### 6.1 Queryar CPT com Taxonomia
+### 7.1 Queryar CPT com Taxonomia
 
 ```php
 <?php
@@ -648,7 +577,7 @@ $args = [
 ?>
 ```
 
-### 6.2 REST API com CPT e Taxonomias
+### 7.2 REST API com CPT e Taxonomias
 
 ```php
 <?php
@@ -667,7 +596,7 @@ $args = [
 <a id="funcoes-essenciais"></a>
 ## Funções Essenciais
 
-### 7.1 Funções de Taxonomias
+### 8.1 Funções de Taxonomias
 
 ```php
 <?php
@@ -710,7 +639,7 @@ wp_insert_term('Novo Produto', 'product_cat', [
 <a id="boas-praticas"></a>
 ## Boas Práticas
 
-### 8.1 Checklist
+### 9.1 Checklist
 
 - ✅ Use nomes únicos com prefixo (meu_plugin_cpt, meu_plugin_tax)
 - ✅ Sempre exponha na REST API (`show_in_rest` => true)
@@ -721,7 +650,7 @@ wp_insert_term('Novo Produto', 'product_cat', [
 - ✅ Teste com WP-CLI: `wp post-type list`, `wp taxonomy list`
 - ✅ Documente tipos e taxonomias para outros devs
 
-### 8.2 Debugging
+### 9.2 Debugging
 
 ```bash
 # Listar todos os CPTs
@@ -736,6 +665,79 @@ wp post list --post_type=portfolio
 # Listar termos
 wp term list product_cat
 ```
+
+---
+
+<a id="autoavaliacao"></a>
+## 📝 Autoavaliação
+
+Teste seu entendimento:
+
+- [ ] Qual é a diferença entre taxonomias hierárquicas e não-hierárquicas?
+- [ ] Como você consulta posts por termos de taxonomia customizada?
+- [ ] Quais são as implicações de segurança de expor posts em rascunho na REST API?
+- [ ] Como você adiciona colunas customizadas à tabela de listagem admin para um CPT?
+- [ ] Qual é o propósito de `capability_type` em `register_post_type()`?
+- [ ] Como você filtra queries de CPT usando `pre_get_posts`?
+- [ ] Qual é a diferença entre `register_post_type()` e o filter `register_post_type_args`?
+- [ ] Como você remove meta boxes padrão e adiciona customizadas?
+
+<a id="projeto-pratico"></a>
+## 🛠️ Projeto Prático
+
+**Construir:** Sistema de Gerenciamento de Eventos
+
+Crie um sistema completo de gerenciamento de eventos com:
+- Custom Post Type "Event" com campos customizados (data, localização, preço)
+- Taxonomia customizada "Event Category" (hierárquica)
+- Taxonomia customizada "Event Tag" (não-hierárquica)
+- Meta boxes customizadas para detalhes do evento
+- Colunas admin customizadas mostrando informações-chave
+- Templates de arquivo e single para eventos
+- Suporte REST API para eventos
+
+**Tempo estimado:** 10-12 horas  
+**Dificuldade:** Intermediário
+
+---
+
+<a id="equivocos-comuns"></a>
+## ❌ Equívocos Comuns
+
+### Equívoco 1: "Custom Post Types precisam de tabelas de banco de dados customizadas"
+**Realidade:** CPTs usam as mesmas tabelas `wp_posts` e `wp_postmeta` que posts regulares. A coluna `post_type` os diferencia.
+
+**Por que é importante:** Entender isso ajuda com queries e otimização de performance. Você não precisa de tabelas separadas.
+
+**Como lembrar:** CPTs = mesmas tabelas, valor diferente de `post_type`.
+
+### Equívoco 2: "Taxonomias são apenas categorias"
+**Realidade:** Taxonomias são um sistema geral. Categorias e tags são taxonomias built-in. Você pode criar taxonomias customizadas para qualquer propósito.
+
+**Por que é importante:** Taxonomias são poderosas para organizar qualquer tipo de conteúdo, não apenas posts.
+
+**Como lembrar:** Taxonomia = sistema de classificação. Categorias/tags = exemplos de taxonomias.
+
+### Equívoco 3: "Taxonomias hierárquicas são sempre melhores"
+**Realidade:** Taxonomias hierárquicas (como categorias) são boas para relacionamentos pai-filho. Não-hierárquicas (como tags) são melhores para organização plana.
+
+**Por que é importante:** Escolher o tipo errado torna a organização de conteúdo difícil e queries ineficientes.
+
+**Como lembrar:** Hierárquica = estrutura de árvore (categorias). Não-hierárquica = lista plana (tags).
+
+### Equívoco 4: "CPTs aparecem automaticamente na REST API"
+**Realidade:** Você precisa definir `'show_in_rest' => true` ao registrar o CPT. Por padrão, custom post types não são expostos na REST API.
+
+**Por que é importante:** Sem essa configuração, seu CPT não será acessível via REST API, limitando possibilidades de integração.
+
+**Como lembrar:** REST API = recurso opt-in. Defina `show_in_rest` para habilitar.
+
+### Equívoco 5: "register_post_type() deve ser chamado no hook init"
+**Realidade:** Embora `init` seja o hook padrão, você pode usar `after_setup_theme` para CPTs baseados em tema. O importante é chamá-lo antes do WordPress precisar saber sobre o CPT.
+
+**Por que é importante:** Entender quando registrar dá flexibilidade na arquitetura de plugin/tema.
+
+**Como lembrar:** Registre antes do WordPress consultar conteúdo. `init` = padrão seguro.
 
 ---
 

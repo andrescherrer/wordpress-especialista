@@ -14,17 +14,17 @@
 ## 📑 Índice
 
 1. [Objetivos de Aprendizado](#objetivos-de-aprendizado)
-2. [Autoavaliação](#autoavaliacao)
-3. [Projeto Prático](#projeto-pratico)
-4. [Equívocos Comuns](#equivocos-comuns)
-5. [Conceitos Fundamentais](#conceitos-fundamentais)
-6. [REST API Controllers](#rest-api-controllers)
-7. [Resposta Estruturada](#resposta-estruturada)
-8. [Validação e Sanitização](#validacao-e-sanitizacao)
-9. [Autenticação e Permissões](#autenticacao-e-permissoes)
-10. [Tratamento de Erros](#tratamento-de-erros)
-11. [Testes de API](#testes-de-api)
-12. [Boas Práticas](#boas-praticas)
+2. [Conceitos Fundamentais](#conceitos-fundamentais)
+3. [REST API Controllers](#rest-api-controllers)
+4. [Resposta Estruturada](#resposta-estruturada)
+5. [Validação e Sanitização](#validacao-e-sanitizacao)
+6. [Autenticação e Permissões](#autenticacao-e-permissoes)
+7. [Tratamento de Erros](#tratamento-de-erros)
+8. [Testes de API](#testes-de-api)
+9. [Boas Práticas](#boas-praticas)
+10. [Autoavaliação](#autoavaliacao)
+11. [Projeto Prático](#projeto-pratico)
+12. [Equívocos Comuns](#equivocos-comuns)
 
 ---
 
@@ -41,69 +41,6 @@ Ao final desta fase, você será capaz de:
 6. ✅ Escrever testes abrangentes para endpoints da REST API
 7. ✅ Aplicar boas práticas e padrões de design da REST API
 8. ✅ Otimizar performance da API com cache e otimização de queries
-
-<a id="autoavaliacao"></a>
-## 📝 Autoavaliação
-
-Teste seu entendimento:
-
-- [ ] Como você estende `WP_REST_Controller` para criar controllers customizados?
-- [ ] Qual é a diferença entre `WP_REST_Response` e `WP_Error`?
-- [ ] Como você cria regras de validação customizadas além dos padrões do WordPress?
-- [ ] Quais são as implicações de segurança de expor IDs internos do WordPress em APIs?
-- [ ] Como você implementa rate limiting em endpoints da REST API?
-- [ ] Qual é a forma adequada de tratar operações em lote na REST API?
-- [ ] Como você testa endpoints da REST API programaticamente?
-- [ ] Quais estratégias de cache são apropriadas para respostas da REST API?
-
-<a id="projeto-pratico"></a>
-## 🛠️ Projeto Prático
-
-**Construir:** API Avançada de Gerenciamento de Blog
-
-Crie uma REST API abrangente que:
-- Estenda `WP_REST_Controller` para posts, comentários e usuários
-- Implemente validação e sanitização customizadas
-- Suporte operações em lote (criar/atualizar múltiplos recursos)
-- Inclua rate limiting e cache
-- Tenha cobertura de testes abrangente
-- Siga boas práticas da REST API
-
-**Tempo estimado:** 12-15 horas  
-**Dificuldade:** Avançado
-
----
-
-<a id="equivocos-comuns"></a>
-## ❌ Equívocos Comuns
-
-### Equívoco 1: "Estender WP_REST_Controller é sempre necessário"
-**Realidade:** Para endpoints simples, `register_rest_route()` com uma função callback é suficiente. Use controllers para endpoints complexos e reutilizáveis.
-
-**Por que é importante:** Super-engenharia em endpoints simples adiciona complexidade desnecessária. Use a ferramenta certa para o trabalho.
-
-**Como lembrar:** Endpoint simples = função callback. Complexo/reutilizável = classe Controller.
-
-### Equívoco 2: "Operações em lote são apenas múltiplas requisições individuais"
-**Realidade:** Operações em lote devem ser atômicas - ou todas têm sucesso ou todas falham. Elas também precisam de tratamento de erro adequado e mecanismos de rollback.
-
-**Por que é importante:** Sem atomicidade, falhas parciais podem deixar dados em estados inconsistentes.
-
-**Como lembrar:** Lote = "Tudo ou nada". Use transações para operações de banco de dados.
-
-### Equívoco 3: "Rate limiting não é necessário para APIs autenticadas"
-**Realidade:** Mesmo usuários autenticados podem abusar de APIs (intencionalmente ou acidentalmente). Rate limiting protege contra abuso e ataques DoS.
-
-**Por que é importante:** Sem rate limiting, um único usuário ou conta comprometida pode sobrecarregar seu servidor.
-
-**Como lembrar:** Rate limiting = proteção para todos, não apenas usuários não autenticados.
-
-### Equívoco 4: "Cachear respostas da REST API é sempre seguro"
-**Realidade:** Cachear dados específicos do usuário ou sensíveis ao tempo pode expor informações privadas ou servir dados desatualizados. Cache apenas dados públicos e não específicos do usuário.
-
-**Por que é importante:** Cachear dados do usuário pode levar a violações de privacidade. Cachear dados sensíveis ao tempo pode causar comportamento incorreto.
-
-**Como lembrar:** Cache = público + não específico do usuário + não sensível ao tempo.
 
 ---
 
@@ -1713,6 +1650,71 @@ meu-plugin/
 ├── composer.json
 └── meu-plugin.php
 ```
+
+---
+
+<a id="autoavaliacao"></a>
+## 📝 Autoavaliação
+
+Teste seu entendimento:
+
+- [ ] Como você estende `WP_REST_Controller` para criar controllers customizados?
+- [ ] Qual é a diferença entre `WP_REST_Response` e `WP_Error`?
+- [ ] Como você cria regras de validação customizadas além dos padrões do WordPress?
+- [ ] Quais são as implicações de segurança de expor IDs internos do WordPress em APIs?
+- [ ] Como você implementa rate limiting em endpoints da REST API?
+- [ ] Qual é a forma adequada de tratar operações em lote na REST API?
+- [ ] Como você testa endpoints da REST API programaticamente?
+- [ ] Quais estratégias de cache são apropriadas para respostas da REST API?
+
+<a id="projeto-pratico"></a>
+## 🛠️ Projeto Prático
+
+**Construir:** API Avançada de Gerenciamento de Blog
+
+Crie uma REST API abrangente que:
+- Estenda `WP_REST_Controller` para posts, comentários e usuários
+- Implemente validação e sanitização customizadas
+- Suporte operações em lote (criar/atualizar múltiplos recursos)
+- Inclua rate limiting e cache
+- Tenha cobertura de testes abrangente
+- Siga boas práticas da REST API
+
+**Tempo estimado:** 12-15 horas  
+**Dificuldade:** Avançado
+
+---
+
+<a id="equivocos-comuns"></a>
+## ❌ Equívocos Comuns
+
+### Equívoco 1: "Estender WP_REST_Controller é sempre necessário"
+**Realidade:** Para endpoints simples, `register_rest_route()` com uma função callback é suficiente. Use controllers para endpoints complexos e reutilizáveis.
+
+**Por que é importante:** Super-engenharia em endpoints simples adiciona complexidade desnecessária. Use a ferramenta certa para o trabalho.
+
+**Como lembrar:** Endpoint simples = função callback. Complexo/reutilizável = classe Controller.
+
+### Equívoco 2: "Operações em lote são apenas múltiplas requisições individuais"
+**Realidade:** Operações em lote devem ser atômicas - ou todas têm sucesso ou todas falham. Elas também precisam de tratamento de erro adequado e mecanismos de rollback.
+
+**Por que é importante:** Sem atomicidade, falhas parciais podem deixar dados em estados inconsistentes.
+
+**Como lembrar:** Lote = "Tudo ou nada". Use transações para operações de banco de dados.
+
+### Equívoco 3: "Rate limiting não é necessário para APIs autenticadas"
+**Realidade:** Mesmo usuários autenticados podem abusar de APIs (intencionalmente ou acidentalmente). Rate limiting protege contra abuso e ataques DoS.
+
+**Por que é importante:** Sem rate limiting, um único usuário ou conta comprometida pode sobrecarregar seu servidor.
+
+**Como lembrar:** Rate limiting = proteção para todos, não apenas usuários não autenticados.
+
+### Equívoco 4: "Cachear respostas da REST API é sempre seguro"
+**Realidade:** Cachear dados específicos do usuário ou sensíveis ao tempo pode expor informações privadas ou servir dados desatualizados. Cache apenas dados públicos e não específicos do usuário.
+
+**Por que é importante:** Cachear dados do usuário pode levar a violações de privacidade. Cachear dados sensíveis ao tempo pode causar comportamento incorreto.
+
+**Como lembrar:** Cache = público + não específico do usuário + não sensível ao tempo.
 
 ---
 

@@ -14,17 +14,17 @@
 ## 📑 Índice
 
 1. [Objetivos de Aprendizado](#objetivos-de-aprendizado)
-2. [Autoavaliação](#autoavaliacao)
-3. [Projeto Prático](#projeto-pratico)
-4. [Equívocos Comuns](#equivocos-comuns)
-5. [Arquitetura e Estrutura](#arquitetura-e-estrutura)
-6. [Hook System (Actions e Filters)](#hook-system-actions-e-filters)
-7. [Estrutura do Banco de Dados](#estrutura-do-banco-de-dados)
-8. [WordPress Database API ($wpdb)](#wordpress-database-api-wpdb)
-9. [Posts, Pages e Custom Content](#posts-pages-e-custom-content)
-10. [Template Hierarchy](#template-hierarchy)
-11. [The Loop](#the-loop)
-12. [WordPress Coding Standards](#wordpress-coding-standards)
+2. [Arquitetura e Estrutura](#arquitetura-e-estrutura)
+3. [Hook System (Actions e Filters)](#hook-system-actions-e-filters)
+4. [Estrutura do Banco de Dados](#estrutura-do-banco-de-dados)
+5. [WordPress Database API ($wpdb)](#wordpress-database-api-wpdb)
+6. [Posts, Pages e Custom Content](#posts-pages-e-custom-content)
+7. [Template Hierarchy](#template-hierarchy)
+8. [The Loop](#the-loop)
+9. [WordPress Coding Standards](#wordpress-coding-standards)
+10. [Autoavaliação](#autoavaliacao)
+11. [Projeto Prático](#projeto-pratico)
+12. [Equívocos Comuns](#equivocos-comuns)
 13. [Resumo da Fase 1](#resumo-da-fase-1)
 
 ---
@@ -43,81 +43,12 @@ Ao final desta fase, você será capaz de:
 7. ✅ Aplicar os WordPress Coding Standards no seu código customizado
 8. ✅ Lidar com a ordem de bootstrap do WordPress e disponibilidade de funções corretamente
 
-<a id="autoavaliacao"></a>
-## 📝 Autoavaliação
-
-Teste seu entendimento:
-
-- [ ] Qual é a diferença entre Actions e Filters no WordPress?
-- [ ] Quando você deve usar `$wpdb->prepare()` ao invés de queries SQL diretas?
-- [ ] Como a Template Hierarchy do WordPress determina qual arquivo de template usar?
-- [ ] O que acontece com o objeto global `$post` em loops WP_Query aninhados?
-- [ ] Qual é a ordem correta de carregamento do WordPress (wp-config → wp-settings → plugins)?
-- [ ] Como você escapa corretamente a saída para diferentes contextos (HTML, atributos, URLs)?
-- [ ] Qual é a diferença entre `wp_insert_post()` e `$wpdb->insert()`?
-- [ ] Como você remove um hook específico com uma prioridade conhecida?
-
-<a id="projeto-pratico"></a>
-## 🛠️ Projeto Prático
-
-**Construir:** Plugin Gerenciador de Custom Post Types
-
-Crie um plugin que:
-- Registre um custom post type com taxonomias customizadas
-- Implemente meta boxes customizadas com sanitização adequada
-- Use hooks para modificar o comportamento de posts (salvar, exibir, consultar)
-- Siga os WordPress Coding Standards
-- Inclua tratamento de erros e validação adequados
-
-**Tempo estimado:** 8-10 horas  
-**Dificuldade:** Intermediário
-
----
-
-<a id="equivocos-comuns"></a>
-## ❌ Equívocos Comuns
-
-### Equívoco 1: "Actions e Filters são a mesma coisa"
-**Realidade:** Actions permitem executar código em pontos específicos, enquanto Filters permitem modificar dados antes de serem usados. Actions não retornam valores, filters retornam.
-
-**Por que é importante:** Usar o tipo de hook errado pode levar a bugs. Por exemplo, tentar modificar um valor usando um action hook não funcionará porque actions não aceitam valores de retorno.
-
-**Como lembrar:** Actions = "Fazer algo" (como `wp_insert_post`), Filters = "Mudar algo" (como `the_content`).
-
-### Equívoco 2: "Posso usar funções do WordPress imediatamente em wp-config.php"
-**Realidade:** Funções do WordPress só estão disponíveis após o core do WordPress ser carregado. Em `wp-config.php`, apenas PHP e constantes do WordPress estão disponíveis.
-
-**Por que é importante:** Tentar usar `get_option()` ou `wp_insert_post()` em `wp-config.php` causará erros fatais.
-
-**Como lembrar:** WordPress carrega nesta ordem: `wp-config.php` → `wp-settings.php` → plugins → tema. Funções só estão disponíveis após `wp-settings.php` carregar.
-
-### Equívoco 3: "Queries SQL diretas são mais rápidas que funções do WordPress"
-**Realidade:** Funções do WordPress como `wp_insert_post()` incluem validação, sanitização, hooks e cache. SQL direto ignora tudo isso, potencialmente causando inconsistências de dados e problemas de segurança.
-
-**Por que é importante:** Queries SQL diretas podem quebrar funcionalidades do WordPress, ignorar verificações de segurança e causar pesadelos de manutenção.
-
-**Como lembrar:** Funções WordPress = seguras + integradas. SQL direto = arriscado + isolado.
-
-### Equívoco 4: "The Loop só funciona com posts"
-**Realidade:** The Loop pode iterar sobre qualquer resultado de `WP_Query`, incluindo custom post types, páginas, usuários, comentários ou queries customizadas.
-
-**Por que é importante:** Entender isso permite criar loops customizados para qualquer tipo de conteúdo, não apenas posts.
-
-**Como lembrar:** The Loop = "Loop através de resultados WP_Query", não "Loop através de posts".
-
-### Equívoco 5: "remove_all_filters() é seguro de usar"
-**Realidade:** `remove_all_filters()` remove TODOS os callbacks de um hook, incluindo aqueles adicionados pelo core do WordPress e outros plugins. Isso pode quebrar funcionalidades.
-
-**Por que é importante:** Usar `remove_all_filters()` pode causar comportamento inesperado e quebrar funcionalidades do core do WordPress ou outros plugins.
-
-**Como lembrar:** Sempre use `remove_filter()` com nomes de funções e prioridades específicas. Remova apenas o que você adicionou.
-
 ---
 
 <a id="arquitetura-e-estrutura"></a>
 ## 🏗️ Arquitetura e Estrutura
 
-### 1.1 Estrutura de Diretórios do WordPress
+### 2.1 Estrutura de Diretórios do WordPress
 
 ```
 wordpress/
@@ -152,7 +83,7 @@ wordpress/
 └── web.config           # Rewrite rules (IIS)
 ```
 
-### 1.2 Arquivos Core Essenciais
+### 2.2 Arquivos Core Essenciais
 
 | Arquivo | Descrição |
 |---------|-----------|
@@ -164,7 +95,7 @@ wordpress/
 | `wp-admin/index.php` | Dashboard |
 | `wp-login.php` | Página de login |
 
-### 1.3 Ordem de Carregamento do WordPress
+### 2.3 Ordem de Carregamento do WordPress
 
 ```
 1. index.php (entry point)
@@ -193,7 +124,7 @@ wordpress/
 10. Output (header, content, footer)
 ```
 
-### 1.1.3 ⚠️ Pitfall: Bootstrap Order e Disponibilidade de Funções
+### 2.1.3 ⚠️ Pitfall: Bootstrap Order e Disponibilidade de Funções
 
 **Problema Comum:** Tentar usar funções WordPress antes delas estarem disponíveis.
 
@@ -312,7 +243,7 @@ add_action('muplugins_loaded', function() {
 
 ---
 
-### 1.4 Constantes Importantes
+### 2.4 Constantes Importantes
 
 ```php
 <?php
@@ -372,7 +303,7 @@ define('FORCE_SSL_LOGIN', true);
 <a id="hook-system-actions-e-filters"></a>
 ## 🔌 Hook System (Actions e Filters)
 
-### 2.1 Fundamentos de Actions
+### 3.1 Fundamentos de Actions
 
 **Actions** executam funções em pontos específicos do código WordPress.
 
@@ -433,7 +364,7 @@ foreach (['post', 'page', 'product'] as $post_type) {
 ?>
 ```
 
-### 2.2 Fundamentos de Filters
+### 3.2 Fundamentos de Filters
 
 **Filters** modificam e retornam valores. Sempre retornam algo.
 
@@ -482,7 +413,7 @@ $callbacks = $GLOBALS['wp_filter']['the_title']->callbacks;
 ?>
 ```
 
-### 2.3 Diferença entre Actions e Filters
+### 3.3 Diferença entre Actions e Filters
 
 | Aspecto | Actions | Filters |
 |--------|---------|---------|
@@ -492,7 +423,7 @@ $callbacks = $GLOBALS['wp_filter']['the_title']->callbacks;
 | **Exemplo** | Salvar post, enviar email | Modificar conteúdo, validar dados |
 | **Função** | Ação/Efeito colateral | Transformação |
 
-### 2.4 Hook Priority (Ordem de Execução)
+### 3.4 Hook Priority (Ordem de Execução)
 
 ```php
 <?php
@@ -525,7 +456,7 @@ add_action('wp_enqueue_scripts', 'enfileirar_js_tema', 15);    // Depois
 ?>
 ```
 
-### 2.5 Hooks Essenciais por Contexto
+### 3.5 Hooks Essenciais por Contexto
 
 #### **Inicialização e Setup**
 
@@ -653,7 +584,7 @@ add_action('save_post', function($post_id) {
 ?>
 ```
 
-### 2.6 Named Functions vs Anonymous Functions
+### 3.6 Named Functions vs Anonymous Functions
 
 ```php
 <?php
@@ -690,7 +621,7 @@ add_action('init', ['Meu_Plugin_Static', 'init']);
 ?>
 ```
 
-### 2.6 ⚠️ Pitfall: remove_all_filters() e remove_all_actions()
+### 3.6 ⚠️ Pitfall: remove_all_filters() e remove_all_actions()
 
 **Problema Comum:** Usar `remove_all_filters()` ou `remove_all_actions()` de forma indiscriminada pode quebrar funcionalidades de outros plugins e do próprio WordPress.
 
@@ -796,7 +727,7 @@ add_filter('the_content', function($content) {
 <a id="estrutura-do-banco-de-dados"></a>
 ## 🗄️ Estrutura do Banco de Dados
 
-### 3.1 Tabelas Principais do WordPress
+### 4.1 Tabelas Principais do WordPress
 
 ```sql
 -- Posts e conteúdo
@@ -825,7 +756,7 @@ wp_links          -- Blogroll (deprecated)
 wp_term_meta      -- Adicionado em 4.4
 ```
 
-### 3.2 Estrutura de wp_posts
+### 4.2 Estrutura de wp_posts
 
 ```sql
 CREATE TABLE wp_posts (
@@ -860,7 +791,7 @@ CREATE TABLE wp_posts (
 );
 ```
 
-### 3.3 Estrutura de wp_postmeta
+### 4.3 Estrutura de wp_postmeta
 
 ```sql
 CREATE TABLE wp_postmeta (
@@ -881,7 +812,7 @@ CREATE TABLE wp_postmeta (
 -- 123     | acf_campo1         | {"nome": "valor"}
 ```
 
-### 3.4 Estrutura de Taxonomias
+### 4.4 Estrutura de Taxonomias
 
 ```sql
 CREATE TABLE wp_terms (
@@ -915,7 +846,7 @@ CREATE TABLE wp_term_relationships (
 );
 ```
 
-### 3.5 Relacionamentos (ER Diagram)
+### 4.5 Relacionamentos (ER Diagram)
 
 ```
 wp_posts (1) ──────── (N) wp_postmeta
@@ -942,7 +873,7 @@ wp_users (1) ──────── (N) wp_posts (post_author)
    └──────── (N) wp_usermeta
 ```
 
-### 3.6 Entendendo Prefixos
+### 4.6 Entendendo Prefixos
 
 ```php
 <?php
@@ -970,7 +901,7 @@ $posts = $wpdb->get_results(
 <a id="wordpress-database-api-wpdb"></a>
 ## 🛠️ WordPress Database API ($wpdb)
 
-### 4.1 Global $wpdb
+### 5.1 Global $wpdb
 
 ```php
 <?php
@@ -994,7 +925,7 @@ echo $wpdb->term_relationships; // wp_term_relationships
 ?>
 ```
 
-### 4.2 Métodos de Query
+### 5.2 Métodos de Query
 
 ```php
 <?php
@@ -1018,7 +949,7 @@ $ids = $wpdb->get_col("SELECT ID FROM {$wpdb->posts}");
 ?>
 ```
 
-### 4.3 Prepared Statements (SEGURANÇA CRÍTICA)
+### 5.3 Prepared Statements (SEGURANÇA CRÍTICA)
 
 ```php
 <?php
@@ -1059,7 +990,7 @@ $post = $wpdb->get_row("SELECT * FROM {$wpdb->posts} WHERE ID = {$_GET['id']}");
 ?>
 ```
 
-### 4.4 Insert, Update, Delete
+### 5.4 Insert, Update, Delete
 
 ```php
 <?php
@@ -1102,7 +1033,7 @@ $deleted = $wpdb->delete(
 ?>
 ```
 
-### 4.5 Transações
+### 5.5 Transações
 
 ```php
 <?php
@@ -1134,7 +1065,7 @@ try {
 ?>
 ```
 
-### 4.7 ⚠️ Pitfall: Transações com $wpdb (BEGIN, COMMIT, ROLLBACK)
+### 5.6 ⚠️ Pitfall: Transações com $wpdb (BEGIN, COMMIT, ROLLBACK)
 
 **Problema Comum:** Não usar transações corretamente ou não tratar erros adequadamente pode levar a dados inconsistentes no banco.
 
@@ -1375,7 +1306,7 @@ function safe_transaction() {
 <a id="posts-pages-e-custom-content"></a>
 ## 📄 Posts, Pages e Custom Content
 
-### 5.1 Post Types Nativos
+### 6.1 Post Types Nativos
 
 ```
 post          - Posts do blog
@@ -1392,7 +1323,7 @@ wp_template   - Templates (block themes)
 wp_template_part - Partes de template
 ```
 
-### 5.2 Post Status
+### 6.2 Post Status
 
 ```
 publish       - Publicado (visível)
@@ -1405,7 +1336,7 @@ auto-draft    - Auto-salvo (nunca foi publicado)
 inherit       - Herdado (attachments, revisões)
 ```
 
-### 5.3 Funções Essenciais
+### 6.3 Funções Essenciais
 
 ```php
 <?php
@@ -1453,7 +1384,7 @@ $posts = get_posts($args);
 ?>
 ```
 
-### 5.4 Revisões, Featured Images e Hierarchy
+### 6.4 Revisões, Featured Images e Hierarchy
 
 ```php
 <?php
@@ -1484,7 +1415,7 @@ $parent = get_post_parent(123);                    // Post pai
 <a id="template-hierarchy"></a>
 ## 🎨 Template Hierarchy
 
-### 6.1 Ordem de Resolução de Templates
+### 7.1 Ordem de Resolução de Templates
 
 ```
 Singular (Single Post):
@@ -1544,7 +1475,7 @@ Homepage/Front Page:
 3. index.php
 ```
 
-### 6.2 Identificar o Template Atual
+### 7.2 Identificar o Template Atual
 
 ```php
 <?php
@@ -1579,7 +1510,7 @@ is_page_template('full-width.php') // Verifica template específico
 <a id="the-loop"></a>
 ## 🔄 The Loop
 
-### 7.1 Conceito Básico
+### 8.1 Conceito Básico
 
 ```php
 <?php
@@ -1603,7 +1534,7 @@ if (have_posts()) {
 ?>
 ```
 
-### 7.2 Funções do Loop
+### 8.2 Funções do Loop
 
 ```php
 <?php
@@ -1641,7 +1572,7 @@ current_user_can('edit_post', get_the_ID())  // Pode editar?
 ?>
 ```
 
-### 7.3 Loops Aninhados (cuidado!)
+### 8.3 Loops Aninhados (cuidado!)
 
 ```php
 <?php
@@ -1704,7 +1635,7 @@ wp_reset_postdata();
 ?>
 ```
 
-### 7.2 ⚠️ Pitfall: Nested Loops (WP_Query em loops aninhados) - Detalhado
+### 8.2 ⚠️ Pitfall: Nested Loops (WP_Query em loops aninhados) - Detalhado
 
 **Problema Comum:** Usar `WP_Query` ou `get_posts()` dentro de um loop existente sem resetar o `$post` global causa dados incorretos.
 
@@ -1719,7 +1650,7 @@ O WordPress usa variáveis globais (`$post`, `$wp_query`) para manter o estado d
 
 **✅ Soluções Completas:**
 
-Veja a seção 7.3 acima para exemplos básicos. Abaixo estão soluções avançadas:
+Veja a seção 8.3 acima para exemplos básicos. Abaixo estão soluções avançadas:
 
 ```php
 <?php
@@ -1782,7 +1713,7 @@ foreach ($main_posts as $main_post) {
 <a id="wordpress-coding-standards"></a>
 ## 📐 WordPress Coding Standards
 
-### 8.1 PHPDoc Padrão
+### 9.1 PHPDoc Padrão
 
 ```php
 <?php
@@ -1821,7 +1752,7 @@ function minha_funcao($param1, $param2, $param3 = []) {
 ?>
 ```
 
-### 8.2 Naming Conventions
+### 9.2 Naming Conventions
 
 ```php
 <?php
@@ -1862,7 +1793,7 @@ set_transient('meu_plugin_cache_dados', $data, HOUR_IN_SECONDS);
 ?>
 ```
 
-### 8.3 Code Formatting
+### 9.3 Code Formatting
 
 ```php
 <?php
@@ -1915,7 +1846,7 @@ for ($i = 0; $i < 10; $i++) { }
 ?>
 ```
 
-### 8.4 Plugin Header
+### 9.4 Plugin Header
 
 ```php
 <?php
@@ -1971,6 +1902,77 @@ add_action('plugins_loaded', function() {
 });
 ?>
 ```
+
+---
+
+<a id="autoavaliacao"></a>
+## 📝 Autoavaliação
+
+Teste seu entendimento:
+
+- [ ] Qual é a diferença entre Actions e Filters no WordPress?
+- [ ] Quando você deve usar `$wpdb->prepare()` ao invés de queries SQL diretas?
+- [ ] Como a Template Hierarchy do WordPress determina qual arquivo de template usar?
+- [ ] O que acontece com o objeto global `$post` em loops WP_Query aninhados?
+- [ ] Qual é a ordem correta de carregamento do WordPress (wp-config → wp-settings → plugins)?
+- [ ] Como você escapa corretamente a saída para diferentes contextos (HTML, atributos, URLs)?
+- [ ] Qual é a diferença entre `wp_insert_post()` e `$wpdb->insert()`?
+- [ ] Como você remove um hook específico com uma prioridade conhecida?
+
+<a id="projeto-pratico"></a>
+## 🛠️ Projeto Prático
+
+**Construir:** Plugin Gerenciador de Custom Post Types
+
+Crie um plugin que:
+- Registre um custom post type com taxonomias customizadas
+- Implemente meta boxes customizadas com sanitização adequada
+- Use hooks para modificar o comportamento de posts (salvar, exibir, consultar)
+- Siga os WordPress Coding Standards
+- Inclua tratamento de erros e validação adequados
+
+**Tempo estimado:** 8-10 horas  
+**Dificuldade:** Intermediário
+
+---
+
+<a id="equivocos-comuns"></a>
+## ❌ Equívocos Comuns
+
+### Equívoco 1: "Actions e Filters são a mesma coisa"
+**Realidade:** Actions permitem executar código em pontos específicos, enquanto Filters permitem modificar dados antes de serem usados. Actions não retornam valores, filters retornam.
+
+**Por que é importante:** Usar o tipo de hook errado pode levar a bugs. Por exemplo, tentar modificar um valor usando um action hook não funcionará porque actions não aceitam valores de retorno.
+
+**Como lembrar:** Actions = "Fazer algo" (como `wp_insert_post`), Filters = "Mudar algo" (como `the_content`).
+
+### Equívoco 2: "Posso usar funções do WordPress imediatamente em wp-config.php"
+**Realidade:** Funções do WordPress só estão disponíveis após o core do WordPress ser carregado. Em `wp-config.php`, apenas PHP e constantes do WordPress estão disponíveis.
+
+**Por que é importante:** Tentar usar `get_option()` ou `wp_insert_post()` em `wp-config.php` causará erros fatais.
+
+**Como lembrar:** WordPress carrega nesta ordem: `wp-config.php` → `wp-settings.php` → plugins → tema. Funções só estão disponíveis após `wp-settings.php` carregar.
+
+### Equívoco 3: "Queries SQL diretas são mais rápidas que funções do WordPress"
+**Realidade:** Funções do WordPress como `wp_insert_post()` incluem validação, sanitização, hooks e cache. SQL direto ignora tudo isso, potencialmente causando inconsistências de dados e problemas de segurança.
+
+**Por que é importante:** Queries SQL diretas podem quebrar funcionalidades do WordPress, ignorar verificações de segurança e causar pesadelos de manutenção.
+
+**Como lembrar:** Funções WordPress = seguras + integradas. SQL direto = arriscado + isolado.
+
+### Equívoco 4: "The Loop só funciona com posts"
+**Realidade:** The Loop pode iterar sobre qualquer resultado de `WP_Query`, incluindo custom post types, páginas, usuários, comentários ou queries customizadas.
+
+**Por que é importante:** Entender isso permite criar loops customizados para qualquer tipo de conteúdo, não apenas posts.
+
+**Como lembrar:** The Loop = "Loop através de resultados WP_Query", não "Loop através de posts".
+
+### Equívoco 5: "remove_all_filters() é seguro de usar"
+**Realidade:** `remove_all_filters()` remove TODOS os callbacks de um hook, incluindo aqueles adicionados pelo core do WordPress e outros plugins. Isso pode quebrar funcionalidades.
+
+**Por que é importante:** Usar `remove_all_filters()` pode causar comportamento inesperado e quebrar funcionalidades do core do WordPress ou outros plugins.
+
+**Como lembrar:** Sempre use `remove_filter()` com nomes de funções e prioridades específicas. Remova apenas o que você adicionou.
 
 ---
 

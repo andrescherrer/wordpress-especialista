@@ -7,7 +7,7 @@
 
 ---
 
-**Navegação:** [Índice](./000-WordPress-Indice-Topicos.md) | [← Fase 16](./015-WordPress-Fase-16-Topicos-Complementares-Avancados.md) | [Fase 10 →](./010-WordPress-Fase-10-Testes-Debug-Implantacao.md)
+**Navegação:** [Índice](./000-WordPress-Indice-Topicos.md) | [← Fase 16](./016-WordPress-Fase-16-Jobs-Assincronos-Background.md) | [Fase 10 →](./010-WordPress-Fase-10-Testes-Debug-Implantacao.md)
 
 ---
 
@@ -25,7 +25,7 @@
 10. [Fase 8: Testando Performance e Cache](#fase-8-testando-performance-e-cache)
 11. [Fase 12: Testando Segurança](#fase-12-testando-seguranca)
 12. [Fase 13: Testando Arquitetura](#fase-13-testando-arquitetura)
-13. [Fase 15: Testando Async Jobs](#fase-15-testando-async-jobs)
+13. [Fase 16: Testando Async Jobs](#fase-16-testando-async-jobs)
 14. [Boas Práticas](#boas-praticas)
 15. [Resumo](#resumo)
 
@@ -2161,7 +2161,7 @@ class DIContainerTest extends WP_UnitTestCase {
 ---
 
 <a id="fase-15-testando-async-jobs"></a>
-## Fase 15: Testando Async Jobs
+## Fase 16: Testando Async Jobs
 
 ### Testando Action Scheduler
 
@@ -2565,4 +2565,4 @@ public function test_user_cannot_access_admin_without_permission(): void {
 
 ---
 
-**Navegação:** [Índice](./000-WordPress-Indice-Topicos.md) | [← Fase 16](./015-WordPress-Fase-16-Topicos-Complementares-Avancados.md) | [Fase 10 →](./010-WordPress-Fase-10-Testes-Debug-Implantacao.md)
+**Navegação:** [Índice](./000-WordPress-Indice-Topicos.md) | [← Fase 16](./016-WordPress-Fase-16-Jobs-Assincronos-Background.md) | [Fase 10 →](./010-WordPress-Fase-10-Testes-Debug-Implantacao.md)

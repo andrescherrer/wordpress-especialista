@@ -14,18 +14,18 @@
 ## 📑 Índice
 
 1. [Objetivos de Aprendizado](#objetivos-de-aprendizado)
-2. [Autoavaliação](#autoavaliacao)
-3. [Projeto Prático](#projeto-pratico)
-4. [Equívocos Comuns](#equivocos-comuns)
-5. [Fundamentos de Shortcodes](#fundamentos-de-shortcodes)
-6. [Criar Shortcodes Básicos](#criar-shortcodes-basicos)
-7. [Shortcodes Avançados](#shortcodes-avancados)
-8. [Widgets API Clássica](#widgets-api-classica)
-9. [Criar Widgets Customizados](#criar-widgets-customizados)
-10. [Fundamentos de Gutenberg Blocks](#fundamentos-de-gutenberg-blocks)
-11. [Criar Custom Blocks](#criar-custom-blocks)
-12. [Dynamic Blocks e Block Patterns](#dynamic-blocks-e-block-patterns)
-13. [Boas Práticas](#boas-praticas)
+2. [Fundamentos de Shortcodes](#fundamentos-de-shortcodes)
+3. [Criar Shortcodes Básicos](#criar-shortcodes-basicos)
+4. [Shortcodes Avançados](#shortcodes-avancados)
+5. [Widgets API Clássica](#widgets-api-classica)
+6. [Criar Widgets Customizados](#criar-widgets-customizados)
+7. [Fundamentos de Gutenberg Blocks](#fundamentos-de-gutenberg-blocks)
+8. [Criar Custom Blocks](#criar-custom-blocks)
+9. [Dynamic Blocks e Block Patterns](#dynamic-blocks-e-block-patterns)
+10. [Boas Práticas](#boas-praticas)
+11. [Autoavaliação](#autoavaliacao)
+12. [Projeto Prático](#projeto-pratico)
+13. [Equívocos Comuns](#equivocos-comuns)
 14. [Resumo da Fase 6](#resumo-da-fase-6)
 
 ---
@@ -43,68 +43,6 @@ Ao final desta fase, você será capaz de:
 6. ✅ Usar Block Patterns e Block Variations efetivamente
 7. ✅ Enfileirar scripts e estilos adequadamente para blocos
 8. ✅ Aplicar boas práticas para desenvolvimento de shortcodes, widgets e blocos
-
-<a id="autoavaliacao"></a>
-## 📝 Autoavaliação
-
-Teste seu entendimento:
-
-- [ ] Qual é a diferença entre shortcodes auto-fechados e com conteúdo?
-- [ ] Como você escapa adequadamente a saída em shortcodes para prevenir XSS?
-- [ ] Qual é a diferença entre blocos Gutenberg estáticos e dinâmicos?
-- [ ] Como você registra atributos de bloco e os usa em funções de edição e salvamento?
-- [ ] Qual é o propósito de `register_block_type()` vs `@wordpress/create-block`?
-- [ ] Como você cria block patterns reutilizáveis?
-- [ ] Qual é a diferença entre Widgets API e blocos Gutenberg?
-- [ ] Como você trata depreciações de blocos ao atualizar atributos de bloco?
-
-<a id="projeto-pratico"></a>
-## 🛠️ Projeto Prático
-
-**Construir:** Plugin de Exibição de Conteúdo
-
-Crie um plugin que inclua:
-- Múltiplos shortcodes para exibir conteúdo (posts recentes, depoimentos, etc.)
-- Widget customizado para exibir conteúdo em destaque
-- Bloco Gutenberg para exibir itens de custom post type
-- Bloco dinâmico que busca dados da REST API
-- Block pattern para layouts comuns
-
-**Tempo estimado:** 10-12 horas  
-**Dificuldade:** Intermediário
-
----
-
-<a id="equivocos-comuns"></a>
-## ❌ Equívocos Comuns
-
-### Equívoco 1: "Shortcodes executam código PHP diretamente"
-**Realidade:** Shortcodes são parseados pelo WordPress e chamam funções callback registradas. Eles não executam código PHP arbitrário.
-
-**Por que é importante:** Shortcodes são mais seguros que permitir execução direta de PHP, mas você ainda precisa escapar a saída adequadamente.
-
-**Como lembrar:** Shortcode = função callback registrada, não execução direta de PHP.
-
-### Equívoco 2: "Blocos Gutenberg substituem shortcodes"
-**Realidade:** Blocos e shortcodes servem propósitos diferentes. Blocos são para edição de conteúdo, shortcodes são para inserção dinâmica de conteúdo. Ambos podem coexistir.
-
-**Por que é importante:** Entender quando usar blocos vs shortcodes ajuda a escolher a ferramenta certa para o trabalho.
-
-**Como lembrar:** Blocos = edição visual. Shortcodes = inserção programática de conteúdo.
-
-### Equívoco 3: "Widgets API está depreciada"
-**Realidade:** A Widgets API clássica ainda funciona e é mantida. Widgets baseados em blocos são uma adição, não uma substituição (ainda).
-
-**Por que é importante:** Muitos temas e plugins ainda usam widgets clássicos. Ambos os sistemas são válidos.
-
-**Como lembrar:** Widgets clássicos = ainda suportados. Widgets de bloco = opção mais nova.
-
-### Equívoco 4: "Blocos dinâmicos sempre precisam de renderização server-side"
-**Realidade:** Blocos dinâmicos podem usar JavaScript client-side para buscar e renderizar dados, reduzindo carga do servidor.
-
-**Por que é importante:** Entender opções de renderização ajuda a otimizar performance.
-
-**Como lembrar:** Server-side = renderização PHP. Client-side = busca JavaScript.
 
 ---
 
@@ -135,7 +73,7 @@ Crie um plugin que inclua:
 <a id="criar-shortcodes-basicos"></a>
 ## Criar Shortcodes Básicos
 
-### 6.2.1 Registrar Shortcodes
+### 3.1 Registrar Shortcodes
 
 ```php
 class Meu_Plugin_Shortcodes {
@@ -160,7 +98,7 @@ class Meu_Plugin_Shortcodes {
 new Meu_Plugin_Shortcodes();
 ```
 
-### 6.2.2 Shortcode Simples - Botão
+### 3.2 Shortcode Simples - Botão
 
 **Uso:** `[meu_botao texto="Clique Aqui" url="https://exemplo.com"]`
 
@@ -208,7 +146,7 @@ public function shortcode_botao($atts) {
 }
 ```
 
-### 6.2.3 Shortcode com Atributos - Alert/Notificação
+### 3.3 Shortcode com Atributos - Alert/Notificação
 
 **Uso:** `[meu_alert tipo="info" titulo="Atenção" fechar="sim"]Conteúdo da mensagem[/meu_alert]`
 
@@ -278,7 +216,7 @@ public function shortcode_alert($atts, $content = '') {
 }
 ```
 
-### 6.2.4 Shortcode com Query - Posts Recentes
+### 3.4 Shortcode com Query - Posts Recentes
 
 **Uso:** `[posts_recentes numero="5" categoria="noticias" ordenar="desc"]`
 
@@ -350,7 +288,7 @@ public function shortcode_posts_recentes($atts) {
 <a id="shortcodes-avancados"></a>
 ## Shortcodes Avançados
 
-### 6.3.1 Shortcodes com Processamento de Formulários
+### 4.1 Shortcodes com Processamento de Formulários
 
 ```php
 /**
@@ -418,7 +356,7 @@ public function shortcode_form_contato($atts, $content = '') {
 }
 ```
 
-### 6.3.2 Shortcodes Aninhados (Nested)
+### 4.2 Shortcodes Aninhados (Nested)
 
 **Uso:** 
 ```
@@ -502,7 +440,7 @@ public function shortcode_tab($atts, $content = '') {
 <a id="criar-widgets-customizados"></a>
 ## Criar Widgets Customizados
 
-### 6.5.1 Widget Básico - Posts Recentes
+### 6.1 Widget Básico - Posts Recentes
 
 ```php
 class Meu_Plugin_Recent_Posts_Widget extends WP_Widget {
@@ -725,7 +663,7 @@ add_action('widgets_init', function() {
 });
 ```
 
-### 6.5.2 Widget com Media Picker
+### 6.2 Widget com Media Picker
 
 ```php
 class Meu_Plugin_Banner_Widget extends WP_Widget {
@@ -852,7 +790,7 @@ add_action('widgets_init', function() {
 <a id="criar-custom-blocks"></a>
 ## Criar Custom Blocks
 
-### 6.7.1 Estrutura Básica de um Gutenberg Block
+### 8.1 Estrutura Básica de um Gutenberg Block
 
 ```php
 class Meu_Plugin_Gutenberg_Blocks {
@@ -961,7 +899,7 @@ class Meu_Plugin_Gutenberg_Blocks {
 new Meu_Plugin_Gutenberg_Blocks();
 ```
 
-### 6.7.2 JavaScript para Blocos (blocks-editor.js)
+### 8.2 JavaScript para Blocos (blocks-editor.js)
 
 ```javascript
 const { registerBlockType } = wp.blocks;
@@ -1072,7 +1010,7 @@ registerBlockType('meu-plugin/latest-posts', {
 <a id="dynamic-blocks-e-block-patterns"></a>
 ## Dynamic Blocks e Block Patterns
 
-### 6.8.1 Block Patterns
+### 9.1 Block Patterns
 
 ```php
 class Meu_Plugin_Block_Patterns {
@@ -1216,6 +1154,70 @@ if (is_plugin_active('woocommerce/woocommerce.php')) {
     // WooCommerce está ativo
 }
 ```
+
+---
+
+<a id="autoavaliacao"></a>
+## 📝 Autoavaliação
+
+Teste seu entendimento:
+
+- [ ] Qual é a diferença entre shortcodes auto-fechados e com conteúdo?
+- [ ] Como você escapa adequadamente a saída em shortcodes para prevenir XSS?
+- [ ] Qual é a diferença entre blocos Gutenberg estáticos e dinâmicos?
+- [ ] Como você registra atributos de bloco e os usa em funções de edição e salvamento?
+- [ ] Qual é o propósito de `register_block_type()` vs `@wordpress/create-block`?
+- [ ] Como você cria block patterns reutilizáveis?
+- [ ] Qual é a diferença entre Widgets API e blocos Gutenberg?
+- [ ] Como você trata depreciações de blocos ao atualizar atributos de bloco?
+
+<a id="projeto-pratico"></a>
+## 🛠️ Projeto Prático
+
+**Construir:** Plugin de Exibição de Conteúdo
+
+Crie um plugin que inclua:
+- Múltiplos shortcodes para exibir conteúdo (posts recentes, depoimentos, etc.)
+- Widget customizado para exibir conteúdo em destaque
+- Bloco Gutenberg para exibir itens de custom post type
+- Bloco dinâmico que busca dados da REST API
+- Block pattern para layouts comuns
+
+**Tempo estimado:** 10-12 horas  
+**Dificuldade:** Intermediário
+
+---
+
+<a id="equivocos-comuns"></a>
+## ❌ Equívocos Comuns
+
+### Equívoco 1: "Shortcodes executam código PHP diretamente"
+**Realidade:** Shortcodes são parseados pelo WordPress e chamam funções callback registradas. Eles não executam código PHP arbitrário.
+
+**Por que é importante:** Shortcodes são mais seguros que permitir execução direta de PHP, mas você ainda precisa escapar a saída adequadamente.
+
+**Como lembrar:** Shortcode = função callback registrada, não execução direta de PHP.
+
+### Equívoco 2: "Blocos Gutenberg substituem shortcodes"
+**Realidade:** Blocos e shortcodes servem propósitos diferentes. Blocos são para edição de conteúdo, shortcodes são para inserção dinâmica de conteúdo. Ambos podem coexistir.
+
+**Por que é importante:** Entender quando usar blocos vs shortcodes ajuda a escolher a ferramenta certa para o trabalho.
+
+**Como lembrar:** Blocos = edição visual. Shortcodes = inserção programática de conteúdo.
+
+### Equívoco 3: "Widgets API está depreciada"
+**Realidade:** A Widgets API clássica ainda funciona e é mantida. Widgets baseados em blocos são uma adição, não uma substituição (ainda).
+
+**Por que é importante:** Muitos temas e plugins ainda usam widgets clássicos. Ambos os sistemas são válidos.
+
+**Como lembrar:** Widgets clássicos = ainda suportados. Widgets de bloco = opção mais nova.
+
+### Equívoco 4: "Blocos dinâmicos sempre precisam de renderização server-side"
+**Realidade:** Blocos dinâmicos podem usar JavaScript client-side para buscar e renderizar dados, reduzindo carga do servidor.
+
+**Por que é importante:** Entender opções de renderização ajuda a otimizar performance.
+
+**Como lembrar:** Server-side = renderização PHP. Client-side = busca JavaScript.
 
 ---
 

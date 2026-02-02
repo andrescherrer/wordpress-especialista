@@ -25,8 +25,8 @@
 | 12 | [Segurança e Boas Práticas](./012-WordPress-Fase-12-Seguranca-Boas-Praticas.md) |
 | 13 | [Arquitetura Avançada](./013-WordPress-Fase-13-Arquitetura-Avancada.md) |
 | 14 | [Implantação e DevOps](./014-WordPress-Fase-14-Implantacao-DevOps.md) |
-| 15 | [Jobs Assíncronos e Background](./016-WordPress-Fase-15-Jobs-Assincronos-Background.md) |
-| 16 | [Tópicos Complementares Avançados](./015-WordPress-Fase-16-Topicos-Complementares-Avancados.md) |
+| 15 | [Tópicos Complementares Avançados](./015-WordPress-Fase-15-Topicos-Complementares-Avancados.md) |
+| 16 | [Jobs Assíncronos e Background](./016-WordPress-Fase-16-Jobs-Assincronos-Background.md) |
 | 17 | [Testes em Toda Fase](./017-WordPress-Fase-17-Testes-Em-Toda-Fase.md) |
 | 18 | [Caminhos de Aprendizado](./018-WordPress-Fase-18-Caminhos-Aprendizado.md) |
 | 19 | [Anti-padrões de Segurança](./019-WordPress-Fase-19-Anti-padroes-Seguranca.md) |
@@ -915,68 +915,9 @@
 
 ---
 
-## 🔄 FASE 15: Jobs Assíncronos e Processamento em Background
+## 🎯 FASE 15: Tópicos complementares
 
-### 15.1 Por Que Jobs Assíncronos?
-- Requisições HTTP bloqueantes
-- Timeout em operações longas
-- Escalabilidade horizontal
-- Experiência do usuário
-- Quando usar jobs assíncronos
-
-### 15.2 Limitações do WP-Cron
-- WP-Cron não é cron real
-- Dependência de requisições HTTP
-- Problemas com múltiplos servidores
-- Falhas silenciosas
-- Desabilitar WP-Cron em produção
-
-### 15.3 Action Scheduler (Pronto para Produção)
-- Instalação e configuração
-- Ações assíncronas (única vez, imediato)
-- Ações agendadas (única vez, com atraso)
-- Ações recorrentes
-- Verificar e cancelar ações
-- Monitoramento de ações
-
-### 15.4 Padrões de Fila (Enterprise)
-- Fila simples (FIFO)
-- Fila de prioridade
-- Fila de mensagens mortas (DLQ)
-- Estratégias de retry
-- Exponential backoff
-
-### 15.5 Receptores de Webhook (Entrada)
-- Verificação de assinatura (HMAC-SHA256)
-- Chaves de idempotência
-- Processamento assíncrono
-- Tratamento de erros
-- Endpoints REST API
-
-### 15.6 Integração com Docker
-- Docker Compose com workers
-- Supervisord para gerenciar workers
-- Health checks
-- Escalar múltiplos workers
-
-### 15.7 Monitoramento em Produção
-- Monitor de fila
-- Endpoints de health check
-- Widgets de dashboard
-- Integração com Sentry
-- Comandos WP-CLI
-
-### 15.8 Casos de Uso Práticos
-- Processamento de pedidos e-commerce
-- Pipeline de processamento de mídia
-- Importação de CSV em chunks
-- Serviço de fila de e-mail
-
----
-
-## 🎯 FASE 16: Tópicos complementares
-
-### 16.1 Tópicos Avançados de API
+### 15.1 Tópicos Avançados de API
 - GraphQL para WordPress
 - Validação de headers customizados
 - Limitação de requisições (rate limiting)
@@ -984,7 +925,7 @@
 - Tratamento de depreciação
 - Documentação de API (OpenAPI/Swagger)
 
-### 16.2 Performance Avançada
+### 15.2 Performance Avançada
 - Otimização de velocidade de página
 - Otimização de imagens
 - Code splitting
@@ -992,7 +933,7 @@
 - Core Web Vitals
 - Otimização Lighthouse
 
-### 16.3 Ecossistema WordPress
+### 15.3 Ecossistema WordPress
 - Integração WooCommerce (padrões avançados)
 - ACF (Advanced Custom Fields)
 - Integração API Jetpack
@@ -1000,18 +941,77 @@
 - WP Rocket
 - Outros plugins populares
 
-### 16.4 Headless WordPress
+### 15.4 Headless WordPress
 - REST API como interface principal
 - Frontend desacoplado
 - Geração de site estático
 - Arquitetura Jamstack
 
-### 16.5 Comunidade e Boas Práticas
+### 15.5 Comunidade e Boas Práticas
 - Contribuir com o WordPress
 - Padrões do repositório de plugins
 - Práticas de revisão de código
 - Padrões de documentação
 - Diretrizes da comunidade
+
+---
+
+## 🔄 FASE 16: Jobs Assíncronos e Processamento em Background
+
+### 16.1 Por Que Jobs Assíncronos?
+- Requisições HTTP bloqueantes
+- Timeout em operações longas
+- Escalabilidade horizontal
+- Experiência do usuário
+- Quando usar jobs assíncronos
+
+### 16.2 Limitações do WP-Cron
+- WP-Cron não é cron real
+- Dependência de requisições HTTP
+- Problemas com múltiplos servidores
+- Falhas silenciosas
+- Desabilitar WP-Cron em produção
+
+### 16.3 Action Scheduler (Pronto para Produção)
+- Instalação e configuração
+- Ações assíncronas (única vez, imediato)
+- Ações agendadas (única vez, com atraso)
+- Ações recorrentes
+- Verificar e cancelar ações
+- Monitoramento de ações
+
+### 16.4 Padrões de Fila (Enterprise)
+- Fila simples (FIFO)
+- Fila de prioridade
+- Fila de mensagens mortas (DLQ)
+- Estratégias de retry
+- Exponential backoff
+
+### 16.5 Receptores de Webhook (Entrada)
+- Verificação de assinatura (HMAC-SHA256)
+- Chaves de idempotência
+- Processamento assíncrono
+- Tratamento de erros
+- Endpoints REST API
+
+### 16.6 Integração com Docker
+- Docker Compose com workers
+- Supervisord para gerenciar workers
+- Health checks
+- Escalar múltiplos workers
+
+### 16.7 Monitoramento em Produção
+- Monitor de fila
+- Endpoints de health check
+- Widgets de dashboard
+- Integração com Sentry
+- Comandos WP-CLI
+
+### 16.8 Casos de Uso Práticos
+- Processamento de pedidos e-commerce
+- Pipeline de processamento de mídia
+- Importação de CSV em chunks
+- Serviço de fila de e-mail
 
 ---
 
@@ -1038,7 +1038,7 @@
 - Fase 8: Performance e cache (transients, queries)
 - Fase 12: Segurança (sanitização)
 - Fase 13: Arquitetura (SOLID, repository, service layer, DI)
-- Fase 15: Async jobs (Action Scheduler, background)
+- Fase 16: Async jobs (Action Scheduler, background)
 
 ### 17.4 Boas Práticas
 - Nomenclatura de testes
@@ -1159,8 +1159,8 @@
 **Fase 12:** Segurança e Revisão de Plugins  
 **Fase 13:** Padrões de Arquitetura  
 **Fase 14:** Implantação e DevOps  
-**Fase 15:** Documentação Action Scheduler  
-**Fase 16:** Tópicos complementares (API, performance, ecossistema, headless)  
+**Fase 15:** Tópicos complementares (API, performance, ecossistema, headless)  
+**Fase 16:** Documentação Action Scheduler (Async jobs)  
 **Fase 17:** Testar em Toda Fase  
 **Fase 18:** Caminhos de Aprendizado  
 **Fase 19:** Anti-padrões de Segurança  
@@ -1184,8 +1184,8 @@
 - [ ] Aplico boas práticas de segurança (Fase 12)
 - [ ] Aplico arquitetura com padrões SOLID e DDD (Fase 13)
 - [ ] Faço deploy com CI/CD e Docker (Fase 14)
-- [ ] Implemento jobs assíncronos e Action Scheduler (Fase 15)
-- [ ] Conheço tópicos complementares (API, headless, ecossistema) (Fase 16)
+- [ ] Conheço tópicos complementares (API, headless, ecossistema) (Fase 15)
+- [ ] Implemento jobs assíncronos e Action Scheduler (Fase 16)
 - [ ] Aplico testes em toda fase do desenvolvimento (Fase 17)
 - [ ] Sigo um caminho de aprendizado adequado ao meu perfil (Fase 18)
 - [ ] Evito anti-padrões de segurança (Fase 19)

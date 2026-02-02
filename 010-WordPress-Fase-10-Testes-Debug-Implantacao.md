@@ -14,30 +14,30 @@
 ## 📑 Índice
 
 1. [Objetivos de Aprendizado](#objetivos-de-aprendizado)
-2. [Autoavaliação](#autoavaliacao)
-3. [Projeto Prático](#projeto-pratico)
-4. [Equívocos Comuns](#equivocos-comuns)
-5. [Fundamentos de Testing](#fundamentos-de-testing)
-6. [PHPUnit Setup](#phpunit-setup)
-7. [Unit Tests Básicos](#unit-tests-basicos)
-8. [Testes de Classes](#testes-de-classes)
-9. [Testes com Factory](#testes-com-factory)
-10. [Mocking e Stubs](#mocking-e-stubs)
-11. [Data Providers](#data-providers)
-12. [Code Coverage](#code-coverage)
-13. [Integration Tests](#integration-tests)
-14. [Performance Tests](#performance-tests)
-15. [Debugging com Xdebug](#debugging-com-xdebug)
-16. [Query Monitor](#query-monitor)
-17. [Sentry Integration](#sentry-integration)
-18. [Deploy Strategies](#deploy-strategies)
-19. [Deploy Checklist](#deploy-checklist)
-20. [Scripts de Deploy](#scripts-de-deploy)
-21. [Blue-Green Deploy](#blue-green-deploy)
-22. [Canary Deploy](#canary-deploy)
-23. [CI/CD Pipeline](#cicd-pipeline)
-24. [Monitoring](#monitoring)
-25. [Boas Práticas](#boas-praticas)
+2. [Fundamentos de Testing](#fundamentos-de-testing)
+3. [PHPUnit Setup](#phpunit-setup)
+4. [Unit Tests Básicos](#unit-tests-basicos)
+5. [Testes de Classes](#testes-de-classes)
+6. [Testes com Factory](#testes-com-factory)
+7. [Mocking e Stubs](#mocking-e-stubs)
+8. [Data Providers](#data-providers)
+9. [Code Coverage](#code-coverage)
+10. [Integration Tests](#integration-tests)
+11. [Performance Tests](#performance-tests)
+12. [Debugging com Xdebug](#debugging-com-xdebug)
+13. [Query Monitor](#query-monitor)
+14. [Sentry Integration](#sentry-integration)
+15. [Deploy Strategies](#deploy-strategies)
+16. [Deploy Checklist](#deploy-checklist)
+17. [Scripts de Deploy](#scripts-de-deploy)
+18. [Blue-Green Deploy](#blue-green-deploy)
+19. [Canary Deploy](#canary-deploy)
+20. [CI/CD Pipeline](#cicd-pipeline)
+21. [Monitoring](#monitoring)
+22. [Boas Práticas](#boas-praticas)
+23. [Autoavaliação](#autoavaliacao)
+24. [Projeto Prático](#projeto-pratico)
+25. [Equívocos Comuns](#equivocos-comuns)
 26. [Recursos Recomendados](#recursos-recomendados)
 
 ---
@@ -55,69 +55,6 @@ Ao final desta fase, você será capaz de:
 6. ✅ Integrar rastreamento de erros com Sentry para monitoramento em produção
 7. ✅ Implementar estratégias de deployment (blue-green, canary, rolling)
 8. ✅ Criar checklists de deployment e scripts de automação
-
-<a id="autoavaliacao"></a>
-## 📝 Autoavaliação
-
-Teste seu entendimento:
-
-- [ ] Qual é a diferença entre testes unitários e testes de integração?
-- [ ] Como você mocka funções do WordPress em testes PHPUnit?
-- [ ] O que é cobertura de código e qual porcentagem você deve buscar?
-- [ ] Como você debuga queries do WordPress usando Query Monitor?
-- [ ] Qual é a diferença entre deployments blue-green e canary?
-- [ ] Como você trata migrações de banco de dados durante deployment?
-- [ ] O que deve ser incluído em um checklist de deployment?
-- [ ] Como você faz rollback de um deployment se algo der errado?
-
-<a id="projeto-pratico"></a>
-## 🛠️ Projeto Prático
-
-**Construir:** Plugin Testado com Pipeline de Deployment
-
-Crie um plugin que:
-- Tenha cobertura de testes abrangente (testes unitários + de integração)
-- Use mocking para dependências externas
-- Inclua ferramentas de debugging e rastreamento de erros
-- Tenha pipeline de deployment automatizado
-- Inclua procedimentos de rollback
-- Siga boas práticas de deployment
-
-**Tempo estimado:** 15-20 horas  
-**Dificuldade:** Avançado
-
----
-
-<a id="equivocos-comuns"></a>
-## ❌ Equívocos Comuns
-
-### Equívoco 1: "100% de cobertura de código significa código sem bugs"
-**Realidade:** Cobertura de código mede qual código é executado, não se está correto. Você pode ter 100% de cobertura com bugs.
-
-**Por que é importante:** Cobertura é uma métrica, não um objetivo. Foque em testes significativos, não apenas porcentagem de cobertura.
-
-**Como lembrar:** Cobertura = o que executa, não correção. Teste comportamento, não apenas linhas.
-
-### Equívoco 2: "Testes unitários são suficientes"
-**Realidade:** Testes unitários verificam componentes individuais. Testes de integração verificam interações entre componentes. Você precisa de ambos.
-
-**Por que é importante:** Testes unitários perdem problemas de integração. Testes de integração capturam problemas do mundo real.
-
-**Como lembrar:** Unitário = isolado. Integração = juntos. Ambos necessários.
-
-### Equívoco 3: "Deployment é apenas copiar arquivos"
-**Realidade:** Deployment inclui migrações de banco de dados, limpeza de cache, health checks, planos de rollback e monitoramento.
-
-**Por que é importante:** Tratar deployment como cópia de arquivos leva a downtime, perda de dados e rollbacks difíceis.
-
-**Como lembrar:** Deployment = arquivos + banco de dados + cache + monitoramento + plano de rollback.
-
-### Equívoco 4: "Deployment blue-green é sempre melhor"
-**Realidade:** Blue-green requer infraestrutura dupla. Deployments canary podem ser mais econômicos para rollouts graduais.
-
-**Por que é importante:** Escolher a estratégia de deployment certa depende de infraestrutura, tolerância a risco e orçamento.
-
-**Como lembrar:** Blue-green = troca instantânea, infraestrutura dupla. Canary = gradual, infraestrutura única.
 
 ---
 
@@ -1738,6 +1675,71 @@ class Monitoring
 - [ ] Logs estruturados
 - [ ] Dashboards atualizados
 ```
+
+---
+
+<a id="autoavaliacao"></a>
+## 📝 Autoavaliação
+
+Teste seu entendimento:
+
+- [ ] Qual é a diferença entre testes unitários e testes de integração?
+- [ ] Como você mocka funções do WordPress em testes PHPUnit?
+- [ ] O que é cobertura de código e qual porcentagem você deve buscar?
+- [ ] Como você debuga queries do WordPress usando Query Monitor?
+- [ ] Qual é a diferença entre deployments blue-green e canary?
+- [ ] Como você trata migrações de banco de dados durante deployment?
+- [ ] O que deve ser incluído em um checklist de deployment?
+- [ ] Como você faz rollback de um deployment se algo der errado?
+
+<a id="projeto-pratico"></a>
+## 🛠️ Projeto Prático
+
+**Construir:** Plugin Testado com Pipeline de Deployment
+
+Crie um plugin que:
+- Tenha cobertura de testes abrangente (testes unitários + de integração)
+- Use mocking para dependências externas
+- Inclua ferramentas de debugging e rastreamento de erros
+- Tenha pipeline de deployment automatizado
+- Inclua procedimentos de rollback
+- Siga boas práticas de deployment
+
+**Tempo estimado:** 15-20 horas  
+**Dificuldade:** Avançado
+
+---
+
+<a id="equivocos-comuns"></a>
+## ❌ Equívocos Comuns
+
+### Equívoco 1: "100% de cobertura de código significa código sem bugs"
+**Realidade:** Cobertura de código mede qual código é executado, não se está correto. Você pode ter 100% de cobertura com bugs.
+
+**Por que é importante:** Cobertura é uma métrica, não um objetivo. Foque em testes significativos, não apenas porcentagem de cobertura.
+
+**Como lembrar:** Cobertura = o que executa, não correção. Teste comportamento, não apenas linhas.
+
+### Equívoco 2: "Testes unitários são suficientes"
+**Realidade:** Testes unitários verificam componentes individuais. Testes de integração verificam interações entre componentes. Você precisa de ambos.
+
+**Por que é importante:** Testes unitários perdem problemas de integração. Testes de integração capturam problemas do mundo real.
+
+**Como lembrar:** Unitário = isolado. Integração = juntos. Ambos necessários.
+
+### Equívoco 3: "Deployment é apenas copiar arquivos"
+**Realidade:** Deployment inclui migrações de banco de dados, limpeza de cache, health checks, planos de rollback e monitoramento.
+
+**Por que é importante:** Tratar deployment como cópia de arquivos leva a downtime, perda de dados e rollbacks difíceis.
+
+**Como lembrar:** Deployment = arquivos + banco de dados + cache + monitoramento + plano de rollback.
+
+### Equívoco 4: "Deployment blue-green é sempre melhor"
+**Realidade:** Blue-green requer infraestrutura dupla. Deployments canary podem ser mais econômicos para rollouts graduais.
+
+**Por que é importante:** Escolher a estratégia de deployment certa depende de infraestrutura, tolerância a risco e orçamento.
+
+**Como lembrar:** Blue-green = troca instantânea, infraestrutura dupla. Canary = gradual, infraestrutura única.
 
 ---
 

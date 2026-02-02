@@ -14,25 +14,25 @@
 ## 📑 Índice
 
 1. [Objetivos de Aprendizado](#objetivos-de-aprendizado)
-2. [Autoavaliação](#autoavaliacao)
-3. [Projeto Prático](#projeto-pratico)
-4. [Equívocos Comuns](#equivocos-comuns)
-5. [Fundamentos de Segurança WordPress](#fundamentos-de-seguranca-wordpress)
-6. [Input Validation e Sanitization](#input-validation-e-sanitization)
-7. [Escapando Output](#escapando-output)
-8. [Nonces para Proteção CSRF](#nonces-para-protecao-csrf)
-9. [Capabilities e Permissões](#capabilities-e-permissoes)
-10. [Prepared Statements](#prepared-statements)
-11. [Authentication e Password Security](#authentication-e-password-security)
-12. [File Upload Security](#file-upload-security)
-13. [REST API Security](#rest-api-security)
-14. [Security Headers](#security-headers)
-15. [Logging & Monitoring](#logging-monitoring)
-16. [Environment Configuration](#environment-configuration)
-17. [Incident Response](#incident-response)
-18. [Code Review Checklist](#code-review-checklist)
-19. [Best Practices Finais](#best-practices-finais)
-20. [Servidor Web Security](#servidor-web-security)
+2. [Fundamentos de Segurança WordPress](#fundamentos-de-seguranca-wordpress)
+3. [Input Validation e Sanitization](#input-validation-e-sanitization)
+4. [Escapando Output](#escapando-output)
+5. [Nonces para Proteção CSRF](#nonces-para-protecao-csrf)
+6. [Capabilities e Permissões](#capabilities-e-permissoes)
+7. [Prepared Statements](#prepared-statements)
+8. [Authentication e Password Security](#authentication-e-password-security)
+9. [File Upload Security](#file-upload-security)
+10. [REST API Security](#rest-api-security)
+11. [Security Headers](#security-headers)
+12. [Logging & Monitoring](#logging-monitoring)
+13. [Environment Configuration](#environment-configuration)
+14. [Incident Response](#incident-response)
+15. [Code Review Checklist](#code-review-checklist)
+16. [Best Practices Finais](#best-practices-finais)
+17. [Servidor Web Security](#servidor-web-security)
+18. [Autoavaliação](#autoavaliacao)
+19. [Projeto Prático](#projeto-pratico)
+20. [Equívocos Comuns](#equivocos-comuns)
 21. [Resumo da Fase 12](#resumo-da-fase-12)
 
 ---
@@ -50,78 +50,6 @@ Ao final desta fase, você será capaz de:
 6. ✅ Implementar autenticação segura e tratamento de senhas
 7. ✅ Proteger uploads de arquivos com validação e armazenamento adequados
 8. ✅ Aplicar security headers e seguir boas práticas de segurança do WordPress
-
-<a id="autoavaliacao"></a>
-## 📝 Autoavaliação
-
-Teste seu entendimento:
-
-- [ ] Qual é a diferença entre validação e sanitização?
-- [ ] Quando você deve usar `esc_html()`, `esc_attr()`, `esc_url()`, e `esc_js()`?
-- [ ] Como nonces previnem ataques CSRF?
-- [ ] Qual é a diferença entre `current_user_can()` e verificações de capability?
-- [ ] Por que você deve sempre usar prepared statements ao invés de queries SQL diretas?
-- [ ] Como você trata uploads de arquivos com segurança no WordPress?
-- [ ] Quais security headers você deve implementar para sites WordPress?
-- [ ] O que deve ser incluído em um checklist de revisão de código de segurança?
-
-<a id="projeto-pratico"></a>
-## 🛠️ Projeto Prático
-
-**Construir:** Plugin Seguro Primeiro
-
-Crie um plugin que:
-- Valide e sanitize todas as entradas adequadamente
-- Escape todas as saídas corretamente
-- Implemente nonces para todos os formulários
-- Use verificações de capability para todas as ações
-- Use prepared statements para todas as queries de banco de dados
-- Trate uploads de arquivos com segurança
-- Implemente security headers
-- Siga padrões de codificação de segurança do WordPress
-
-**Tempo estimado:** 12-15 horas  
-**Dificuldade:** Avançado
-
----
-
-<a id="equivocos-comuns"></a>
-## ❌ Equívocos Comuns
-
-### Equívoco 1: "WordPress é inseguro por padrão"
-**Realidade:** O core do WordPress é seguro quando configurado e atualizado adequadamente. A maioria dos problemas de segurança vem de plugins, temas ou má configuração.
-
-**Por que é importante:** Culpar o core do WordPress ignora problemas reais de segurança. Foque em plugins, temas e configuração.
-
-**Como lembrar:** Core WordPress = seguro. Plugins/temas/config = vulnerabilidades potenciais.
-
-### Equívoco 2: "Escaping previne todos os ataques XSS"
-**Realidade:** Escaping previne XSS em contextos específicos, mas você também precisa de validação de entrada, headers CSP e filtragem adequada de conteúdo.
-
-**Por que é importante:** Escaping sozinho não é suficiente. Defesa em profundidade é necessária.
-
-**Como lembrar:** Escaping = uma camada. Múltiplas camadas = defesa em profundidade.
-
-### Equívoco 3: "Nonces expiram após um uso"
-**Realidade:** Nonces expiram após 24 horas (padrão) ou ao fazer logout, não após um uso. Eles podem ser reutilizados dentro do período de validade.
-
-**Por que é importante:** Entender o tempo de vida de nonces ajuda com tratamento de formulários e requisições AJAX.
-
-**Como lembrar:** Nonces = baseados em tempo, não em uso. Válidos por ~24 horas.
-
-### Equívoco 4: "Prepared statements previnem toda SQL injection"
-**Realidade:** Prepared statements previnem SQL injection quando usados corretamente. Mas nomes dinâmicos de tabela/coluna e queries complexas ainda precisam de tratamento cuidadoso.
-
-**Por que é importante:** Prepared statements são essenciais mas não são bala de prata. Entenda suas limitações.
-
-**Como lembrar:** Prepared statements = previnem injeção em valores. Nomes de tabela/coluna = precisam de whitelist.
-
-### Equívoco 5: "Plugins de segurança tornam tudo seguro"
-**Realidade:** Plugins de segurança ajudam mas não substituem práticas de codificação segura, configuração adequada e atualizações regulares.
-
-**Por que é importante:** Confiar apenas em plugins de segurança cria falsa sensação de segurança. Segurança de código é fundamental.
-
-**Como lembrar:** Plugins de segurança = camada adicional. Código seguro = fundação.
 
 ---
 
@@ -1568,6 +1496,80 @@ location = /wp-login.php {
     limit_req zone=login burst=5 nodelay;
 }
 ```
+
+---
+
+<a id="autoavaliacao"></a>
+## 📝 Autoavaliação
+
+Teste seu entendimento:
+
+- [ ] Qual é a diferença entre validação e sanitização?
+- [ ] Quando você deve usar `esc_html()`, `esc_attr()`, `esc_url()`, e `esc_js()`?
+- [ ] Como nonces previnem ataques CSRF?
+- [ ] Qual é a diferença entre `current_user_can()` e verificações de capability?
+- [ ] Por que você deve sempre usar prepared statements ao invés de queries SQL diretas?
+- [ ] Como você trata uploads de arquivos com segurança no WordPress?
+- [ ] Quais security headers você deve implementar para sites WordPress?
+- [ ] O que deve ser incluído em um checklist de revisão de código de segurança?
+
+<a id="projeto-pratico"></a>
+## 🛠️ Projeto Prático
+
+**Construir:** Plugin Seguro Primeiro
+
+Crie um plugin que:
+- Valide e sanitize todas as entradas adequadamente
+- Escape todas as saídas corretamente
+- Implemente nonces para todos os formulários
+- Use verificações de capability para todas as ações
+- Use prepared statements para todas as queries de banco de dados
+- Trate uploads de arquivos com segurança
+- Implemente security headers
+- Siga padrões de codificação de segurança do WordPress
+
+**Tempo estimado:** 12-15 horas  
+**Dificuldade:** Avançado
+
+---
+
+<a id="equivocos-comuns"></a>
+## ❌ Equívocos Comuns
+
+### Equívoco 1: "WordPress é inseguro por padrão"
+**Realidade:** O core do WordPress é seguro quando configurado e atualizado adequadamente. A maioria dos problemas de segurança vem de plugins, temas ou má configuração.
+
+**Por que é importante:** Culpar o core do WordPress ignora problemas reais de segurança. Foque em plugins, temas e configuração.
+
+**Como lembrar:** Core WordPress = seguro. Plugins/temas/config = vulnerabilidades potenciais.
+
+### Equívoco 2: "Escaping previne todos os ataques XSS"
+**Realidade:** Escaping previne XSS em contextos específicos, mas você também precisa de validação de entrada, headers CSP e filtragem adequada de conteúdo.
+
+**Por que é importante:** Escaping sozinho não é suficiente. Defesa em profundidade é necessária.
+
+**Como lembrar:** Escaping = uma camada. Múltiplas camadas = defesa em profundidade.
+
+### Equívoco 3: "Nonces expiram após um uso"
+**Realidade:** Nonces expiram após 24 horas (padrão) ou ao fazer logout, não após um uso. Eles podem ser reutilizados dentro do período de validade.
+
+**Por que é importante:** Entender o tempo de vida de nonces ajuda com tratamento de formulários e requisições AJAX.
+
+**Como lembrar:** Nonces = baseados em tempo, não em uso. Válidos por ~24 horas.
+
+### Equívoco 4: "Prepared statements previnem toda SQL injection"
+**Realidade:** Prepared statements previnem SQL injection quando usados corretamente. Mas nomes dinâmicos de tabela/coluna e queries complexas ainda precisam de tratamento cuidadoso.
+
+**Por que é importante:** Prepared statements são essenciais mas não são bala de prata. Entenda suas limitações.
+
+**Como lembrar:** Prepared statements = previnem injeção em valores. Nomes de tabela/coluna = precisam de whitelist.
+
+### Equívoco 5: "Plugins de segurança tornam tudo seguro"
+**Realidade:** Plugins de segurança ajudam mas não substituem práticas de codificação segura, configuração adequada e atualizações regulares.
+
+**Por que é importante:** Confiar apenas em plugins de segurança cria falsa sensação de segurança. Segurança de código é fundamental.
+
+**Como lembrar:** Plugins de segurança = camada adicional. Código seguro = fundação.
 
 ---
 

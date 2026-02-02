@@ -14,21 +14,21 @@
 ## 📑 Índice
 
 1. [Objetivos de Aprendizado](#objetivos-de-aprendizado)
-2. [Autoavaliação](#autoavaliacao)
-3. [Projeto Prático](#projeto-pratico)
-4. [Equívocos Comuns](#equivocos-comuns)
-5. [Fundamentos do WP-CLI](#fundamentos-do-wp-cli)
-6. [Comandos Básicos Essenciais](#comandos-basicos-essenciais)
-7. [Criar Comandos WP-CLI Customizados](#criar-comandos-wp-cli-customizados)
-8. [Subcomandos e Hierarquia](#subcomandos-e-hierarquia)
-9. [Comandos com Interatividade](#comandos-com-interatividade)
-10. [Comandos com Testes](#comandos-com-testes)
-11. [Scaffolding com WP-CLI](#scaffolding-com-wp-cli)
-12. [Migrations e Database](#migrations-e-database)
-13. [Debugging Tools](#debugging-tools)
-14. [Scripts de Automação](#scripts-de-automacao)
-15. [CI/CD com GitHub Actions](#cicd-com-github-actions)
-16. [Boas Práticas](#boas-praticas)
+2. [Fundamentos do WP-CLI](#fundamentos-do-wp-cli)
+3. [Comandos Básicos Essenciais](#comandos-basicos-essenciais)
+4. [Criar Comandos WP-CLI Customizados](#criar-comandos-wp-cli-customizados)
+5. [Subcomandos e Hierarquia](#subcomandos-e-hierarquia)
+6. [Comandos com Interatividade](#comandos-com-interatividade)
+7. [Comandos com Testes](#comandos-com-testes)
+8. [Scaffolding com WP-CLI](#scaffolding-com-wp-cli)
+9. [Migrations e Database](#migrations-e-database)
+10. [Debugging Tools](#debugging-tools)
+11. [Scripts de Automação](#scripts-de-automacao)
+12. [CI/CD com GitHub Actions](#cicd-com-github-actions)
+13. [Boas Práticas](#boas-praticas)
+14. [Autoavaliação](#autoavaliacao)
+15. [Projeto Prático](#projeto-pratico)
+16. [Equívocos Comuns](#equivocos-comuns)
 17. [Resumo da Fase 9](#resumo-da-fase-9)
 
 ---
@@ -46,62 +46,6 @@ Ao final desta fase, você será capaz de:
 6. ✅ Implementar ferramentas de debugging e tratamento de erros no WP-CLI
 7. ✅ Criar ferramentas de scaffolding para desenvolvimento rápido
 8. ✅ Aplicar workflows de desenvolvimento profissional com WP-CLI
-
-<a id="autoavaliacao"></a>
-## 📝 Autoavaliação
-
-Teste seu entendimento:
-
-- [ ] Como você testa comandos WP-CLI programaticamente?
-- [ ] Qual é a melhor forma de tratar migrações de banco de dados com WP-CLI?
-- [ ] Como você integra comandos WP-CLI em workflows do GitHub Actions?
-- [ ] Quais são as considerações de segurança ao expor comandos WP-CLI?
-- [ ] Como você cria bibliotecas reutilizáveis de comandos WP-CLI?
-- [ ] Qual é a diferença entre comandos WP-CLI e hooks do WordPress?
-- [ ] Como você trata comandos WP-CLI de longa duração sem timeout?
-- [ ] Quais são as melhores práticas para documentação de comandos WP-CLI?
-
-<a id="projeto-pratico"></a>
-## 🛠️ Projeto Prático
-
-**Construir:** Suite de Automação de Desenvolvimento
-
-Crie uma suite abrangente de desenvolvimento baseada em WP-CLI que:
-- Gere scaffolding de plugin/tema
-- Execute migrações de banco de dados
-- Execute testes automatizados
-- Realize verificações de qualidade de código
-- Integre com pipelines CI/CD
-- Inclua ferramentas de debugging e profiling
-
-**Tempo estimado:** 10-12 horas  
-**Dificuldade:** Avançado
-
----
-
-<a id="equivocos-comuns"></a>
-## ❌ Equívocos Comuns
-
-### Equívoco 1: "Comandos WP-CLI não podem ser testados"
-**Realidade:** Comandos WP-CLI podem e devem ser testados usando PHPUnit, assim como qualquer outro código PHP.
-
-**Por que é importante:** Testar comandos WP-CLI garante confiabilidade e previne regressões.
-
-**Como lembrar:** Comandos WP-CLI = código PHP = podem ser testados com PHPUnit.
-
-### Equívoco 2: "WP-CLI é apenas para tarefas pontuais"
-**Realidade:** WP-CLI se destaca em automação, integração CI/CD e tarefas repetitivas. É uma ferramenta poderosa de automação.
-
-**Por que é importante:** Entender capacidades de automação do WP-CLI desbloqueia workflows poderosos.
-
-**Como lembrar:** WP-CLI = ferramenta de automação, não apenas comandos manuais.
-
-### Equívoco 3: "Comandos WP-CLI sempre precisam do WordPress carregado"
-**Realidade:** Alguns comandos WP-CLI podem funcionar sem bootstrap completo do WordPress, melhorando performance para tarefas específicas.
-
-**Por que é importante:** Entender quando o WordPress precisa ser carregado ajuda a otimizar performance de comandos.
-
-**Como lembrar:** Alguns comandos = WordPress não necessário. Maioria dos comandos = WordPress requerido.
 
 ---
 
@@ -2068,6 +2012,64 @@ check_admin_referer('action_nonce');
 // Preparar queries
 $wpdb->prepare("SELECT * FROM {$wpdb->posts} WHERE post_title = %s", $title);
 ```
+
+---
+
+<a id="autoavaliacao"></a>
+## 📝 Autoavaliação
+
+Teste seu entendimento:
+
+- [ ] Como você testa comandos WP-CLI programaticamente?
+- [ ] Qual é a melhor forma de tratar migrações de banco de dados com WP-CLI?
+- [ ] Como você integra comandos WP-CLI em workflows do GitHub Actions?
+- [ ] Quais são as considerações de segurança ao expor comandos WP-CLI?
+- [ ] Como você cria bibliotecas reutilizáveis de comandos WP-CLI?
+- [ ] Qual é a diferença entre comandos WP-CLI e hooks do WordPress?
+- [ ] Como você trata comandos WP-CLI de longa duração sem timeout?
+- [ ] Quais são as melhores práticas para documentação de comandos WP-CLI?
+
+<a id="projeto-pratico"></a>
+## 🛠️ Projeto Prático
+
+**Construir:** Suite de Automação de Desenvolvimento
+
+Crie uma suite abrangente de desenvolvimento baseada em WP-CLI que:
+- Gere scaffolding de plugin/tema
+- Execute migrações de banco de dados
+- Execute testes automatizados
+- Realize verificações de qualidade de código
+- Integre com pipelines CI/CD
+- Inclua ferramentas de debugging e profiling
+
+**Tempo estimado:** 10-12 horas  
+**Dificuldade:** Avançado
+
+---
+
+<a id="equivocos-comuns"></a>
+## ❌ Equívocos Comuns
+
+### Equívoco 1: "Comandos WP-CLI não podem ser testados"
+**Realidade:** Comandos WP-CLI podem e devem ser testados usando PHPUnit, assim como qualquer outro código PHP.
+
+**Por que é importante:** Testar comandos WP-CLI garante confiabilidade e previne regressões.
+
+**Como lembrar:** Comandos WP-CLI = código PHP = podem ser testados com PHPUnit.
+
+### Equívoco 2: "WP-CLI é apenas para tarefas pontuais"
+**Realidade:** WP-CLI se destaca em automação, integração CI/CD e tarefas repetitivas. É uma ferramenta poderosa de automação.
+
+**Por que é importante:** Entender capacidades de automação do WP-CLI desbloqueia workflows poderosos.
+
+**Como lembrar:** WP-CLI = ferramenta de automação, não apenas comandos manuais.
+
+### Equívoco 3: "Comandos WP-CLI sempre precisam do WordPress carregado"
+**Realidade:** Alguns comandos WP-CLI podem funcionar sem bootstrap completo do WordPress, melhorando performance para tarefas específicas.
+
+**Por que é importante:** Entender quando o WordPress precisa ser carregado ajuda a otimizar performance de comandos.
+
+**Como lembrar:** Alguns comandos = WordPress não necessário. Maioria dos comandos = WordPress requerido.
 
 ---
 

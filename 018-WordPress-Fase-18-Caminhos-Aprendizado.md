@@ -77,7 +77,7 @@ Fase 1 (Core Fundamentals)
   │     │
   │     ├─→ Fase 3 (REST API Advanced)
   │     │     │
-  │     │     └─→ Fase 15 (Async Jobs) ──┐
+  │     │     └─→ Fase 16 (Async Jobs) ──┐
   │     │                                 │
   │     ├─→ Fase 4 (Settings API)         │
   │     │     │                           │
@@ -104,7 +104,7 @@ Fase 1 (Core Fundamentals)
                                       │
                                       └─→ Fase 14 (DevOps)
                                             │
-                                            └─→ Fase 15 (Async Jobs)
+                                            └─→ Fase 16 (Async Jobs)
 ```
 
 ### Dependências por Fase
@@ -125,7 +125,7 @@ Fase 1 (Core Fundamentals)
 
 #### **Fase 3: REST API Advanced**
 **Pré-requisitos:** Fase 1, Fase 2  
-**Dependências:** Fase 15 (Async Jobs)  
+**Dependências:** Fase 16 (Async Jobs)  
 **Tempo:** 15-20 horas
 
 #### **Fase 4: Settings API**
@@ -179,16 +179,16 @@ Fase 1 (Core Fundamentals)
 **Pré-requisitos:** Fase 1-10 (recomendado)  
 **Dependências:** 
 - Fase 14 (DevOps)
-- Fase 15 (Async Jobs)
+- Fase 16 (Async Jobs)
 - Fase 11 (Multisite/i18n)
 **Tempo:** 25-30 horas
 
 #### **Fase 14: DevOps**
 **Pré-requisitos:** Fase 1-9, Fase 13 (recomendado)  
-**Dependências:** Fase 15 (Async Jobs)  
+**Dependências:** Fase 16 (Async Jobs)  
 **Tempo:** 20-25 horas
 
-#### **Fase 15: Async Jobs**
+#### **Fase 16: Async Jobs**
 **Pré-requisitos:** Fase 1-3, Fase 13 (recomendado)  
 **Dependências:** Nenhuma específica  
 **Tempo:** 20-25 horas
@@ -215,7 +215,7 @@ Fase 2 (REST API Fundamentals)
   ↓
 Fase 3 (REST API Advanced)
   ↓
-Fase 15 (Async Jobs & Background Processing)
+Fase 16 (Async Jobs & Background Processing)
   ↓
 Fase 13 (Arquitetura Avançada)
   ↓
@@ -248,7 +248,7 @@ Fase 14 (DevOps)
 - Error handling
 - Webhooks outbound
 
-#### **Etapa 4: Async Jobs (Fase 15)**
+#### **Etapa 4: Async Jobs (Fase 16)**
 **Tempo:** 20-25 horas  
 **Por quê:** Processamento assíncrono essencial  
 **Foco:** 
@@ -417,7 +417,7 @@ Fase 14 (DevOps)
 - ❌ Fase 7 (WP-CLI Fundamentals) - Útil mas não essencial
 - ❌ Fase 9 (WP-CLI Advanced) - Útil mas não essencial
 - ❌ Fase 11 (Multisite/i18n) - Específico, não essencial
-- ❌ Fase 15 (Async Jobs) - Pode ser aprendido depois se necessário
+- ❌ Fase 16 (Async Jobs) - Pode ser aprendido depois se necessário
 
 ---
 
@@ -451,7 +451,7 @@ Fase 12 (Segurança Avançada)
   ↓
 Fase 14 (DevOps)
   ↓
-Fase 15 (Async Jobs)
+Fase 16 (Async Jobs)
 ```
 
 ### Detalhamento do Path
@@ -515,7 +515,7 @@ Fase 15 (Async Jobs)
 - Monitoring
 - Backup strategies
 
-#### **Etapa 9: Async Jobs (Fase 15)**
+#### **Etapa 9: Async Jobs (Fase 16)**
 **Tempo:** 20-25 horas  
 **Por quê:** Background processing  
 **Foco:** 
@@ -572,7 +572,7 @@ Fase 12 (Segurança Avançada)
   ↓
 Fase 13 (Arquitetura Avançada)
   ↓
-Fase 15 (Async Jobs)
+Fase 16 (Async Jobs)
   ↓
 Fase 14 (DevOps)
   ↓
@@ -618,7 +618,7 @@ Fase 11 (Multisite/i18n)
 - Dependency Injection
 - Event-driven architecture
 
-#### **Etapa 6: Async Jobs (Fase 15)**
+#### **Etapa 6: Async Jobs (Fase 16)**
 **Tempo:** 20-25 horas  
 **Por quê:** Background processing  
 **Foco:** 

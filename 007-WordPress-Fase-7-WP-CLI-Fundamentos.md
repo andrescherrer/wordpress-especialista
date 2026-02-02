@@ -14,17 +14,17 @@
 ## 📑 Índice
 
 1. [Objetivos de Aprendizado](#objetivos-de-aprendizado)
-2. [Autoavaliação](#autoavaliacao)
-3. [Projeto Prático](#projeto-pratico)
-4. [Equívocos Comuns](#equivocos-comuns)
-5. [Fundamentos do WP-CLI](#fundamentos-do-wp-cli)
-6. [Comandos Básicos Essenciais](#comandos-basicos-essenciais)
-7. [Criar Comandos WP-CLI Customizados](#criar-comandos-wp-cli-customizados)
-8. [Subcomandos e Estrutura Hierárquica](#subcomandos-e-estrutura-hierarquica)
-9. [Comandos com Interatividade](#comandos-com-interatividade)
-10. [Comandos de Database](#comandos-de-database)
-11. [Scaffolding com WP-CLI](#scaffolding-com-wp-cli)
-12. [Boas Práticas](#boas-praticas)
+2. [Fundamentos do WP-CLI](#fundamentos-do-wp-cli)
+3. [Comandos Básicos Essenciais](#comandos-basicos-essenciais)
+4. [Criar Comandos WP-CLI Customizados](#criar-comandos-wp-cli-customizados)
+5. [Subcomandos e Estrutura Hierárquica](#subcomandos-e-estrutura-hierarquica)
+6. [Comandos com Interatividade](#comandos-com-interatividade)
+7. [Comandos de Database](#comandos-de-database)
+8. [Scaffolding com WP-CLI](#scaffolding-com-wp-cli)
+9. [Boas Práticas](#boas-praticas)
+10. [Autoavaliação](#autoavaliacao)
+11. [Projeto Prático](#projeto-pratico)
+12. [Equívocos Comuns](#equivocos-comuns)
 13. [Resumo da Fase 7](#resumo-da-fase-7)
 
 ---
@@ -42,62 +42,6 @@ Ao final desta fase, você será capaz de:
 6. ✅ Gerar scaffolding de plugin/tema com WP-CLI
 7. ✅ Integrar comandos WP-CLI em scripts de automação
 8. ✅ Aplicar boas práticas e tratamento de erros do WP-CLI
-
-<a id="autoavaliacao"></a>
-## 📝 Autoavaliação
-
-Teste seu entendimento:
-
-- [ ] Como você cria um comando WP-CLI customizado com argumentos e opções?
-- [ ] Qual é a diferença entre `WP_CLI::add_command()` e `WP_CLI::add_command()` com callable?
-- [ ] Como você trata erros em comandos WP-CLI?
-- [ ] Qual é o propósito de `WP_CLI::confirm()` e `WP_CLI::prompt()`?
-- [ ] Como você cria subcomandos no WP-CLI?
-- [ ] Qual é a diferença entre `WP_CLI::success()` e `WP_CLI::log()`?
-- [ ] Como você usa WP-CLI em scripts shell para automação?
-- [ ] Quais são as considerações de segurança ao usar comandos WP-CLI?
-
-<a id="projeto-pratico"></a>
-## 🛠️ Projeto Prático
-
-**Construir:** Gerenciador de Plugin WP-CLI
-
-Crie um plugin com comandos WP-CLI customizados que:
-- Gerencie configurações do plugin via CLI
-- Importe/exporte dados
-- Execute tarefas de manutenção
-- Inclua prompts interativos para configuração
-- Tenha subcomandos para diferentes operações
-- Forneça mensagens de erro úteis e indicadores de progresso
-
-**Tempo estimado:** 6-8 horas  
-**Dificuldade:** Iniciante-Intermediário
-
----
-
-<a id="equivocos-comuns"></a>
-## ❌ Equívocos Comuns
-
-### Equívoco 1: "WP-CLI requer acesso SSH"
-**Realidade:** WP-CLI roda localmente no servidor. Você precisa de acesso shell, mas não necessariamente SSH (pode ser terminal local).
-
-**Por que é importante:** Entender requisitos de acesso ajuda a configurar workflows de desenvolvimento corretamente.
-
-**Como lembrar:** WP-CLI = ferramenta de linha de comando, precisa de acesso shell (local ou remoto).
-
-### Equívoco 2: "Comandos WP-CLI são mais lentos que a interface admin"
-**Realidade:** WP-CLI é frequentemente mais rápido para operações em lote e automação. Ele ignora overhead HTTP e pode processar múltiplos itens eficientemente.
-
-**Por que é importante:** WP-CLI se destaca em operações em lote e scripting, não apenas tarefas pontuais.
-
-**Como lembrar:** WP-CLI = mais rápido para operações em lote, automação e scripting.
-
-### Equívoco 3: "WP-CLI não pode fazer tudo que o admin pode"
-**Realidade:** WP-CLI pode fazer a maioria das tarefas admin e muitas coisas que o admin não pode (operaciones em lote, automação, scripting).
-
-**Por que é importante:** WP-CLI é mais poderoso para desenvolvedores que a interface admin para muitas tarefas.
-
-**Como lembrar:** WP-CLI = ferramenta de desenvolvedor, mais poderoso que admin para automação.
 
 ---
 
@@ -1384,6 +1328,64 @@ if (defined('WP_CLI') && WP_CLI) {
     WP_CLI::add_command('meu-plugin scaffold', 'Meu_Plugin_Scaffold_CLI_Command');
 }
 ```
+
+---
+
+<a id="autoavaliacao"></a>
+## 📝 Autoavaliação
+
+Teste seu entendimento:
+
+- [ ] Como você cria um comando WP-CLI customizado com argumentos e opções?
+- [ ] Qual é a diferença entre `WP_CLI::add_command()` e `WP_CLI::add_command()` com callable?
+- [ ] Como você trata erros em comandos WP-CLI?
+- [ ] Qual é o propósito de `WP_CLI::confirm()` e `WP_CLI::prompt()`?
+- [ ] Como você cria subcomandos no WP-CLI?
+- [ ] Qual é a diferença entre `WP_CLI::success()` e `WP_CLI::log()`?
+- [ ] Como você usa WP-CLI em scripts shell para automação?
+- [ ] Quais são as considerações de segurança ao usar comandos WP-CLI?
+
+<a id="projeto-pratico"></a>
+## 🛠️ Projeto Prático
+
+**Construir:** Gerenciador de Plugin WP-CLI
+
+Crie um plugin com comandos WP-CLI customizados que:
+- Gerencie configurações do plugin via CLI
+- Importe/exporte dados
+- Execute tarefas de manutenção
+- Inclua prompts interativos para configuração
+- Tenha subcomandos para diferentes operações
+- Forneça mensagens de erro úteis e indicadores de progresso
+
+**Tempo estimado:** 6-8 horas  
+**Dificuldade:** Iniciante-Intermediário
+
+---
+
+<a id="equivocos-comuns"></a>
+## ❌ Equívocos Comuns
+
+### Equívoco 1: "WP-CLI requer acesso SSH"
+**Realidade:** WP-CLI roda localmente no servidor. Você precisa de acesso shell, mas não necessariamente SSH (pode ser terminal local).
+
+**Por que é importante:** Entender requisitos de acesso ajuda a configurar workflows de desenvolvimento corretamente.
+
+**Como lembrar:** WP-CLI = ferramenta de linha de comando, precisa de acesso shell (local ou remoto).
+
+### Equívoco 2: "Comandos WP-CLI são mais lentos que a interface admin"
+**Realidade:** WP-CLI é frequentemente mais rápido para operações em lote e automação. Ele ignora overhead HTTP e pode processar múltiplos itens eficientemente.
+
+**Por que é importante:** WP-CLI se destaca em operações em lote e scripting, não apenas tarefas pontuais.
+
+**Como lembrar:** WP-CLI = mais rápido para operações em lote, automação e scripting.
+
+### Equívoco 3: "WP-CLI não pode fazer tudo que o admin pode"
+**Realidade:** WP-CLI pode fazer a maioria das tarefas admin e muitas coisas que o admin não pode (operaciones em lote, automação, scripting).
+
+**Por que é importante:** WP-CLI é mais poderoso para desenvolvedores que a interface admin para muitas tarefas.
+
+**Como lembrar:** WP-CLI = ferramenta de desenvolvedor, mais poderoso que admin para automação.
 
 ---
 

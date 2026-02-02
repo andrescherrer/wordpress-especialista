@@ -14,21 +14,21 @@
 ## 📑 Índice
 
 1. [Objetivos de Aprendizado](#objetivos-de-aprendizado)
-2. [Autoavaliação](#autoavaliacao)
-3. [Projeto Prático](#projeto-pratico)
-4. [Equívocos Comuns](#equivocos-comuns)
-5. [13.1 - SOLID Principles em WordPress](#131-solid-principles-em-wordpress)
-6. [13.2 - Domain-Driven Design (DDD)](#132-domain-driven-design-ddd)
-7. [13.3 - Service Layer Pattern](#133-service-layer-pattern)
-8. [13.4 - Repository Pattern](#134-repository-pattern)
-9. [13.5 - Dependency Injection Container](#135-dependency-injection-container)
-10. [13.6 - Event-Driven Architecture](#136-event-driven-architecture)
-11. [13.7 - MVC em WordPress](#137-mvc-em-wordpress)
-12. [13.8 - Adapter Pattern para APIs Externas](#138-adapter-pattern-para-apis-externas)
-13. [13.9 - Strategy Pattern](#139-strategy-pattern)
-14. [13.10 - Factory Pattern](#1310-factory-pattern)
-15. [13.11 - Quando NÃO Usar SOLID (Trade-offs)](#1311-quando-nao-usar-solid-trade-offs)
-16. [13.12 - Error Handling em Arquitetura Avançada](#1312-error-handling-em-arquitetura-avancada)
+2. [13.1 - SOLID Principles em WordPress](#131-solid-principles-em-wordpress)
+3. [13.2 - Domain-Driven Design (DDD)](#132-domain-driven-design-ddd)
+4. [13.3 - Service Layer Pattern](#133-service-layer-pattern)
+5. [13.4 - Repository Pattern](#134-repository-pattern)
+6. [13.5 - Dependency Injection Container](#135-dependency-injection-container)
+7. [13.6 - Event-Driven Architecture](#136-event-driven-architecture)
+8. [13.7 - MVC em WordPress](#137-mvc-em-wordpress)
+9. [13.8 - Adapter Pattern para APIs Externas](#138-adapter-pattern-para-apis-externas)
+10. [13.9 - Strategy Pattern](#139-strategy-pattern)
+11. [13.10 - Factory Pattern](#1310-factory-pattern)
+12. [13.11 - Quando NÃO Usar SOLID (Trade-offs)](#1311-quando-nao-usar-solid-trade-offs)
+13. [13.12 - Error Handling em Arquitetura Avançada](#1312-error-handling-em-arquitetura-avancada)
+14. [Autoavaliação](#autoavaliacao)
+15. [Projeto Prático](#projeto-pratico)
+16. [Equívocos Comuns](#equivocos-comuns)
 17. [Resumo Comparativo dos Padrões](#resumo-comparativo-dos-padroes)
 18. [Checklist de Implementação](#checklist-de-implementacao)
 
@@ -47,77 +47,6 @@ Ao final desta fase, você será capaz de:
 6. ✅ Projetar arquiteturas event-driven usando hooks do WordPress
 7. ✅ Aplicar padrões de design (Adapter, Strategy, Factory) apropriadamente
 8. ✅ Reconhecer quando NÃO usar SOLID (trade-offs e super-engenharia)
-
-<a id="autoavaliacao"></a>
-## 📝 Autoavaliação
-
-Teste seu entendimento:
-
-- [ ] O que é o Princípio de Responsabilidade Única e como se aplica ao WordPress?
-- [ ] Como o Princípio de Inversão de Dependência ajuda com testes e manutenibilidade?
-- [ ] Qual é a diferença entre Repository Pattern e acesso direto ao banco de dados?
-- [ ] Quando você deve usar um Dependency Injection Container vs gerenciamento manual de dependências?
-- [ ] Como você implementa Domain-Driven Design no contexto WordPress?
-- [ ] Qual é o trade-off entre abstração e performance?
-- [ ] Quando é apropriado NÃO seguir princípios SOLID?
-- [ ] Como você equilibra pureza arquitetural com convenções do core WordPress?
-
-<a id="projeto-pratico"></a>
-## 🛠️ Projeto Prático
-
-**Construir:** Plugin de Arquitetura Enterprise
-
-Crie um plugin que demonstre:
-- Princípios SOLID aplicados corretamente
-- Service layer para lógica de negócio
-- Repository pattern para acesso a dados
-- Container de dependency injection
-- Arquitetura event-driven
-- Múltiplos padrões de design (Adapter, Strategy, Factory)
-- Documento de análise de trade-offs explicando decisões arquiteturais
-
-**Tempo estimado:** 20-25 horas  
-**Dificuldade:** Avançado
-
----
-
-<a id="equivocos-comuns"></a>
-## ❌ Equívocos Comuns
-
-### Equívoco 1: "Princípios SOLID sempre melhoram código"
-**Realidade:** Princípios SOLID melhoram manutenibilidade e testabilidade, mas podem adicionar complexidade e overhead de performance. Use-os quando benefícios superam custos.
-
-**Por que é importante:** Aplicar SOLID excessivamente em código simples cria complexidade desnecessária. Equilíbrio é fundamental.
-
-**Como lembrar:** SOLID = ferramenta, não dogma. Use quando ajuda, pule quando prejudica.
-
-### Equívoco 2: "Dependency Injection requer um container"
-**Realidade:** Dependency Injection é passar dependências, não usar um container. Você pode injetar manualmente ou usar um container. Ambos são válidos.
-
-**Por que é importante:** Entender DI vs DI Container ajuda a escolher a abordagem certa para o tamanho do seu projeto.
-
-**Como lembrar:** DI = padrão. DI Container = ferramenta para DI. Você pode fazer DI sem container.
-
-### Equívoco 3: "Repository Pattern sempre melhora performance"
-**Realidade:** Repository Pattern melhora testabilidade e manutenibilidade, mas adiciona camadas de abstração que podem impactar performance. Meça antes de otimizar.
-
-**Por que é importante:** Abstração tem custos. Use repositories quando benefícios (testes, manutenibilidade) superam custos.
-
-**Como lembrar:** Repository = abstração = testabilidade + manutenibilidade - alguma performance.
-
-### Equívoco 4: "Arquitetura Event-Driven é sempre melhor"
-**Realidade:** Arquitetura event-driven melhora desacoplamento mas torna debugging mais difícil e pode obscurecer fluxo de controle. Use quando desacoplamento é valioso.
-
-**Por que é importante:** Eventos tornam código mais difícil de rastrear. Use eventos para necessidades reais de desacoplamento, não em todos os lugares.
-
-**Como lembrar:** Eventos = desacoplamento + debugging mais difícil. Use quando desacoplamento importa.
-
-### Equívoco 5: "WordPress não suporta arquitetura moderna"
-**Realidade:** WordPress suporta padrões modernos (SOLID, DDD, DI) mas requer adaptá-los a convenções do WordPress (hooks, filters, globals).
-
-**Por que é importante:** Você pode usar arquitetura moderna no WordPress, mas deve trabalhar com WordPress, não contra ele.
-
-**Como lembrar:** Arquitetura moderna + convenções WordPress = combinação poderosa.
 
 ---
 
@@ -3924,6 +3853,79 @@ class EventDispatcher {
     }
 }
 ```
+
+---
+
+<a id="autoavaliacao"></a>
+## 📝 Autoavaliação
+
+Teste seu entendimento:
+
+- [ ] O que é o Princípio de Responsabilidade Única e como se aplica ao WordPress?
+- [ ] Como o Princípio de Inversão de Dependência ajuda com testes e manutenibilidade?
+- [ ] Qual é a diferença entre Repository Pattern e acesso direto ao banco de dados?
+- [ ] Quando você deve usar um Dependency Injection Container vs gerenciamento manual de dependências?
+- [ ] Como você implementa Domain-Driven Design no contexto WordPress?
+- [ ] Qual é o trade-off entre abstração e performance?
+- [ ] Quando é apropriado NÃO seguir princípios SOLID?
+- [ ] Como você equilibra pureza arquitetural com convenções do core WordPress?
+
+<a id="projeto-pratico"></a>
+## 🛠️ Projeto Prático
+
+**Construir:** Plugin de Arquitetura Enterprise
+
+Crie um plugin que demonstre:
+- Princípios SOLID aplicados corretamente
+- Service layer para lógica de negócio
+- Repository pattern para acesso a dados
+- Container de dependency injection
+- Arquitetura event-driven
+- Múltiplos padrões de design (Adapter, Strategy, Factory)
+- Documento de análise de trade-offs explicando decisões arquiteturais
+
+**Tempo estimado:** 20-25 horas  
+**Dificuldade:** Avançado
+
+---
+
+<a id="equivocos-comuns"></a>
+## ❌ Equívocos Comuns
+
+### Equívoco 1: "Princípios SOLID sempre melhoram código"
+**Realidade:** Princípios SOLID melhoram manutenibilidade e testabilidade, mas podem adicionar complexidade e overhead de performance. Use-os quando benefícios superam custos.
+
+**Por que é importante:** Aplicar SOLID excessivamente em código simples cria complexidade desnecessária. Equilíbrio é fundamental.
+
+**Como lembrar:** SOLID = ferramenta, não dogma. Use quando ajuda, pule quando prejudica.
+
+### Equívoco 2: "Dependency Injection requer um container"
+**Realidade:** Dependency Injection é passar dependências, não usar um container. Você pode injetar manualmente ou usar um container. Ambos são válidos.
+
+**Por que é importante:** Entender DI vs DI Container ajuda a escolher a abordagem certa para o tamanho do seu projeto.
+
+**Como lembrar:** DI = padrão. DI Container = ferramenta para DI. Você pode fazer DI sem container.
+
+### Equívoco 3: "Repository Pattern sempre melhora performance"
+**Realidade:** Repository Pattern melhora testabilidade e manutenibilidade, mas adiciona camadas de abstração que podem impactar performance. Meça antes de otimizar.
+
+**Por que é importante:** Abstração tem custos. Use repositories quando benefícios (testes, manutenibilidade) superam custos.
+
+**Como lembrar:** Repository = abstração = testabilidade + manutenibilidade - alguma performance.
+
+### Equívoco 4: "Arquitetura Event-Driven é sempre melhor"
+**Realidade:** Arquitetura event-driven melhora desacoplamento mas torna debugging mais difícil e pode obscurecer fluxo de controle. Use quando desacoplamento é valioso.
+
+**Por que é importante:** Eventos tornam código mais difícil de rastrear. Use eventos para necessidades reais de desacoplamento, não em todos os lugares.
+
+**Como lembrar:** Eventos = desacoplamento + debugging mais difícil. Use quando desacoplamento importa.
+
+### Equívoco 5: "WordPress não suporta arquitetura moderna"
+**Realidade:** WordPress suporta padrões modernos (SOLID, DDD, DI) mas requer adaptá-los a convenções do WordPress (hooks, filters, globals).
+
+**Por que é importante:** Você pode usar arquitetura moderna no WordPress, mas deve trabalhar com WordPress, não contra ele.
+
+**Como lembrar:** Arquitetura moderna + convenções WordPress = combinação poderosa.
 
 ---
 

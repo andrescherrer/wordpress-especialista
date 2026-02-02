@@ -14,26 +14,26 @@
 ## 📑 Índice
 
 1. [Objetivos de Aprendizado](#objetivos-de-aprendizado)
-2. [Autoavaliação](#autoavaliacao)
-3. [Projeto Prático](#projeto-pratico)
-4. [Equívocos Comuns](#equivocos-comuns)
-5. [Fundamentos do WordPress Multisite](#fundamentos-do-wordpress-multisite)
-6. [Plugin Compatível com Multisite](#plugin-compativel-com-multisite)
-7. [Classe Multisite](#classe-multisite)
-8. [Network Settings](#network-settings)
-9. [Site vs Network Options](#site-vs-network-options)
-10. [Fundamentos de Internacionalização (i18n)](#fundamentos-de-internacionalizacao-i18n)
-11. [Classe i18n](#classe-i18n)
-12. [Funções de Tradução](#funcoes-de-traducao)
-13. [Gerar Arquivo POT](#gerar-arquivo-pot)
-14. [Traduzir Plugin](#traduzir-plugin)
-15. [JavaScript i18n](#javascript-i18n)
-16. [RTL Support](#rtl-support)
-17. [Traduções Dinâmicas](#traducoes-dinamicas)
-18. [Translation Manager Dashboard](#translation-manager-dashboard)
-19. [GlotPress Integration](#glotpress-integration)
-20. [WP-CLI i18n](#wp-cli-i18n)
-21. [Best Practices](#best-practices)
+2. [Fundamentos do WordPress Multisite](#fundamentos-do-wordpress-multisite)
+3. [Plugin Compatível com Multisite](#plugin-compativel-com-multisite)
+4. [Classe Multisite](#classe-multisite)
+5. [Network Settings](#network-settings)
+6. [Site vs Network Options](#site-vs-network-options)
+7. [Fundamentos de Internacionalização (i18n)](#fundamentos-de-internacionalizacao-i18n)
+8. [Classe i18n](#classe-i18n)
+9. [Funções de Tradução](#funcoes-de-traducao)
+10. [Gerar Arquivo POT](#gerar-arquivo-pot)
+11. [Traduzir Plugin](#traduzir-plugin)
+12. [JavaScript i18n](#javascript-i18n)
+13. [RTL Support](#rtl-support)
+14. [Traduções Dinâmicas](#traducoes-dinamicas)
+15. [Translation Manager Dashboard](#translation-manager-dashboard)
+16. [GlotPress Integration](#glotpress-integration)
+17. [WP-CLI i18n](#wp-cli-i18n)
+18. [Best Practices](#best-practices)
+19. [Autoavaliação](#autoavaliacao)
+20. [Projeto Prático](#projeto-pratico)
+21. [Equívocos Comuns](#equivocos-comuns)
 22. [Resumo da Fase 11](#resumo-da-fase-11)
 
 ---
@@ -51,70 +51,6 @@ Ao final desta fase, você será capaz de:
 6. ✅ Tratar traduções JavaScript e suporte RTL (Right-to-Left)
 7. ✅ Implementar traduções dinâmicas e sistemas de gerenciamento de tradução
 8. ✅ Integrar com GlotPress para workflows colaborativos de tradução
-
-<a id="autoavaliacao"></a>
-## 📝 Autoavaliação
-
-Teste seu entendimento:
-
-- [ ] Qual é a diferença entre `get_site_option()` e `get_option()` no Multisite?
-- [ ] Como você verifica se o WordPress está rodando em modo Multisite?
-- [ ] Qual é a diferença entre funções `__()`, `_e()`, `_x()`, e `_n()`?
-- [ ] Como você gera um arquivo POT para seu plugin/tema?
-- [ ] Qual é o propósito de text domains em traduções do WordPress?
-- [ ] Como você trata formas plurais em traduções?
-- [ ] Qual é a diferença entre `load_plugin_textdomain()` e `load_theme_textdomain()`?
-- [ ] Como você implementa suporte RTL em temas e plugins?
-
-<a id="projeto-pratico"></a>
-## 🛠️ Projeto Prático
-
-**Construir:** Plugin Multilíngue com Suporte Multisite
-
-Crie um plugin que:
-- Funcione em instalações single-site e Multisite
-- Esteja totalmente internacionalizado com suporte a tradução
-- Inclua configurações de network admin para Multisite
-- Gere arquivos POT automaticamente
-- Suporte múltiplos idiomas com formas plurais adequadas
-- Inclua suporte RTL
-- Integre com sistema de gerenciamento de tradução
-
-**Tempo estimado:** 10-12 horas  
-**Dificuldade:** Intermediário-Avançado
-
----
-
-<a id="equivocos-comuns"></a>
-## ❌ Equívocos Comuns
-
-### Equívoco 1: "Multisite é apenas múltiplas instalações WordPress"
-**Realidade:** Multisite compartilha um core WordPress, um banco de dados (com tabelas específicas por site) e um codebase. É uma rede de sites, não instalações separadas.
-
-**Por que é importante:** Entender a arquitetura ajuda com performance, segurança e manutenção.
-
-**Como lembrar:** Multisite = um core, múltiplos sites. Instalações separadas = múltiplos cores.
-
-### Equívoco 2: "i18n e l10n são a mesma coisa"
-**Realidade:** i18n (internacionalização) é tornar código traduzível. l10n (localização) é traduzir para locales específicos. i18n vem primeiro.
-
-**Por que é importante:** Você deve internacionalizar código antes de poder localizá-lo. Entender a diferença ajuda no workflow.
-
-**Como lembrar:** i18n = "tornar traduzível". l10n = "traduzir para locale".
-
-### Equívoco 3: "Funções de tradução traduzem automaticamente"
-**Realidade:** Funções de tradução (`__()`, `_e()`) retornam strings traduzidas SE traduções existirem. Sem arquivos de tradução, retornam o texto original em inglês.
-
-**Por que é importante:** Traduções não acontecem automaticamente. Você precisa de arquivos de tradução (.po/.mo) para cada idioma.
-
-**Como lembrar:** Funções de tradução = "obter tradução se disponível", não "sempre traduzir".
-
-### Equívoco 4: "get_option() funciona igual no Multisite"
-**Realidade:** No Multisite, `get_option()` obtém opções específicas do site. `get_site_option()` obtém opções da rede. Elas são diferentes.
-
-**Por que é importante:** Usar a função errada pode causar problemas de isolamento de dados ou expor dados da rede a sites individuais.
-
-**Como lembrar:** `get_option()` = específico do site. `get_site_option()` = rede inteira.
 
 ---
 
@@ -1878,6 +1814,72 @@ if (defined('WP_CLI') && WP_CLI) {
 - [ ] Progresso de tradução monitorado
 - [ ] Traduções automáticas via GlotPress (se aplicável)
 ```
+
+---
+
+<a id="autoavaliacao"></a>
+## 📝 Autoavaliação
+
+Teste seu entendimento:
+
+- [ ] Qual é a diferença entre `get_site_option()` e `get_option()` no Multisite?
+- [ ] Como você verifica se o WordPress está rodando em modo Multisite?
+- [ ] Qual é a diferença entre funções `__()`, `_e()`, `_x()`, e `_n()`?
+- [ ] Como você gera um arquivo POT para seu plugin/tema?
+- [ ] Qual é o propósito de text domains em traduções do WordPress?
+- [ ] Como você trata formas plurais em traduções?
+- [ ] Qual é a diferença entre `load_plugin_textdomain()` e `load_theme_textdomain()`?
+- [ ] Como você implementa suporte RTL em temas e plugins?
+
+<a id="projeto-pratico"></a>
+## 🛠️ Projeto Prático
+
+**Construir:** Plugin Multilíngue com Suporte Multisite
+
+Crie um plugin que:
+- Funcione em instalações single-site e Multisite
+- Esteja totalmente internacionalizado com suporte a tradução
+- Inclua configurações de network admin para Multisite
+- Gere arquivos POT automaticamente
+- Suporte múltiplos idiomas com formas plurais adequadas
+- Inclua suporte RTL
+- Integre com sistema de gerenciamento de tradução
+
+**Tempo estimado:** 10-12 horas  
+**Dificuldade:** Intermediário-Avançado
+
+---
+
+<a id="equivocos-comuns"></a>
+## ❌ Equívocos Comuns
+
+### Equívoco 1: "Multisite é apenas múltiplas instalações WordPress"
+**Realidade:** Multisite compartilha um core WordPress, um banco de dados (com tabelas específicas por site) e um codebase. É uma rede de sites, não instalações separadas.
+
+**Por que é importante:** Entender a arquitetura ajuda com performance, segurança e manutenção.
+
+**Como lembrar:** Multisite = um core, múltiplos sites. Instalações separadas = múltiplos cores.
+
+### Equívoco 2: "i18n e l10n são a mesma coisa"
+**Realidade:** i18n (internacionalização) é tornar código traduzível. l10n (localização) é traduzir para locales específicos. i18n vem primeiro.
+
+**Por que é importante:** Você deve internacionalizar código antes de poder localizá-lo. Entender a diferença ajuda no workflow.
+
+**Como lembrar:** i18n = "tornar traduzível". l10n = "traduzir para locale".
+
+### Equívoco 3: "Funções de tradução traduzem automaticamente"
+**Realidade:** Funções de tradução (`__()`, `_e()`) retornam strings traduzidas SE traduções existirem. Sem arquivos de tradução, retornam o texto original em inglês.
+
+**Por que é importante:** Traduções não acontecem automaticamente. Você precisa de arquivos de tradução (.po/.mo) para cada idioma.
+
+**Como lembrar:** Funções de tradução = "obter tradução se disponível", não "sempre traduzir".
+
+### Equívoco 4: "get_option() funciona igual no Multisite"
+**Realidade:** No Multisite, `get_option()` obtém opções específicas do site. `get_site_option()` obtém opções da rede. Elas são diferentes.
+
+**Por que é importante:** Usar a função errada pode causar problemas de isolamento de dados ou expor dados da rede a sites individuais.
+
+**Como lembrar:** `get_option()` = específico do site. `get_site_option()` = rede inteira.
 
 ---
 
