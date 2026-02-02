@@ -7,7 +7,7 @@
 
 ---
 
-**Navegação:** [Índice](000-WordPress-Topicos-Index.md) | [← Fase 3](003-WordPress-Fase-3-REST-API-Advanced.md) | [Fase 5 →](005-WordPress-Fase-5-Custom-Post-Types-Taxonomies.md)
+**Navegação:** [Índice](000-WordPress-Indice-Topicos.md) | [← Fase 3](003-WordPress-Fase-3-REST-API-Avancado.md) | [Fase 5 →](005-WordPress-Fase-5-CPT-Taxonomias.md)
 
 ---
 

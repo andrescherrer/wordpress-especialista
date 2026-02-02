@@ -7,7 +7,7 @@
 
 ---
 
-**Navegação:** [Índice](000-WordPress-Topicos-Index.md) | [← Fase 12](012-WordPress-Fase-12-Seguranca-Boas-Praticas.md) | [Fase 14 →](014-WordPress-Fase-14-Deployment-DevOps.md)
+**Navegação:** [Índice](000-WordPress-Indice-Topicos.md) | [← Fase 12](012-WordPress-Fase-12-Seguranca-Boas-Praticas.md) | [Fase 14 →](014-WordPress-Fase-14-Implantacao-DevOps.md)
 
 ---
 

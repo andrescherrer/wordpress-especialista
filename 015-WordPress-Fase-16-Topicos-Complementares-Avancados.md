@@ -4,7 +4,7 @@
 
 ---
 
-**Navegação:** [Índice](000-WordPress-Topicos-Index.md) | [← Fase 15](016-WordPress-Fase-15-Async-Jobs-Background-Processing.md) | [Testing Throughout →](017-WordPress-Testing-Throughout.md)
+**Navegação:** [Índice](000-WordPress-Indice-Topicos.md) | [← Fase 15](016-WordPress-Fase-15-Jobs-Assincronos-Background.md) | [Fase 17 →](017-WordPress-Fase-17-Testes-Em-Toda-Fase.md)
 
 ---
 
@@ -3949,6 +3949,6 @@ Este guia cobriu tópicos avançados em WordPress, desde otimizações de API at
 
 ---
 
-**Navegação:** [Índice](000-WordPress-Topicos-Index.md) | [← Fase 15](016-WordPress-Fase-15-Async-Jobs-Background-Processing.md) | [Testing Throughout →](017-WordPress-Testing-Throughout.md)
+**Navegação:** [Índice](000-WordPress-Indice-Topicos.md) | [← Fase 15](016-WordPress-Fase-15-Jobs-Assincronos-Background.md) | [Fase 17 →](017-WordPress-Fase-17-Testes-Em-Toda-Fase.md)
 
 **Último atualizado:** Janeiro 2026

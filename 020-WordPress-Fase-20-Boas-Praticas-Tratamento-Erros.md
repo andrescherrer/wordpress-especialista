@@ -7,7 +7,7 @@
 
 ---
 
-**Navegação:** [Índice](000-WordPress-Topicos-Index.md) | [← Security Anti-patterns](019-WordPress-Security-Anti-patterns.md)
+**Navegação:** [Índice](000-WordPress-Indice-Topicos.md) | [← Fase 19](019-WordPress-Fase-19-Anti-padroes-Seguranca.md)
 
 ---
 
@@ -680,13 +680,13 @@ class StructuredLogger {
 
 ---
 
-**Navegação:** [Índice](000-WordPress-Topicos-Index.md) | [← Security Anti-patterns](019-WordPress-Security-Anti-patterns.md)
+**Navegação:** [Índice](000-WordPress-Indice-Topicos.md) | [← Fase 19](019-WordPress-Fase-19-Anti-padroes-Seguranca.md)
 
 ---
 
 ## Recursos Adicionais
 
-- [Fase 2 - REST API Error Handling](002-WordPress-Fase-2-WordPress%20REST%20API%20Fundamentals.md#2121-error-handling-patterns-completos)
-- [Fase 3 - Advanced Error Handling](003-WordPress-Fase-3-REST-API-Advanced.md#tratamento-de-erros)
+- [Fase 2 - REST API Error Handling](002-WordPress-Fase-2-REST-API-Fundamentos.md#2121-error-handling-patterns-completos)
+- [Fase 3 - Advanced Error Handling](003-WordPress-Fase-3-REST-API-Avancado.md#tratamento-de-erros)
 - [Fase 13 - Architecture Error Handling](013-WordPress-Fase-13-Arquitetura-Avancada.md#1312-error-handling-em-arquitetura-avançada)
-- [Fase 15 - Async Jobs Error Handling](016-WordPress-Fase-15-Async-Jobs-Background-Processing.md#error-handling-em-async-jobs)
+- [Fase 15 - Async Jobs Error Handling](016-WordPress-Fase-15-Jobs-Assincronos-Background.md#error-handling-em-async-jobs)

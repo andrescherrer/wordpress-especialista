@@ -7,7 +7,7 @@
 
 ---
 
-**Navegação:** [Índice](000-WordPress-Topicos-Index.md) | [← Fase 6](006-WordPress-Fase-6-Shortcodes-Widgets-Gutenberg.md) | [Fase 8 →](008-WordPress-Fase-8-Performance-Cache-Otimizacao.md)
+**Navegação:** [Índice](000-WordPress-Indice-Topicos.md) | [← Fase 6](006-WordPress-Fase-6-Shortcodes-Widgets-Gutenberg.md) | [Fase 8 →](008-WordPress-Fase-8-Performance-Cache-Otimizacao.md)
 
 ---
 

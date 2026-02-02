@@ -7,7 +7,7 @@
 
 ---
 
-**Navegação:** [Índice](000-WordPress-Topicos-Index.md) | [← Fase 2](002-WordPress-Fase-2-WordPress%20REST%20API%20Fundamentals.md) | [Fase 4 →](004-WordPress-Fase-4-Settings-Admin.md)
+**Navegação:** [Índice](000-WordPress-Indice-Topicos.md) | [← Fase 2](002-WordPress-Fase-2-REST-API-Fundamentos.md) | [Fase 4 →](004-WordPress-Fase-4-Configuracoes-Admin.md)
 
 ---
 

@@ -7,7 +7,7 @@
 
 ---
 
-**Navegação:** [Índice](000-WordPress-Topicos-Index.md) | [← Fase 1](001-WordPress-Fase-1-Fundamentals%20of%20WordPress%20Core.md) | [Fase 3 →](003-WordPress-Fase-3-REST-API-Advanced.md)
+**Navegação:** [Índice](000-WordPress-Indice-Topicos.md) | [← Fase 1](001-WordPress-Fase-1-Fundamentos-Core.md) | [Fase 3 →](003-WordPress-Fase-3-REST-API-Avancado.md)
 
 ---
 
@@ -1951,7 +1951,7 @@ $wpdb->prepare("SELECT * FROM posts WHERE id = %d", $_GET['id']);
 
 ### 2.9.10 Exemplos Práticos Completos por Cenário
 
-Veja exemplos completos de formulário de contato, upload de arquivo e busca na seção [Security Anti-patterns](019-WordPress-Security-Anti-patterns.md#fase-2-rest-api-security-mistakes).
+Veja exemplos completos de formulário de contato, upload de arquivo e busca na seção [Fase 19 - Anti-padrões de Segurança](019-WordPress-Fase-19-Anti-padroes-Seguranca.md#fase-2-rest-api-security-mistakes).
 
 ### 2.9.11 Code Review Checklist Expandido
 

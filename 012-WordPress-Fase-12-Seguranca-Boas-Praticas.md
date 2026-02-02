@@ -7,7 +7,7 @@
 
 ---
 
-**Navegação:** [Índice](000-WordPress-Topicos-Index.md) | [← Fase 11](011-WordPress-Fase-11-Multisite-Internacionalizacao.md) | [Fase 13 →](013-WordPress-Fase-13-Arquitetura-Avancada.md)
+**Navegação:** [Índice](000-WordPress-Indice-Topicos.md) | [← Fase 11](011-WordPress-Fase-11-Multisite-Internacionalizacao.md) | [Fase 13 →](013-WordPress-Fase-13-Arquitetura-Avancada.md)
 
 ---
 
@@ -1582,7 +1582,7 @@ Você agora domina:
 
 ---
 
-**Documentos relacionados:** [Security Anti-patterns](019-WordPress-Security-Anti-patterns.md) — Padrões inseguros a evitar
+**Documentos relacionados:** [Fase 19 - Anti-padrões de Segurança](019-WordPress-Fase-19-Anti-padroes-Seguranca.md) — Padrões inseguros a evitar
 
 ---
 

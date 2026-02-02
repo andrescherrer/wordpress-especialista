@@ -7,7 +7,7 @@
 
 ---
 
-**Navegação:** [Índice](000-WordPress-Topicos-Index.md) | [← Learning Paths](018-WordPress-Learning-Paths.md) | [Fase 12: Segurança](012-WordPress-Fase-12-Seguranca-Boas-Praticas.md) | [Error Handling →](020-WordPress-Error-Handling-Best-Practices.md)
+**Navegação:** [Índice](000-WordPress-Indice-Topicos.md) | [← Fase 18](018-WordPress-Fase-18-Caminhos-Aprendizado.md) | [Fase 12: Segurança](012-WordPress-Fase-12-Seguranca-Boas-Praticas.md) | [Fase 20 →](020-WordPress-Fase-20-Boas-Praticas-Tratamento-Erros.md)
 
 ---
 
@@ -1732,4 +1732,4 @@ define('DB_NAME', 'wordpress_db');
 
 ---
 
-**Navegação:** [Índice](000-WordPress-Topicos-Index.md) | [← Learning Paths](018-WordPress-Learning-Paths.md) | [Fase 12: Segurança](012-WordPress-Fase-12-Seguranca-Boas-Praticas.md) | [Error Handling →](020-WordPress-Error-Handling-Best-Practices.md)
+**Navegação:** [Índice](000-WordPress-Indice-Topicos.md) | [← Fase 18](018-WordPress-Fase-18-Caminhos-Aprendizado.md) | [Fase 12: Segurança](012-WordPress-Fase-12-Seguranca-Boas-Praticas.md) | [Fase 20 →](020-WordPress-Fase-20-Boas-Praticas-Tratamento-Erros.md)

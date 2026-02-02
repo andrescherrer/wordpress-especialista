@@ -7,7 +7,7 @@
 
 ---
 
-**Navegação:** [Índice](000-WordPress-Topicos-Index.md) | [← Tópicos complementares](015-WordPress-Topicos-Complementares-Avancados.md) | [Fase 10: Testing Avançado →](010-WordPress-Fase-10-Testing-Debugging-Deploy.md)
+**Navegação:** [Índice](000-WordPress-Indice-Topicos.md) | [← Fase 16](015-WordPress-Fase-16-Topicos-Complementares-Avancados.md) | [Fase 10 →](010-WordPress-Fase-10-Testes-Debug-Implantacao.md)
 
 ---
 
@@ -2545,8 +2545,8 @@ public function test_user_cannot_access_admin_without_permission(): void {
 
 - [PHPUnit Documentation](https://phpunit.de/documentation.html)
 - [WordPress Test Suite](https://make.wordpress.org/core/handbook/testing/automated-testing/phpunit/)
-- [Fase 10: Testing Avançado](010-WordPress-Fase-10-Testing-Debugging-Deploy.md)
+- [Fase 10: Testing Avançado](010-WordPress-Fase-10-Testes-Debug-Implantacao.md)
 
 ---
 
-**Navegação:** [Índice](000-WordPress-Topicos-Index.md) | [← Tópicos complementares](015-WordPress-Topicos-Complementares-Avancados.md) | [Fase 10: Testing Avançado →](010-WordPress-Fase-10-Testing-Debugging-Deploy.md)
+**Navegação:** [Índice](000-WordPress-Indice-Topicos.md) | [← Fase 16](015-WordPress-Fase-16-Topicos-Complementares-Avancados.md) | [Fase 10 →](010-WordPress-Fase-10-Testes-Debug-Implantacao.md)
