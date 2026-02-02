@@ -7,7 +7,7 @@
 
 ---
 
-**Navegação:** [📚 Índice](000-WordPress-Topicos-Index.md) | [← Fase 10](010-WordPress-Fase-10-Testing-Debugging-Deploy.md) | [Fase 12 →](012-WordPress-Fase-12-Seguranca-Boas-Praticas.md)
+**Navegação:** [Índice](000-WordPress-Topicos-Index.md) | [← Fase 10](010-WordPress-Fase-10-Testing-Debugging-Deploy.md) | [Fase 12 →](012-WordPress-Fase-12-Seguranca-Boas-Praticas.md)
 
 ---
 
@@ -30,6 +30,82 @@
 15. [GlotPress Integration](#glotpress-integration)
 16. [WP-CLI i18n](#wp-cli-i18n)
 17. [Best Practices](#best-practices)
+
+---
+
+## 🎯 Objetivos de Aprendizado
+
+Ao final desta fase, você será capaz de:
+
+1. ✅ Entender arquitetura WordPress Multisite e conceitos de network vs site
+2. ✅ Criar plugins e temas compatíveis com Multisite
+3. ✅ Usar configurações de rede vs opções específicas de site corretamente
+4. ✅ Implementar internacionalização (i18n) usando funções de tradução do WordPress
+5. ✅ Gerar arquivos POT e gerenciar traduções para plugins/temas
+6. ✅ Tratar traduções JavaScript e suporte RTL (Right-to-Left)
+7. ✅ Implementar traduções dinâmicas e sistemas de gerenciamento de tradução
+8. ✅ Integrar com GlotPress para workflows colaborativos de tradução
+
+## 📝 Autoavaliação
+
+Teste seu entendimento:
+
+- [ ] Qual é a diferença entre `get_site_option()` e `get_option()` no Multisite?
+- [ ] Como você verifica se o WordPress está rodando em modo Multisite?
+- [ ] Qual é a diferença entre funções `__()`, `_e()`, `_x()`, e `_n()`?
+- [ ] Como você gera um arquivo POT para seu plugin/tema?
+- [ ] Qual é o propósito de text domains em traduções do WordPress?
+- [ ] Como você trata formas plurais em traduções?
+- [ ] Qual é a diferença entre `load_plugin_textdomain()` e `load_theme_textdomain()`?
+- [ ] Como você implementa suporte RTL em temas e plugins?
+
+## 🛠️ Projeto Prático
+
+**Construir:** Plugin Multilíngue com Suporte Multisite
+
+Crie um plugin que:
+- Funcione em instalações single-site e Multisite
+- Esteja totalmente internacionalizado com suporte a tradução
+- Inclua configurações de network admin para Multisite
+- Gere arquivos POT automaticamente
+- Suporte múltiplos idiomas com formas plurais adequadas
+- Inclua suporte RTL
+- Integre com sistema de gerenciamento de tradução
+
+**Tempo estimado:** 10-12 horas  
+**Dificuldade:** Intermediário-Avançado
+
+---
+
+## ❌ Equívocos Comuns
+
+### Equívoco 1: "Multisite é apenas múltiplas instalações WordPress"
+**Realidade:** Multisite compartilha um core WordPress, um banco de dados (com tabelas específicas por site) e um codebase. É uma rede de sites, não instalações separadas.
+
+**Por que é importante:** Entender a arquitetura ajuda com performance, segurança e manutenção.
+
+**Como lembrar:** Multisite = um core, múltiplos sites. Instalações separadas = múltiplos cores.
+
+### Equívoco 2: "i18n e l10n são a mesma coisa"
+**Realidade:** i18n (internacionalização) é tornar código traduzível. l10n (localização) é traduzir para locales específicos. i18n vem primeiro.
+
+**Por que é importante:** Você deve internacionalizar código antes de poder localizá-lo. Entender a diferença ajuda no workflow.
+
+**Como lembrar:** i18n = "tornar traduzível". l10n = "traduzir para locale".
+
+### Equívoco 3: "Funções de tradução traduzem automaticamente"
+**Realidade:** Funções de tradução (`__()`, `_e()`) retornam strings traduzidas SE traduções existirem. Sem arquivos de tradução, retornam o texto original em inglês.
+
+**Por que é importante:** Traduções não acontecem automaticamente. Você precisa de arquivos de tradução (.po/.mo) para cada idioma.
+
+**Como lembrar:** Funções de tradução = "obter tradução se disponível", não "sempre traduzir".
+
+### Equívoco 4: "get_option() funciona igual no Multisite"
+**Realidade:** No Multisite, `get_option()` obtém opções específicas do site. `get_site_option()` obtém opções da rede. Elas são diferentes.
+
+**Por que é importante:** Usar a função errada pode causar problemas de isolamento de dados ou expor dados da rede a sites individuais.
+
+**Como lembrar:** `get_option()` = específico do site. `get_site_option()` = rede inteira.
 
 ---
 

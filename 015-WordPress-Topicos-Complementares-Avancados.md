@@ -4,7 +4,7 @@
 
 ---
 
-**Navegação:** [📚 Índice](000-WordPress-Topicos-Index.md) | [← Fase 14](014-WordPress-Fase-14-Deployment-DevOps.md)
+**Navegação:** [Índice](000-WordPress-Topicos-Index.md) | [← Fase 15](016-WordPress-Fase-15-Async-Jobs-Background-Processing.md) | [Testing Throughout →](017-WordPress-Testing-Throughout.md)
 
 ---
 
@@ -1894,9 +1894,362 @@ lhci autorun \
 
 ## WordPress Ecosystem
 
-### 1. WooCommerce Integration
+### 1. WooCommerce Integration - Padrões Avançados
 
 #### Estender Funcionalidade do WooCommerce
+
+**Padrão 1: Custom Product Type Completo**
+
+```php
+<?php
+/**
+ * Custom Product Type com todas as funcionalidades
+ */
+class WC_Product_Subscription extends WC_Product {
+    
+    public function __construct($product) {
+        $this->product_type = 'subscription';
+        parent::__construct($product);
+    }
+    
+    public function get_type() {
+        return 'subscription';
+    }
+    
+    public function is_purchasable() {
+        return true;
+    }
+    
+    public function is_virtual() {
+        return true; // Produto virtual
+    }
+    
+    public function needs_shipping() {
+        return false;
+    }
+    
+    public function get_price_html($price = '') {
+        $price = $this->get_price();
+        $billing_period = $this->get_meta('_billing_period', true) ?: 'month';
+        
+        return wc_price($price) . ' / ' . $billing_period;
+    }
+    
+    public function add_to_cart_text() {
+        return __('Subscribe', 'woocommerce');
+    }
+}
+
+// Registrar product type
+add_filter('product_type_selector', function($types) {
+    $types['subscription'] = __('Subscription', 'woocommerce');
+    return $types;
+});
+
+add_filter('woocommerce_product_class', function($classname, $product_type) {
+    if ($product_type === 'subscription') {
+        $classname = 'WC_Product_Subscription';
+    }
+    return $classname;
+}, 10, 2);
+```
+
+**Padrão 2: WooCommerce Hooks Avançados**
+
+```php
+<?php
+/**
+ * Padrões avançados de hooks WooCommerce
+ */
+class WooCommerce_Hooks_Advanced {
+    
+    /**
+     * Modificar cálculo de preço dinamicamente
+     */
+    public static function dynamic_pricing() {
+        add_filter('woocommerce_product_get_price', function($price, $product) {
+            // Desconto baseado em quantidade
+            if (WC()->cart) {
+                $cart_item = WC()->cart->find_product_in_cart($product->get_id());
+                if ($cart_item && $cart_item['quantity'] >= 10) {
+                    $price = $price * 0.9; // 10% desconto
+                }
+            }
+            
+            return $price;
+        }, 10, 2);
+        
+        // Desconto para usuários específicos
+        add_filter('woocommerce_product_get_sale_price', function($sale_price, $product) {
+            if (current_user_can('wholesale_customer')) {
+                $regular_price = $product->get_regular_price();
+                return $regular_price * 0.8; // 20% desconto
+            }
+            return $sale_price;
+        }, 10, 2);
+    }
+    
+    /**
+     * Customizar processo de checkout
+     */
+    public static function custom_checkout_process() {
+        // Validar campos customizados
+        add_action('woocommerce_checkout_process', function() {
+            $custom_field = $_POST['billing_custom_field'] ?? '';
+            
+            if (empty($custom_field)) {
+                wc_add_notice(__('Campo customizado é obrigatório', 'woocommerce'), 'error');
+            }
+        });
+        
+        // Processar dados após checkout
+        add_action('woocommerce_checkout_order_processed', function($order_id, $posted_data) {
+            // Salvar dados customizados
+            if (!empty($posted_data['billing_custom_field'])) {
+                update_post_meta(
+                    $order_id,
+                    '_billing_custom_field',
+                    sanitize_text_field($posted_data['billing_custom_field'])
+                );
+            }
+        }, 10, 2);
+    }
+    
+    /**
+     * Customizar emails de pedido
+     */
+    public static function custom_order_emails() {
+        // Adicionar conteúdo customizado aos emails
+        add_action('woocommerce_email_order_details', function($order, $sent_to_admin, $plain_text, $email) {
+            if ($email->id === 'customer_completed_order') {
+                $custom_message = get_post_meta($order->get_id(), '_custom_email_message', true);
+                if ($custom_message) {
+                    echo '<p>' . esc_html($custom_message) . '</p>';
+                }
+            }
+        }, 10, 4);
+        
+        // Adicionar anexos aos emails
+        add_filter('woocommerce_email_attachments', function($attachments, $email_id, $order) {
+            if ($email_id === 'customer_invoice') {
+                $invoice_pdf = generate_invoice_pdf($order);
+                if ($invoice_pdf) {
+                    $attachments[] = $invoice_pdf;
+                }
+            }
+            return $attachments;
+        }, 10, 3);
+    }
+    
+    /**
+     * Integração com REST API WooCommerce
+     */
+    public static function rest_api_integration() {
+        // Adicionar campos customizados à REST API
+        add_action('rest_api_init', function() {
+            register_rest_field('shop_order', 'custom_fields', [
+                'get_callback' => function($order) {
+                    return [
+                        'custom_field' => get_post_meta($order['id'], '_billing_custom_field', true),
+                        'subscription_id' => get_post_meta($order['id'], '_subscription_id', true),
+                    ];
+                },
+                'update_callback' => function($value, $order) {
+                    update_post_meta($order->get_id(), '_billing_custom_field', sanitize_text_field($value['custom_field']));
+                },
+                'schema' => [
+                    'type' => 'object',
+                    'properties' => [
+                        'custom_field' => ['type' => 'string'],
+                        'subscription_id' => ['type' => 'integer'],
+                    ],
+                ],
+            ]);
+        });
+    }
+    
+    /**
+     * Customizar carrinho e checkout
+     */
+    public static function cart_customization() {
+        // Adicionar fees customizados
+        add_action('woocommerce_cart_calculate_fees', function() {
+            if (is_admin() && !defined('DOING_AJAX')) {
+                return;
+            }
+            
+            $fee_amount = 0;
+            
+            // Fee baseado em método de pagamento
+            $chosen_payment_method = WC()->session->get('chosen_payment_method');
+            if ($chosen_payment_method === 'bacs') {
+                $fee_amount = 5.00; // Taxa para transferência bancária
+            }
+            
+            if ($fee_amount > 0) {
+                WC()->cart->add_fee(__('Taxa de processamento', 'woocommerce'), $fee_amount);
+            }
+        });
+        
+        // Validar carrinho antes de checkout
+        add_action('woocommerce_check_cart_items', function() {
+            foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) {
+                $product = $cart_item['data'];
+                
+                // Verificar estoque mínimo
+                if ($product->get_stock_quantity() < 5) {
+                    wc_add_notice(
+                        sprintf(__('%s está com estoque baixo', 'woocommerce'), $product->get_name()),
+                        'error'
+                    );
+                }
+            }
+        });
+    }
+}
+
+// Inicializar
+WooCommerce_Hooks_Advanced::dynamic_pricing();
+WooCommerce_Hooks_Advanced::custom_checkout_process();
+WooCommerce_Hooks_Advanced::custom_order_emails();
+WooCommerce_Hooks_Advanced::rest_api_integration();
+WooCommerce_Hooks_Advanced::cart_customization();
+```
+
+**Padrão 3: Subscription Management**
+
+```php
+<?php
+/**
+ * Sistema de assinaturas WooCommerce
+ */
+class WooCommerce_Subscriptions {
+    
+    /**
+     * Criar assinatura a partir de pedido
+     */
+    public static function create_subscription_from_order($order_id) {
+        $order = wc_get_order($order_id);
+        
+        if (!$order) {
+            return false;
+        }
+        
+        // Verificar se pedido contém produto de assinatura
+        $has_subscription = false;
+        foreach ($order->get_items() as $item) {
+            $product = $item->get_product();
+            if ($product && $product->get_type() === 'subscription') {
+                $has_subscription = true;
+                break;
+            }
+        }
+        
+        if (!$has_subscription) {
+            return false;
+        }
+        
+        // Criar assinatura
+        $subscription_data = [
+            'post_type' => 'shop_subscription',
+            'post_status' => 'wc-active',
+            'post_author' => $order->get_customer_id(),
+            'meta_input' => [
+                '_order_id' => $order_id,
+                '_customer_user' => $order->get_customer_id(),
+                '_billing_period' => get_post_meta($order_id, '_billing_period', true) ?: 'month',
+                '_billing_interval' => 1,
+                '_next_payment' => date('Y-m-d H:i:s', strtotime('+1 month')),
+            ],
+        ];
+        
+        $subscription_id = wp_insert_post($subscription_data);
+        
+        if (is_wp_error($subscription_id)) {
+            error_log('Failed to create subscription: ' . $subscription_id->get_error_message());
+            return false;
+        }
+        
+        // Agendar renovação
+        wp_schedule_event(
+            strtotime('+1 month'),
+            'monthly',
+            'woocommerce_subscription_renewal',
+            [$subscription_id]
+        );
+        
+        return $subscription_id;
+    }
+    
+    /**
+     * Processar renovação de assinatura
+     */
+    public static function process_renewal($subscription_id) {
+        $subscription = get_post($subscription_id);
+        
+        if (!$subscription || $subscription->post_type !== 'shop_subscription') {
+            return false;
+        }
+        
+        $order_id = get_post_meta($subscription_id, '_order_id', true);
+        $order = wc_get_order($order_id);
+        
+        if (!$order) {
+            return false;
+        }
+        
+        // Criar novo pedido de renovação
+        $renewal_order = wc_create_order([
+            'customer_id' => $order->get_customer_id(),
+            'created_via' => 'subscription_renewal',
+        ]);
+        
+        // Adicionar itens do pedido original
+        foreach ($order->get_items() as $item) {
+            $renewal_order->add_product(
+                $item->get_product(),
+                $item->get_quantity()
+            );
+        }
+        
+        // Processar pagamento
+        $payment_method = $order->get_payment_method();
+        $payment_result = WC()->payment_gateways()->payment_gateways()[$payment_method]->process_payment($renewal_order->get_id());
+        
+        if ($payment_result['result'] === 'success') {
+            // Atualizar próxima renovação
+            update_post_meta(
+                $subscription_id,
+                '_next_payment',
+                date('Y-m-d H:i:s', strtotime('+1 month'))
+            );
+            
+            // Agendar próxima renovação
+            wp_schedule_single_event(
+                strtotime('+1 month'),
+                'woocommerce_subscription_renewal',
+                [$subscription_id]
+            );
+            
+            return true;
+        }
+        
+        // Pagamento falhou - suspender assinatura
+        wp_update_post([
+            'ID' => $subscription_id,
+            'post_status' => 'wc-on-hold',
+        ]);
+        
+        return false;
+    }
+}
+
+// Hook para criar assinatura após pedido completo
+add_action('woocommerce_order_status_completed', [WooCommerce_Subscriptions::class, 'create_subscription_from_order']);
+
+// Hook para processar renovação
+add_action('woocommerce_subscription_renewal', [WooCommerce_Subscriptions::class, 'process_renewal']);
+```
 
 **Produtos Customizados:**
 
@@ -2021,9 +2374,244 @@ class OrderCustomization {
 
 ---
 
-### 2. ACF (Advanced Custom Fields)
+### 2. ACF (Advanced Custom Fields) - Padrões Avançados
 
 #### Trabalhar com ACF em WordPress
+
+**Padrão 1: ACF Fields com Validação Customizada**
+
+```php
+<?php
+/**
+ * ACF Fields com validação avançada
+ */
+class ACF_Advanced_Patterns {
+    
+    /**
+     * Registrar fields com validação customizada
+     */
+    public static function register_validated_fields() {
+        if (!function_exists('acf_add_local_field_group')) {
+            return;
+        }
+        
+        acf_add_local_field_group([
+            'key' => 'group_product_details',
+            'title' => 'Detalhes do Produto',
+            'fields' => [
+                [
+                    'key' => 'field_product_sku',
+                    'label' => 'SKU',
+                    'name' => 'product_sku',
+                    'type' => 'text',
+                    'required' => true,
+                    'custom_validation' => true, // Flag para validação customizada
+                ],
+                [
+                    'key' => 'field_product_price',
+                    'label' => 'Preço',
+                    'name' => 'product_price',
+                    'type' => 'number',
+                    'required' => true,
+                    'min' => 0,
+                    'step' => 0.01,
+                ],
+            ],
+            'location' => [
+                [
+                    [
+                        'param' => 'post_type',
+                        'operator' => '==',
+                        'value' => 'product',
+                    ],
+                ],
+            ],
+        ]);
+        
+        // Validação customizada
+        add_filter('acf/validate_value/name=product_sku', [self::class, 'validate_sku'], 10, 4);
+    }
+    
+    /**
+     * Validar SKU único
+     */
+    public static function validate_sku($valid, $value, $field, $input) {
+        if (!$valid) {
+            return $valid;
+        }
+        
+        // Verificar se SKU já existe
+        $existing = get_posts([
+            'post_type' => 'product',
+            'meta_query' => [
+                [
+                    'key' => 'product_sku',
+                    'value' => $value,
+                    'compare' => '=',
+                ],
+            ],
+            'post__not_in' => [get_the_ID()],
+        ]);
+        
+        if (!empty($existing)) {
+            return 'SKU já existe. Escolha outro.';
+        }
+        
+        return $valid;
+    }
+    
+    /**
+     * Conditional Fields (campos condicionais)
+     */
+    public static function conditional_fields() {
+        acf_add_local_field_group([
+            'key' => 'group_conditional_fields',
+            'title' => 'Campos Condicionais',
+            'fields' => [
+                [
+                    'key' => 'field_product_type',
+                    'label' => 'Tipo de Produto',
+                    'name' => 'product_type',
+                    'type' => 'select',
+                    'choices' => [
+                        'physical' => 'Físico',
+                        'digital' => 'Digital',
+                        'service' => 'Serviço',
+                    ],
+                ],
+                [
+                    'key' => 'field_shipping_weight',
+                    'label' => 'Peso (kg)',
+                    'name' => 'shipping_weight',
+                    'type' => 'number',
+                    'conditional_logic' => [
+                        [
+                            [
+                                'field' => 'field_product_type',
+                                'operator' => '==',
+                                'value' => 'physical',
+                            ],
+                        ],
+                    ],
+                ],
+                [
+                    'key' => 'field_download_link',
+                    'label' => 'Link de Download',
+                    'name' => 'download_link',
+                    'type' => 'url',
+                    'conditional_logic' => [
+                        [
+                            [
+                                'field' => 'field_product_type',
+                                'operator' => '==',
+                                'value' => 'digital',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ]);
+    }
+    
+    /**
+     * ACF Fields com Options Page
+     */
+    public static function options_page_fields() {
+        // Criar options page
+        if (function_exists('acf_add_options_page')) {
+            acf_add_options_page([
+                'page_title' => 'Configurações do Site',
+                'menu_title' => 'Configurações',
+                'menu_slug' => 'site-settings',
+                'capability' => 'manage_options',
+            ]);
+        }
+        
+        // Adicionar fields à options page
+        acf_add_local_field_group([
+            'key' => 'group_site_settings',
+            'title' => 'Configurações do Site',
+            'fields' => [
+                [
+                    'key' => 'field_site_logo',
+                    'label' => 'Logo do Site',
+                    'name' => 'site_logo',
+                    'type' => 'image',
+                ],
+                [
+                    'key' => 'field_contact_email',
+                    'label' => 'Email de Contato',
+                    'name' => 'contact_email',
+                    'type' => 'email',
+                ],
+            ],
+            'location' => [
+                [
+                    [
+                        'param' => 'options_page',
+                        'operator' => '==',
+                        'value' => 'site-settings',
+                    ],
+                ],
+            ],
+        ]);
+    }
+    
+    /**
+     * ACF com REST API e GraphQL
+     */
+    public static function api_integration() {
+        // Habilitar ACF em REST API
+        add_filter('acf/rest_api_enabled/post', '__return_true');
+        
+        // Customizar campos expostos na REST API
+        add_filter('acf/rest_api_format', function($format, $post_id, $field) {
+            // Formato customizado para campo de imagem
+            if ($field['type'] === 'image') {
+                $image_id = get_field($field['name'], $post_id);
+                if ($image_id) {
+                    return [
+                        'id' => $image_id,
+                        'url' => wp_get_attachment_image_url($image_id, 'full'),
+                        'thumbnail' => wp_get_attachment_image_url($image_id, 'thumbnail'),
+                        'alt' => get_post_meta($image_id, '_wp_attachment_image_alt', true),
+                    ];
+                }
+            }
+            
+            return $format;
+        }, 10, 3);
+        
+        // GraphQL (requer wp-graphql-acf)
+        if (function_exists('acf_add_options_page')) {
+            // Fields de options page automaticamente disponíveis em GraphQL
+        }
+    }
+    
+    /**
+     * ACF Fields com Local JSON
+     */
+    public static function local_json_setup() {
+        // Salvar fields como JSON local (versionamento)
+        add_filter('acf/settings/save_json', function($path) {
+            return get_stylesheet_directory() . '/acf-json';
+        });
+        
+        add_filter('acf/settings/load_json', function($paths) {
+            unset($paths[0]);
+            $paths[] = get_stylesheet_directory() . '/acf-json';
+            return $paths;
+        });
+    }
+}
+
+// Inicializar
+ACF_Advanced_Patterns::register_validated_fields();
+ACF_Advanced_Patterns::conditional_fields();
+ACF_Advanced_Patterns::options_page_fields();
+ACF_Advanced_Patterns::api_integration();
+ACF_Advanced_Patterns::local_json_setup();
+```
 
 **Registrar Fields Programaticamente:**
 
@@ -2119,9 +2707,315 @@ class ACFToRest {
 
 ---
 
-### 3. Jetpack
+### 3. Jetpack API Integration - Padrões Avançados
 
 #### Integrar Jetpack para Funcionalidades Adicionais
+
+**Padrão 1: Jetpack REST API Completo**
+
+```php
+<?php
+/**
+ * Integração completa com Jetpack API
+ */
+class Jetpack_API_Integration {
+    
+    /**
+     * Configurar módulos Jetpack programaticamente
+     */
+    public static function configure_modules() {
+        if (!class_exists('Jetpack')) {
+            return;
+        }
+        
+        // Módulos essenciais
+        $modules = [
+            'json-api',           // REST API
+            'protect',            // Proteção brute force
+            'photon',             // CDN de imagens
+            'stats',              // Estatísticas
+            'sitemaps',           // Sitemaps XML
+            'verification-tools', // Verificação de propriedade
+        ];
+        
+        foreach ($modules as $module) {
+            if (Jetpack::is_module_active($module)) {
+                continue;
+            }
+            
+            Jetpack::activate_module($module, false, false);
+        }
+    }
+    
+    /**
+     * Usar Jetpack REST API para autenticação
+     */
+    public static function rest_api_auth() {
+        // Jetpack fornece autenticação via Application Passwords
+        // Verificar se request vem do Jetpack
+        add_filter('determine_current_user', function($user_id) {
+            $jetpack_signature = $_SERVER['HTTP_X_JETPACK_SIGNATURE'] ?? null;
+            
+            if ($jetpack_signature) {
+                // Validar assinatura Jetpack
+                $is_valid = Jetpack::verify_xml_rpc_signature(
+                    $_SERVER['REQUEST_METHOD'],
+                    $_SERVER['REQUEST_URI'],
+                    file_get_contents('php://input')
+                );
+                
+                if ($is_valid) {
+                    // Autenticar como usuário do Jetpack
+                    $jetpack_user = Jetpack::get_connected_user_data();
+                    if ($jetpack_user) {
+                        return $jetpack_user['ID'];
+                    }
+                }
+            }
+            
+            return $user_id;
+        });
+    }
+    
+    /**
+     * Integração com Jetpack Stats API
+     */
+    public static function stats_integration() {
+        // Obter estatísticas do site
+        add_action('rest_api_init', function() {
+            register_rest_route('jetpack/v1', '/stats', [
+                'methods' => 'GET',
+                'callback' => function() {
+                    if (!class_exists('Jetpack')) {
+                        return new WP_Error('jetpack_not_active', 'Jetpack não está ativo');
+                    }
+                    
+                    $stats = Jetpack::get_module('stats');
+                    
+                    if (!$stats) {
+                        return new WP_Error('stats_not_available', 'Stats não disponível');
+                    }
+                    
+                    // Obter dados de estatísticas
+                    $stats_data = [
+                        'visitors' => get_option('jetpack_stats_visitors'),
+                        'views' => get_option('jetpack_stats_views'),
+                        'top_posts' => get_option('jetpack_stats_top_posts'),
+                    ];
+                    
+                    return new WP_REST_Response($stats_data, 200);
+                },
+                'permission_callback' => function() {
+                    return current_user_can('manage_options');
+                },
+            ]);
+        });
+    }
+    
+    /**
+     * Jetpack Photon - CDN de Imagens
+     */
+    public static function photon_integration() {
+        // Habilitar Photon para todas as imagens
+        add_filter('jetpack_photon_url', '__return_true');
+        
+        // Excluir certas imagens do Photon
+        add_filter('jetpack_photon_skip_image', function($skip, $image_src) {
+            // Pular imagens de certos domínios
+            $excluded_domains = ['example.com', 'cdn.example.com'];
+            
+            foreach ($excluded_domains as $domain) {
+                if (strpos($image_src, $domain) !== false) {
+                    return true;
+                }
+            }
+            
+            return $skip;
+        }, 10, 2);
+        
+        // Customizar parâmetros do Photon
+        add_filter('jetpack_photon_pre_args', function($args, $image_url) {
+            // Adicionar parâmetros customizados
+            $args['quality'] = 90;
+            $args['strip'] = 'all';
+            
+            return $args;
+        }, 10, 2);
+    }
+    
+    /**
+     * Jetpack Protect - Proteção contra Brute Force
+     */
+    public static function protect_integration() {
+        // Verificar se IP está bloqueado
+        add_action('wp_login_failed', function($username) {
+            if (class_exists('Jetpack_Protect_Module')) {
+                $ip = $_SERVER['REMOTE_ADDR'];
+                
+                // Jetpack Protect gerencia bloqueios automaticamente
+                // Mas podemos adicionar lógica customizada
+                $failed_attempts = get_transient("login_failed_{$ip}") ?: 0;
+                $failed_attempts++;
+                
+                if ($failed_attempts >= 5) {
+                    // Bloquear IP temporariamente
+                    set_transient("ip_blocked_{$ip}", true, 3600); // 1 hora
+                } else {
+                    set_transient("login_failed_{$ip}", $failed_attempts, 900); // 15 minutos
+                }
+            }
+        });
+        
+        // Verificar bloqueio antes de login
+        add_filter('authenticate', function($user, $username, $password) {
+            $ip = $_SERVER['REMOTE_ADDR'];
+            
+            if (get_transient("ip_blocked_{$ip}")) {
+                return new WP_Error(
+                    'ip_blocked',
+                    'Seu IP foi temporariamente bloqueado devido a múltiplas tentativas de login falhadas.'
+                );
+            }
+            
+            return $user;
+        }, 10, 3);
+    }
+    
+    /**
+     * Jetpack Sitemaps - Customização
+     */
+    public static function sitemaps_customization() {
+        // Adicionar custom post types ao sitemap
+        add_filter('jetpack_sitemap_post_types', function($post_types) {
+            $post_types[] = 'product';
+            $post_types[] = 'event';
+            return $post_types;
+        });
+        
+        // Excluir posts específicos do sitemap
+        add_filter('jetpack_sitemap_skip_post', function($skip, $post) {
+            // Excluir posts com meta específico
+            if (get_post_meta($post->ID, '_exclude_from_sitemap', true)) {
+                return true;
+            }
+            
+            return $skip;
+        }, 10, 2);
+    }
+}
+
+// Inicializar
+Jetpack_API_Integration::configure_modules();
+Jetpack_API_Integration::rest_api_auth();
+Jetpack_API_Integration::stats_integration();
+Jetpack_API_Integration::photon_integration();
+Jetpack_API_Integration::protect_integration();
+Jetpack_API_Integration::sitemaps_customization();
+```
+
+**Padrão 2: Automattic Coding Standards vs PSR-12**
+
+```php
+<?php
+/**
+ * Comparação: WordPress Coding Standards vs PSR-12
+ * 
+ * WordPress usa suas próprias coding standards baseadas em PEAR,
+ * enquanto PSR-12 é o padrão PHP-FIG mais comum.
+ * 
+ * Diferenças principais:
+ */
+
+// ========== INDENTAÇÃO ==========
+// WordPress: Tabs
+class MyClass {
+	public function method() {
+		// código
+	}
+}
+
+// PSR-12: Spaces (4 espaços)
+class MyClass
+{
+    public function method()
+    {
+        // código
+    }
+}
+
+// ========== CHAVES ==========
+// WordPress: Chaves na mesma linha
+if (condition) {
+	// código
+}
+
+// PSR-12: Chaves em linha separada para classes/métodos
+class MyClass
+{
+    public function method()
+    {
+        if (condition) {
+            // código
+        }
+    }
+}
+
+// ========== NAMESPACES ==========
+// WordPress: Sem namespaces (ou namespaces simples)
+// functions.php
+function my_function() {}
+
+// PSR-12: Namespaces obrigatórios
+namespace App\Services;
+
+class MyService {}
+
+// ========== QUANDO USAR QUAL ==========
+/**
+ * Use WordPress Coding Standards quando:
+ * - Desenvolvendo plugins/temas WordPress
+ * - Contribuindo para WordPress core
+ * - Trabalhando em projetos WordPress puros
+ * 
+ * Use PSR-12 quando:
+ * - Desenvolvendo bibliotecas PHP independentes
+ * - Trabalhando em projetos que não são WordPress
+ * - Integrando WordPress com frameworks externos
+ * 
+ * Híbrido (Recomendado para WordPress moderno):
+ * - Use WordPress standards para código que interage diretamente com WordPress
+ * - Use PSR-12 para código de domínio/bibliotecas isoladas
+ * - Use namespaces e autoloading (Composer)
+ */
+
+// Exemplo híbrido
+namespace MyPlugin\Domain;
+
+// Código de domínio - PSR-12
+class Product
+{
+    private string $name;
+    
+    public function __construct(string $name)
+    {
+        $this->name = $name;
+    }
+}
+
+// Código WordPress - WordPress standards
+class Product_Manager {
+	public static function register() {
+		add_action('init', [self::class, 'register_post_type']);
+	}
+	
+	public static function register_post_type() {
+		register_post_type('product', [
+			'public' => true,
+			'show_in_rest' => true,
+		]);
+	}
+}
+```
 
 **Otimizar com Jetpack:**
 
@@ -3054,5 +3948,7 @@ Este guia cobriu tópicos avançados em WordPress, desde otimizações de API at
 - [WordPress Slack Community](https://wordpress.slack.com)
 
 ---
+
+**Navegação:** [Índice](000-WordPress-Topicos-Index.md) | [← Fase 15](016-WordPress-Fase-15-Async-Jobs-Background-Processing.md) | [Testing Throughout →](017-WordPress-Testing-Throughout.md)
 
 **Último atualizado:** Janeiro 2026

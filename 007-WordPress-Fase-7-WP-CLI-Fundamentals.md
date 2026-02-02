@@ -7,7 +7,7 @@
 
 ---
 
-**Navegação:** [📚 Índice](000-WordPress-Topicos-Index.md) | [← Fase 6](006-WordPress-Fase-6-Shortcodes-Widgets-Gutenberg.md) | [Fase 8 →](008-WordPress-Fase-8-Performance-Cache-Otimizacao.md)
+**Navegação:** [Índice](000-WordPress-Topicos-Index.md) | [← Fase 6](006-WordPress-Fase-6-Shortcodes-Widgets-Gutenberg.md) | [Fase 8 →](008-WordPress-Fase-8-Performance-Cache-Otimizacao.md)
 
 ---
 
@@ -21,6 +21,74 @@
 6. [Comandos de Database](#comandos-de-database)
 7. [Scaffolding com WP-CLI](#scaffolding-com-wp-cli)
 8. [Boas Práticas](#boas-práticas)
+
+---
+
+## 🎯 Objetivos de Aprendizado
+
+Ao final desta fase, você será capaz de:
+
+1. ✅ Usar comandos WP-CLI para operações comuns do WordPress (posts, users, options)
+2. ✅ Criar comandos WP-CLI customizados usando `WP_CLI::add_command()`
+3. ✅ Construir estruturas de comando hierárquicas com subcomandos
+4. ✅ Implementar comandos interativos com prompts e confirmações
+5. ✅ Usar WP-CLI para operações de banco de dados e migrações
+6. ✅ Gerar scaffolding de plugin/tema com WP-CLI
+7. ✅ Integrar comandos WP-CLI em scripts de automação
+8. ✅ Aplicar boas práticas e tratamento de erros do WP-CLI
+
+## 📝 Autoavaliação
+
+Teste seu entendimento:
+
+- [ ] Como você cria um comando WP-CLI customizado com argumentos e opções?
+- [ ] Qual é a diferença entre `WP_CLI::add_command()` e `WP_CLI::add_command()` com callable?
+- [ ] Como você trata erros em comandos WP-CLI?
+- [ ] Qual é o propósito de `WP_CLI::confirm()` e `WP_CLI::prompt()`?
+- [ ] Como você cria subcomandos no WP-CLI?
+- [ ] Qual é a diferença entre `WP_CLI::success()` e `WP_CLI::log()`?
+- [ ] Como você usa WP-CLI em scripts shell para automação?
+- [ ] Quais são as considerações de segurança ao usar comandos WP-CLI?
+
+## 🛠️ Projeto Prático
+
+**Construir:** Gerenciador de Plugin WP-CLI
+
+Crie um plugin com comandos WP-CLI customizados que:
+- Gerencie configurações do plugin via CLI
+- Importe/exporte dados
+- Execute tarefas de manutenção
+- Inclua prompts interativos para configuração
+- Tenha subcomandos para diferentes operações
+- Forneça mensagens de erro úteis e indicadores de progresso
+
+**Tempo estimado:** 6-8 horas  
+**Dificuldade:** Iniciante-Intermediário
+
+---
+
+## ❌ Equívocos Comuns
+
+### Equívoco 1: "WP-CLI requer acesso SSH"
+**Realidade:** WP-CLI roda localmente no servidor. Você precisa de acesso shell, mas não necessariamente SSH (pode ser terminal local).
+
+**Por que é importante:** Entender requisitos de acesso ajuda a configurar workflows de desenvolvimento corretamente.
+
+**Como lembrar:** WP-CLI = ferramenta de linha de comando, precisa de acesso shell (local ou remoto).
+
+### Equívoco 2: "Comandos WP-CLI são mais lentos que a interface admin"
+**Realidade:** WP-CLI é frequentemente mais rápido para operações em lote e automação. Ele ignora overhead HTTP e pode processar múltiplos itens eficientemente.
+
+**Por que é importante:** WP-CLI se destaca em operações em lote e scripting, não apenas tarefas pontuais.
+
+**Como lembrar:** WP-CLI = mais rápido para operações em lote, automação e scripting.
+
+### Equívoco 3: "WP-CLI não pode fazer tudo que o admin pode"
+**Realidade:** WP-CLI pode fazer a maioria das tarefas admin e muitas coisas que o admin não pode (operaciones em lote, automação, scripting).
+
+**Por que é importante:** WP-CLI é mais poderoso para desenvolvedores que a interface admin para muitas tarefas.
+
+**Como lembrar:** WP-CLI = ferramenta de desenvolvedor, mais poderoso que admin para automação.
 
 ---
 

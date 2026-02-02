@@ -7,7 +7,7 @@
 
 ---
 
-**Navegação:** [📚 Índice](000-WordPress-Topicos-Index.md) | [← Fase 5](005-WordPress-Fase-5-Custom-Post-Types-Taxonomies.md) | [Fase 7 →](007-WordPress-Fase-7-WP-CLI-Fundamentals.md)
+**Navegação:** [Índice](000-WordPress-Topicos-Index.md) | [← Fase 5](005-WordPress-Fase-5-Custom-Post-Types-Taxonomies.md) | [Fase 7 →](007-WordPress-Fase-7-WP-CLI-Fundamentals.md)
 
 ---
 
@@ -22,6 +22,80 @@
 7. [Criar Custom Blocks](#criar-custom-blocks)
 8. [Dynamic Blocks e Block Patterns](#dynamic-blocks-e-block-patterns)
 9. [Boas Práticas](#boas-práticas)
+
+---
+
+## 🎯 Objetivos de Aprendizado
+
+Ao final desta fase, você será capaz de:
+
+1. ✅ Criar shortcodes simples e avançados com atributos e tratamento de conteúdo
+2. ✅ Construir widgets customizados usando a Widgets API
+3. ✅ Entender os fundamentos do desenvolvimento de blocos Gutenberg
+4. ✅ Criar blocos Gutenberg estáticos e dinâmicos usando `@wordpress/create-block`
+5. ✅ Implementar atributos de bloco, componentes de edição e funções de salvamento
+6. ✅ Usar Block Patterns e Block Variations efetivamente
+7. ✅ Enfileirar scripts e estilos adequadamente para blocos
+8. ✅ Aplicar boas práticas para desenvolvimento de shortcodes, widgets e blocos
+
+## 📝 Autoavaliação
+
+Teste seu entendimento:
+
+- [ ] Qual é a diferença entre shortcodes auto-fechados e com conteúdo?
+- [ ] Como você escapa adequadamente a saída em shortcodes para prevenir XSS?
+- [ ] Qual é a diferença entre blocos Gutenberg estáticos e dinâmicos?
+- [ ] Como você registra atributos de bloco e os usa em funções de edição e salvamento?
+- [ ] Qual é o propósito de `register_block_type()` vs `@wordpress/create-block`?
+- [ ] Como você cria block patterns reutilizáveis?
+- [ ] Qual é a diferença entre Widgets API e blocos Gutenberg?
+- [ ] Como você trata depreciações de blocos ao atualizar atributos de bloco?
+
+## 🛠️ Projeto Prático
+
+**Construir:** Plugin de Exibição de Conteúdo
+
+Crie um plugin que inclua:
+- Múltiplos shortcodes para exibir conteúdo (posts recentes, depoimentos, etc.)
+- Widget customizado para exibir conteúdo em destaque
+- Bloco Gutenberg para exibir itens de custom post type
+- Bloco dinâmico que busca dados da REST API
+- Block pattern para layouts comuns
+
+**Tempo estimado:** 10-12 horas  
+**Dificuldade:** Intermediário
+
+---
+
+## ❌ Equívocos Comuns
+
+### Equívoco 1: "Shortcodes executam código PHP diretamente"
+**Realidade:** Shortcodes são parseados pelo WordPress e chamam funções callback registradas. Eles não executam código PHP arbitrário.
+
+**Por que é importante:** Shortcodes são mais seguros que permitir execução direta de PHP, mas você ainda precisa escapar a saída adequadamente.
+
+**Como lembrar:** Shortcode = função callback registrada, não execução direta de PHP.
+
+### Equívoco 2: "Blocos Gutenberg substituem shortcodes"
+**Realidade:** Blocos e shortcodes servem propósitos diferentes. Blocos são para edição de conteúdo, shortcodes são para inserção dinâmica de conteúdo. Ambos podem coexistir.
+
+**Por que é importante:** Entender quando usar blocos vs shortcodes ajuda a escolher a ferramenta certa para o trabalho.
+
+**Como lembrar:** Blocos = edição visual. Shortcodes = inserção programática de conteúdo.
+
+### Equívoco 3: "Widgets API está depreciada"
+**Realidade:** A Widgets API clássica ainda funciona e é mantida. Widgets baseados em blocos são uma adição, não uma substituição (ainda).
+
+**Por que é importante:** Muitos temas e plugins ainda usam widgets clássicos. Ambos os sistemas são válidos.
+
+**Como lembrar:** Widgets clássicos = ainda suportados. Widgets de bloco = opção mais nova.
+
+### Equívoco 4: "Blocos dinâmicos sempre precisam de renderização server-side"
+**Realidade:** Blocos dinâmicos podem usar JavaScript client-side para buscar e renderizar dados, reduzindo carga do servidor.
+
+**Por que é importante:** Entender opções de renderização ajuda a otimizar performance.
+
+**Como lembrar:** Server-side = renderização PHP. Client-side = busca JavaScript.
 
 ---
 

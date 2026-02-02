@@ -1,6 +1,90 @@
 # 🚀 FASE 14: Deployment e DevOps - Guia Completo
 
-**Navegação:** [📚 Índice](000-WordPress-Topicos-Index.md) | [← Fase 13](013-WordPress-Fase-13-Arquitetura-Avancada.md) | [Tópicos complementares →](015-WordPress-Topicos-Complementares-Avancados.md)
+**Navegação:** [Índice](000-WordPress-Topicos-Index.md) | [← Fase 13](013-WordPress-Fase-13-Arquitetura-Avancada.md) | [Fase 15 →](016-WordPress-Fase-15-Async-Jobs-Background-Processing.md)
+
+---
+
+## 🎯 Objetivos de Aprendizado
+
+Ao final desta fase, você será capaz de:
+
+1. ✅ Configurar ambientes de desenvolvimento Docker para WordPress
+2. ✅ Gerenciar secrets com segurança usando Docker Secrets, arquivos .env e secrets CI/CD
+3. ✅ Implementar health checks abrangentes para PHP, Nginx e Redis
+4. ✅ Configurar pipelines CI/CD com GitHub Actions ou GitLab CI
+5. ✅ Configurar testes automatizados em pipelines de deployment
+6. ✅ Implementar estratégias de backup incluindo Point-in-Time Recovery (PITR)
+7. ✅ Testar restaurações de backup automaticamente para garantir validade do backup
+8. ✅ Aplicar boas práticas DevOps para deployments WordPress em produção
+
+## 📝 Autoavaliação
+
+Teste seu entendimento:
+
+- [ ] Como você gerencia secrets com segurança em ambientes Docker e CI/CD?
+- [ ] Qual é a diferença entre ambientes de desenvolvimento, staging e produção?
+- [ ] Como você implementa health checks para serviços WordPress?
+- [ ] O que é Point-in-Time Recovery e como funciona com binlogs MySQL?
+- [ ] Por que é importante testar restaurações de backup regularmente?
+- [ ] Como você configura pipelines de deployment automatizados?
+- [ ] O que deve ser incluído em um checklist de deployment?
+- [ ] Como você trata migrações de banco de dados durante deployment?
+
+## 🛠️ Projeto Prático
+
+**Construir:** Setup DevOps Completo
+
+Crie um setup DevOps completo que inclua:
+- Ambiente de desenvolvimento Docker
+- Pipeline CI/CD com testes automatizados
+- Sistema de gerenciamento de secrets
+- Health checks para todos os serviços
+- Estratégia de backup com PITR
+- Testes automatizados de restauração
+- Scripts de automação de deployment
+- Monitoramento e alertas
+
+**Tempo estimado:** 20-25 horas  
+**Dificuldade:** Avançado
+
+---
+
+## ❌ Equívocos Comuns
+
+### Equívoco 1: "Docker é apenas para produção"
+**Realidade:** Docker é excelente para desenvolvimento (ambientes consistentes) e produção (containerização). Use em ambos.
+
+**Por que é importante:** Docker em desenvolvimento previne problemas de "funciona na minha máquina" e corresponde à produção.
+
+**Como lembrar:** Docker = ambientes consistentes em todos os lugares (dev, staging, prod).
+
+### Equívoco 2: "Arquivos .env são seguros"
+**Realidade:** Arquivos .env são convenientes mas não são seguros se commitados no controle de versão. Use gerenciamento de secrets em produção.
+
+**Por que é importante:** Arquivos .env commitados expõem secrets. Use gerenciamento adequado de secrets.
+
+**Como lembrar:** .env = conveniência de desenvolvimento. Gerenciador de secrets = segurança de produção.
+
+### Equívoco 3: "Health checks são opcionais"
+**Realidade:** Health checks são essenciais para orquestração de containers, load balancing e monitoramento. Sem eles, containers não saudáveis continuam recebendo tráfego.
+
+**Por que é importante:** Health checks permitem recuperação automática e previnem servir tráfego de containers quebrados.
+
+**Como lembrar:** Health checks = recuperação automática + roteamento de tráfego.
+
+### Equívoco 4: "Backups são suficientes para disaster recovery"
+**Realidade:** Backups são inúteis se você não pode restaurá-los. Você precisa de procedimentos de restauração testados, alvos RTO/RPO e planos de recuperação documentados.
+
+**Por que é importante:** Backups não testados frequentemente falham quando necessários. Teste restaurações regularmente.
+
+**Como lembrar:** Backups + restaurações testadas + plano de recuperação = disaster recovery.
+
+### Equívoco 5: "CI/CD é apenas para equipes grandes"
+**Realidade:** CI/CD beneficia qualquer tamanho de equipe ao capturar erros cedo, automatizar deployments e garantir consistência.
+
+**Por que é importante:** Mesmo desenvolvedores solo se beneficiam de testes e deployment automatizados.
+
+**Como lembrar:** CI/CD = automação + consistência, independente do tamanho da equipe.
 
 ---
 
@@ -189,7 +273,772 @@ EXPOSE 9000
 CMD ["php-fpm"]
 ```
 
-### 14.1.3 Configuração PHP (php.ini)
+### 14.1.3 Secrets Management (Docker Secrets, .env, CI/CD)
+
+**Problema:** Credenciais hardcoded em código são um risco de segurança crítico.
+
+**Solução:** Gerenciar secrets de forma segura usando ferramentas apropriadas.
+
+#### Docker Secrets (Docker Swarm Mode)
+
+```yaml
+# docker-compose.yml para Swarm
+version: '3.9'
+
+services:
+  db:
+    image: mysql:8.0
+    secrets:
+      - db_root_password
+      - db_password
+    environment:
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/db_root_password
+      MYSQL_PASSWORD_FILE: /run/secrets/db_password
+    volumes:
+      - db_data:/var/lib/mysql
+
+secrets:
+  db_root_password:
+    external: true  # Criado externamente
+  db_password:
+    external: true
+
+volumes:
+  db_data:
+```
+
+**Criar secrets:**
+
+```bash
+# Criar secret
+echo "my_secure_password" | docker secret create db_root_password -
+
+# Listar secrets
+docker secret ls
+
+# Usar em stack
+docker stack deploy -c docker-compose.yml wordpress
+```
+
+#### .env Files (Desenvolvimento)
+
+```bash
+# .env.example (versionado)
+DB_NAME=wordpress_db
+DB_USER=wordpress_user
+DB_PASSWORD=your_password_here
+DB_HOST=localhost
+
+WP_DEBUG=true
+WP_DEBUG_LOG=true
+
+JWT_SECRET=your_jwt_secret_here
+API_KEY=your_api_key_here
+
+# .env (NÃO versionado - no .gitignore)
+DB_NAME=wordpress_prod
+DB_USER=wp_prod_user
+DB_PASSWORD=super_secure_password_123
+DB_HOST=db.internal
+
+WP_DEBUG=false
+WP_DEBUG_LOG=false
+
+JWT_SECRET=actual_jwt_secret_from_env
+API_KEY=actual_api_key_from_env
+```
+
+**Usar em PHP:**
+
+```php
+<?php
+// wp-config.php
+require_once __DIR__ . '/vendor/autoload.php';
+
+use Dotenv\Dotenv;
+
+$dotenv = Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
+// Usar variáveis de ambiente
+define('DB_NAME', $_ENV['DB_NAME']);
+define('DB_USER', $_ENV['DB_USER']);
+define('DB_PASSWORD', $_ENV['DB_PASSWORD']);
+define('DB_HOST', $_ENV['DB_HOST']);
+
+define('JWT_SECRET', $_ENV['JWT_SECRET'] ?? wp_salt('auth'));
+define('API_KEY', $_ENV['API_KEY'] ?? '');
+
+// Validar que variáveis obrigatórias existem
+$dotenv->required(['DB_NAME', 'DB_USER', 'DB_PASSWORD']);
+```
+
+**Docker Compose com .env:**
+
+```yaml
+# docker-compose.yml
+version: '3.9'
+
+services:
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    # .env é carregado automaticamente pelo docker-compose
+```
+
+#### GitHub Actions Secrets
+
+```yaml
+# .github/workflows/deploy.yml
+name: Deploy to Production
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Deploy to server
+        env:
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          API_KEY: ${{ secrets.API_KEY }}
+        run: |
+          # Usar secrets nas variáveis de ambiente
+          ssh user@server "
+            export DB_PASSWORD='$DB_PASSWORD'
+            export JWT_SECRET='$JWT_SECRET'
+            export API_KEY='$API_KEY'
+            ./deploy.sh
+          "
+      
+      - name: Update .env on server
+        run: |
+          ssh user@server "
+            cat > .env << EOF
+          DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+          JWT_SECRET=${{ secrets.JWT_SECRET }}
+          API_KEY=${{ secrets.API_KEY }}
+          EOF
+          "
+```
+
+**Configurar secrets no GitHub:**
+
+1. Vá em Settings → Secrets and variables → Actions
+2. Clique em "New repository secret"
+3. Adicione cada secret:
+   - `DB_PASSWORD`
+   - `JWT_SECRET`
+   - `API_KEY`
+
+#### AWS Secrets Manager
+
+```php
+<?php
+/**
+ * Usar AWS Secrets Manager para produção
+ */
+require_once __DIR__ . '/vendor/autoload.php';
+
+use Aws\SecretsManager\SecretsManagerClient;
+use Aws\Exception\AwsException;
+
+class SecretsManager {
+    
+    private SecretsManagerClient $client;
+    private array $cache = [];
+    
+    public function __construct() {
+        $this->client = new SecretsManagerClient([
+            'version' => 'latest',
+            'region' => getenv('AWS_REGION') ?: 'us-east-1',
+        ]);
+    }
+    
+    /**
+     * Obter secret do AWS Secrets Manager
+     */
+    public function getSecret(string $secretName): array {
+        // Cachear para evitar muitas chamadas
+        if (isset($this->cache[$secretName])) {
+            return $this->cache[$secretName];
+        }
+        
+        try {
+            $result = $this->client->getSecretValue([
+                'SecretId' => $secretName,
+            ]);
+            
+            $secret = json_decode($result['SecretString'], true);
+            $this->cache[$secretName] = $secret;
+            
+            return $secret;
+        } catch (AwsException $e) {
+            error_log('Error retrieving secret: ' . $e->getMessage());
+            throw new Exception('Failed to retrieve secret');
+        }
+    }
+}
+
+// Uso em wp-config.php
+if (getenv('WP_ENV') === 'production') {
+    $secretsManager = new SecretsManager();
+    $dbSecrets = $secretsManager->getSecret('wordpress/database');
+    
+    define('DB_NAME', $dbSecrets['name']);
+    define('DB_USER', $dbSecrets['username']);
+    define('DB_PASSWORD', $dbSecrets['password']);
+    define('DB_HOST', $dbSecrets['host']);
+} else {
+    // Desenvolvimento: usar .env
+    $dotenv = Dotenv::createImmutable(__DIR__);
+    $dotenv->load();
+    
+    define('DB_NAME', $_ENV['DB_NAME']);
+    define('DB_USER', $_ENV['DB_USER']);
+    define('DB_PASSWORD', $_ENV['DB_PASSWORD']);
+    define('DB_HOST', $_ENV['DB_HOST']);
+}
+```
+
+#### Rotação de Credenciais
+
+```php
+<?php
+/**
+ * Sistema de rotação de credenciais
+ */
+class CredentialRotation {
+    
+    /**
+     * Rotacionar senha de banco de dados
+     */
+    public function rotateDatabasePassword(): void {
+        // 1. Gerar nova senha
+        $newPassword = wp_generate_password(32, true, true);
+        
+        // 2. Atualizar no banco
+        global $wpdb;
+        $wpdb->query($wpdb->prepare(
+            "ALTER USER %s@%s IDENTIFIED BY %s",
+            DB_USER,
+            DB_HOST,
+            $newPassword
+        ));
+        
+        // 3. Atualizar em Secrets Manager
+        $secretsManager = new SecretsManager();
+        $secretsManager->updateSecret('wordpress/database', [
+            'password' => $newPassword,
+        ]);
+        
+        // 4. Atualizar .env (se desenvolvimento)
+        if (file_exists(__DIR__ . '/.env')) {
+            $envContent = file_get_contents(__DIR__ . '/.env');
+            $envContent = preg_replace(
+                '/^DB_PASSWORD=.*/m',
+                "DB_PASSWORD={$newPassword}",
+                $envContent
+            );
+            file_put_contents(__DIR__ . '/.env', $envContent);
+        }
+        
+        // 5. Reiniciar serviços que usam a senha
+        // (via webhook, API, etc)
+    }
+    
+    /**
+     * Rotacionar API keys
+     */
+    public function rotateApiKey(string $service): string {
+        $newKey = bin2hex(random_bytes(32));
+        
+        // Atualizar em Secrets Manager
+        $secretsManager = new SecretsManager();
+        $secrets = $secretsManager->getSecret('wordpress/api-keys');
+        $secrets[$service] = $newKey;
+        $secretsManager->updateSecret('wordpress/api-keys', $secrets);
+        
+        // Invalidar cache
+        wp_cache_flush();
+        
+        return $newKey;
+    }
+}
+
+// Agendar rotação automática (mensal)
+add_action('wp_scheduled_credential_rotation', function() {
+    $rotator = new CredentialRotation();
+    $rotator->rotateDatabasePassword();
+});
+
+if (!wp_next_scheduled('wp_scheduled_credential_rotation')) {
+    wp_schedule_event(time(), 'monthly', 'wp_scheduled_credential_rotation');
+}
+```
+
+**Checklist de Secrets Management:**
+
+- [ ] Nenhum secret está hardcoded no código
+- [ ] `.env` está no `.gitignore`
+- [ ] `.env.example` está versionado (sem valores reais)
+- [ ] Secrets são carregados de variáveis de ambiente em produção
+- [ ] Secrets Manager (AWS/HashiCorp Vault) é usado em produção
+- [ ] Rotação de credenciais está configurada
+- [ ] Acesso a secrets é auditado e logado
+- [ ] Secrets diferentes para dev/staging/production
+
+### 14.1.4 Health Checks Completos (PHP, Nginx, Redis)
+
+**Problema:** Containers podem estar rodando mas não funcionando corretamente.
+
+**Solução:** Implementar health checks completos para todos os serviços.
+
+#### PHP-FPM Health Check
+
+```php
+<?php
+/**
+ * healthcheck.php - Endpoint de health check para PHP-FPM
+ * Acessar: http://localhost/healthcheck.php
+ */
+
+header('Content-Type: application/json');
+
+$health = [
+    'status' => 'healthy',
+    'timestamp' => date('c'),
+    'checks' => [],
+];
+
+// 1. Verificar conexão com banco de dados
+try {
+    global $wpdb;
+    $wpdb->get_var("SELECT 1");
+    $health['checks']['database'] = 'ok';
+} catch (Exception $e) {
+    $health['status'] = 'unhealthy';
+    $health['checks']['database'] = 'failed: ' . $e->getMessage();
+    http_response_code(503);
+}
+
+// 2. Verificar Redis
+try {
+    if (class_exists('Redis')) {
+        $redis = new Redis();
+        $redis->connect('redis', 6379);
+        $redis->ping();
+        $health['checks']['redis'] = 'ok';
+    } else {
+        $health['checks']['redis'] = 'not_configured';
+    }
+} catch (Exception $e) {
+    $health['status'] = 'degraded';
+    $health['checks']['redis'] = 'failed: ' . $e->getMessage();
+}
+
+// 3. Verificar espaço em disco
+$diskFree = disk_free_space('/');
+$diskTotal = disk_total_space('/');
+$diskPercent = ($diskFree / $diskTotal) * 100;
+
+if ($diskPercent < 10) {
+    $health['status'] = 'unhealthy';
+    $health['checks']['disk'] = 'critical: ' . round($diskPercent, 2) . '% free';
+    http_response_code(503);
+} else {
+    $health['checks']['disk'] = 'ok: ' . round($diskPercent, 2) . '% free';
+}
+
+// 4. Verificar memória
+$memoryUsage = memory_get_usage(true);
+$memoryLimit = ini_get('memory_limit');
+$health['checks']['memory'] = [
+    'used' => $memoryUsage,
+    'limit' => $memoryLimit,
+    'status' => 'ok',
+];
+
+// 5. Verificar opcache (se habilitado)
+if (function_exists('opcache_get_status')) {
+    $opcache = opcache_get_status();
+    if ($opcache && $opcache['opcache_enabled']) {
+        $health['checks']['opcache'] = 'ok';
+    } else {
+        $health['checks']['opcache'] = 'disabled';
+    }
+}
+
+// 6. Verificar WordPress
+if (defined('ABSPATH')) {
+    $health['checks']['wordpress'] = 'ok';
+} else {
+    $health['status'] = 'unhealthy';
+    $health['checks']['wordpress'] = 'failed';
+    http_response_code(503);
+}
+
+echo json_encode($health, JSON_PRETTY_PRINT);
+```
+
+**Docker Health Check para PHP:**
+
+```yaml
+# docker-compose.yml
+services:
+  php:
+    build: ./docker/php
+    healthcheck:
+      test: ["CMD", "php", "-r", "file_get_contents('http://localhost/healthcheck.php')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+```
+
+#### Nginx Health Check
+
+```nginx
+# nginx.conf
+server {
+    listen 80;
+    server_name _;
+    
+    # Health check endpoint
+    location /health {
+        access_log off;
+        return 200 "healthy\n";
+        add_header Content-Type text/plain;
+    }
+    
+    # Health check completo
+    location /healthcheck {
+        access_log off;
+        
+        # Verificar se PHP-FPM está respondendo
+        fastcgi_pass php:9000;
+        fastcgi_param SCRIPT_FILENAME /var/www/html/healthcheck.php;
+        include fastcgi_params;
+    }
+    
+    # Status endpoint (requer módulo nginx status)
+    location /nginx_status {
+        stub_status on;
+        access_log off;
+        allow 127.0.0.1;
+        deny all;
+    }
+}
+```
+
+**Docker Health Check para Nginx:**
+
+```yaml
+services:
+  nginx:
+    image: nginx:alpine
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+```
+
+#### Redis Health Check
+
+```bash
+#!/bin/bash
+# healthcheck-redis.sh
+
+# Verificar se Redis está respondendo
+redis-cli -h redis ping
+
+if [ $? -eq 0 ]; then
+    # Verificar memória
+    MEMORY=$(redis-cli -h redis info memory | grep used_memory_human | cut -d: -f2 | tr -d '\r')
+    
+    # Verificar conexões
+    CONNECTIONS=$(redis-cli -h redis info clients | grep connected_clients | cut -d: -f2 | tr -d '\r')
+    
+    echo "Redis Status: OK"
+    echo "Memory Used: $MEMORY"
+    echo "Connections: $CONNECTIONS"
+    exit 0
+else
+    echo "Redis Status: FAILED"
+    exit 1
+fi
+```
+
+**Docker Health Check para Redis:**
+
+```yaml
+services:
+  redis:
+    image: redis:7-alpine
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+```
+
+#### Health Check Completo com Monitoramento
+
+```php
+<?php
+/**
+ * Sistema completo de health checks
+ */
+class HealthCheckService {
+    
+    public function checkAll(): array {
+        $results = [
+            'overall_status' => 'healthy',
+            'timestamp' => time(),
+            'checks' => [],
+        ];
+        
+        // Database
+        $results['checks']['database'] = $this->checkDatabase();
+        
+        // Redis
+        $results['checks']['redis'] = $this->checkRedis();
+        
+        // Disk Space
+        $results['checks']['disk'] = $this->checkDiskSpace();
+        
+        // Memory
+        $results['checks']['memory'] = $this->checkMemory();
+        
+        // WordPress
+        $results['checks']['wordpress'] = $this->checkWordPress();
+        
+        // External APIs
+        $results['checks']['external_apis'] = $this->checkExternalApis();
+        
+        // Determinar status geral
+        foreach ($results['checks'] as $check) {
+            if ($check['status'] === 'critical') {
+                $results['overall_status'] = 'unhealthy';
+                break;
+            } elseif ($check['status'] === 'warning' && $results['overall_status'] === 'healthy') {
+                $results['overall_status'] = 'degraded';
+            }
+        }
+        
+        return $results;
+    }
+    
+    private function checkDatabase(): array {
+        try {
+            global $wpdb;
+            $start = microtime(true);
+            $wpdb->get_var("SELECT 1");
+            $duration = (microtime(true) - $start) * 1000;
+            
+            return [
+                'status' => 'ok',
+                'response_time_ms' => round($duration, 2),
+            ];
+        } catch (Exception $e) {
+            return [
+                'status' => 'critical',
+                'error' => $e->getMessage(),
+            ];
+        }
+    }
+    
+    private function checkRedis(): array {
+        try {
+            if (!class_exists('Redis')) {
+                return ['status' => 'not_configured'];
+            }
+            
+            $redis = new Redis();
+            $redis->connect('redis', 6379, 1); // 1 segundo timeout
+            
+            $start = microtime(true);
+            $redis->ping();
+            $duration = (microtime(true) - $start) * 1000;
+            
+            $info = $redis->info('memory');
+            
+            return [
+                'status' => 'ok',
+                'response_time_ms' => round($duration, 2),
+                'memory_used' => $info['used_memory_human'] ?? 'unknown',
+            ];
+        } catch (Exception $e) {
+            return [
+                'status' => 'warning',
+                'error' => $e->getMessage(),
+            ];
+        }
+    }
+    
+    private function checkDiskSpace(): array {
+        $free = disk_free_space('/');
+        $total = disk_total_space('/');
+        $percent = ($free / $total) * 100;
+        
+        if ($percent < 5) {
+            return [
+                'status' => 'critical',
+                'free_percent' => round($percent, 2),
+            ];
+        } elseif ($percent < 10) {
+            return [
+                'status' => 'warning',
+                'free_percent' => round($percent, 2),
+            ];
+        }
+        
+        return [
+            'status' => 'ok',
+            'free_percent' => round($percent, 2),
+            'free_gb' => round($free / 1024 / 1024 / 1024, 2),
+        ];
+    }
+    
+    private function checkMemory(): array {
+        $used = memory_get_usage(true);
+        $peak = memory_get_peak_usage(true);
+        $limit = ini_get('memory_limit');
+        
+        return [
+            'status' => 'ok',
+            'used_mb' => round($used / 1024 / 1024, 2),
+            'peak_mb' => round($peak / 1024 / 1024, 2),
+            'limit' => $limit,
+        ];
+    }
+    
+    private function checkWordPress(): array {
+        if (!defined('ABSPATH')) {
+            return ['status' => 'critical', 'error' => 'WordPress not loaded'];
+        }
+        
+        // Verificar se pode executar queries básicas
+        try {
+            $postCount = wp_count_posts();
+            return [
+                'status' => 'ok',
+                'post_count' => $postCount->publish ?? 0,
+            ];
+        } catch (Exception $e) {
+            return [
+                'status' => 'warning',
+                'error' => $e->getMessage(),
+            ];
+        }
+    }
+    
+    private function checkExternalApis(): array {
+        $apis = [
+            'payment_gateway' => 'https://api.payment.com/health',
+            'email_service' => 'https://api.email.com/health',
+        ];
+        
+        $results = [];
+        
+        foreach ($apis as $name => $url) {
+            $start = microtime(true);
+            $response = wp_remote_get($url, ['timeout' => 5]);
+            $duration = (microtime(true) - $start) * 1000;
+            
+            if (is_wp_error($response)) {
+                $results[$name] = [
+                    'status' => 'warning',
+                    'error' => $response->get_error_message(),
+                ];
+            } elseif (wp_remote_retrieve_response_code($response) === 200) {
+                $results[$name] = [
+                    'status' => 'ok',
+                    'response_time_ms' => round($duration, 2),
+                ];
+            } else {
+                $results[$name] = [
+                    'status' => 'warning',
+                    'http_code' => wp_remote_retrieve_response_code($response),
+                ];
+            }
+        }
+        
+        return $results;
+    }
+}
+
+// Endpoint REST API para health check
+add_action('rest_api_init', function() {
+    register_rest_route('wp/v1', '/health', [
+        'methods' => 'GET',
+        'callback' => function() {
+            $service = new HealthCheckService();
+            $results = $service->checkAll();
+            
+            $statusCode = $results['overall_status'] === 'healthy' ? 200 : 503;
+            
+            return new WP_REST_Response($results, $statusCode);
+        },
+        'permission_callback' => '__return_true',
+    ]);
+});
+```
+
+**Monitoramento com Prometheus:**
+
+```php
+<?php
+/**
+ * Expor métricas para Prometheus
+ */
+add_action('rest_api_init', function() {
+    register_rest_route('wp/v1', '/metrics', [
+        'methods' => 'GET',
+        'callback' => function() {
+            $service = new HealthCheckService();
+            $results = $service->checkAll();
+            
+            // Formato Prometheus
+            $metrics = [];
+            $metrics[] = '# HELP wp_health_status Overall health status (1=healthy, 0=unhealthy)';
+            $metrics[] = '# TYPE wp_health_status gauge';
+            $metrics[] = 'wp_health_status ' . ($results['overall_status'] === 'healthy' ? 1 : 0);
+            
+            $metrics[] = '# HELP wp_db_response_time Database response time in milliseconds';
+            $metrics[] = '# TYPE wp_db_response_time gauge';
+            $metrics[] = 'wp_db_response_time ' . ($results['checks']['database']['response_time_ms'] ?? 0);
+            
+            $metrics[] = '# HELP wp_redis_response_time Redis response time in milliseconds';
+            $metrics[] = '# TYPE wp_redis_response_time gauge';
+            $metrics[] = 'wp_redis_response_time ' . ($results['checks']['redis']['response_time_ms'] ?? 0);
+            
+            $metrics[] = '# HELP wp_disk_free_percent Free disk space percentage';
+            $metrics[] = '# TYPE wp_disk_free_percent gauge';
+            $metrics[] = 'wp_disk_free_percent ' . ($results['checks']['disk']['free_percent'] ?? 0);
+            
+            return new WP_REST_Response(implode("\n", $metrics), 200, [
+                'Content-Type' => 'text/plain; version=0.0.4',
+            ]);
+        },
+        'permission_callback' => '__return_true',
+    ]);
+});
+```
+
+### 14.1.5 Configuração PHP (php.ini)
 
 ```ini
 [PHP]
@@ -234,7 +1083,7 @@ xdebug.client_port = 9003
 xdebug.idekey = docker
 ```
 
-### 14.1.4 Configuração Nginx
+### 14.1.6 Configuração Nginx
 
 ```nginx
 server {
@@ -304,7 +1153,7 @@ server {
 }
 ```
 
-### 14.1.5 Iniciar Environment de Desenvolvimento
+### 14.1.7 Iniciar Environment de Desenvolvimento
 
 ```bash
 # Construir e iniciar containers
@@ -323,7 +1172,7 @@ docker-compose down
 docker-compose down -v
 ```
 
-### 14.1.6 Configurar WordPress em Desenvolvimento
+### 14.1.8 Configurar WordPress em Desenvolvimento
 
 ```bash
 # Entrar no container PHP
@@ -344,7 +1193,7 @@ docker-compose exec wp-cli wp config shuffle-salts
 docker-compose exec wp-cli wp db tables
 ```
 
-### 14.1.7 .dockerignore
+### 14.1.9 .dockerignore
 
 ```
 .git
@@ -2466,75 +3315,615 @@ log "  Tamanho: $(du -sh $BACKUP_DIR | cut -f1)"
 */6 * * * * root /var/scripts/backup/incremental-backup.sh
 ```
 
-### 14.9.3 Restore Testing
+### 14.9.3 Point-in-Time Recovery (PITR)
+
+**Conceito:** PITR permite restaurar banco de dados para qualquer ponto no tempo, não apenas para quando backup foi feito.
+
+**Requisitos:**
+- Binary logging habilitado no MySQL
+- Backups incrementais regulares
+- Retenção de binlogs
+
+#### Configurar Binary Logging no MySQL
+
+```ini
+# my.cnf
+[mysqld]
+# Habilitar binary logging
+log-bin=mysql-bin
+binlog_format=ROW
+expire_logs_days=7
+max_binlog_size=100M
+sync_binlog=1
+
+# Para InnoDB
+innodb_flush_log_at_trx_commit=1
+```
+
+#### Script de Backup com Binlog
 
 ```bash
 #!/bin/bash
+# backup-with-binlog.sh
 
-# restore-test.sh
-# Testar restore em ambiente staging
+set -euo pipefail
 
-set -e
+BACKUP_DIR="/var/backups/wordpress/$(date +%Y-%m-%d_%H-%M-%S)"
+DB_NAME="wordpress_prod"
+DB_USER="backup_user"
+DB_PASSWORD="${DB_PASSWORD}"
 
-BACKUP_FILE="${1}"
-TEST_DB="wordpress_restore_test"
-TEST_PATH="/tmp/wordpress_restore_test"
+mkdir -p "$BACKUP_DIR"
 
 log() {
-    echo "[$(date '+%H:%M:%S')] $1"
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1"
 }
 
-if [ -z "$BACKUP_FILE" ]; then
-    echo "Uso: ./restore-test.sh <backup-file.tar.gz>"
+log "Iniciando backup com binlog..."
+
+# 1. Flush logs para criar novo binlog
+log "Flushando logs..."
+mysql -u"$DB_USER" -p"$DB_PASSWORD" -e "FLUSH LOGS;"
+
+# 2. Obter posição atual do binlog
+BINLOG_POSITION=$(mysql -u"$DB_USER" -p"$DB_PASSWORD" -e "SHOW MASTER STATUS\G" | grep Position | awk '{print $2}')
+BINLOG_FILE=$(mysql -u"$DB_USER" -p"$DB_PASSWORD" -e "SHOW MASTER STATUS\G" | grep File | awk '{print $2}')
+
+log "Binlog atual: $BINLOG_FILE, Posição: $BINLOG_POSITION"
+
+# 3. Backup completo do banco
+log "Backup completo do banco..."
+mysqldump \
+    --single-transaction \
+    --master-data=2 \
+    --flush-logs \
+    -u"$DB_USER" \
+    -p"$DB_PASSWORD" \
+    "$DB_NAME" | gzip > "$BACKUP_DIR/database.sql.gz"
+
+# 4. Salvar informações do binlog
+cat > "$BACKUP_DIR/binlog-info.txt" << EOF
+BINLOG_FILE=$BINLOG_FILE
+BINLOG_POSITION=$BINLOG_POSITION
+TIMESTAMP=$(date +%s)
+DATE=$(date '+%Y-%m-%d %H:%M:%S')
+EOF
+
+# 5. Copiar binlogs desde o último backup
+log "Copiando binlogs..."
+BINLOG_DIR="/var/lib/mysql"
+cp "$BINLOG_DIR/$BINLOG_FILE"* "$BACKUP_DIR/" 2>/dev/null || true
+
+log "✓ Backup com binlog concluído"
+log "  Binlog: $BINLOG_FILE"
+log "  Posição: $BINLOG_POSITION"
+```
+
+#### Restore Point-in-Time
+
+```bash
+#!/bin/bash
+# restore-pitr.sh
+
+set -euo pipefail
+
+BACKUP_DIR="${1}"
+RESTORE_TIME="${2}"  # Formato: 2026-02-02 14:30:00
+TEST_DB="wordpress_restore_test"
+
+if [ -z "$BACKUP_DIR" ] || [ -z "$RESTORE_TIME" ]; then
+    echo "Uso: ./restore-pitr.sh <backup-dir> <restore-time>"
+    echo "Exemplo: ./restore-pitr.sh /var/backups/wordpress/2026-02-02_10-00-00 '2026-02-02 14:30:00'"
     exit 1
 fi
 
-log "Iniciando teste de restore..."
+log() {
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1"
+}
 
-# 1. Criar test database
+log "Iniciando Point-in-Time Recovery..."
+log "Backup: $BACKUP_DIR"
+log "Restaurar para: $RESTORE_TIME"
+
+# 1. Ler informações do binlog do backup
+source "$BACKUP_DIR/binlog-info.txt"
+log "Binlog do backup: $BINLOG_FILE, Posição: $BINLOG_POSITION"
+
+# 2. Criar database de teste
 log "Criando database de teste..."
 mysql -e "DROP DATABASE IF EXISTS $TEST_DB;"
 mysql -e "CREATE DATABASE $TEST_DB CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
 
-# 2. Restaurar arquivos
-log "Extraindo arquivos..."
+# 3. Restaurar backup completo
+log "Restaurando backup completo..."
+gunzip < "$BACKUP_DIR/database.sql.gz" | mysql "$TEST_DB"
+
+# 4. Converter tempo para timestamp
+RESTORE_TIMESTAMP=$(date -d "$RESTORE_TIME" +%s)
+BACKUP_TIMESTAMP=$(date -d "$(cat $BACKUP_DIR/binlog-info.txt | grep DATE | cut -d= -f2)" +%s)
+
+if [ "$RESTORE_TIMESTAMP" -le "$BACKUP_TIMESTAMP" ]; then
+    log "Tempo de restore é anterior ao backup. Usando apenas backup completo."
+    log "✓ Restore concluído"
+    exit 0
+fi
+
+# 5. Aplicar binlogs até o tempo especificado
+log "Aplicando binlogs até $RESTORE_TIME..."
+
+BINLOG_DIR="/var/lib/mysql"
+BINLOG_FILES=($(ls -t "$BINLOG_DIR"/mysql-bin.* 2>/dev/null | head -10))
+
+for binlog_file in "${BINLOG_FILES[@]}"; do
+    FILENAME=$(basename "$binlog_file")
+    
+    # Verificar se este binlog contém eventos após o backup
+    if [[ "$FILENAME" > "$BINLOG_FILE" ]] || [[ "$FILENAME" == "$BINLOG_FILE" ]]; then
+        log "Processando binlog: $FILENAME"
+        
+        # Aplicar binlog com stop-datetime
+        mysqlbinlog \
+            --stop-datetime="$RESTORE_TIME" \
+            --database="$TEST_DB" \
+            "$binlog_file" | mysql "$TEST_DB" 2>/dev/null || true
+    fi
+done
+
+log "✓ Point-in-Time Recovery concluído"
+log "Database de teste: $TEST_DB"
+log "Verifique os dados antes de aplicar em produção!"
+```
+
+#### Automatizar PITR
+
+```bash
+#!/bin/bash
+# setup-pitr.sh
+
+# Configurar PITR completo
+
+# 1. Habilitar binary logging
+log "Configurando MySQL para PITR..."
+mysql -e "
+SET GLOBAL log_bin = ON;
+SET GLOBAL binlog_format = 'ROW';
+SET GLOBAL expire_logs_days = 7;
+SET GLOBAL max_binlog_size = 104857600; -- 100MB
+"
+
+# 2. Criar usuário para backups
+mysql -e "
+CREATE USER IF NOT EXISTS 'backup_user'@'localhost' IDENTIFIED BY 'secure_backup_password';
+GRANT SELECT, RELOAD, LOCK TABLES, REPLICATION CLIENT ON *.* TO 'backup_user'@'localhost';
+GRANT PROCESS ON *.* TO 'backup_user'@'localhost';
+FLUSH PRIVILEGES;
+"
+
+# 3. Agendar backups com binlog
+log "Configurando cron para backups..."
+cat > /etc/cron.d/wordpress-pitr << EOF
+# Backup completo a cada 6 horas
+0 */6 * * * root /var/scripts/backup/backup-with-binlog.sh
+
+# Limpar binlogs antigos (já configurado no MySQL)
+0 2 * * * root mysql -e "PURGE BINARY LOGS BEFORE DATE_SUB(NOW(), INTERVAL 7 DAY);"
+EOF
+
+log "✓ PITR configurado"
+```
+
+#### Verificar Binlogs Disponíveis
+
+```bash
+#!/bin/bash
+# list-binlogs.sh
+
+echo "Binlogs disponíveis para PITR:"
+echo ""
+
+mysql -e "SHOW BINARY LOGS;" | while read line; do
+    if [[ $line =~ ^mysql-bin ]]; then
+        FILE=$(echo $line | awk '{print $1}')
+        SIZE=$(echo $line | awk '{print $2}')
+        echo "  $FILE - $SIZE bytes"
+    fi
+done
+
+echo ""
+echo "Para restaurar para um ponto específico:"
+echo "  ./restore-pitr.sh <backup-dir> '2026-02-02 14:30:00'"
+```
+
+### 14.9.4 Backup Restore Testing
+
+**Importante:** Testar restores regularmente garante que backups são válidos e processo funciona.
+
+#### Script Completo de Restore Testing
+
+```bash
+#!/bin/bash
+# restore-test.sh
+# Testar restore em ambiente staging
+
+set -euo pipefail
+
+BACKUP_DIR="${1:-}"
+TEST_DB="wordpress_restore_test_$(date +%s)"
+TEST_PATH="/tmp/wordpress_restore_test_$(date +%s)"
+REPORT_FILE="/var/log/restore-tests/report-$(date +%Y-%m-%d).log"
+
+mkdir -p "$(dirname $REPORT_FILE)"
+
+log() {
+    echo "[$(date '+%H:%M:%S')] $1" | tee -a "$REPORT_FILE"
+}
+
+if [ -z "$BACKUP_DIR" ]; then
+    echo "Uso: ./restore-test.sh <backup-dir>"
+    echo "Exemplo: ./restore-test.sh /var/backups/wordpress/2026-02-02_10-00-00"
+    exit 1
+fi
+
+if [ ! -d "$BACKUP_DIR" ]; then
+    log "✗ Diretório de backup não encontrado: $BACKUP_DIR"
+    exit 1
+fi
+
+log "=========================================="
+log "Iniciando teste de restore..."
+log "Backup: $BACKUP_DIR"
+log "=========================================="
+
+# Contador de erros
+ERRORS=0
+WARNINGS=0
+
+# 1. Verificar integridade do backup
+log ""
+log "1. Verificando integridade do backup..."
+
+if [ ! -f "$BACKUP_DIR/database.sql.gz" ]; then
+    log "✗ ERRO: database.sql.gz não encontrado"
+    ERRORS=$((ERRORS + 1))
+else
+    if gunzip -t "$BACKUP_DIR/database.sql.gz" 2>/dev/null; then
+        log "✓ database.sql.gz válido"
+    else
+        log "✗ ERRO: database.sql.gz corrompido"
+        ERRORS=$((ERRORS + 1))
+    fi
+fi
+
+# Verificar outros arquivos
+for file in "plugins.tar.gz" "themes.tar.gz" "config.tar.gz"; do
+    if [ -f "$BACKUP_DIR/$file" ]; then
+        if tar -tzf "$BACKUP_DIR/$file" >/dev/null 2>&1; then
+            log "✓ $file válido"
+        else
+            log "⚠️  AVISO: $file pode estar corrompido"
+            WARNINGS=$((WARNINGS + 1))
+        fi
+    fi
+done
+
+# 2. Criar ambiente de teste
+log ""
+log "2. Criando ambiente de teste..."
+
+log "  Criando database de teste: $TEST_DB"
+mysql -e "DROP DATABASE IF EXISTS $TEST_DB;" 2>/dev/null || true
+mysql -e "CREATE DATABASE $TEST_DB CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;" || {
+    log "✗ ERRO: Falha ao criar database"
+    exit 1
+}
+
+log "  Criando diretório de teste: $TEST_PATH"
 mkdir -p "$TEST_PATH"
-tar -xzf "/var/backups/wordpress/$BACKUP_FILE" -C "$TEST_PATH"
 
-# 3. Restaurar database
-log "Restaurando database..."
-gunzip < "/var/backups/wordpress/database.sql.gz" | \
-    mysql "$TEST_DB"
+# 3. Restaurar arquivos
+log ""
+log "3. Restaurando arquivos..."
 
-# 4. Testes de integridade
-log "Executando testes..."
+if [ -f "$BACKUP_DIR/full-backup.tar.gz" ]; then
+    log "  Extraindo backup completo..."
+    tar -xzf "$BACKUP_DIR/full-backup.tar.gz" -C "$TEST_PATH" || {
+        log "✗ ERRO: Falha ao extrair backup completo"
+        ERRORS=$((ERRORS + 1))
+    }
+else
+    log "  Backup completo não encontrado, extraindo componentes individuais..."
+    
+    if [ -f "$BACKUP_DIR/plugins.tar.gz" ]; then
+        tar -xzf "$BACKUP_DIR/plugins.tar.gz" -C "$TEST_PATH" || true
+    fi
+    
+    if [ -f "$BACKUP_DIR/themes.tar.gz" ]; then
+        tar -xzf "$BACKUP_DIR/themes.tar.gz" -C "$TEST_PATH" || true
+    fi
+    
+    if [ -f "$BACKUP_DIR/config.tar.gz" ]; then
+        tar -xzf "$BACKUP_DIR/config.tar.gz" -C "$TEST_PATH" || true
+    fi
+fi
+
+# 4. Restaurar database
+log ""
+log "4. Restaurando database..."
+
+log "  Importando SQL..."
+gunzip < "$BACKUP_DIR/database.sql.gz" | mysql "$TEST_DB" 2>&1 | tee -a "$REPORT_FILE" || {
+    log "✗ ERRO: Falha ao importar database"
+    ERRORS=$((ERRORS + 1))
+}
+
+# 5. Validação de integridade
+log ""
+log "5. Validando integridade..."
 
 # Verificar estrutura de diretórios
+log "  Verificando estrutura de arquivos..."
 if [ ! -d "$TEST_PATH/wp-content" ]; then
-    log "✗ wp-content não encontrado!"
-    exit 1
+    log "✗ ERRO: wp-content não encontrado"
+    ERRORS=$((ERRORS + 1))
+else
+    log "✓ wp-content encontrado"
+fi
+
+if [ ! -f "$TEST_PATH/wp-config.php" ]; then
+    log "⚠️  AVISO: wp-config.php não encontrado (pode ser esperado)"
+    WARNINGS=$((WARNINGS + 1))
 fi
 
 # Verificar database
-TABLE_COUNT=$(mysql "$TEST_DB" -e "SHOW TABLES;" | wc -l)
+log "  Verificando database..."
+TABLE_COUNT=$(mysql "$TEST_DB" -e "SHOW TABLES;" 2>/dev/null | wc -l)
+TABLE_COUNT=$((TABLE_COUNT - 1)) # Remover header
+
 if [ "$TABLE_COUNT" -lt 10 ]; then
-    log "✗ Database corrupta!"
-    exit 1
+    log "✗ ERRO: Database parece incompleta (apenas $TABLE_COUNT tabelas)"
+    ERRORS=$((ERRORS + 1))
+else
+    log "✓ Database contém $TABLE_COUNT tabelas"
 fi
+
+# Verificar tabelas essenciais
+ESSENTIAL_TABLES=("wp_posts" "wp_users" "wp_options" "wp_postmeta")
+for table in "${ESSENTIAL_TABLES[@]}"; do
+    if mysql "$TEST_DB" -e "SHOW TABLES LIKE '$table';" 2>/dev/null | grep -q "$table"; then
+        log "✓ Tabela $table existe"
+    else
+        log "✗ ERRO: Tabela essencial $table não encontrada"
+        ERRORS=$((ERRORS + 1))
+    fi
+done
+
+# Verificar dados
+log "  Verificando dados..."
+POST_COUNT=$(mysql "$TEST_DB" -e "SELECT COUNT(*) FROM wp_posts;" 2>/dev/null | tail -1)
+USER_COUNT=$(mysql "$TEST_DB" -e "SELECT COUNT(*) FROM wp_users;" 2>/dev/null | tail -1)
+
+log "  Posts restaurados: $POST_COUNT"
+log "  Usuários restaurados: $USER_COUNT"
+
+if [ "$POST_COUNT" -eq 0 ]; then
+    log "⚠️  AVISO: Nenhum post encontrado (pode ser esperado)"
+    WARNINGS=$((WARNINGS + 1))
+fi
+
+# 6. Testar WordPress
+log ""
+log "6. Testando WordPress..."
+
+cd "$TEST_PATH"
 
 # Verificar se WP pode ser inicializado
-cd "$TEST_PATH"
-if ! wp core is-installed --path="$TEST_PATH"; then
-    log "⚠️  WordPress não foi instalado corretamente"
+if command -v wp &> /dev/null; then
+    if wp core is-installed --path="$TEST_PATH" --allow-root 2>/dev/null; then
+        log "✓ WordPress detectado como instalado"
+        
+        # Testar algumas funções básicas
+        SITE_URL=$(wp option get siteurl --path="$TEST_PATH" --allow-root 2>/dev/null || echo "N/A")
+        log "  Site URL: $SITE_URL"
+    else
+        log "⚠️  AVISO: WordPress não detectado como instalado"
+        WARNINGS=$((WARNINGS + 1))
+    fi
+else
+    log "⚠️  AVISO: WP-CLI não disponível, pulando testes WordPress"
+    WARNINGS=$((WARNINGS + 1))
 fi
 
-log "✓ Teste de restore completado com sucesso!"
+# 7. Testar funcionalidades específicas
+log ""
+log "7. Testando funcionalidades específicas..."
 
-# 5. Limpeza
-log "Limpando..."
-rm -rf "$TEST_PATH"
-mysql -e "DROP DATABASE $TEST_DB;"
+# Verificar se plugins estão presentes
+if [ -d "$TEST_PATH/wp-content/plugins" ]; then
+    PLUGIN_COUNT=$(find "$TEST_PATH/wp-content/plugins" -maxdepth 1 -type d | wc -l)
+    PLUGIN_COUNT=$((PLUGIN_COUNT - 1)) # Remover diretório base
+    log "  Plugins encontrados: $PLUGIN_COUNT"
+fi
+
+# Verificar se temas estão presentes
+if [ -d "$TEST_PATH/wp-content/themes" ]; then
+    THEME_COUNT=$(find "$TEST_PATH/wp-content/themes" -maxdepth 1 -type d | wc -l)
+    THEME_COUNT=$((THEME_COUNT - 1))
+    log "  Temas encontrados: $THEME_COUNT"
+fi
+
+# 8. Relatório final
+log ""
+log "=========================================="
+log "Relatório Final:"
+log "  Erros: $ERRORS"
+log "  Avisos: $WARNINGS"
+log "=========================================="
+
+if [ $ERRORS -eq 0 ]; then
+    log "✓ Teste de restore PASSOU"
+    EXIT_CODE=0
+else
+    log "✗ Teste de restore FALHOU com $ERRORS erros"
+    EXIT_CODE=1
+fi
+
+# 9. Limpeza
+log ""
+log "9. Limpando ambiente de teste..."
+
+read -p "Manter ambiente de teste para inspeção? (s/N): " KEEP_TEST
+
+if [[ ! "$KEEP_TEST" =~ ^[Ss]$ ]]; then
+    log "  Removendo database de teste..."
+    mysql -e "DROP DATABASE IF EXISTS $TEST_DB;" 2>/dev/null || true
+    
+    log "  Removendo diretório de teste..."
+    rm -rf "$TEST_PATH"
+    
+    log "✓ Limpeza concluída"
+else
+    log "⚠️  Ambiente de teste mantido:"
+    log "    Database: $TEST_DB"
+    log "    Path: $TEST_PATH"
+fi
+
+log ""
+log "Relatório completo salvo em: $REPORT_FILE"
+log "=========================================="
+
+exit $EXIT_CODE
 ```
+
+#### Validação de Integridade Avançada
+
+```bash
+#!/bin/bash
+# validate-backup-integrity.sh
+
+BACKUP_DIR="${1}"
+
+validate_backup() {
+    local errors=0
+    
+    echo "Validando backup: $BACKUP_DIR"
+    echo ""
+    
+    # 1. Verificar checksums (se existirem)
+    if [ -f "$BACKUP_DIR/checksums.md5" ]; then
+        echo "Verificando checksums..."
+        cd "$BACKUP_DIR"
+        if md5sum -c checksums.md5 >/dev/null 2>&1; then
+            echo "✓ Checksums válidos"
+        else
+            echo "✗ Checksums inválidos!"
+            errors=$((errors + 1))
+        fi
+    fi
+    
+    # 2. Verificar tamanho dos arquivos
+    echo ""
+    echo "Verificando tamanhos..."
+    DB_SIZE=$(du -h "$BACKUP_DIR/database.sql.gz" 2>/dev/null | cut -f1)
+    if [ -n "$DB_SIZE" ]; then
+        echo "  Database: $DB_SIZE"
+        
+        # Verificar se não está vazio
+        if [ ! -s "$BACKUP_DIR/database.sql.gz" ]; then
+            echo "✗ Database backup está vazio!"
+            errors=$((errors + 1))
+        fi
+    fi
+    
+    # 3. Verificar estrutura SQL
+    echo ""
+    echo "Verificando estrutura SQL..."
+    SQL_CONTENT=$(gunzip -c "$BACKUP_DIR/database.sql.gz" 2>/dev/null | head -100)
+    
+    if echo "$SQL_CONTENT" | grep -q "CREATE TABLE"; then
+        echo "✓ Contém CREATE TABLE statements"
+    else
+        echo "⚠️  Não encontrou CREATE TABLE statements"
+    fi
+    
+    if echo "$SQL_CONTENT" | grep -q "INSERT INTO"; then
+        echo "✓ Contém dados (INSERT statements)"
+    else
+        echo "⚠️  Não encontrou INSERT statements"
+    fi
+    
+    # 4. Verificar metadados do backup
+    echo ""
+    echo "Verificando metadados..."
+    if [ -f "$BACKUP_DIR/backup-info.json" ]; then
+        BACKUP_DATE=$(cat "$BACKUP_DIR/backup-info.json" | grep -o '"date":"[^"]*"' | cut -d'"' -f4)
+        echo "  Data do backup: $BACKUP_DATE"
+    fi
+    
+    return $errors
+}
+
+validate_backup "$BACKUP_DIR"
+```
+
+#### Teste Automatizado de Restore
+
+```bash
+#!/bin/bash
+# automated-restore-test.sh
+
+# Executar teste de restore automaticamente após cada backup
+
+BACKUP_DIR="/var/backups/wordpress/$(date +%Y-%m-%d)"
+TEST_SCRIPT="/var/scripts/backup/restore-test.sh"
+
+log() {
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1" >> /var/log/restore-tests/automated.log
+}
+
+# Executar teste
+log "Iniciando teste automatizado de restore para: $BACKUP_DIR"
+
+if [ -d "$BACKUP_DIR" ]; then
+    $TEST_SCRIPT "$BACKUP_DIR" >> /var/log/restore-tests/automated.log 2>&1
+    
+    if [ $? -eq 0 ]; then
+        log "✓ Teste passou"
+        
+        # Enviar notificação de sucesso (opcional)
+        # echo "Restore test passed for $BACKUP_DIR" | mail -s "Backup Valid" admin@example.com
+    else
+        log "✗ Teste falhou!"
+        
+        # Enviar alerta
+        echo "ALERTA: Teste de restore falhou para backup $BACKUP_DIR" | \
+            mail -s "ALERTA: Backup Restore Test Failed" admin@example.com
+    fi
+else
+    log "✗ Diretório de backup não encontrado: $BACKUP_DIR"
+fi
+```
+
+**Agendar Testes Automatizados:**
+
+```bash
+# /etc/cron.d/restore-tests
+# Testar restore do último backup diariamente
+0 3 * * * root /var/scripts/backup/automated-restore-test.sh
+
+# Testar restore completo semanalmente
+0 4 * * 0 root /var/scripts/backup/restore-test.sh /var/backups/wordpress/$(date -d '7 days ago' +%Y-%m-%d)
+```
+
+**Checklist de Restore Testing:**
+
+- [ ] Teste automatizado após cada backup
+- [ ] Validação de integridade de arquivos
+- [ ] Validação de estrutura de database
+- [ ] Verificação de dados essenciais
+- [ ] Teste de funcionalidades WordPress
+- [ ] Relatórios de teste são gerados
+- [ ] Alertas são enviados em caso de falha
+- [ ] Testes são executados em ambiente isolado
 
 ---
 

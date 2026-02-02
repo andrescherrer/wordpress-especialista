@@ -7,7 +7,7 @@
 
 ---
 
-**Navegação:** [📚 Índice](000-WordPress-Topicos-Index.md) | [← Fase 3](003-WordPress-Fase-3-REST-API-Advanced.md) | [Fase 5 →](005-WordPress-Fase-5-Custom-Post-Types-Taxonomies.md)
+**Navegação:** [Índice](000-WordPress-Topicos-Index.md) | [← Fase 3](003-WordPress-Fase-3-REST-API-Advanced.md) | [Fase 5 →](005-WordPress-Fase-5-Custom-Post-Types-Taxonomies.md)
 
 ---
 
@@ -21,6 +21,81 @@
 6. [Admin Notices](#admin-notices)
 7. [Validação e Sanitização](#validação-e-sanitização)
 8. [Admin Forms Avançado](#admin-forms-avançado)
+
+---
+
+## 🎯 Objetivos de Aprendizado
+
+Ao final desta fase, você será capaz de:
+
+1. ✅ Usar a Settings API do WordPress para registrar settings, seções e campos
+2. ✅ Criar páginas admin customizadas e páginas de submenu
+3. ✅ Implementar validação e sanitização adequadas para formulários admin
+4. ✅ Criar e gerenciar meta boxes para posts e custom post types
+5. ✅ Exibir admin notices (sucesso, erro, aviso, info) apropriadamente
+6. ✅ Estilizar páginas admin usando CSS admin do WordPress e estilos customizados
+7. ✅ Tratar submissões de formulários com segurança usando nonces e verificações de capability
+8. ✅ Construir interfaces admin complexas com abas, seções e fieldsets
+
+## 📝 Autoavaliação
+
+Teste seu entendimento:
+
+- [ ] Qual é a diferença entre `register_setting()`, `add_settings_section()`, e `add_settings_field()`?
+- [ ] Como você sanitiza adequadamente diferentes tipos de inputs de formulário (text, email, URL, number)?
+- [ ] Qual é o propósito de nonces em formulários admin e como você os verifica?
+- [ ] Como você cria campos condicionais que aparecem/ocultam baseados em valores de outros campos?
+- [ ] Qual capability você deve verificar antes de permitir que usuários acessem páginas de configurações?
+- [ ] Como você salva configurações no banco de dados com segurança?
+- [ ] Qual é a diferença entre `add_meta_box()` e `add_action('add_meta_boxes')`?
+- [ ] Como você trata uploads de arquivos em formulários admin?
+
+## 🛠️ Projeto Prático
+
+**Construir:** Gerenciador de Configurações de Plugin
+
+Crie um plugin com uma página de configurações abrangente que:
+- Tenha múltiplas abas e seções
+- Inclua vários tipos de campos (text, textarea, select, checkbox, radio, file upload)
+- Implemente validação e sanitização adequadas
+- Mostre admin notices para estados de sucesso/erro
+- Inclua uma meta box para posts com campos customizados
+- Siga padrões de UI/UX admin do WordPress
+
+**Tempo estimado:** 8-10 horas  
+**Dificuldade:** Intermediário
+
+---
+
+## ❌ Equívocos Comuns
+
+### Equívoco 1: "Settings API salva dados automaticamente"
+**Realidade:** Settings API fornece a estrutura, mas você precisa tratar a submissão do formulário e chamar `update_option()` ou usar `register_setting()` com callbacks adequados.
+
+**Por que é importante:** Sem tratamento adequado de salvamento, as configurações não persistirão. Entender o fluxo previne confusão.
+
+**Como lembrar:** Settings API = estrutura + validação. Você ainda precisa salvar os dados.
+
+### Equívoco 2: "Nonces são opcionais para formulários admin"
+**Realidade:** Nonces são essenciais para proteção CSRF. O WordPress não salvará configurações sem nonces válidos em muitos casos.
+
+**Por que é importante:** Sem nonces, formulários são vulneráveis a ataques CSRF onde sites maliciosos podem submeter formulários em nome dos usuários.
+
+**Como lembrar:** Nonce = "Number used once" = proteção CSRF. Sempre inclua em formulários.
+
+### Equívoco 3: "Todas as configurações devem usar a mesma sanitização"
+**Realidade:** Diferentes tipos de campos precisam de sanitização diferente. Text precisa de `sanitize_text_field()`, URLs precisam de `esc_url_raw()`, emails precisam de `sanitize_email()`.
+
+**Por que é importante:** Usar sanitização errada pode corromper dados ou deixar vulnerabilidades de segurança.
+
+**Como lembrar:** Combine sanitização com tipo de dado. Text → sanitização de texto, URL → sanitização de URL.
+
+### Equívoco 4: "Meta boxes só funcionam para posts"
+**Realidade:** Meta boxes podem ser adicionadas a qualquer post type, incluindo custom post types, usando o hook `add_meta_boxes` com o parâmetro do post type.
+
+**Por que é importante:** Entender isso permite adicionar campos customizados a qualquer tipo de conteúdo, não apenas posts.
+
+**Como lembrar:** Meta boxes = "Caixas para qualquer post type", não apenas tipo "post".
 
 ---
 

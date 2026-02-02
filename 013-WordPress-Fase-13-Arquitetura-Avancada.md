@@ -7,7 +7,7 @@
 
 ---
 
-**Navegação:** [📚 Índice](000-WordPress-Topicos-Index.md) | [← Fase 12](012-WordPress-Fase-12-Seguranca-Boas-Praticas.md) | [Fase 14 →](014-WordPress-Fase-14-Deployment-DevOps.md)
+**Navegação:** [Índice](000-WordPress-Topicos-Index.md) | [← Fase 12](012-WordPress-Fase-12-Seguranca-Boas-Praticas.md) | [Fase 14 →](014-WordPress-Fase-14-Deployment-DevOps.md)
 
 ---
 
@@ -15,14 +15,100 @@
 
 1. [13.1 - SOLID Principles em WordPress](#131-solid-principles-em-wordpress)
 2. [13.2 - Domain-Driven Design (DDD)](#132-domain-driven-design-ddd)
+   - [13.2.2 - DDD Ubiquitous Language](#1322-ddd-ubiquitous-language)
 3. [13.3 - Service Layer Pattern](#133-service-layer-pattern)
 4. [13.4 - Repository Pattern](#134-repository-pattern)
 5. [13.5 - Dependency Injection Container](#135-dependency-injection-container)
+   - [13.5.2 - DI Container Implementação Completa com Pimple](#1352-di-container-implementação-completa-com-pimple)
 6. [13.6 - Event-Driven Architecture](#136-event-driven-architecture)
 7. [13.7 - MVC em WordPress](#137-mvc-em-wordpress)
 8. [13.8 - Adapter Pattern para APIs Externas](#138-adapter-pattern-para-apis-externas)
 9. [13.9 - Strategy Pattern](#139-strategy-pattern)
 10. [13.10 - Factory Pattern](#1310-factory-pattern)
+11. [13.11 - Quando NÃO Usar SOLID (Trade-offs)](#1311-quando-não-usar-solid-trade-offs)
+
+---
+
+## 🎯 Objetivos de Aprendizado
+
+Ao final desta fase, você será capaz de:
+
+1. ✅ Aplicar princípios SOLID (SRP, OCP, LSP, ISP, DIP) no desenvolvimento WordPress
+2. ✅ Implementar Domain-Driven Design (DDD) com linguagem ubíqua
+3. ✅ Criar padrões de service layer para orquestrar lógica de negócio
+4. ✅ Usar padrão Repository para abstração de acesso a dados
+5. ✅ Implementar containers de dependency injection (Pimple, containers customizados)
+6. ✅ Projetar arquiteturas event-driven usando hooks do WordPress
+7. ✅ Aplicar padrões de design (Adapter, Strategy, Factory) apropriadamente
+8. ✅ Reconhecer quando NÃO usar SOLID (trade-offs e super-engenharia)
+
+## 📝 Autoavaliação
+
+Teste seu entendimento:
+
+- [ ] O que é o Princípio de Responsabilidade Única e como se aplica ao WordPress?
+- [ ] Como o Princípio de Inversão de Dependência ajuda com testes e manutenibilidade?
+- [ ] Qual é a diferença entre Repository Pattern e acesso direto ao banco de dados?
+- [ ] Quando você deve usar um Dependency Injection Container vs gerenciamento manual de dependências?
+- [ ] Como você implementa Domain-Driven Design no contexto WordPress?
+- [ ] Qual é o trade-off entre abstração e performance?
+- [ ] Quando é apropriado NÃO seguir princípios SOLID?
+- [ ] Como você equilibra pureza arquitetural com convenções do core WordPress?
+
+## 🛠️ Projeto Prático
+
+**Construir:** Plugin de Arquitetura Enterprise
+
+Crie um plugin que demonstre:
+- Princípios SOLID aplicados corretamente
+- Service layer para lógica de negócio
+- Repository pattern para acesso a dados
+- Container de dependency injection
+- Arquitetura event-driven
+- Múltiplos padrões de design (Adapter, Strategy, Factory)
+- Documento de análise de trade-offs explicando decisões arquiteturais
+
+**Tempo estimado:** 20-25 horas  
+**Dificuldade:** Avançado
+
+---
+
+## ❌ Equívocos Comuns
+
+### Equívoco 1: "Princípios SOLID sempre melhoram código"
+**Realidade:** Princípios SOLID melhoram manutenibilidade e testabilidade, mas podem adicionar complexidade e overhead de performance. Use-os quando benefícios superam custos.
+
+**Por que é importante:** Aplicar SOLID excessivamente em código simples cria complexidade desnecessária. Equilíbrio é fundamental.
+
+**Como lembrar:** SOLID = ferramenta, não dogma. Use quando ajuda, pule quando prejudica.
+
+### Equívoco 2: "Dependency Injection requer um container"
+**Realidade:** Dependency Injection é passar dependências, não usar um container. Você pode injetar manualmente ou usar um container. Ambos são válidos.
+
+**Por que é importante:** Entender DI vs DI Container ajuda a escolher a abordagem certa para o tamanho do seu projeto.
+
+**Como lembrar:** DI = padrão. DI Container = ferramenta para DI. Você pode fazer DI sem container.
+
+### Equívoco 3: "Repository Pattern sempre melhora performance"
+**Realidade:** Repository Pattern melhora testabilidade e manutenibilidade, mas adiciona camadas de abstração que podem impactar performance. Meça antes de otimizar.
+
+**Por que é importante:** Abstração tem custos. Use repositories quando benefícios (testes, manutenibilidade) superam custos.
+
+**Como lembrar:** Repository = abstração = testabilidade + manutenibilidade - alguma performance.
+
+### Equívoco 4: "Arquitetura Event-Driven é sempre melhor"
+**Realidade:** Arquitetura event-driven melhora desacoplamento mas torna debugging mais difícil e pode obscurecer fluxo de controle. Use quando desacoplamento é valioso.
+
+**Por que é importante:** Eventos tornam código mais difícil de rastrear. Use eventos para necessidades reais de desacoplamento, não em todos os lugares.
+
+**Como lembrar:** Eventos = desacoplamento + debugging mais difícil. Use quando desacoplamento importa.
+
+### Equívoco 5: "WordPress não suporta arquitetura moderna"
+**Realidade:** WordPress suporta padrões modernos (SOLID, DDD, DI) mas requer adaptá-los a convenções do WordPress (hooks, filters, globals).
+
+**Por que é importante:** Você pode usar arquitetura moderna no WordPress, mas deve trabalhar com WordPress, não contra ele.
+
+**Como lembrar:** Arquitetura moderna + convenções WordPress = combinação poderosa.
 
 ---
 
@@ -1074,6 +1160,286 @@ src/
         └── WordPressEventPublisher.php
 ```
 
+### 13.2.2 DDD Ubiquitous Language
+
+**Conceito:** Ubiquitous Language (Linguagem Ubíqua) é a linguagem compartilhada entre desenvolvedores e especialistas do domínio (domain experts) para descrever o domínio do negócio.
+
+**Por Que É Importante:**
+
+1. **Comunicação Clara:** Todos falam a mesma linguagem
+2. **Código Expressivo:** Código reflete o domínio do negócio
+3. **Menos Traduções:** Não precisa traduzir entre "linguagem de negócio" e "linguagem técnica"
+4. **Modelo Rico:** O modelo de domínio fica mais rico e expressivo
+
+**Processo de Identificação:**
+
+#### Passo 1: Entender o Domínio
+
+```php
+<?php
+/**
+ * Exemplo: E-commerce de Produtos
+ * 
+ * Entrevista com Domain Expert:
+ * 
+ * Domain Expert: "Quando um cliente adiciona um produto ao carrinho,
+ *                 verificamos se há estoque disponível. Se sim, reservamos
+ *                 o estoque por 15 minutos. Se o cliente não finalizar
+ *                 a compra nesse tempo, liberamos o estoque."
+ * 
+ * Termos identificados:
+ * - Cliente (Customer)
+ * - Produto (Product)
+ * - Carrinho (Cart)
+ * - Estoque (Inventory)
+ * - Reserva de Estoque (Stock Reservation)
+ * - Finalizar Compra (Checkout)
+ * - Liberar Estoque (Release Stock)
+ */
+```
+
+#### Passo 2: Criar Entidades e Value Objects com Nomes do Domínio
+
+```php
+<?php
+/**
+ * ✅ CORRETO: Usar termos do domínio
+ */
+
+// Termo do domínio: "Reserva de Estoque"
+class StockReservation {
+    private ProductId $productId;
+    private int $quantity;
+    private DateTime $reservedAt;
+    private DateTime $expiresAt;
+    
+    public function __construct(ProductId $productId, int $quantity) {
+        $this->productId = $productId;
+        $this->quantity = $quantity;
+        $this->reservedAt = new DateTime();
+        $this->expiresAt = (new DateTime())->modify('+15 minutes');
+    }
+    
+    public function isExpired(): bool {
+        return new DateTime() > $this->expiresAt;
+    }
+    
+    public function release(): void {
+        // "Liberar estoque" - termo do domínio
+    }
+}
+
+// Termo do domínio: "Finalizar Compra"
+class Checkout {
+    private Cart $cart;
+    private Customer $customer;
+    private PaymentMethod $paymentMethod;
+    
+    public function finalize(): Order {
+        // "Finalizar compra" - termo do domínio
+        // Verificar reservas de estoque
+        // Processar pagamento
+        // Criar pedido
+    }
+}
+```
+
+#### Passo 3: Evitar Traduções Técnicas
+
+```php
+<?php
+/**
+ * ❌ ERRADO: Termos técnicos ao invés de termos do domínio
+ */
+class DatabaseRecord {
+    public function insert() { } // ❌ "insert" é termo técnico
+    public function update() { } // ❌ "update" é termo técnico
+}
+
+/**
+ * ✅ CORRETO: Termos do domínio
+ */
+class Product {
+    public function register(): void { } // ✅ "register" é termo do domínio
+    public function updatePrice(Price $newPrice): void { } // ✅ "updatePrice" é termo do domínio
+}
+```
+
+#### Passo 4: Documentar Glossário do Domínio
+
+```php
+<?php
+/**
+ * GLOSSÁRIO DO DOMÍNIO - E-commerce
+ * 
+ * Termos e Significados:
+ * 
+ * **Cliente (Customer)**
+ * - Pessoa que compra produtos
+ * - Pode ter múltiplos endereços de entrega
+ * - Tem histórico de pedidos
+ * 
+ * **Produto (Product)**
+ * - Item vendido na loja
+ * - Tem preço, estoque, descrição
+ * - Pode estar ativo ou inativo
+ * 
+ * **Carrinho (Cart)**
+ * - Coleção temporária de produtos que cliente quer comprar
+ * - Expira após 30 dias de inatividade
+ * - Pode ser salvo para depois
+ * 
+ * **Reserva de Estoque (Stock Reservation)**
+ * - Quando produto é adicionado ao carrinho, estoque é reservado
+ * - Reserva expira após 15 minutos se compra não for finalizada
+ * - Impede que outro cliente compre último item disponível
+ * 
+ * **Finalizar Compra (Checkout)**
+ * - Processo de converter carrinho em pedido
+ * - Inclui: validar estoque, processar pagamento, criar pedido
+ * - Pode falhar se estoque foi esgotado durante processo
+ * 
+ * **Pedido (Order)**
+ * - Compra finalizada pelo cliente
+ * - Tem status: pendente, pago, enviado, entregue, cancelado
+ * - Não pode ser modificado após criação
+ */
+```
+
+#### Passo 5: Usar Ubiquitous Language em Código
+
+```php
+<?php
+/**
+ * Exemplo completo usando Ubiquitous Language
+ */
+
+// Domain Expert disse: "Quando cliente adiciona produto ao carrinho,
+// verificamos estoque e reservamos por 15 minutos"
+
+class CartService {
+    private ProductRepository $productRepository;
+    private StockReservationRepository $reservationRepository;
+    
+    /**
+     * "Adicionar produto ao carrinho" - termo do domínio
+     */
+    public function addProductToCart(CartId $cartId, ProductId $productId, int $quantity): void {
+        // "Verificar estoque disponível" - termo do domínio
+        $product = $this->productRepository->findById($productId);
+        $availableStock = $product->getAvailableStock();
+        
+        if (!$availableStock->hasEnough($quantity)) {
+            throw new InsufficientStockException('Estoque insuficiente');
+        }
+        
+        // "Reservar estoque" - termo do domínio
+        $reservation = new StockReservation($productId, $quantity);
+        $this->reservationRepository->save($reservation);
+        
+        // Adicionar ao carrinho
+        $cart = $this->cartRepository->findById($cartId);
+        $cart->addItem($productId, $quantity);
+        $this->cartRepository->save($cart);
+    }
+    
+    /**
+     * "Finalizar compra" - termo do domínio
+     */
+    public function checkout(CartId $cartId, PaymentMethod $paymentMethod): Order {
+        $cart = $this->cartRepository->findById($cartId);
+        
+        // Verificar se reservas ainda são válidas
+        foreach ($cart->getItems() as $item) {
+            $reservation = $this->reservationRepository->findByProductAndCart(
+                $item->getProductId(),
+                $cartId
+            );
+            
+            if ($reservation->isExpired()) {
+                throw new ReservationExpiredException('Reserva de estoque expirou');
+            }
+        }
+        
+        // Processar pagamento
+        $payment = $this->paymentService->process($cart->getTotal(), $paymentMethod);
+        
+        // Criar pedido
+        $order = Order::createFromCart($cart, $payment);
+        $this->orderRepository->save($order);
+        
+        // "Liberar reservas" - termo do domínio (ou converter em alocação permanente)
+        foreach ($cart->getItems() as $item) {
+            $reservation = $this->reservationRepository->findByProductAndCart(
+                $item->getProductId(),
+                $cartId
+            );
+            $reservation->convertToAllocation($order->getId());
+        }
+        
+        // Limpar carrinho
+        $this->cartRepository->delete($cartId);
+        
+        return $order;
+    }
+}
+```
+
+**Checklist para Ubiquitous Language:**
+
+- [ ] Termos do código correspondem aos termos usados por domain experts?
+- [ ] Evitamos termos técnicos genéricos (insert, update, delete)?
+- [ ] Glossário do domínio está documentado?
+- [ ] Código é legível por não-desenvolvedores familiarizados com o domínio?
+- [ ] Mudanças no domínio são refletidas no código?
+
+**Exemplo Prático: Identificando Ubiquitous Language**
+
+```php
+<?php
+/**
+ * Cenário: Sistema de Biblioteca
+ * 
+ * Entrevista com bibliotecário (Domain Expert):
+ * 
+ * "Quando um membro quer pegar um livro emprestado, verificamos se o livro
+ *  está disponível. Se estiver, criamos um empréstimo (loan) por 14 dias.
+ *  Se o membro não devolver no prazo, aplicamos uma multa (fine) de R$ 2,00
+ *  por dia de atraso. Quando o livro é devolvido, verificamos se está em
+ *  bom estado. Se estiver danificado, cobramos uma taxa de reparo."
+ * 
+ * Termos identificados:
+ * - Membro (Member) - pessoa que pode pegar livros emprestados
+ * - Livro (Book) - item que pode ser emprestado
+ * - Empréstimo (Loan) - quando membro pega livro emprestado
+ * - Devolução (Return) - quando membro devolve livro
+ * - Multa (Fine) - penalidade por atraso
+ * - Taxa de Reparo (Repair Fee) - cobrança por dano
+ * - Disponibilidade (Availability) - se livro está disponível para empréstimo
+ * 
+ * Implementação:
+ */
+
+class LibraryDomain {
+    // ✅ Usar termos do domínio
+    public function borrowBook(MemberId $memberId, BookId $bookId): Loan {
+        // "Pegar livro emprestado" - termo do domínio
+    }
+    
+    public function returnBook(LoanId $loanId): Return {
+        // "Devolver livro" - termo do domínio
+    }
+    
+    public function calculateFine(Loan $loan): Fine {
+        // "Calcular multa" - termo do domínio
+    }
+    
+    public function assessDamage(Book $book): DamageAssessment {
+        // "Avaliar dano" - termo do domínio
+    }
+}
+```
+
 ### 13.2.2 Entities vs Value Objects
 
 **Entities - Identidade própria:**
@@ -1837,6 +2203,405 @@ $createOrderService = $container->get(CreateOrderService::class);
 $orderDTO = $createOrderService->execute($dto);
 ```
 
+### 13.5.2 DI Container Implementação Completa com Pimple
+
+**Instalação:**
+
+```bash
+composer require pimple/pimple
+```
+
+**Implementação Completa:**
+
+```php
+<?php
+use Pimple\Container;
+
+/**
+ * Configuração completa do DI Container usando Pimple
+ */
+class ServiceContainer {
+    
+    private Container $container;
+    
+    public function __construct() {
+        $this->container = new Container();
+        $this->registerServices();
+    }
+    
+    private function registerServices() {
+        // ========== REPOSITORIES (Singletons) ==========
+        
+        $this->container['product.repository'] = function($c) {
+            return new ProductRepositoryWordPress();
+        };
+        
+        $this->container['order.repository'] = function($c) {
+            return new OrderRepositoryWordPress();
+        };
+        
+        $this->container['customer.repository'] = function($c) {
+            return new CustomerRepositoryWordPress();
+        };
+        
+        // ========== DOMAIN SERVICES (Singletons) ==========
+        
+        $this->container['pricing.service'] = function($c) {
+            return new PricingDomainService();
+        };
+        
+        $this->container['inventory.service'] = function($c) {
+            return new InventoryDomainService(
+                $c['product.repository']
+            );
+        };
+        
+        // ========== APPLICATION SERVICES ==========
+        
+        $this->container['create.product.service'] = function($c) {
+            return new CreateProductService(
+                $c['product.repository'],
+                $c['event.publisher'],
+                $c['logger']
+            );
+        };
+        
+        $this->container['create.order.service'] = function($c) {
+            return new CreateOrderService(
+                $c['order.repository'],
+                $c['product.repository'],
+                $c['customer.repository'],
+                $c['pricing.service'],
+                $c['inventory.service'],
+                $c['event.publisher'],
+                $c['logger']
+            );
+        };
+        
+        // ========== INFRASTRUCTURE SERVICES ==========
+        
+        $this->container['logger'] = function($c) {
+            return new WPLogger();
+        };
+        
+        $this->container['email.service'] = function($c) {
+            return new EmailService(
+                get_option('smtp_host'),
+                get_option('smtp_port'),
+                get_option('smtp_user'),
+                get_option('smtp_pass')
+            );
+        };
+        
+        $this->container['event.publisher'] = function($c) {
+            return new WordPressEventPublisher();
+        };
+        
+        $this->container['cache.service'] = function($c) {
+            return new CacheService();
+        };
+        
+        // ========== FACTORIES ==========
+        
+        $this->container['payment.gateway.factory'] = function($c) {
+            return new PaymentGatewayFactory([
+                'stripe' => function() {
+                    return new StripeGateway(get_option('stripe_api_key'));
+                },
+                'paypal' => function() {
+                    return new PayPalGateway(
+                        get_option('paypal_client_id'),
+                        get_option('paypal_secret')
+                    );
+                },
+            ]);
+        };
+        
+        // ========== ALIASES ==========
+        
+        // Permitir acesso por nome de classe também
+        $this->container[CreateProductService::class] = $this->container->factory(function($c) {
+            return $c['create.product.service'];
+        });
+        
+        $this->container[CreateOrderService::class] = $this->container->factory(function($c) {
+            return $c['create.order.service'];
+        });
+        
+        $this->container[ProductRepository::class] = $this->container->factory(function($c) {
+            return $c['product.repository'];
+        });
+    }
+    
+    /**
+     * Obter serviço do container
+     */
+    public function get(string $id) {
+        if (!isset($this->container[$id])) {
+            throw new ServiceNotFoundException("Service '$id' not found");
+        }
+        
+        return $this->container[$id];
+    }
+    
+    /**
+     * Verificar se serviço existe
+     */
+    public function has(string $id): bool {
+        return isset($this->container[$id]);
+    }
+    
+    /**
+     * Obter container Pimple diretamente (para casos avançados)
+     */
+    public function getContainer(): Container {
+        return $this->container;
+    }
+}
+
+// ========== USO DO CONTAINER ==========
+
+// Criar instância global do container
+$GLOBALS['service_container'] = new ServiceContainer();
+
+// Helper function para acesso fácil
+function container(): ServiceContainer {
+    return $GLOBALS['service_container'];
+}
+
+// Usar em código
+$createOrderService = container()->get('create.order.service');
+// ou
+$createOrderService = container()->get(CreateOrderService::class);
+
+$order = $createOrderService->execute($orderDTO);
+```
+
+**Auto-wiring Básico:**
+
+```php
+<?php
+/**
+ * Auto-wiring simples usando Reflection
+ */
+class AutoWiringContainer extends Container {
+    
+    public function autoWire(string $className) {
+        if (isset($this[$className])) {
+            return $this[$className];
+        }
+        
+        $reflection = new ReflectionClass($className);
+        $constructor = $reflection->getConstructor();
+        
+        if (!$constructor) {
+            // Sem construtor, criar instância simples
+            return $this[$className] = new $className();
+        }
+        
+        $parameters = $constructor->getParameters();
+        $dependencies = [];
+        
+        foreach ($parameters as $parameter) {
+            $type = $parameter->getType();
+            
+            if (!$type || $type->isBuiltin()) {
+                // Tipo primitivo ou sem tipo, não pode auto-wire
+                throw new AutoWiringException(
+                    "Cannot auto-wire parameter '{$parameter->getName()}' in {$className}"
+                );
+            }
+            
+            $dependencyClass = $type->getName();
+            $dependencies[] = $this->autoWire($dependencyClass);
+        }
+        
+        return $this[$className] = new $className(...$dependencies);
+    }
+}
+
+// Uso
+$container = new AutoWiringContainer();
+
+// Auto-wire automaticamente resolve dependências
+$service = $container->autoWire(CreateOrderService::class);
+// Cria CreateOrderService, que precisa de OrderRepository,
+// que é criado automaticamente, etc.
+```
+
+**Service Provider Pattern:**
+
+```php
+<?php
+/**
+ * Service Provider para organizar registros
+ */
+interface ServiceProvider {
+    public function register(Container $container): void;
+}
+
+class RepositoryServiceProvider implements ServiceProvider {
+    public function register(Container $container): void {
+        $container['product.repository'] = function($c) {
+            return new ProductRepositoryWordPress();
+        };
+        
+        $container['order.repository'] = function($c) {
+            return new OrderRepositoryWordPress();
+        };
+        
+        $container['customer.repository'] = function($c) {
+            return new CustomerRepositoryWordPress();
+        };
+    }
+}
+
+class ApplicationServiceProvider implements ServiceProvider {
+    public function register(Container $container): void {
+        $container['create.product.service'] = function($c) {
+            return new CreateProductService(
+                $c['product.repository'],
+                $c['event.publisher'],
+                $c['logger']
+            );
+        };
+        
+        $container['create.order.service'] = function($c) {
+            return new CreateOrderService(
+                $c['order.repository'],
+                $c['product.repository'],
+                $c['pricing.service'],
+                $c['event.publisher']
+            );
+        };
+    }
+}
+
+class InfrastructureServiceProvider implements ServiceProvider {
+    public function register(Container $container): void {
+        $container['logger'] = function($c) {
+            return new WPLogger();
+        };
+        
+        $container['event.publisher'] = function($c) {
+            return new WordPressEventPublisher();
+        };
+        
+        $container['email.service'] = function($c) {
+            return new EmailService();
+        };
+    }
+}
+
+// Registrar providers
+$container = new Container();
+
+$providers = [
+    new InfrastructureServiceProvider(),
+    new RepositoryServiceProvider(),
+    new ApplicationServiceProvider(),
+];
+
+foreach ($providers as $provider) {
+    $provider->register($container);
+}
+```
+
+**Lazy Loading:**
+
+```php
+<?php
+/**
+ * Lazy loading com Pimple
+ */
+$container['heavy.service'] = $container->factory(function($c) {
+    // Esta função só é executada quando serviço é acessado
+    return new HeavyService(
+        $c['dependency1'],
+        $c['dependency2']
+    );
+});
+
+// Serviço não é criado até ser acessado
+// $container['heavy.service'] ainda não executou a factory
+
+// Agora sim, cria a instância
+$service = $container['heavy.service'];
+```
+
+**Service Container Customizado para WordPress:**
+
+```php
+<?php
+/**
+ * Container customizado integrado com WordPress
+ */
+class WordPressServiceContainer extends Container {
+    
+    public function __construct() {
+        parent::__construct();
+        $this->registerWordPressServices();
+    }
+    
+    private function registerWordPressServices() {
+        // Registrar serviços WordPress como factories
+        $this['wpdb'] = function($c) {
+            global $wpdb;
+            return $wpdb;
+        };
+        
+        $this['wp_query'] = function($c) {
+            global $wp_query;
+            return $wp_query;
+        };
+        
+        // Registrar hooks do WordPress
+        $this['hook.manager'] = function($c) {
+            return new WordPressHookManager();
+        };
+        
+        // Registrar cache
+        $this['cache'] = function($c) {
+            return new WordPressCacheService();
+        };
+    }
+    
+    /**
+     * Registrar serviço como singleton
+     */
+    public function singleton(string $id, callable $factory): void {
+        $this[$id] = function($c) use ($factory) {
+            static $instance = null;
+            if ($instance === null) {
+                $instance = $factory($c);
+            }
+            return $instance;
+        };
+    }
+    
+    /**
+     * Registrar serviço como factory (nova instância sempre)
+     */
+    public function factory(string $id, callable $factory): void {
+        $this[$id] = $this->factory($factory);
+    }
+}
+
+// Uso
+$container = new WordPressServiceContainer();
+
+$container->singleton('product.repository', function($c) {
+    return new ProductRepositoryWordPress($c['wpdb']);
+});
+
+$container->factory('order.service', function($c) {
+    return new OrderService(
+        $c['order.repository'],
+        $c['product.repository']
+    );
+});
+```
+
 ---
 
 ## 13.6 Event-Driven Architecture
@@ -2422,6 +3187,721 @@ $orderFactory = new OrderFactory(
 );
 
 $order = $orderFactory->create($dto);
+```
+
+---
+
+## 13.11 Quando NÃO Usar SOLID (Trade-offs)
+
+**Importante:** SOLID não é uma religião. Há situações onde aplicar SOLID rigorosamente pode ser over-engineering.
+
+### 13.11.1 Trade-offs de Performance
+
+**Problema:** Abstrações e injeção de dependências têm custo de performance.
+
+```php
+<?php
+/**
+ * ❌ OVER-ENGINEERING: Muitas abstrações para código simples
+ */
+interface CalculatorInterface {
+    public function add(int $a, int $b): int;
+}
+
+class Calculator implements CalculatorInterface {
+    public function add(int $a, int $b): int {
+        return $a + $b;
+    }
+}
+
+class MathService {
+    private CalculatorInterface $calculator;
+    
+    public function __construct(CalculatorInterface $calculator) {
+        $this->calculator = $calculator;
+    }
+    
+    public function sum(array $numbers): int {
+        $result = 0;
+        foreach ($numbers as $num) {
+            $result = $this->calculator->add($result, $num);
+        }
+        return $result;
+    }
+}
+
+// Uso: Muitas camadas para operação simples
+$calculator = new Calculator();
+$service = new MathService($calculator);
+$result = $service->sum([1, 2, 3]);
+
+/**
+ * ✅ SIMPLES E EFICIENTE: Para código simples, não precisa de abstrações
+ */
+function sum(array $numbers): int {
+    return array_sum($numbers);
+}
+
+// Uso direto
+$result = sum([1, 2, 3]);
+```
+
+**Quando Não Usar:**
+
+- **Operações matemáticas simples** - Não precisa de abstração
+- **Funções utilitárias** - Diretas são mais eficientes
+- **Código que roda milhões de vezes** - Performance > Abstração
+- **Scripts temporários** - Não vale o esforço
+
+### 13.11.2 Projetos Pequenos
+
+**Problema:** SOLID adiciona complexidade que pode não ser necessária.
+
+```php
+<?php
+/**
+ * ❌ OVER-ENGINEERING: Para plugin simples de 200 linhas
+ */
+interface PostDisplayInterface {
+    public function render(Post $post): string;
+}
+
+class PostDisplay implements PostDisplayInterface {
+    private PostFormatterInterface $formatter;
+    private PostValidatorInterface $validator;
+    
+    public function __construct(
+        PostFormatterInterface $formatter,
+        PostValidatorInterface $validator
+    ) {
+        $this->formatter = $formatter;
+        $this->validator = $validator;
+    }
+    
+    public function render(Post $post): string {
+        if (!$this->validator->validate($post)) {
+            return '';
+        }
+        return $this->formatter->format($post);
+    }
+}
+
+/**
+ * ✅ SIMPLES: Para projeto pequeno, código direto é melhor
+ */
+function display_post($post_id) {
+    $post = get_post($post_id);
+    if (!$post) {
+        return '';
+    }
+    
+    echo '<h2>' . esc_html($post->post_title) . '</h2>';
+    echo '<div>' . wp_kses_post($post->post_content) . '</div>';
+}
+```
+
+**Quando Não Usar:**
+
+- **Plugins simples** (< 500 linhas)
+- **Temas simples** - Não precisa de arquitetura complexa
+- **Scripts de migração** - Uma vez só, não precisa ser extensível
+- **Protótipos** - Foque em funcionalidade primeiro
+
+### 13.11.3 Quando Complexidade Não Compensa
+
+**Regra de Ouro:** Se adicionar SOLID torna código mais difícil de entender sem benefício claro, não use.
+
+```php
+<?php
+/**
+ * ❌ COMPLEXIDADE DESNECESSÁRIA
+ * 
+ * Para um helper simples, criar interface + implementação + DI
+ * é mais complexo que o problema que resolve
+ */
+interface ConfigHelperInterface {
+    public function get(string $key, $default = null);
+}
+
+class ConfigHelper implements ConfigHelperInterface {
+    public function get(string $key, $default = null) {
+        return get_option($key, $default);
+    }
+}
+
+class MyService {
+    private ConfigHelperInterface $config;
+    
+    public function __construct(ConfigHelperInterface $config) {
+        $this->config = $config;
+    }
+    
+    public function doSomething() {
+        $value = $this->config->get('my_option');
+        // ...
+    }
+}
+
+/**
+ * ✅ SIMPLES E CLARO
+ * 
+ * Direto ao ponto, fácil de entender
+ */
+class MyService {
+    public function doSomething() {
+        $value = get_option('my_option');
+        // ...
+    }
+}
+```
+
+### 13.11.4 WordPress Core vs Custom Code
+
+**Problema:** WordPress core não segue SOLID rigorosamente, e isso é OK.
+
+```php
+<?php
+/**
+ * WordPress core usa funções globais - não é SOLID, mas funciona
+ */
+$post = get_post(123);
+$title = get_the_title($post);
+$content = get_the_content($post);
+
+/**
+ * Tentar "corrigir" WordPress core com SOLID pode ser contraproducente
+ * 
+ * ❌ EVITAR: Criar wrappers complexos para funções WordPress simples
+ */
+class WordPressPostAdapter {
+    private int $postId;
+    private ?WP_Post $post = null;
+    
+    public function __construct(int $postId) {
+        $this->postId = $postId;
+    }
+    
+    private function getPost(): WP_Post {
+        if ($this->post === null) {
+            $this->post = get_post($this->postId);
+        }
+        return $this->post;
+    }
+    
+    public function getTitle(): string {
+        return get_the_title($this->getPost());
+    }
+    
+    public function getContent(): string {
+        return get_the_content(null, false, $this->getPost());
+    }
+}
+
+// Uso: Mais complexo que necessário
+$adapter = new WordPressPostAdapter(123);
+$title = $adapter->getTitle();
+
+/**
+ * ✅ ACEITÁVEL: Usar funções WordPress diretamente quando apropriado
+ */
+$post = get_post(123);
+$title = get_the_title($post);
+```
+
+**Quando Não Usar:**
+
+- **Integração com WordPress core** - Use funções WordPress diretamente
+- **Hooks do WordPress** - Não precisa abstrair `add_action`, `add_filter`
+- **Queries simples** - `get_posts()`, `WP_Query` direto é OK
+
+### 13.11.5 Prototipagem e MVP
+
+**Problema:** SOLID pode atrasar entrega de MVP.
+
+```php
+<?php
+/**
+ * ❌ MVP: Não precisa de arquitetura completa desde o início
+ * 
+ * Foque em funcionalidade primeiro, refatore depois
+ */
+class MVPFeature {
+    public function process($data) {
+        // Código direto, sem abstrações
+        $validated = $this->validate($data);
+        $processed = $this->processData($validated);
+        $this->save($processed);
+        $this->sendEmail($processed);
+        
+        return $processed;
+    }
+    
+    private function validate($data) {
+        // Validação simples inline
+        if (empty($data['email'])) {
+            throw new Exception('Email required');
+        }
+        return $data;
+    }
+    
+    private function processData($data) {
+        // Processamento direto
+        return [
+            'email' => sanitize_email($data['email']),
+            'name' => sanitize_text_field($data['name']),
+        ];
+    }
+    
+    private function save($data) {
+        // Salvar direto
+        update_option('mvp_data', $data);
+    }
+    
+    private function sendEmail($data) {
+        // Enviar email direto
+        wp_mail($data['email'], 'Welcome', 'Thanks!');
+    }
+}
+
+/**
+ * ✅ DEPOIS: Refatorar para SOLID quando necessário
+ * 
+ * Quando código cresce e precisa de testes, extensibilidade, etc.
+ */
+```
+
+**Estratégia:**
+
+1. **MVP:** Código direto, funcional
+2. **Crescimento:** Refatorar gradualmente para SOLID
+3. **Produção:** SOLID onde faz sentido
+
+### 13.11.6 Decisão: Quando Usar SOLID?
+
+**Use SOLID quando:**
+
+- ✅ Projeto tem mais de 1000 linhas
+- ✅ Código precisa ser testável
+- ✅ Múltiplos desenvolvedores trabalham no código
+- ✅ Código precisa ser extensível
+- ✅ Performance não é crítica (não roda milhões de vezes)
+- ✅ Projeto vai durar anos
+
+**NÃO use SOLID quando:**
+
+- ❌ Projeto muito pequeno (< 500 linhas)
+- ❌ Script temporário ou de migração
+- ❌ Prototipagem rápida
+- ❌ Performance crítica (hot path)
+- ❌ Código simples que não vai mudar
+- ❌ Wrapper desnecessário sobre funções WordPress simples
+
+**Regra Prática:**
+
+```
+Complexidade do Problema vs Complexidade da Solução
+
+Se Complexidade da Solução > Complexidade do Problema:
+    → Over-engineering, simplifique
+
+Se Complexidade da Solução ≈ Complexidade do Problema:
+    → SOLID apropriado
+
+Se Complexidade da Solução < Complexidade do Problema:
+    → Pode precisar de mais abstração
+```
+
+**Exemplo Prático:**
+
+```php
+<?php
+/**
+ * Cenário 1: Helper simples
+ * 
+ * Problema: Buscar configuração
+ * Complexidade: Baixa
+ * Solução: Função direta ✅
+ */
+function get_config($key) {
+    return get_option($key);
+}
+
+/**
+ * Cenário 2: Sistema de pagamento
+ * 
+ * Problema: Múltiplos gateways, testes, extensibilidade
+ * Complexidade: Alta
+ * Solução: SOLID com interfaces, DI ✅
+ */
+interface PaymentGatewayInterface {
+    public function process(Payment $payment): PaymentResult;
+}
+
+class PaymentService {
+    private PaymentGatewayInterface $gateway;
+    
+    public function __construct(PaymentGatewayInterface $gateway) {
+        $this->gateway = $gateway;
+    }
+    
+    public function processPayment(Payment $payment): PaymentResult {
+        return $this->gateway->process($payment);
+    }
+}
+
+/**
+ * Cenário 3: Processamento de dados simples
+ * 
+ * Problema: Transformar array
+ * Complexidade: Baixa
+ * Solução: Função direta ✅ (não precisa de classe)
+ */
+function transform_data($data) {
+    return array_map(function($item) {
+        return [
+            'id' => $item['ID'],
+            'name' => $item['post_title'],
+        ];
+    }, $data);
+}
+```
+
+---
+
+## 13.12 Error Handling em Arquitetura Avançada
+
+### 13.12.1 Exception Handling com Domain Exceptions
+
+```php
+<?php
+/**
+ * Domain Exceptions - Exceções específicas do domínio
+ */
+namespace App\Domain\Exceptions;
+
+class DomainException extends \Exception {
+    protected $context = [];
+    
+    public function __construct(string $message, array $context = [], int $code = 0, \Throwable $previous = null) {
+        parent::__construct($message, $code, $previous);
+        $this->context = $context;
+    }
+    
+    public function getContext(): array {
+        return $this->context;
+    }
+}
+
+class InvalidUserDataException extends DomainException {}
+class UserNotFoundException extends DomainException {}
+class InsufficientPermissionsException extends DomainException {}
+class BusinessRuleViolationException extends DomainException {}
+
+/**
+ * Uso em Domain Services
+ */
+class UserService {
+    public function createUser(array $data): User {
+        // Validação de regras de negócio
+        if (empty($data['email'])) {
+            throw new InvalidUserDataException(
+                'Email é obrigatório',
+                ['field' => 'email', 'data' => $data]
+            );
+        }
+        
+        if (!is_email($data['email'])) {
+            throw new InvalidUserDataException(
+                'Email inválido',
+                ['field' => 'email', 'value' => $data['email']]
+            );
+        }
+        
+        // Verificar regra de negócio
+        if ($this->userExists($data['email'])) {
+            throw new BusinessRuleViolationException(
+                'Usuário com este email já existe',
+                ['email' => $data['email']]
+            );
+        }
+        
+        // Criar usuário
+        return $this->userRepository->create($data);
+    }
+}
+```
+
+### 13.12.2 Error Handling em Service Layer
+
+```php
+<?php
+/**
+ * Service Layer com tratamento de erros robusto
+ */
+class OrderService {
+    private OrderRepository $orderRepository;
+    private PaymentService $paymentService;
+    private InventoryService $inventoryService;
+    private LoggerInterface $logger;
+    
+    public function __construct(
+        OrderRepository $orderRepository,
+        PaymentService $paymentService,
+        InventoryService $inventoryService,
+        LoggerInterface $logger
+    ) {
+        $this->orderRepository = $orderRepository;
+        $this->paymentService = $paymentService;
+        $this->inventoryService = $inventoryService;
+        $this->logger = $logger;
+    }
+    
+    /**
+     * Processar pedido com tratamento de erros completo
+     */
+    public function processOrder(Order $order): OrderResult {
+        try {
+            // 1. Validar estoque
+            $this->validateInventory($order);
+            
+            // 2. Processar pagamento
+            $payment_result = $this->paymentService->process($order->getPayment());
+            
+            if (!$payment_result->isSuccessful()) {
+                throw new PaymentFailedException(
+                    'Pagamento falhou',
+                    ['order_id' => $order->getId(), 'payment_result' => $payment_result]
+                );
+            }
+            
+            // 3. Reservar estoque
+            $this->inventoryService->reserve($order->getItems());
+            
+            // 4. Criar pedido
+            $saved_order = $this->orderRepository->save($order);
+            
+            // 5. Confirmar pagamento
+            $this->paymentService->confirm($payment_result->getTransactionId());
+            
+            return OrderResult::success($saved_order);
+            
+        } catch (InsufficientInventoryException $e) {
+            // Erro de estoque - não processar pagamento
+            $this->logger->warning('Insufficient inventory', [
+                'order_id' => $order->getId(),
+                'exception' => $e,
+            ]);
+            
+            return OrderResult::failure('Estoque insuficiente', $e);
+            
+        } catch (PaymentFailedException $e) {
+            // Erro de pagamento - liberar estoque se reservado
+            if (isset($saved_order)) {
+                $this->inventoryService->release($order->getItems());
+            }
+            
+            $this->logger->error('Payment failed', [
+                'order_id' => $order->getId(),
+                'exception' => $e,
+            ]);
+            
+            return OrderResult::failure('Pagamento falhou', $e);
+            
+        } catch (Exception $e) {
+            // Erro inesperado - rollback completo
+            $this->rollbackOrder($order);
+            
+            $this->logger->error('Unexpected error processing order', [
+                'order_id' => $order->getId(),
+                'exception' => $e,
+            ]);
+            
+            return OrderResult::failure('Erro ao processar pedido', $e);
+        }
+    }
+    
+    /**
+     * Rollback de operações em caso de erro
+     */
+    private function rollbackOrder(Order $order): void {
+        try {
+            // Liberar estoque
+            if ($order->hasReservedInventory()) {
+                $this->inventoryService->release($order->getItems());
+            }
+            
+            // Cancelar pagamento se processado
+            if ($order->hasProcessedPayment()) {
+                $this->paymentService->cancel($order->getPaymentTransactionId());
+            }
+            
+            // Remover pedido se criado
+            if ($order->getId()) {
+                $this->orderRepository->delete($order->getId());
+            }
+            
+        } catch (Exception $e) {
+            // Log erro no rollback mas não lançar
+            $this->logger->critical('Rollback failed', [
+                'order_id' => $order->getId(),
+                'exception' => $e,
+            ]);
+        }
+    }
+}
+```
+
+### 13.12.3 Error Handling em Repository Pattern
+
+```php
+<?php
+/**
+ * Repository com tratamento de erros específico
+ */
+class PostRepository implements PostRepositoryInterface {
+    private $wpdb;
+    private $logger;
+    
+    public function findById(int $id): ?Post {
+        try {
+            $post = get_post($id);
+            
+            if (!$post) {
+                return null; // Não é erro, apenas não encontrado
+            }
+            
+            return $this->mapToDomain($post);
+            
+        } catch (Exception $e) {
+            $this->logger->error('Error finding post', [
+                'id' => $id,
+                'exception' => $e,
+            ]);
+            
+            throw new RepositoryException(
+                'Erro ao buscar post',
+                ['id' => $id],
+                0,
+                $e
+            );
+        }
+    }
+    
+    public function save(Post $post): Post {
+        try {
+            global $wpdb;
+            
+            $wpdb->query('START TRANSACTION');
+            
+            try {
+                if ($post->getId()) {
+                    $this->update($post);
+                } else {
+                    $this->insert($post);
+                }
+                
+                $wpdb->query('COMMIT');
+                
+                return $post;
+                
+            } catch (Exception $e) {
+                $wpdb->query('ROLLBACK');
+                throw $e;
+            }
+            
+        } catch (Exception $e) {
+            $this->logger->error('Error saving post', [
+                'post_id' => $post->getId(),
+                'exception' => $e,
+            ]);
+            
+            throw new RepositoryException(
+                'Erro ao salvar post',
+                ['post' => $post],
+                0,
+                $e
+            );
+        }
+    }
+    
+    private function insert(Post $post): void {
+        $post_id = wp_insert_post([
+            'post_title' => $post->getTitle(),
+            'post_content' => $post->getContent(),
+            'post_status' => $post->getStatus(),
+        ]);
+        
+        if (is_wp_error($post_id)) {
+            throw new RepositoryException(
+                'Falha ao inserir post',
+                ['error' => $post_id]
+            );
+        }
+        
+        $post->setId($post_id);
+    }
+}
+```
+
+### 13.12.4 Error Handling em Event-Driven Architecture
+
+```php
+<?php
+/**
+ * Event handlers com tratamento de erros
+ */
+class OrderPlacedHandler {
+    private LoggerInterface $logger;
+    private DeadLetterQueue $dlq;
+    
+    public function handle(OrderPlacedEvent $event): void {
+        try {
+            // Processar evento
+            $this->sendConfirmationEmail($event->getOrder());
+            $this->updateInventory($event->getOrder());
+            $this->notifyWarehouse($event->getOrder());
+            
+        } catch (EmailException $e) {
+            // Erro de email não deve bloquear outros processamentos
+            $this->logger->warning('Email failed', [
+                'order_id' => $event->getOrder()->getId(),
+                'exception' => $e,
+            ]);
+            
+            // Continuar processamento
+            
+        } catch (Exception $e) {
+            // Erro crítico - mover para DLQ
+            $this->logger->error('Event handling failed', [
+                'event' => $event,
+                'exception' => $e,
+            ]);
+            
+            $this->dlq->enqueue($event, $e);
+            
+            // Re-lançar para que o sistema saiba que falhou
+            throw $e;
+        }
+    }
+}
+
+/**
+ * Event dispatcher com retry logic
+ */
+class EventDispatcher {
+    private RetryableOperation $retry;
+    
+    public function dispatch(Event $event): void {
+        $this->retry->execute(function() use ($event) {
+            foreach ($this->getHandlers($event) as $handler) {
+                $handler->handle($event);
+            }
+        }, function($error) {
+            // Retentar apenas erros temporários
+            return !($error instanceof BusinessRuleViolationException);
+        });
+    }
+}
 ```
 
 ---

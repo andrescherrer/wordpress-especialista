@@ -7,7 +7,7 @@
 
 ---
 
-**Navegação:** [📚 Índice](000-WordPress-Topicos-Index.md) | [Fase 2 →](002-WordPress-Fase-2-WordPress%20REST%20API%20Fundamentals.md)
+**Navegação:** [Índice](000-WordPress-Topicos-Index.md) | [Fase 2 →](002-WordPress-Fase-2-WordPress%20REST%20API%20Fundamentals.md)
 
 ---
 
@@ -21,6 +21,87 @@
 6. [Template Hierarchy](#template-hierarchy)
 7. [The Loop](#the-loop)
 8. [WordPress Coding Standards](#wordpress-coding-standards)
+
+---
+
+## 🎯 Objetivos de Aprendizado
+
+Ao final desta fase, você será capaz de:
+
+1. ✅ Entender a estrutura de diretórios do WordPress e organização dos arquivos core
+2. ✅ Dominar o Sistema de Hooks do WordPress (Actions e Filters) e suas prioridades
+3. ✅ Navegar e consultar o banco de dados do WordPress usando `$wpdb` com prepared statements
+4. ✅ Trabalhar com Posts, Pages e Custom Post Types de forma eficaz
+5. ✅ Entender e implementar a Template Hierarchy corretamente
+6. ✅ Usar The Loop adequadamente, incluindo o tratamento de queries aninhadas
+7. ✅ Aplicar os WordPress Coding Standards no seu código customizado
+8. ✅ Lidar com a ordem de bootstrap do WordPress e disponibilidade de funções corretamente
+
+## 📝 Autoavaliação
+
+Teste seu entendimento:
+
+- [ ] Qual é a diferença entre Actions e Filters no WordPress?
+- [ ] Quando você deve usar `$wpdb->prepare()` ao invés de queries SQL diretas?
+- [ ] Como a Template Hierarchy do WordPress determina qual arquivo de template usar?
+- [ ] O que acontece com o objeto global `$post` em loops WP_Query aninhados?
+- [ ] Qual é a ordem correta de carregamento do WordPress (wp-config → wp-settings → plugins)?
+- [ ] Como você escapa corretamente a saída para diferentes contextos (HTML, atributos, URLs)?
+- [ ] Qual é a diferença entre `wp_insert_post()` e `$wpdb->insert()`?
+- [ ] Como você remove um hook específico com uma prioridade conhecida?
+
+## 🛠️ Projeto Prático
+
+**Construir:** Plugin Gerenciador de Custom Post Types
+
+Crie um plugin que:
+- Registre um custom post type com taxonomias customizadas
+- Implemente meta boxes customizadas com sanitização adequada
+- Use hooks para modificar o comportamento de posts (salvar, exibir, consultar)
+- Siga os WordPress Coding Standards
+- Inclua tratamento de erros e validação adequados
+
+**Tempo estimado:** 8-10 horas  
+**Dificuldade:** Intermediário
+
+---
+
+## ❌ Equívocos Comuns
+
+### Equívoco 1: "Actions e Filters são a mesma coisa"
+**Realidade:** Actions permitem executar código em pontos específicos, enquanto Filters permitem modificar dados antes de serem usados. Actions não retornam valores, filters retornam.
+
+**Por que é importante:** Usar o tipo de hook errado pode levar a bugs. Por exemplo, tentar modificar um valor usando um action hook não funcionará porque actions não aceitam valores de retorno.
+
+**Como lembrar:** Actions = "Fazer algo" (como `wp_insert_post`), Filters = "Mudar algo" (como `the_content`).
+
+### Equívoco 2: "Posso usar funções do WordPress imediatamente em wp-config.php"
+**Realidade:** Funções do WordPress só estão disponíveis após o core do WordPress ser carregado. Em `wp-config.php`, apenas PHP e constantes do WordPress estão disponíveis.
+
+**Por que é importante:** Tentar usar `get_option()` ou `wp_insert_post()` em `wp-config.php` causará erros fatais.
+
+**Como lembrar:** WordPress carrega nesta ordem: `wp-config.php` → `wp-settings.php` → plugins → tema. Funções só estão disponíveis após `wp-settings.php` carregar.
+
+### Equívoco 3: "Queries SQL diretas são mais rápidas que funções do WordPress"
+**Realidade:** Funções do WordPress como `wp_insert_post()` incluem validação, sanitização, hooks e cache. SQL direto ignora tudo isso, potencialmente causando inconsistências de dados e problemas de segurança.
+
+**Por que é importante:** Queries SQL diretas podem quebrar funcionalidades do WordPress, ignorar verificações de segurança e causar pesadelos de manutenção.
+
+**Como lembrar:** Funções WordPress = seguras + integradas. SQL direto = arriscado + isolado.
+
+### Equívoco 4: "The Loop só funciona com posts"
+**Realidade:** The Loop pode iterar sobre qualquer resultado de `WP_Query`, incluindo custom post types, páginas, usuários, comentários ou queries customizadas.
+
+**Por que é importante:** Entender isso permite criar loops customizados para qualquer tipo de conteúdo, não apenas posts.
+
+**Como lembrar:** The Loop = "Loop através de resultados WP_Query", não "Loop através de posts".
+
+### Equívoco 5: "remove_all_filters() é seguro de usar"
+**Realidade:** `remove_all_filters()` remove TODOS os callbacks de um hook, incluindo aqueles adicionados pelo core do WordPress e outros plugins. Isso pode quebrar funcionalidades.
+
+**Por que é importante:** Usar `remove_all_filters()` pode causar comportamento inesperado e quebrar funcionalidades do core do WordPress ou outros plugins.
+
+**Como lembrar:** Sempre use `remove_filter()` com nomes de funções e prioridades específicas. Remova apenas o que você adicionou.
 
 ---
 
@@ -101,6 +182,125 @@ wordpress/
    ↓
 10. Output (header, content, footer)
 ```
+
+### 1.1.3 ⚠️ Pitfall: Bootstrap Order e Disponibilidade de Funções
+
+**Problema Comum:** Tentar usar funções WordPress antes delas estarem disponíveis.
+
+```php
+<?php
+// ❌ ERRADO: Tentar usar função WordPress em wp-config.php
+// wp-config.php
+define('DB_NAME', 'wordpress_db');
+define('DB_USER', 'user');
+define('DB_PASSWORD', 'password');
+define('DB_HOST', 'localhost');
+
+// ❌ Isso NÃO funciona! get_post() não existe ainda
+$post = get_post(1); // Fatal error: Call to undefined function get_post()
+
+// ❌ ERRADO: Tentar usar em mu-plugins antes de plugins_loaded
+// wp-content/mu-plugins/early-plugin.php
+$users = get_users(); // ❌ Pode não funcionar dependendo do momento
+```
+
+**Por Que Acontece:**
+
+A ordem de carregamento do WordPress é crítica:
+
+1. **wp-config.php** - Apenas constantes e configuração de banco
+2. **wp-settings.php** - Carrega funções core do WordPress
+3. **mu-plugins** - Carregados antes de plugins normais
+4. **plugins** - Carregados após mu-plugins
+5. **tema** - Carregado por último
+
+**✅ Solução Correta:**
+
+```php
+<?php
+// ✅ CORRETO: Usar hooks apropriados
+// wp-content/plugins/my-plugin/my-plugin.php
+
+// ❌ ERRADO: Código no nível raiz do arquivo
+// $post = get_post(1); // Pode não funcionar
+
+// ✅ CORRETO: Usar hook 'plugins_loaded' ou 'init'
+add_action('plugins_loaded', function() {
+    // Agora get_post() está disponível
+    $post = get_post(1);
+});
+
+// ✅ CORRETO: Para código que precisa rodar mais cedo, usar 'init'
+add_action('init', function() {
+    // WordPress está totalmente inicializado
+    register_post_type('product', [...]);
+});
+
+// ✅ CORRETO: Para código que precisa rodar ainda mais cedo
+add_action('after_setup_theme', function() {
+    // Após tema ser carregado, mas antes de 'init'
+    add_theme_support('post-thumbnails');
+});
+```
+
+**Quando Cada Hook Está Disponível:**
+
+| Hook | Quando Executa | O Que Está Disponível |
+|------|----------------|----------------------|
+| `muplugins_loaded` | Após mu-plugins | Funções core básicas |
+| `plugins_loaded` | Após todos plugins | Todos plugins carregados |
+| `after_setup_theme` | Após tema carregado | Tema e funções de tema |
+| `init` | WordPress inicializado | Tudo exceto query de URL |
+| `wp_loaded` | Após query de URL | Tudo disponível |
+| `wp` | Após query executada | Query completa disponível |
+
+**Exemplo Prático:**
+
+```php
+<?php
+/**
+ * Plugin: Product Manager
+ * Problema: Precisa acessar posts e criar CPT
+ */
+
+// ❌ ERRADO: Tentar criar CPT no nível raiz
+// register_post_type('product', [...]); // Pode falhar
+
+// ✅ CORRETO: Usar hook apropriado
+add_action('init', function() {
+    // 'init' é o hook correto para registrar CPTs
+    register_post_type('product', [
+        'public' => true,
+        'label' => 'Products',
+    ]);
+});
+
+// ✅ CORRETO: Para código que precisa de query
+add_action('wp', function() {
+    // Agora podemos usar funções de query
+    if (is_single()) {
+        $post = get_queried_object();
+        // Fazer algo com o post
+    }
+});
+
+// ✅ CORRETO: Para código que precisa rodar muito cedo
+add_action('muplugins_loaded', function() {
+    // Apenas funções core básicas disponíveis
+    // Não use get_post() aqui ainda!
+    define('MY_PLUGIN_VERSION', '1.0.0');
+});
+```
+
+**Checklist:**
+
+- [ ] Nunca usar funções WordPress em `wp-config.php`
+- [ ] Usar `init` para registrar CPTs, taxonomies, post status
+- [ ] Usar `plugins_loaded` para código que depende de outros plugins
+- [ ] Usar `wp_loaded` para código que precisa de query completa
+- [ ] Verificar documentação do hook antes de usar
+
+---
 
 ### 1.4 Constantes Importantes
 
@@ -479,6 +679,107 @@ add_action('init', ['Meu_Plugin_Static', 'init']);
 ?>
 ```
 
+### 2.6 ⚠️ Pitfall: remove_all_filters() e remove_all_actions()
+
+**Problema Comum:** Usar `remove_all_filters()` ou `remove_all_actions()` de forma indiscriminada pode quebrar funcionalidades de outros plugins e do próprio WordPress.
+
+```php
+<?php
+// ❌ ERRADO: Remover TODOS os filters de um hook importante
+remove_all_filters('the_content');
+// Agora wpautop, shortcodes, e outros filters não funcionam mais!
+
+// ❌ ERRADO: Remover TODAS as actions de um hook crítico
+remove_all_actions('wp_head');
+// Agora wp_generator, wp_enqueue_scripts, e outros não executam!
+
+// ❌ ERRADO: Remover em hook muito cedo
+add_action('plugins_loaded', function() {
+    remove_all_filters('the_content'); // ❌ Outros plugins ainda não registraram seus filters
+});
+```
+
+**Por Que É Perigoso:**
+
+1. **Quebra Funcionalidades Core:** Remove funcionalidades essenciais do WordPress
+2. **Conflitos com Plugins:** Outros plugins podem depender desses hooks
+3. **Difícil de Debuggar:** Problemas aparecem em lugares inesperados
+4. **Manutenção:** Código difícil de manter e entender
+
+**✅ Solução Correta:**
+
+```php
+<?php
+// ✅ CORRETO: Remover hook específico com callback conhecido
+remove_filter('the_content', 'wpautop'); // Remove apenas wpautop
+
+// ✅ CORRETO: Remover hook específico com prioridade
+remove_action('wp_head', 'wp_generator', 1); // Remove apenas wp_generator
+
+// ✅ CORRETO: Verificar se hook existe antes de remover
+if (has_filter('the_content', 'wpautop')) {
+    remove_filter('the_content', 'wpautop');
+}
+
+// ✅ CORRETO: Remover hook condicionalmente
+add_action('init', function() {
+    // Remover apenas em contexto específico
+    if (is_admin()) {
+        remove_action('wp_head', 'wp_generator');
+    }
+});
+
+// ✅ CORRETO: Usar prioridade alta para remover depois que outros plugins registraram
+add_action('wp_loaded', function() {
+    // Agora é seguro remover, pois todos os plugins já carregaram
+    remove_filter('the_content', 'wpautop');
+}, 999); // Prioridade alta para executar por último
+```
+
+**Quando Usar remove_all_*:**
+
+```php
+<?php
+// ⚠️ APENAS em casos muito específicos e com cuidado:
+
+// ✅ CORRETO: Em hook customizado do seu próprio plugin
+add_action('meu_plugin_custom_hook', 'callback1');
+add_action('meu_plugin_custom_hook', 'callback2');
+
+// Se precisar limpar para testes ou reset
+remove_all_actions('meu_plugin_custom_hook'); // ✅ OK, é seu hook
+
+// ✅ CORRETO: Em ambiente de desenvolvimento/testes
+if (defined('WP_DEBUG') && WP_DEBUG) {
+    // Apenas em desenvolvimento, com aviso
+    error_log('Warning: remove_all_filters used in debug mode');
+    remove_all_filters('meu_hook_customizado');
+}
+```
+
+**Alternativas Melhores:**
+
+```php
+<?php
+// ✅ CORRETO: Usar prioridade para controlar ordem ao invés de remover
+add_filter('the_content', 'meu_filter_personalizado', 5); // Executa antes de wpautop (10)
+
+// ✅ CORRETO: Usar filter para modificar comportamento ao invés de remover
+add_filter('the_content', function($content) {
+    // Modificar conteúdo sem remover outros filters
+    $content = str_replace('old', 'new', $content);
+    return $content; // Outros filters ainda executam depois
+}, 5);
+```
+
+**Checklist:**
+
+- [ ] Nunca usar `remove_all_*` em hooks core do WordPress
+- [ ] Sempre remover hooks específicos quando possível
+- [ ] Verificar se hook existe antes de remover
+- [ ] Usar prioridade para controlar ordem ao invés de remover
+- [ ] Documentar por que está removendo um hook específico
+
 ---
 
 ## 🗄️ Estrutura do Banco de Dados
@@ -820,6 +1121,242 @@ try {
 ?>
 ```
 
+### 4.7 ⚠️ Pitfall: Transações com $wpdb (BEGIN, COMMIT, ROLLBACK)
+
+**Problema Comum:** Não usar transações corretamente ou não tratar erros adequadamente pode levar a dados inconsistentes no banco.
+
+```php
+<?php
+// ❌ ERRADO: Múltiplas operações sem transação
+global $wpdb;
+
+// Se segunda operação falhar, primeira já foi commitada
+$wpdb->insert($wpdb->posts, ['post_title' => 'Post 1']);
+$wpdb->insert($wpdb->postmeta, ['post_id' => $wpdb->insert_id, 'meta_key' => 'price', 'meta_value' => '99.99']);
+// Se segunda falhar, temos post sem meta - dados inconsistentes!
+
+// ❌ ERRADO: Transação sem tratamento de erro
+$wpdb->query('START TRANSACTION');
+$wpdb->insert($wpdb->posts, [...]);
+$wpdb->insert($wpdb->postmeta, [...]);
+$wpdb->query('COMMIT');
+// Se insert falhar, transação fica aberta!
+
+// ❌ ERRADO: Usar funções WordPress dentro de transação sem cuidado
+$wpdb->query('START TRANSACTION');
+wp_insert_post([...]); // ❌ wp_insert_post pode fazer commit automático!
+update_post_meta($post_id, 'key', 'value');
+$wpdb->query('COMMIT');
+```
+
+**Por Que É Importante:**
+
+1. **Consistência de Dados:** Garante que todas as operações sejam commitadas juntas ou nenhuma
+2. **Integridade:** Evita estados intermediários inconsistentes
+3. **Rollback:** Permite desfazer operações em caso de erro
+4. **Performance:** Transações podem melhorar performance em operações múltiplas
+
+**✅ Solução Correta:**
+
+```php
+<?php
+// ✅ CORRETO: Transação completa com tratamento de erro
+global $wpdb;
+
+try {
+    $wpdb->query('START TRANSACTION');
+    
+    // Operação 1
+    $result1 = $wpdb->insert($wpdb->posts, [
+        'post_title' => 'Test Post',
+        'post_status' => 'publish',
+        'post_type' => 'post',
+    ]);
+    
+    if ($result1 === false) {
+        throw new Exception('Failed to insert post: ' . $wpdb->last_error);
+    }
+    
+    $post_id = $wpdb->insert_id;
+    
+    // Operação 2
+    $result2 = $wpdb->insert($wpdb->postmeta, [
+        'post_id' => $post_id,
+        'meta_key' => '_price',
+        'meta_value' => '99.99',
+    ]);
+    
+    if ($result2 === false) {
+        throw new Exception('Failed to insert meta: ' . $wpdb->last_error);
+    }
+    
+    // Operação 3
+    $result3 = $wpdb->insert($wpdb->postmeta, [
+        'post_id' => $post_id,
+        'meta_key' => '_stock',
+        'meta_value' => '10',
+    ]);
+    
+    if ($result3 === false) {
+        throw new Exception('Failed to insert stock: ' . $wpdb->last_error);
+    }
+    
+    // Se tudo deu certo, commitar
+    $wpdb->query('COMMIT');
+    
+} catch (Exception $e) {
+    // Em caso de erro, fazer rollback
+    $wpdb->query('ROLLBACK');
+    error_log('Transaction failed: ' . $e->getMessage());
+    throw $e; // Re-throw para tratamento superior
+}
+```
+
+**Exemplo Prático: Atualizar Múltiplas Tabelas Atomicamente**
+
+```php
+<?php
+/**
+ * Atualizar estoque e criar log de transação atomicamente
+ */
+function update_product_stock($product_id, $quantity_sold) {
+    global $wpdb;
+    
+    try {
+        $wpdb->query('START TRANSACTION');
+        
+        // 1. Obter estoque atual
+        $current_stock = $wpdb->get_var($wpdb->prepare(
+            "SELECT meta_value FROM {$wpdb->postmeta} 
+             WHERE post_id = %d AND meta_key = '_stock'",
+            $product_id
+        ));
+        
+        if ($current_stock === null) {
+            throw new Exception('Product not found');
+        }
+        
+        $current_stock = (int) $current_stock;
+        $new_stock = $current_stock - $quantity_sold;
+        
+        if ($new_stock < 0) {
+            throw new Exception('Insufficient stock');
+        }
+        
+        // 2. Atualizar estoque
+        $updated = $wpdb->update(
+            $wpdb->postmeta,
+            ['meta_value' => $new_stock],
+            [
+                'post_id' => $product_id,
+                'meta_key' => '_stock',
+            ],
+            ['%d'],
+            ['%d', '%s']
+        );
+        
+        if ($updated === false) {
+            throw new Exception('Failed to update stock: ' . $wpdb->last_error);
+        }
+        
+        // 3. Criar log da transação
+        $log_inserted = $wpdb->insert(
+            $wpdb->prefix . 'stock_logs',
+            [
+                'product_id' => $product_id,
+                'quantity_sold' => $quantity_sold,
+                'old_stock' => $current_stock,
+                'new_stock' => $new_stock,
+                'created_at' => current_time('mysql'),
+            ]
+        );
+        
+        if ($log_inserted === false) {
+            throw new Exception('Failed to create log: ' . $wpdb->last_error);
+        }
+        
+        // Tudo certo, commitar
+        $wpdb->query('COMMIT');
+        
+        return [
+            'success' => true,
+            'old_stock' => $current_stock,
+            'new_stock' => $new_stock,
+        ];
+        
+    } catch (Exception $e) {
+        // Rollback em caso de erro
+        $wpdb->query('ROLLBACK');
+        error_log('Stock update failed: ' . $e->getMessage());
+        
+        return [
+            'success' => false,
+            'error' => $e->getMessage(),
+        ];
+    }
+}
+```
+
+**⚠️ Cuidado com Funções WordPress:**
+
+```php
+<?php
+// ⚠️ ATENÇÃO: wp_insert_post() e outras funções WordPress podem fazer commit automático
+// Não use dentro de transações $wpdb diretas
+
+// ❌ ERRADO: Misturar $wpdb transações com funções WordPress
+$wpdb->query('START TRANSACTION');
+wp_insert_post([...]); // Pode fazer commit automático!
+$wpdb->query('COMMIT'); // Pode commitar duas vezes!
+
+// ✅ CORRETO: Usar apenas $wpdb dentro da transação
+$wpdb->query('START TRANSACTION');
+$wpdb->insert($wpdb->posts, [...]);
+$wpdb->insert($wpdb->postmeta, [...]);
+$wpdb->query('COMMIT');
+
+// ✅ CORRETO: Ou usar funções WordPress sem transação manual
+// Elas já têm suas próprias garantias de consistência
+wp_insert_post([...]);
+update_post_meta($post_id, 'key', 'value');
+```
+
+**Tratamento de Erros em Transações:**
+
+```php
+<?php
+// ✅ CORRETO: Verificar $wpdb->last_error após cada operação
+function safe_transaction() {
+    global $wpdb;
+    
+    $wpdb->query('START TRANSACTION');
+    
+    $result1 = $wpdb->insert($wpdb->posts, [...]);
+    if ($result1 === false || !empty($wpdb->last_error)) {
+        $wpdb->query('ROLLBACK');
+        return new WP_Error('insert_failed', $wpdb->last_error);
+    }
+    
+    $result2 = $wpdb->insert($wpdb->postmeta, [...]);
+    if ($result2 === false || !empty($wpdb->last_error)) {
+        $wpdb->query('ROLLBACK');
+        return new WP_Error('meta_insert_failed', $wpdb->last_error);
+    }
+    
+    $wpdb->query('COMMIT');
+    return true;
+}
+```
+
+**Checklist:**
+
+- [ ] Sempre usar try-catch com transações
+- [ ] Sempre fazer ROLLBACK em caso de erro
+- [ ] Verificar $wpdb->last_error após cada operação
+- [ ] Não misturar $wpdb transações com funções WordPress (wp_insert_post, etc)
+- [ ] Garantir que COMMIT só acontece se todas operações foram bem-sucedidas
+- [ ] Logar erros para debug
+
 ---
 
 ## 📄 Posts, Pages e Custom Content
@@ -1150,6 +1687,79 @@ if ($main_query->have_posts()) {
 wp_reset_postdata();
 ?>
 ```
+
+### 7.2 ⚠️ Pitfall: Nested Loops (WP_Query em loops aninhados) - Detalhado
+
+**Problema Comum:** Usar `WP_Query` ou `get_posts()` dentro de um loop existente sem resetar o `$post` global causa dados incorretos.
+
+**Por Que Acontece:**
+
+O WordPress usa variáveis globais (`$post`, `$wp_query`) para manter o estado do loop atual. Quando você cria um novo loop dentro de outro:
+
+1. `get_posts()` ou `WP_Query` modificam `$post` global
+2. Funções como `get_the_title()`, `get_the_content()` usam `$post` global
+3. Após o loop aninhado, `$post` não é mais o post original
+4. Dados incorretos são exibidos
+
+**✅ Soluções Completas:**
+
+Veja a seção 7.3 acima para exemplos básicos. Abaixo estão soluções avançadas:
+
+```php
+<?php
+// ✅ CORRETO: Evitar loops aninhados quando possível (melhor performance)
+// Buscar todos os dados de uma vez
+$main_posts = get_posts(['post_type' => 'post', 'posts_per_page' => 10]);
+$all_related_ids = [];
+
+// Coletar todos os IDs relacionados
+foreach ($main_posts as $main_post) {
+    $related = get_post_meta($main_post->ID, '_related_posts', true);
+    if ($related) {
+        $all_related_ids = array_merge($all_related_ids, (array) $related);
+    }
+}
+
+// Buscar todos os relacionados de uma vez
+$all_related = [];
+if (!empty($all_related_ids)) {
+    $all_related = get_posts([
+        'post__in' => array_unique($all_related_ids),
+        'post_type' => 'related_post',
+    ]);
+}
+
+// Criar mapa para acesso rápido
+$related_map = [];
+foreach ($all_related as $related_post) {
+    $related_map[$related_post->ID] = $related_post;
+}
+
+// Agora iterar sem loops aninhados
+foreach ($main_posts as $main_post) {
+    echo '<h2>' . $main_post->post_title . '</h2>';
+    
+    $related_ids = get_post_meta($main_post->ID, '_related_posts', true);
+    if ($related_ids) {
+        foreach ((array) $related_ids as $related_id) {
+            if (isset($related_map[$related_id])) {
+                $related = $related_map[$related_id];
+                echo '<p>' . $related->post_title . '</p>';
+            }
+        }
+    }
+    
+    echo '<p>' . wp_trim_words($main_post->post_content, 50) . '</p>';
+}
+```
+
+**Checklist:**
+
+- [ ] Sempre usar `wp_reset_postdata()` após loops aninhados com `get_posts()`
+- [ ] Sempre usar `$query->reset_postdata()` após loops aninhados com `WP_Query`
+- [ ] Considerar evitar loops aninhados quando possível (melhor performance)
+- [ ] Usar propriedades diretas (`$post->post_title`) quando não precisa de funções globais
+- [ ] Testar templates com loops aninhados para garantir dados corretos
 
 ---
 

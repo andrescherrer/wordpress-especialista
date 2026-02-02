@@ -1,4 +1,4 @@
-# 📚 Índice de Tópicos - Roadmap Completo WordPress
+# Índice de Tópicos - Roadmap Completo WordPress
 
 **Status:** Roadmap detalhado e completo para especialista em PHP  
 **Data:** Janeiro 2026  
@@ -6,11 +6,11 @@
 
 ---
 
-## 📂 Navegação do repositório
+## Navegação do repositório
 
-| Fase | Documento |
-|:----:|-----------|
-| — | [📚 Índice (este arquivo)](000-WordPress-Topicos-Index.md) |
+| # | Documento |
+|:--:|-----------|
+| 0 | [Índice (este arquivo)](000-WordPress-Topicos-Index.md) |
 | 1 | [Fundamentos do WordPress Core](001-WordPress-Fase-1-Fundamentals%20of%20WordPress%20Core.md) |
 | 2 | [REST API Fundamentals](002-WordPress-Fase-2-WordPress%20REST%20API%20Fundamentals.md) |
 | 3 | [REST API Advanced](003-WordPress-Fase-3-REST-API-Advanced.md) |
@@ -25,8 +25,13 @@
 | 12 | [Segurança e Boas Práticas](012-WordPress-Fase-12-Seguranca-Boas-Praticas.md) |
 | 13 | [Arquitetura Avançada](013-WordPress-Fase-13-Arquitetura-Avancada.md) |
 | 14 | [Deployment e DevOps](014-WordPress-Fase-14-Deployment-DevOps.md) |
-| + | [Tópicos complementares](015-WordPress-Topicos-Complementares-Avancados.md) |
-| — | [📊 Análise do projeto](ANALISE-PROJETO-WORDPRESS-ESPECIALISTA.md) · [README](README.md) |
+| 15 | [Async Jobs e Background Processing](016-WordPress-Fase-15-Async-Jobs-Background-Processing.md) |
+| 16 | [Tópicos complementares](015-WordPress-Topicos-Complementares-Avancados.md) |
+| 17 | [Testing Throughout](017-WordPress-Testing-Throughout.md) |
+| 18 | [Learning Paths](018-WordPress-Learning-Paths.md) |
+| 19 | [Security Anti-patterns](019-WordPress-Security-Anti-patterns.md) |
+| 20 | [Error Handling Best Practices](020-WordPress-Error-Handling-Best-Practices.md) |
+| — | [README](README.md) |
 
 ---
 
@@ -132,7 +137,16 @@
 - Custom validation functions
 - Tratamento de erros
 
-### 2.5 REST Authentication
+### 2.5 Security Essentials
+- Input Validation vs Sanitization vs Escaping
+- Funções de sanitização (sanitize_text_field, sanitize_email, etc.)
+- Funções de escaping (esc_html, esc_attr, esc_url, etc.)
+- Nonces básico (wp_nonce_field, wp_verify_nonce)
+- Capability checks (current_user_can)
+- Checklist de segurança
+- Erros comuns de segurança
+
+### 2.6 REST Authentication
 - Autenticação básica
 - Nonces em REST
 - Application Passwords (WordPress 5.6+)
@@ -140,28 +154,28 @@
 - OAuth2
 - Verificação de capabilities
 
-### 2.6 REST Permissions
+### 2.7 REST Permissions
 - current_user_can() em REST
 - Verificação de roles
 - Capabilities específicas
 - Permission callbacks por método HTTP
 - Public vs Authenticated endpoints
 
-### 2.7 REST Response e Error Handling
+### 2.8 REST Response e Error Handling
 - WP_REST_Response
 - WP_Error
 - Status codes apropriados
 - Mensagens de erro claras
 - Headers customizados
 
-### 2.8 Documentação e Schema
+### 2.9 Documentação e Schema
 - Schema de dados (WP_JSON_Schema)
 - Documentação de endpoints
 - Descrição de parâmetros
 - Documentação de erros
 - OpenAPI/Swagger integration
 
-### 2.9 REST Filters Avançados
+### 2.10 REST Filters Avançados
 - rest_prepare_{post_type}
 - rest_insert_{post_type}
 - rest_post_query
@@ -921,6 +935,65 @@
 
 ---
 
+## 🔄 FASE 15: Async Jobs e Background Processing
+
+### 15.1 Por Que Async Jobs?
+- Requisições HTTP bloqueantes
+- Timeout em operações longas
+- Escalabilidade horizontal
+- Experiência do usuário
+- Quando usar async jobs
+
+### 15.2 Limitações do WP-Cron
+- WP-Cron não é cron real
+- Dependência de requisições HTTP
+- Problemas com múltiplos servidores
+- Falhas silenciosas
+- Desabilitar WP-Cron em produção
+
+### 15.3 Action Scheduler (Production-Ready)
+- Instalação e setup
+- Async actions (one-time, imediato)
+- Scheduled actions (one-time, com delay)
+- Recurring actions (recorrente)
+- Verificar e cancelar ações
+- Monitoramento de ações
+
+### 15.4 Queue Patterns (Enterprise)
+- Simple Queue (FIFO)
+- Priority Queue
+- Dead Letter Queue (DLQ)
+- Retry strategies
+- Exponential backoff
+
+### 15.5 Webhook Receivers (Inbound)
+- Signature verification (HMAC-SHA256)
+- Idempotency keys
+- Async processing
+- Error handling
+- REST API endpoints
+
+### 15.6 Integração com Docker
+- Docker Compose com workers
+- Supervisord para gerenciar workers
+- Health checks
+- Scaling múltiplos workers
+
+### 15.7 Monitoramento em Produção
+- Queue Monitor
+- Health check endpoints
+- Dashboard widgets
+- Integração com Sentry
+- WP-CLI commands
+
+### 15.8 Case Studies Práticos
+- E-commerce order processing
+- Media processing pipeline
+- CSV import em chunks
+- Email queue service
+
+---
+
 ## 🎯 Tópicos Complementares
 
 ### Advanced API Topics
@@ -975,6 +1048,7 @@
 **Fase 12:** Security & Plugin Review  
 **Fase 13:** Architecture Patterns  
 **Fase 14:** Deployment & DevOps  
+**Fase 15:** Action Scheduler Documentation  
 
 ---
 
@@ -995,9 +1069,13 @@
 - [ ] Aplico security best practices
 - [ ] Arquitetura com padrões SOLID
 - [ ] Deploy com CI/CD automation
+- [ ] Implemento async jobs e background processing
+- [ ] Uso Action Scheduler em produção
+- [ ] Implemento webhook receivers seguros
 
 ---
 
-**Versão:** 1.0  
+**Versão:** 1.1  
 **Status:** Completo e atualizado  
+**Última atualização:** Fevereiro 2026 (Fase 15 adicionada)  
 **Próxima revisão:** Q2 2026
