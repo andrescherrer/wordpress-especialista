@@ -15,17 +15,21 @@
 
 1. [Por Que Learning Paths?](#por-que-learning-paths)
 2. [Dependency Graph Visual](#dependency-graph-visual)
-3. [Path 1: Backend APIs (REST + Jobs)](#path-1-backend-apis-rest--jobs)
-4. [Path 2: Full Stack (Admin + Frontend)](#path-2-full-stack-admin--frontend)
+3. [Path 1: Backend APIs (REST + Jobs)](#path-1-backend-apis-rest-jobs)
+4. [Path 2: Full Stack (Admin + Frontend)](#path-2-full-stack-admin-frontend)
 5. [Path 3: DevOps First](#path-3-devops-first)
 6. [Path 4: Enterprise Architecture](#path-4-enterprise-architecture)
 7. [Path 5: Plugin Developer](#path-5-plugin-developer)
 8. [Path 6: Theme Developer](#path-6-theme-developer)
-9. [Recomendações por Perfil](#recomendações-por-perfil)
+9. [Recomendações por Perfil](#recomendacoes-por-perfil)
 10. [Tempo Estimado por Path](#tempo-estimado-por-path)
+11. [Como Usar Este Documento](#como-usar-este-documento)
+12. [Dicas de Aprendizado](#dicas-de-aprendizado)
+13. [Resumo](#resumo)
 
 ---
 
+<a id="por-que-learning-paths"></a>
 ## Por Que Learning Paths?
 
 ### Problema: Um Único Caminho Linear
@@ -57,6 +61,7 @@
 
 ---
 
+<a id="dependency-graph-visual"></a>
 ## Dependency Graph Visual
 
 ### Grafo de Dependências Completo
@@ -190,6 +195,7 @@ Fase 1 (Core Fundamentals)
 
 ---
 
+<a id="path-1-backend-apis-rest-jobs"></a>
 ## Path 1: Backend APIs (REST + Jobs)
 
 ### Perfil do Desenvolvedor
@@ -289,6 +295,7 @@ Fase 14 (DevOps)
 
 ---
 
+<a id="path-2-full-stack-admin-frontend"></a>
 ## Path 2: Full Stack (Admin + Frontend)
 
 ### Perfil do Desenvolvedor
@@ -414,6 +421,7 @@ Fase 14 (DevOps)
 
 ---
 
+<a id="path-3-devops-first"></a>
 ## Path 3: DevOps First
 
 ### Perfil do Desenvolvedor
@@ -532,6 +540,7 @@ Fase 15 (Async Jobs)
 
 ---
 
+<a id="path-4-enterprise-architecture"></a>
 ## Path 4: Enterprise Architecture
 
 ### Perfil do Desenvolvedor
@@ -646,6 +655,7 @@ Fase 11 (Multisite/i18n)
 
 ---
 
+<a id="path-5-plugin-developer"></a>
 ## Path 5: Plugin Developer
 
 ### Perfil do Desenvolvedor
@@ -688,6 +698,7 @@ Fase 13 (Arquitetura Avançada)
 
 ---
 
+<a id="path-6-theme-developer"></a>
 ## Path 6: Theme Developer
 
 ### Perfil do Desenvolvedor
@@ -724,6 +735,7 @@ Fase 12 (Segurança Avançada)
 
 ---
 
+<a id="recomendacoes-por-perfil"></a>
 ## Recomendações por Perfil
 
 ### Desenvolvedor Backend (APIs)
@@ -770,6 +782,7 @@ Fase 12 (Segurança Avançada)
 
 ---
 
+<a id="tempo-estimado-por-path"></a>
 ## Tempo Estimado por Path
 
 | Path | Mínimo | Máximo | Ideal | Tempo Parcial |
@@ -789,6 +802,7 @@ Fase 12 (Segurança Avançada)
 
 ---
 
+<a id="como-usar-este-documento"></a>
 ## Como Usar Este Documento
 
 ### Passo 1: Identificar Seu Objetivo
@@ -817,6 +831,7 @@ Fase 12 (Segurança Avançada)
 
 ---
 
+<a id="dicas-de-aprendizado"></a>
 ## Dicas de Aprendizado
 
 ### 1. Prática Constante
@@ -851,6 +866,7 @@ Fase 12 (Segurança Avançada)
 
 ---
 
+<a id="resumo"></a>
 ## Resumo
 
 ### O Que Você Aprendeu

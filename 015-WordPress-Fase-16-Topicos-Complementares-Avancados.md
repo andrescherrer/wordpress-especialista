@@ -15,9 +15,12 @@
 3. [WordPress Ecosystem](#wordpress-ecosystem)
 4. [Headless WordPress](#headless-wordpress)
 5. [Community e Best Practices](#community-e-best-practices)
+6. [Code Review Checklist](#code-review-checklist)
+7. [Resumo e Próximos Passos](#resumo-e-proximos-passos)
 
 ---
 
+<a id="advanced-api-topics"></a>
 ## Advanced API Topics
 
 ### 1. GraphQL for WordPress
@@ -1054,6 +1057,7 @@ class SwaggerUI {
 
 ---
 
+<a id="advanced-performance"></a>
 ## Advanced Performance
 
 ### 1. Page Speed Optimization
@@ -1892,6 +1896,7 @@ lhci autorun \
 
 ---
 
+<a id="wordpress-ecosystem"></a>
 ## WordPress Ecosystem
 
 ### 1. WooCommerce Integration - Padrões Avançados
@@ -3196,6 +3201,7 @@ class YoastIntegration {
 
 ---
 
+<a id="headless-wordpress"></a>
 ## Headless WordPress
 
 ### 1. REST API as Primary Interface
@@ -3577,6 +3583,7 @@ class BuildTrigger {
 
 ---
 
+<a id="community-e-best-practices"></a>
 ## Community e Best Practices
 
 ### 1. Contributing to WordPress
@@ -3738,6 +3745,7 @@ svn commit -m "Tag version 1.0.0"
 **Checklist de Review:**
 
 ```markdown
+<a id="code-review-checklist"></a>
 ## Code Review Checklist
 
 ### Funcionalidade
@@ -3927,6 +3935,7 @@ Denúncias devem ser enviadas para: conduct@example.com
 
 ---
 
+<a id="resumo-e-proximos-passos"></a>
 ## 📚 Resumo e Próximos Passos
 
 Este guia cobriu tópicos avançados em WordPress, desde otimizações de API até integração com o ecossistema e contribuição à comunidade.

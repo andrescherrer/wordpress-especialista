@@ -13,26 +13,32 @@
 
 ## 📑 Índice
 
-1. [Fundamentos do WordPress Multisite](#fundamentos-do-wordpress-multisite)
-2. [Plugin Compatível com Multisite](#plugin-compatível-com-multisite)
-3. [Classe Multisite](#classe-multisite)
-4. [Network Settings](#network-settings)
-5. [Site vs Network Options](#site-vs-network-options)
-6. [Fundamentos de Internacionalização (i18n)](#fundamentos-de-internacionalização-i18n)
-7. [Classe i18n](#classe-i18n)
-8. [Funções de Tradução](#funções-de-tradução)
-9. [Gerar Arquivo POT](#gerar-arquivo-pot)
-10. [Traduzir Plugin](#traduzir-plugin)
-11. [JavaScript i18n](#javascript-i18n)
-12. [RTL Support](#rtl-support)
-13. [Traduções Dinâmicas](#traduções-dinâmicas)
-14. [Translation Manager](#translation-manager)
-15. [GlotPress Integration](#glotpress-integration)
-16. [WP-CLI i18n](#wp-cli-i18n)
-17. [Best Practices](#best-practices)
+1. [Objetivos de Aprendizado](#objetivos-de-aprendizado)
+2. [Autoavaliação](#autoavaliacao)
+3. [Projeto Prático](#projeto-pratico)
+4. [Equívocos Comuns](#equivocos-comuns)
+5. [Fundamentos do WordPress Multisite](#fundamentos-do-wordpress-multisite)
+6. [Plugin Compatível com Multisite](#plugin-compativel-com-multisite)
+7. [Classe Multisite](#classe-multisite)
+8. [Network Settings](#network-settings)
+9. [Site vs Network Options](#site-vs-network-options)
+10. [Fundamentos de Internacionalização (i18n)](#fundamentos-de-internacionalizacao-i18n)
+11. [Classe i18n](#classe-i18n)
+12. [Funções de Tradução](#funcoes-de-traducao)
+13. [Gerar Arquivo POT](#gerar-arquivo-pot)
+14. [Traduzir Plugin](#traduzir-plugin)
+15. [JavaScript i18n](#javascript-i18n)
+16. [RTL Support](#rtl-support)
+17. [Traduções Dinâmicas](#traducoes-dinamicas)
+18. [Translation Manager Dashboard](#translation-manager-dashboard)
+19. [GlotPress Integration](#glotpress-integration)
+20. [WP-CLI i18n](#wp-cli-i18n)
+21. [Best Practices](#best-practices)
+22. [Resumo da Fase 11](#resumo-da-fase-11)
 
 ---
 
+<a id="objetivos-de-aprendizado"></a>
 ## 🎯 Objetivos de Aprendizado
 
 Ao final desta fase, você será capaz de:
@@ -46,6 +52,7 @@ Ao final desta fase, você será capaz de:
 7. ✅ Implementar traduções dinâmicas e sistemas de gerenciamento de tradução
 8. ✅ Integrar com GlotPress para workflows colaborativos de tradução
 
+<a id="autoavaliacao"></a>
 ## 📝 Autoavaliação
 
 Teste seu entendimento:
@@ -59,6 +66,7 @@ Teste seu entendimento:
 - [ ] Qual é a diferença entre `load_plugin_textdomain()` e `load_theme_textdomain()`?
 - [ ] Como você implementa suporte RTL em temas e plugins?
 
+<a id="projeto-pratico"></a>
 ## 🛠️ Projeto Prático
 
 **Construir:** Plugin Multilíngue com Suporte Multisite
@@ -77,6 +85,7 @@ Crie um plugin que:
 
 ---
 
+<a id="equivocos-comuns"></a>
 ## ❌ Equívocos Comuns
 
 ### Equívoco 1: "Multisite é apenas múltiplas instalações WordPress"
@@ -109,6 +118,7 @@ Crie um plugin que:
 
 ---
 
+<a id="fundamentos-do-wordpress-multisite"></a>
 ## 🏗️ Fundamentos do WordPress Multisite
 
 ### O que é Multisite?
@@ -154,6 +164,7 @@ if (is_multisite()) {
 
 ---
 
+<a id="plugin-compativel-com-multisite"></a>
 ## 💻 Plugin Compatível com Multisite
 
 ### Estrutura Básica
@@ -254,6 +265,7 @@ register_deactivation_hook(__FILE__, function() {
 
 ---
 
+<a id="classe-multisite"></a>
 ## 🌐 Classe Multisite
 
 **includes/class-multisite.php**
@@ -430,6 +442,7 @@ Meu_Plugin_Multisite::register_hooks();
 
 ---
 
+<a id="network-settings"></a>
 ## ⚙️ Network Settings
 
 **includes/class-network-admin.php**
@@ -606,6 +619,7 @@ if (is_multisite()) {
 
 ---
 
+<a id="site-vs-network-options"></a>
 ## 🎯 Site vs Network Options
 
 **includes/class-options-manager.php**
@@ -674,6 +688,7 @@ class Meu_Plugin_Options_Manager {
 
 ---
 
+<a id="fundamentos-de-internacionalizacao-i18n"></a>
 ## 🌐 Fundamentos de Internacionalização (i18n)
 
 ### Conceitos Importantes
@@ -700,6 +715,7 @@ meu-plugin/
 
 ---
 
+<a id="classe-i18n"></a>
 ## 🔤 Classe i18n
 
 **includes/class-i18n.php**
@@ -786,6 +802,7 @@ class Meu_Plugin_I18n {
 
 ---
 
+<a id="funcoes-de-traducao"></a>
 ## 📝 Funções de Tradução
 
 ### Funções Básicas
@@ -893,6 +910,7 @@ class Meu_Plugin_Translations_Example {
 
 ---
 
+<a id="gerar-arquivo-pot"></a>
 ## 🔧 Gerar Arquivo POT
 
 ### Método 1: WP-CLI
@@ -971,6 +989,7 @@ module.exports = function(grunt) {
 
 ---
 
+<a id="traduzir-plugin"></a>
 ## 🌍 Traduzir Plugin
 
 **languages/meu-plugin-pt_BR.po**
@@ -1071,6 +1090,7 @@ msgstr "Digite sua chave API aqui"
 
 ---
 
+<a id="javascript-i18n"></a>
 ## 📜 JavaScript i18n
 
 ### Método 1: wp_localize_script (Tradicional)
@@ -1157,6 +1177,7 @@ const context = _x('Post', 'post type', 'meu-plugin');
 
 ---
 
+<a id="rtl-support"></a>
 ## 🌏 RTL Support
 
 ### RTL CSS
@@ -1216,6 +1237,7 @@ if (is_rtl()) {
 
 ---
 
+<a id="traducoes-dinamicas"></a>
 ## 💾 Traduções Dinâmicas
 
 **includes/class-dynamic-translations.php**
@@ -1337,6 +1359,7 @@ class Meu_Plugin_Dynamic_Translations {
 
 ---
 
+<a id="translation-manager-dashboard"></a>
 ## 🎛️ Translation Manager Dashboard
 
 **includes/class-translation-manager.php**
@@ -1521,6 +1544,7 @@ new Meu_Plugin_Translation_Manager();
 
 ---
 
+<a id="glotpress-integration"></a>
 ## 🔄 GlotPress Integration
 
 ```php
@@ -1628,6 +1652,7 @@ new Meu_Plugin_GlotPress();
 
 ---
 
+<a id="wp-cli-i18n"></a>
 ## 🎯 WP-CLI i18n
 
 **Comandos customizados**
@@ -1810,6 +1835,7 @@ if (defined('WP_CLI') && WP_CLI) {
 
 ---
 
+<a id="best-practices"></a>
 ## ✅ Best Practices
 
 ### Checklist de Internacionalização
@@ -1855,6 +1881,7 @@ if (defined('WP_CLI') && WP_CLI) {
 
 ---
 
+<a id="resumo-da-fase-11"></a>
 ## 📌 Resumo da Fase 11
 
 ### ✅ Tópicos Abordados

@@ -13,17 +13,23 @@
 
 ## 📑 Índice
 
-1. [Fundamentos da Settings API](#fundamentos-da-settings-api)
-2. [Criar Páginas de Configuração](#criar-páginas-de-configuração)
-3. [Registrar Settings](#registrar-settings)
-4. [Admin Styling e Scripts](#admin-styling-e-scripts)
-5. [Meta Boxes](#meta-boxes)
-6. [Admin Notices](#admin-notices)
-7. [Validação e Sanitização](#validação-e-sanitização)
-8. [Admin Forms Avançado](#admin-forms-avançado)
+1. [Objetivos de Aprendizado](#objetivos-de-aprendizado)
+2. [Autoavaliação](#autoavaliacao)
+3. [Projeto Prático](#projeto-pratico)
+4. [Equívocos Comuns](#equivocos-comuns)
+5. [Fundamentos da Settings API](#fundamentos-da-settings-api)
+6. [Criar Páginas de Configuração](#criar-paginas-de-configuracao)
+7. [Registrar Settings](#registrar-settings)
+8. [Admin Styling e Scripts](#admin-styling-e-scripts)
+9. [Meta Boxes](#meta-boxes)
+10. [Admin Notices](#admin-notices)
+11. [Validação e Sanitização](#validacao-e-sanitizacao)
+12. [Admin Forms Avançado](#admin-forms-avancado)
+13. [Resumo da Fase 4](#resumo-da-fase-4)
 
 ---
 
+<a id="objetivos-de-aprendizado"></a>
 ## 🎯 Objetivos de Aprendizado
 
 Ao final desta fase, você será capaz de:
@@ -37,6 +43,7 @@ Ao final desta fase, você será capaz de:
 7. ✅ Tratar submissões de formulários com segurança usando nonces e verificações de capability
 8. ✅ Construir interfaces admin complexas com abas, seções e fieldsets
 
+<a id="autoavaliacao"></a>
 ## 📝 Autoavaliação
 
 Teste seu entendimento:
@@ -50,6 +57,7 @@ Teste seu entendimento:
 - [ ] Qual é a diferença entre `add_meta_box()` e `add_action('add_meta_boxes')`?
 - [ ] Como você trata uploads de arquivos em formulários admin?
 
+<a id="projeto-pratico"></a>
 ## 🛠️ Projeto Prático
 
 **Construir:** Gerenciador de Configurações de Plugin
@@ -67,6 +75,7 @@ Crie um plugin com uma página de configurações abrangente que:
 
 ---
 
+<a id="equivocos-comuns"></a>
 ## ❌ Equívocos Comuns
 
 ### Equívoco 1: "Settings API salva dados automaticamente"
@@ -99,6 +108,7 @@ Crie um plugin com uma página de configurações abrangente que:
 
 ---
 
+<a id="fundamentos-da-settings-api"></a>
 ## 🔧 Fundamentos da Settings API
 
 ### O que é Settings API?
@@ -132,6 +142,7 @@ A **Settings API** é um conjunto de funções do WordPress que facilitam a cria
 
 ---
 
+<a id="criar-paginas-de-configuracao"></a>
 ## 🏗️ Criar Páginas de Configuração
 
 ### Estrutura Básica Profissional
@@ -253,6 +264,7 @@ add_action('plugins_loaded', function() {
 
 ---
 
+<a id="registrar-settings"></a>
 ## 📝 Registrar Settings
 
 ### Registrar, Adicionar Seções e Campos
@@ -419,6 +431,7 @@ public function sanitize_settings($input) {
 
 ---
 
+<a id="admin-styling-e-scripts"></a>
 ## 🎨 Admin Styling e Scripts
 
 ### Enfileirar Assets para Admin
@@ -604,6 +617,7 @@ add_action('plugins_loaded', function() {
 
 ---
 
+<a id="meta-boxes"></a>
 ## 📦 Meta Boxes
 
 ### Criar Meta Boxes em Posts
@@ -749,6 +763,7 @@ add_action('plugins_loaded', function() {
 
 ---
 
+<a id="admin-notices"></a>
 ## ⚠️ Admin Notices
 
 ### Adicionar Mensagens no Admin
@@ -782,6 +797,7 @@ meu_plugin_add_notice('Nova versão disponível.', 'info');
 
 ---
 
+<a id="validacao-e-sanitizacao"></a>
 ## ✅ Validação e Sanitização
 
 ### Validar e Sanitizar Dados
@@ -862,6 +878,7 @@ register_setting(
 
 ---
 
+<a id="admin-forms-avancado"></a>
 ## 🎯 Admin Forms Avançado
 
 ### Campos Dinâmicos (Repeaters)
@@ -946,6 +963,7 @@ wp_enqueue_script('meu-plugin-admin-js', MEU_PLUGIN_URL . 'admin/js/admin.js', [
 
 ---
 
+<a id="resumo-da-fase-4"></a>
 ## 🎓 Resumo da Fase 4
 
 Ao dominar a **Fase 4**, você entenderá:

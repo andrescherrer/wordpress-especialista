@@ -20,9 +20,11 @@
 5. [Fase 13: Architecture Security Mistakes](#fase-13-architecture-security-mistakes)
 6. [Fase 14: DevOps Security Mistakes](#fase-14-devops-security-mistakes)
 7. [Code Review Checklist](#code-review-checklist)
+8. [Resumo](#resumo)
 
 ---
 
+<a id="fase-1-core-security-mistakes"></a>
 ## Fase 1: Core Security Mistakes
 
 ### ❌ Anti-pattern 1.1: Output User Input Directly (XSS)
@@ -269,6 +271,7 @@ update_option('_api_key_hash', wp_hash_password('secret-key-12345'), false);
 
 ---
 
+<a id="fase-2-rest-api-security-mistakes"></a>
 ## Fase 2: REST API Security Mistakes
 
 ### ❌ Anti-pattern 2.1: No Input Validation
@@ -651,6 +654,7 @@ function secure_log($message, $context = []) {
 
 ---
 
+<a id="fase-4-settings-api-security-mistakes"></a>
 ## Fase 4: Settings API Security Mistakes
 
 ### ❌ Anti-pattern 4.1: No Validation
@@ -867,6 +871,7 @@ DB_PASSWORD=senha123
 
 ---
 
+<a id="fase-5-cpt-security-mistakes"></a>
 ## Fase 5: CPT Security Mistakes
 
 ### ❌ Anti-pattern 5.1: No Capability Checks
@@ -1099,6 +1104,7 @@ add_action('save_post_product', function($post_id) {
 
 ---
 
+<a id="fase-13-architecture-security-mistakes"></a>
 ## Fase 13: Architecture Security Mistakes
 
 ### ❌ Anti-pattern 13.1: DI Without Validation
@@ -1392,6 +1398,7 @@ class PostRepository {
 
 ---
 
+<a id="fase-14-devops-security-mistakes"></a>
 ## Fase 14: DevOps Security Mistakes
 
 ### ❌ Anti-pattern 14.1: Hardcoded Secrets
@@ -1647,6 +1654,7 @@ define('DB_NAME', 'wordpress_db');
 
 ---
 
+<a id="code-review-checklist"></a>
 ## Code Review Checklist
 
 ### Input Validation
@@ -1708,6 +1716,7 @@ define('DB_NAME', 'wordpress_db');
 
 ---
 
+<a id="resumo"></a>
 ## Resumo
 
 ### O Que Você Aprendeu

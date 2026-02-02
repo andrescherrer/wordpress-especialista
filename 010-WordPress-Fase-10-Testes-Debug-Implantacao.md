@@ -13,30 +13,36 @@
 
 ## 📑 Índice
 
-1. [Fundamentos de Testing](#fundamentos-de-testing)
-2. [PHPUnit Setup](#phpunit-setup)
-3. [Unit Tests Básicos](#unit-tests-básicos)
-4. [Testes de Classes](#testes-de-classes)
-5. [Testes com Factory](#testes-com-factory)
-6. [Mocking e Stubs](#mocking-e-stubs)
-7. [Data Providers](#data-providers)
-8. [Code Coverage](#code-coverage)
-9. [Integration Tests](#integration-tests)
-10. [Performance Tests](#performance-tests)
-11. [Debugging com Xdebug](#debugging-com-xdebug)
-12. [Query Monitor](#query-monitor)
-13. [Sentry Integration](#sentry-integration)
-14. [Deploy Strategies](#deploy-strategies)
-15. [Deploy Checklist](#deploy-checklist)
-16. [Scripts de Deploy](#scripts-de-deploy)
-17. [Blue-Green Deploy](#blue-green-deploy)
-18. [Canary Deploy](#canary-deploy)
-19. [CI/CD Pipeline](#cicd-pipeline)
-20. [Monitoring](#monitoring)
-21. [Boas Práticas](#boas-práticas)
+1. [Objetivos de Aprendizado](#objetivos-de-aprendizado)
+2. [Autoavaliação](#autoavaliacao)
+3. [Projeto Prático](#projeto-pratico)
+4. [Equívocos Comuns](#equivocos-comuns)
+5. [Fundamentos de Testing](#fundamentos-de-testing)
+6. [PHPUnit Setup](#phpunit-setup)
+7. [Unit Tests Básicos](#unit-tests-basicos)
+8. [Testes de Classes](#testes-de-classes)
+9. [Testes com Factory](#testes-com-factory)
+10. [Mocking e Stubs](#mocking-e-stubs)
+11. [Data Providers](#data-providers)
+12. [Code Coverage](#code-coverage)
+13. [Integration Tests](#integration-tests)
+14. [Performance Tests](#performance-tests)
+15. [Debugging com Xdebug](#debugging-com-xdebug)
+16. [Query Monitor](#query-monitor)
+17. [Sentry Integration](#sentry-integration)
+18. [Deploy Strategies](#deploy-strategies)
+19. [Deploy Checklist](#deploy-checklist)
+20. [Scripts de Deploy](#scripts-de-deploy)
+21. [Blue-Green Deploy](#blue-green-deploy)
+22. [Canary Deploy](#canary-deploy)
+23. [CI/CD Pipeline](#cicd-pipeline)
+24. [Monitoring](#monitoring)
+25. [Boas Práticas](#boas-praticas)
+26. [Recursos Recomendados](#recursos-recomendados)
 
 ---
 
+<a id="objetivos-de-aprendizado"></a>
 ## 🎯 Objetivos de Aprendizado
 
 Ao final desta fase, você será capaz de:
@@ -50,6 +56,7 @@ Ao final desta fase, você será capaz de:
 7. ✅ Implementar estratégias de deployment (blue-green, canary, rolling)
 8. ✅ Criar checklists de deployment e scripts de automação
 
+<a id="autoavaliacao"></a>
 ## 📝 Autoavaliação
 
 Teste seu entendimento:
@@ -63,6 +70,7 @@ Teste seu entendimento:
 - [ ] O que deve ser incluído em um checklist de deployment?
 - [ ] Como você faz rollback de um deployment se algo der errado?
 
+<a id="projeto-pratico"></a>
 ## 🛠️ Projeto Prático
 
 **Construir:** Plugin Testado com Pipeline de Deployment
@@ -80,6 +88,7 @@ Crie um plugin que:
 
 ---
 
+<a id="equivocos-comuns"></a>
 ## ❌ Equívocos Comuns
 
 ### Equívoco 1: "100% de cobertura de código significa código sem bugs"
@@ -112,6 +121,7 @@ Crie um plugin que:
 
 ---
 
+<a id="fundamentos-de-testing"></a>
 ## 🧪 Fundamentos de Testing
 
 ### Por que Testar?
@@ -135,6 +145,7 @@ Unit Tests (89%)
 
 ---
 
+<a id="phpunit-setup"></a>
 ## 🔧 PHPUnit Setup
 
 ### Instalação
@@ -218,6 +229,7 @@ wp_cache_flush();
 
 ---
 
+<a id="unit-tests-basicos"></a>
 ## 📝 Unit Tests Básicos
 
 ### Exemplo 1: Teste Simples de Função
@@ -286,6 +298,7 @@ class UtilTest extends TestCase
 
 ---
 
+<a id="testes-de-classes"></a>
 ## 🏗️ Testes de Classes
 
 ### Exemplo: Teste de Classe Service
@@ -400,6 +413,7 @@ class UserServiceTest extends TestCase
 
 ---
 
+<a id="testes-com-factory"></a>
 ## 🏭 Testes com Factory
 
 ### Factory Pattern para Testes
@@ -513,6 +527,7 @@ class UserAuthorizationTest extends TestCase
 
 ---
 
+<a id="mocking-e-stubs"></a>
 ## 🎭 Mocking e Stubs
 
 ### Mock Objects
@@ -625,6 +640,7 @@ class PaymentGatewayTest extends TestCase
 
 ---
 
+<a id="data-providers"></a>
 ## 📊 Data Providers
 
 ### Exemplo com Data Provider
@@ -723,6 +739,7 @@ class CalculationTest extends TestCase
 
 ---
 
+<a id="code-coverage"></a>
 ## 📈 Code Coverage
 
 ### Configurar Code Coverage
@@ -771,6 +788,7 @@ open coverage/index.html
 
 ---
 
+<a id="integration-tests"></a>
 ## 🔗 Integration Tests
 
 ### Teste com Banco de Dados
@@ -848,6 +866,7 @@ class UserRepositoryTest extends TestCase
 
 ---
 
+<a id="performance-tests"></a>
 ## ⚡ Performance Tests
 
 ### Teste de Performance
@@ -918,6 +937,7 @@ class QueryPerformanceTest extends TestCase
 
 ---
 
+<a id="debugging-com-xdebug"></a>
 ## 🐛 Debugging com Xdebug
 
 ### Configuração do Xdebug
@@ -962,6 +982,7 @@ xdebug.profiler_output_dir = /tmp/profiler
 
 ---
 
+<a id="query-monitor"></a>
 ## 📊 Query Monitor
 
 ### Usar Query Monitor para Debugging
@@ -1006,6 +1027,7 @@ function processa_dados() {
 
 ---
 
+<a id="sentry-integration"></a>
 ## 🚨 Sentry Integration
 
 ### Configurar Sentry
@@ -1054,6 +1076,7 @@ try {
 
 ---
 
+<a id="deploy-strategies"></a>
 ## 🚀 Deploy Strategies
 
 ### Estratégias de Deploy
@@ -1097,6 +1120,7 @@ Risco: BAIXO (sem downtime total)
 
 ---
 
+<a id="deploy-checklist"></a>
 ## ✅ Deploy Checklist
 
 ### Pré-Deploy
@@ -1163,6 +1187,7 @@ Risco: BAIXO (sem downtime total)
 
 ---
 
+<a id="scripts-de-deploy"></a>
 ## 📜 Scripts de Deploy
 
 ### Deploy Script Completo
@@ -1357,6 +1382,7 @@ info "Monitorar próximas 30 minutos para detectar problemas"
 
 ---
 
+<a id="blue-green-deploy"></a>
 ## 🔄 Blue-Green Deploy
 
 ### Implementação de Blue-Green
@@ -1424,6 +1450,7 @@ log "Ativo agora: $INACTIVE (era $ACTIVE)"
 
 ---
 
+<a id="canary-deploy"></a>
 ## 📊 Canary Deploy
 
 ### Implementação de Canary
@@ -1489,6 +1516,7 @@ log "✅ Deploy Canary concluído com sucesso!"
 
 ---
 
+<a id="cicd-pipeline"></a>
 ## 🔄 CI/CD Pipeline
 
 ### GitHub Actions Workflow
@@ -1597,6 +1625,7 @@ jobs:
 
 ---
 
+<a id="monitoring"></a>
 ## 📈 Monitoring
 
 ### Configurar Monitoramento
@@ -1664,6 +1693,7 @@ class Monitoring
 
 ---
 
+<a id="boas-praticas"></a>
 ## 🎯 Boas Práticas
 
 ### Checklist Final
@@ -1711,6 +1741,7 @@ class Monitoring
 
 ---
 
+<a id="recursos-recomendados"></a>
 ## 📚 Recursos Recomendados
 
 - [PHPUnit Documentation](https://phpunit.de/documentation.html)

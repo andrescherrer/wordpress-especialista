@@ -13,22 +13,28 @@
 
 ## 📑 Índice
 
-1. [13.1 - SOLID Principles em WordPress](#131-solid-principles-em-wordpress)
-2. [13.2 - Domain-Driven Design (DDD)](#132-domain-driven-design-ddd)
-   - [13.2.2 - DDD Ubiquitous Language](#1322-ddd-ubiquitous-language)
-3. [13.3 - Service Layer Pattern](#133-service-layer-pattern)
-4. [13.4 - Repository Pattern](#134-repository-pattern)
-5. [13.5 - Dependency Injection Container](#135-dependency-injection-container)
-   - [13.5.2 - DI Container Implementação Completa com Pimple](#1352-di-container-implementação-completa-com-pimple)
-6. [13.6 - Event-Driven Architecture](#136-event-driven-architecture)
-7. [13.7 - MVC em WordPress](#137-mvc-em-wordpress)
-8. [13.8 - Adapter Pattern para APIs Externas](#138-adapter-pattern-para-apis-externas)
-9. [13.9 - Strategy Pattern](#139-strategy-pattern)
-10. [13.10 - Factory Pattern](#1310-factory-pattern)
-11. [13.11 - Quando NÃO Usar SOLID (Trade-offs)](#1311-quando-não-usar-solid-trade-offs)
+1. [Objetivos de Aprendizado](#objetivos-de-aprendizado)
+2. [Autoavaliação](#autoavaliacao)
+3. [Projeto Prático](#projeto-pratico)
+4. [Equívocos Comuns](#equivocos-comuns)
+5. [13.1 - SOLID Principles em WordPress](#131-solid-principles-em-wordpress)
+6. [13.2 - Domain-Driven Design (DDD)](#132-domain-driven-design-ddd)
+7. [13.3 - Service Layer Pattern](#133-service-layer-pattern)
+8. [13.4 - Repository Pattern](#134-repository-pattern)
+9. [13.5 - Dependency Injection Container](#135-dependency-injection-container)
+10. [13.6 - Event-Driven Architecture](#136-event-driven-architecture)
+11. [13.7 - MVC em WordPress](#137-mvc-em-wordpress)
+12. [13.8 - Adapter Pattern para APIs Externas](#138-adapter-pattern-para-apis-externas)
+13. [13.9 - Strategy Pattern](#139-strategy-pattern)
+14. [13.10 - Factory Pattern](#1310-factory-pattern)
+15. [13.11 - Quando NÃO Usar SOLID (Trade-offs)](#1311-quando-nao-usar-solid-trade-offs)
+16. [13.12 - Error Handling em Arquitetura Avançada](#1312-error-handling-em-arquitetura-avancada)
+17. [Resumo Comparativo dos Padrões](#resumo-comparativo-dos-padroes)
+18. [Checklist de Implementação](#checklist-de-implementacao)
 
 ---
 
+<a id="objetivos-de-aprendizado"></a>
 ## 🎯 Objetivos de Aprendizado
 
 Ao final desta fase, você será capaz de:
@@ -42,6 +48,7 @@ Ao final desta fase, você será capaz de:
 7. ✅ Aplicar padrões de design (Adapter, Strategy, Factory) apropriadamente
 8. ✅ Reconhecer quando NÃO usar SOLID (trade-offs e super-engenharia)
 
+<a id="autoavaliacao"></a>
 ## 📝 Autoavaliação
 
 Teste seu entendimento:
@@ -55,6 +62,7 @@ Teste seu entendimento:
 - [ ] Quando é apropriado NÃO seguir princípios SOLID?
 - [ ] Como você equilibra pureza arquitetural com convenções do core WordPress?
 
+<a id="projeto-pratico"></a>
 ## 🛠️ Projeto Prático
 
 **Construir:** Plugin de Arquitetura Enterprise
@@ -73,6 +81,7 @@ Crie um plugin que demonstre:
 
 ---
 
+<a id="equivocos-comuns"></a>
 ## ❌ Equívocos Comuns
 
 ### Equívoco 1: "Princípios SOLID sempre melhoram código"
@@ -112,6 +121,7 @@ Crie um plugin que demonstre:
 
 ---
 
+<a id="131-solid-principles-em-wordpress"></a>
 ## 13.1 SOLID Principles em WordPress
 
 Os 5 princípios SOLID são a base para código limpo, manutenível e extensível. Vamos detalhar cada um com exemplos práticos em WordPress.
@@ -1084,6 +1094,7 @@ public function testCreateOrder() {
 
 ---
 
+<a id="132-domain-driven-design-ddd"></a>
 ## 13.2 Domain-Driven Design (DDD)
 
 Domain-Driven Design é uma filosofia arquitetural que coloca a lógica de negócio no centro da aplicação.
@@ -1958,6 +1969,7 @@ $eventPublisher->subscribe(
 
 ---
 
+<a id="133-service-layer-pattern"></a>
 ## 13.3 Service Layer Pattern
 
 ```php
@@ -2072,12 +2084,14 @@ class CreateOrderApplicationService implements CreateOrderService {
 
 ---
 
+<a id="134-repository-pattern"></a>
 ## 13.4 Repository Pattern
 
 Já coberto em profundidade na seção 13.2.3
 
 ---
 
+<a id="135-dependency-injection-container"></a>
 ## 13.5 Dependency Injection Container
 
 ```php
@@ -2604,12 +2618,14 @@ $container->factory('order.service', function($c) {
 
 ---
 
+<a id="136-event-driven-architecture"></a>
 ## 13.6 Event-Driven Architecture
 
 Já coberto em profundidade na seção 13.2.5
 
 ---
 
+<a id="137-mvc-em-wordpress"></a>
 ## 13.7 MVC em WordPress
 
 ```php
@@ -2735,6 +2751,7 @@ add_shortcode('posts_list', function($atts) {
 
 ---
 
+<a id="138-adapter-pattern-para-apis-externas"></a>
 ## 13.8 Adapter Pattern para APIs Externas
 
 ```php
@@ -2894,6 +2911,7 @@ $service = new OrderPaymentService($adapter);
 
 ---
 
+<a id="139-strategy-pattern"></a>
 ## 13.9 Strategy Pattern
 
 ```php
@@ -3026,6 +3044,7 @@ $finalPrice = $service->calculateFinalPrice($order);
 
 ---
 
+<a id="1310-factory-pattern"></a>
 ## 13.10 Factory Pattern
 
 ```php
@@ -3191,6 +3210,7 @@ $order = $orderFactory->create($dto);
 
 ---
 
+<a id="1311-quando-nao-usar-solid-trade-offs"></a>
 ## 13.11 Quando NÃO Usar SOLID (Trade-offs)
 
 **Importante:** SOLID não é uma religião. Há situações onde aplicar SOLID rigorosamente pode ser over-engineering.
@@ -3568,6 +3588,7 @@ function transform_data($data) {
 
 ---
 
+<a id="1312-error-handling-em-arquitetura-avancada"></a>
 ## 13.12 Error Handling em Arquitetura Avançada
 
 ### 13.12.1 Exception Handling com Domain Exceptions
@@ -3906,6 +3927,7 @@ class EventDispatcher {
 
 ---
 
+<a id="resumo-comparativo-dos-padroes"></a>
 ## 📊 Resumo Comparativo dos Padrões
 
 | Padrão | Propósito | Quando Usar |
@@ -3923,6 +3945,7 @@ class EventDispatcher {
 
 ---
 
+<a id="checklist-de-implementacao"></a>
 ## 🚀 Checklist de Implementação
 
 - [ ] SOLID Principles implementados

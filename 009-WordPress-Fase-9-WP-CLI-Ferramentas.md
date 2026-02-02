@@ -13,21 +13,27 @@
 
 ## 📑 Índice
 
-1. [Fundamentos do WP-CLI](#fundamentos-do-wp-cli)
-2. [Comandos Básicos Essenciais](#comandos-básicos-essenciais)
-3. [Criar Comandos WP-CLI Customizados](#criar-comandos-wp-cli-customizados)
-4. [Subcomandos e Hierarquia](#subcomandos-e-hierarquia)
-5. [Comandos com Interatividade](#comandos-com-interatividade)
-6. [Comandos com Testes](#comandos-com-testes)
-7. [Scaffolding com WP-CLI](#scaffolding-com-wp-cli)
-8. [Migrations e Database](#migrations-e-database)
-9. [Debugging Tools](#debugging-tools)
-10. [Scripts de Automação](#scripts-de-automação)
-11. [CI/CD com GitHub Actions](#cicd-com-github-actions)
-12. [Boas Práticas](#boas-práticas)
+1. [Objetivos de Aprendizado](#objetivos-de-aprendizado)
+2. [Autoavaliação](#autoavaliacao)
+3. [Projeto Prático](#projeto-pratico)
+4. [Equívocos Comuns](#equivocos-comuns)
+5. [Fundamentos do WP-CLI](#fundamentos-do-wp-cli)
+6. [Comandos Básicos Essenciais](#comandos-basicos-essenciais)
+7. [Criar Comandos WP-CLI Customizados](#criar-comandos-wp-cli-customizados)
+8. [Subcomandos e Hierarquia](#subcomandos-e-hierarquia)
+9. [Comandos com Interatividade](#comandos-com-interatividade)
+10. [Comandos com Testes](#comandos-com-testes)
+11. [Scaffolding com WP-CLI](#scaffolding-com-wp-cli)
+12. [Migrations e Database](#migrations-e-database)
+13. [Debugging Tools](#debugging-tools)
+14. [Scripts de Automação](#scripts-de-automacao)
+15. [CI/CD com GitHub Actions](#cicd-com-github-actions)
+16. [Boas Práticas](#boas-praticas)
+17. [Resumo da Fase 9](#resumo-da-fase-9)
 
 ---
 
+<a id="objetivos-de-aprendizado"></a>
 ## 🎯 Objetivos de Aprendizado
 
 Ao final desta fase, você será capaz de:
@@ -41,6 +47,7 @@ Ao final desta fase, você será capaz de:
 7. ✅ Criar ferramentas de scaffolding para desenvolvimento rápido
 8. ✅ Aplicar workflows de desenvolvimento profissional com WP-CLI
 
+<a id="autoavaliacao"></a>
 ## 📝 Autoavaliação
 
 Teste seu entendimento:
@@ -54,6 +61,7 @@ Teste seu entendimento:
 - [ ] Como você trata comandos WP-CLI de longa duração sem timeout?
 - [ ] Quais são as melhores práticas para documentação de comandos WP-CLI?
 
+<a id="projeto-pratico"></a>
 ## 🛠️ Projeto Prático
 
 **Construir:** Suite de Automação de Desenvolvimento
@@ -71,6 +79,7 @@ Crie uma suite abrangente de desenvolvimento baseada em WP-CLI que:
 
 ---
 
+<a id="equivocos-comuns"></a>
 ## ❌ Equívocos Comuns
 
 ### Equívoco 1: "Comandos WP-CLI não podem ser testados"
@@ -96,6 +105,7 @@ Crie uma suite abrangente de desenvolvimento baseada em WP-CLI que:
 
 ---
 
+<a id="fundamentos-do-wp-cli"></a>
 ## Fundamentos do WP-CLI
 
 ### O que é WP-CLI?
@@ -146,6 +156,7 @@ wp --info
 
 ---
 
+<a id="comandos-basicos-essenciais"></a>
 ## Comandos Básicos Essenciais
 
 ### Core WordPress
@@ -367,6 +378,7 @@ wp option delete siteurl
 
 ---
 
+<a id="criar-comandos-wp-cli-customizados"></a>
 ## Criar Comandos WP-CLI Customizados
 
 ### Estrutura Básica de um Comando
@@ -639,6 +651,7 @@ WP_CLI::add_command('meu-plugin', 'Meu_Plugin_CLI_Command');
 
 ---
 
+<a id="subcomandos-e-hierarquia"></a>
 ## Subcomandos e Hierarquia
 
 ```php
@@ -782,6 +795,7 @@ WP_CLI::add_command('meu-plugin db', 'Meu_Plugin_DB_CLI_Command');
 
 ---
 
+<a id="comandos-com-interatividade"></a>
 ## Comandos com Interatividade
 
 ```php
@@ -1062,6 +1076,7 @@ WP_CLI::add_command('meu-plugin import', ['Meu_Plugin_Interactive_CLI_Command', 
 
 ---
 
+<a id="comandos-com-testes"></a>
 ## Comandos com Testes
 
 ```php
@@ -1216,6 +1231,7 @@ WP_CLI::add_command('meu-plugin test', 'Meu_Plugin_Test_CLI_Command');
 
 ---
 
+<a id="scaffolding-com-wp-cli"></a>
 ## Scaffolding com WP-CLI
 
 ```php
@@ -1428,6 +1444,7 @@ WP_CLI::add_command('meu-plugin scaffold module', ['Meu_Plugin_Scaffold_CLI_Comm
 
 ---
 
+<a id="migrations-e-database"></a>
 ## Migrations e Database
 
 ```php
@@ -1631,6 +1648,7 @@ WP_CLI::add_command('meu-plugin migrations', ['Meu_Plugin_Migration_CLI_Command'
 
 ---
 
+<a id="debugging-tools"></a>
 ## Debugging Tools
 
 ```php
@@ -1797,6 +1815,7 @@ WP_CLI::add_command('meu-plugin debug', 'Meu_Plugin_Debug_CLI_Command');
 
 ---
 
+<a id="scripts-de-automacao"></a>
 ## Scripts de Automação
 
 ```bash
@@ -1857,6 +1876,7 @@ echo "╚═══════════════════════�
 
 ---
 
+<a id="cicd-com-github-actions"></a>
 ## CI/CD com GitHub Actions
 
 ```yaml
@@ -1942,6 +1962,7 @@ jobs:
 
 ---
 
+<a id="boas-praticas"></a>
 ## Boas Práticas
 
 ### 1. Documentação de Comandos
@@ -2050,6 +2071,7 @@ $wpdb->prepare("SELECT * FROM {$wpdb->posts} WHERE post_title = %s", $title);
 
 ---
 
+<a id="resumo-da-fase-9"></a>
 ## Resumo da Fase 9
 
 Ao dominar a **Fase 9**, você entenderá:

@@ -4,6 +4,37 @@
 
 ---
 
+## 📑 Índice
+
+1. [Objetivos de Aprendizado](#objetivos-de-aprendizado)
+2. [Autoavaliação](#autoavaliacao)
+3. [Projeto Prático](#projeto-pratico)
+4. [Equívocos Comuns](#equivocos-comuns)
+5. [14.1 - Development Environment (Docker)](#141-development-environment-docker-para-wordpress)
+6. [14.2 - Staging Environment](#142-staging-environment-replicar-production)
+7. [14.3 - Production Environment](#143-production-environment-configuracao-de-production)
+8. [14.4 - Version Control (Git)](#144-version-control-git-estrategias-e-configuracoes)
+9. [14.5 - CI/CD Pipeline](#145-cicd-pipeline)
+10. [14.6 - Automated Testing in Pipeline](#146-automated-testing-in-pipeline)
+11. [14.7 - Automated Deployment](#147-automated-deployment)
+12. [14.8 - Monitoring e Logging](#148-monitoring-e-logging)
+13. [14.9 - Backup Strategy](#149-backup-strategy)
+14. [14.10 - Disaster Recovery](#1410-disaster-recovery)
+15. [RTO - Recovery Time Objective](#rto-recovery-time-objective-tempo-para-recuperacao)
+16. [RPO - Recovery Point Objective](#rpo-recovery-point-objective-perda-maxima-aceitavel-de-dados)
+17. [Informações Críticas](#informacoes-criticas)
+18. [Localizações de Backups](#localizacoes-de-backups)
+19. [Contatos de Emergência](#contatos-de-emergencia)
+20. [Recovery Checklists](#recovery-checklists)
+21. [Scripts Críticos](#scripts-criticos)
+22. [Lições Aprendidas](#licoes-aprendidas)
+23. [Resumo - Checklist Fase 14](#resumo-checklist-fase-14)
+24. [Próximos Passos](#proximos-passos)
+25. [Referências Úteis](#referencias-uteis)
+
+---
+
+<a id="objetivos-de-aprendizado"></a>
 ## 🎯 Objetivos de Aprendizado
 
 Ao final desta fase, você será capaz de:
@@ -17,6 +48,7 @@ Ao final desta fase, você será capaz de:
 7. ✅ Testar restaurações de backup automaticamente para garantir validade do backup
 8. ✅ Aplicar boas práticas DevOps para deployments WordPress em produção
 
+<a id="autoavaliacao"></a>
 ## 📝 Autoavaliação
 
 Teste seu entendimento:
@@ -30,6 +62,7 @@ Teste seu entendimento:
 - [ ] O que deve ser incluído em um checklist de deployment?
 - [ ] Como você trata migrações de banco de dados durante deployment?
 
+<a id="projeto-pratico"></a>
 ## 🛠️ Projeto Prático
 
 **Construir:** Setup DevOps Completo
@@ -49,6 +82,7 @@ Crie um setup DevOps completo que inclua:
 
 ---
 
+<a id="equivocos-comuns"></a>
 ## ❌ Equívocos Comuns
 
 ### Equívoco 1: "Docker é apenas para produção"
@@ -88,6 +122,7 @@ Crie um setup DevOps completo que inclua:
 
 ---
 
+<a id="141-development-environment-docker-para-wordpress"></a>
 ## 14.1 Development Environment - Docker para WordPress
 
 ### 14.1.1 Docker Compose File Completo
@@ -1217,6 +1252,7 @@ docker-compose.override.yml
 
 ---
 
+<a id="142-staging-environment-replicar-production"></a>
 ## 14.2 Staging Environment - Replicar Production
 
 ### 14.2.1 Docker Compose para Staging
@@ -1476,6 +1512,7 @@ echo "✅ Todos os testes passaram!"
 
 ---
 
+<a id="143-production-environment-configuracao-de-production"></a>
 ## 14.3 Production Environment - Configuração de Production
 
 ### 14.3.1 Setup Inicial de Servidor (Ubuntu 22.04)
@@ -1824,6 +1861,7 @@ if (defined('WP_CACHE') && WP_CACHE) {
 
 ---
 
+<a id="144-version-control-git-estrategias-e-configuracoes"></a>
 ## 14.4 Version Control (Git) - Estratégias e Configurações
 
 ### 14.4.1 .gitignore Completo para WordPress
@@ -2063,6 +2101,7 @@ echo "✅ Todas as verificações passaram!"
 
 ---
 
+<a id="145-cicd-pipeline"></a>
 ## 14.5 CI/CD Pipeline
 
 ### 14.5.1 GitHub Actions Workflow Completo
@@ -2492,6 +2531,7 @@ deploy_production:
 
 ---
 
+<a id="146-automated-testing-in-pipeline"></a>
 ## 14.6 Automated Testing in Pipeline
 
 ### 14.6.1 PHPUnit Configuration
@@ -2732,6 +2772,7 @@ rules:
 
 ---
 
+<a id="147-automated-deployment"></a>
 ## 14.7 Automated Deployment
 
 ### 14.7.1 Deploy Script Completo
@@ -2944,6 +2985,7 @@ echo "✅ Rollback concluído!"
 
 ---
 
+<a id="148-monitoring-e-logging"></a>
 ## 14.8 Monitoring e Logging
 
 ### 14.8.1 Sentry Integration
@@ -3169,6 +3211,7 @@ exit $?
 
 ---
 
+<a id="149-backup-strategy"></a>
 ## 14.9 Backup Strategy
 
 ### 14.9.1 Backup Script Completo
@@ -3927,6 +3970,7 @@ fi
 
 ---
 
+<a id="1410-disaster-recovery"></a>
 ## 14.10 Disaster Recovery
 
 ### 14.10.1 RTO/RPO Targets
@@ -3934,6 +3978,7 @@ fi
 ```markdown
 # Disaster Recovery Plan
 
+<a id="rto-recovery-time-objective-tempo-para-recuperacao"></a>
 ## RTO (Recovery Time Objective) - Tempo para recuperação
 
 - **Critical Systems**: < 1 hora
@@ -3950,6 +3995,7 @@ fi
   - Development environment
   - Testing servers
 
+<a id="rpo-recovery-point-objective-perda-maxima-aceitavel-de-dados"></a>
 ## RPO (Recovery Point Objective) - Perda máxima aceitável de dados
 
 - **Database**: 1 hora (backups de hora em hora)
@@ -4103,6 +4149,7 @@ log "Recovery completo!"
 ```markdown
 # Disaster Recovery - Documentação
 
+<a id="informacoes-criticas"></a>
 ## Informações Críticas
 
 - **Website**: example.com
@@ -4112,6 +4159,7 @@ log "Recovery completo!"
 - **Recovery Time Objective (RTO)**: 1 hora
 - **Recovery Point Objective (RPO)**: 1 hora
 
+<a id="localizacoes-de-backups"></a>
 ## Localizações de Backups
 
 | Type | Location | Frequency | Retention |
@@ -4121,12 +4169,14 @@ log "Recovery completo!"
 | Remote | S3 (AWS) | Daily | 90 dias |
 | Archive | External HDD | Monthly | 1 ano |
 
+<a id="contatos-de-emergencia"></a>
 ## Contatos de Emergência
 
 - **Database Admin**: dba@example.com
 - **Infrastructure**: infra@example.com
 - **On-call**: +55 11 XXXX-XXXX
 
+<a id="recovery-checklists"></a>
 ## Recovery Checklists
 
 ### Database Recovery
@@ -4150,6 +4200,7 @@ log "Recovery completo!"
 - Documentar tempo de recuperação
 - Atualizar runbooks
 
+<a id="scripts-criticos"></a>
 ## Scripts Críticos
 
 - `backup.sh` - Backup automático
@@ -4157,6 +4208,7 @@ log "Recovery completo!"
 - `restore-test.sh` - Testar restore
 - `health-check.sh` - Verificar saúde
 
+<a id="licoes-aprendidas"></a>
 ## Lições Aprendidas
 
 [Registrar descobertas de cada incident]
@@ -4221,6 +4273,7 @@ echo ""
 
 ---
 
+<a id="resumo-checklist-fase-14"></a>
 ## Resumo - Checklist Fase 14
 
 ```markdown
@@ -4300,6 +4353,7 @@ echo ""
 
 ---
 
+<a id="proximos-passos"></a>
 ## Próximos Passos
 
 Após completar esta Fase 14:
@@ -4326,6 +4380,7 @@ Após completar esta Fase 14:
 
 ---
 
+<a id="referencias-uteis"></a>
 ## Referências Úteis
 
 - [WordPress DevOps Best Practices](https://developer.wordpress.org/)

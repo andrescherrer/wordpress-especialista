@@ -13,17 +13,22 @@
 
 ## 📑 Índice
 
-1. [Conceitos Fundamentais](#conceitos-fundamentais)
-2. [REST API Controllers](#rest-api-controllers)
-3. [Resposta Estruturada](#resposta-estruturada)
-4. [Validação e Sanitização](#validação-e-sanitização)
-5. [Autenticação e Permissões](#autenticação-e-permissões)
-6. [Tratamento de Erros](#tratamento-de-erros)
-7. [Testes de API](#testes-de-api)
-8. [Boas Práticas](#boas-práticas)
+1. [Objetivos de Aprendizado](#objetivos-de-aprendizado)
+2. [Autoavaliação](#autoavaliacao)
+3. [Projeto Prático](#projeto-pratico)
+4. [Equívocos Comuns](#equivocos-comuns)
+5. [Conceitos Fundamentais](#conceitos-fundamentais)
+6. [REST API Controllers](#rest-api-controllers)
+7. [Resposta Estruturada](#resposta-estruturada)
+8. [Validação e Sanitização](#validacao-e-sanitizacao)
+9. [Autenticação e Permissões](#autenticacao-e-permissoes)
+10. [Tratamento de Erros](#tratamento-de-erros)
+11. [Testes de API](#testes-de-api)
+12. [Boas Práticas](#boas-praticas)
 
 ---
 
+<a id="objetivos-de-aprendizado"></a>
 ## 🎯 Objetivos de Aprendizado
 
 Ao final desta fase, você será capaz de:
@@ -37,6 +42,7 @@ Ao final desta fase, você será capaz de:
 7. ✅ Aplicar boas práticas e padrões de design da REST API
 8. ✅ Otimizar performance da API com cache e otimização de queries
 
+<a id="autoavaliacao"></a>
 ## 📝 Autoavaliação
 
 Teste seu entendimento:
@@ -50,6 +56,7 @@ Teste seu entendimento:
 - [ ] Como você testa endpoints da REST API programaticamente?
 - [ ] Quais estratégias de cache são apropriadas para respostas da REST API?
 
+<a id="projeto-pratico"></a>
 ## 🛠️ Projeto Prático
 
 **Construir:** API Avançada de Gerenciamento de Blog
@@ -67,6 +74,7 @@ Crie uma REST API abrangente que:
 
 ---
 
+<a id="equivocos-comuns"></a>
 ## ❌ Equívocos Comuns
 
 ### Equívoco 1: "Estender WP_REST_Controller é sempre necessário"
@@ -99,6 +107,7 @@ Crie uma REST API abrangente que:
 
 ---
 
+<a id="conceitos-fundamentais"></a>
 ## Conceitos Fundamentais
 
 ### O que é uma REST API?
@@ -135,6 +144,7 @@ class Meu_Plugin_Posts_Controller extends WP_REST_Controller {
 
 ---
 
+<a id="rest-api-controllers"></a>
 ## REST API Controllers
 
 ### Estrutura Base de um Controller
@@ -633,6 +643,7 @@ new Meu_Plugin_Posts_Controller();
 
 ---
 
+<a id="resposta-estruturada"></a>
 ## Resposta Estruturada
 
 ### Padrão de Resposta Consistente
@@ -730,6 +741,7 @@ class Meu_Plugin_REST_Response {
 
 ---
 
+<a id="validacao-e-sanitizacao"></a>
 ## Validação e Sanitização
 
 ### Validação de Entrada (Input Validation)
@@ -909,6 +921,7 @@ class Meu_Plugin_Sanitizer {
 
 ---
 
+<a id="autenticacao-e-permissoes"></a>
 ## Autenticação e Permissões
 
 ### Autenticação JWT (JSON Web Token)
@@ -1142,6 +1155,7 @@ new Meu_Plugin_JWT_Auth();
 
 ---
 
+<a id="tratamento-de-erros"></a>
 ## Tratamento de Erros
 
 ### Error Handling Avançado em Controllers
@@ -1531,6 +1545,7 @@ $products = Resilient_API_Operation::execute_with_fallback(
 
 ---
 
+<a id="testes-de-api"></a>
 ## Testes de API
 
 ### Testar Endpoints com cURL
@@ -1660,6 +1675,7 @@ class Test_REST_API_Controller extends WP_UnitTestCase {
 
 ---
 
+<a id="boas-praticas"></a>
 ## Boas Práticas
 
 ### Checklist de Qualidade

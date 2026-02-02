@@ -13,17 +13,23 @@
 
 ## 📑 Índice
 
-1. [Fundamentos do WP-CLI](#fundamentos-do-wp-cli)
-2. [Comandos Básicos Essenciais](#comandos-básicos-essenciais)
-3. [Criar Comandos WP-CLI Customizados](#criar-comandos-wp-cli-customizados)
-4. [Subcomandos e Estrutura Hierárquica](#subcomandos-e-estrutura-hierárquica)
-5. [Comandos com Interatividade](#comandos-com-interatividade)
-6. [Comandos de Database](#comandos-de-database)
-7. [Scaffolding com WP-CLI](#scaffolding-com-wp-cli)
-8. [Boas Práticas](#boas-práticas)
+1. [Objetivos de Aprendizado](#objetivos-de-aprendizado)
+2. [Autoavaliação](#autoavaliacao)
+3. [Projeto Prático](#projeto-pratico)
+4. [Equívocos Comuns](#equivocos-comuns)
+5. [Fundamentos do WP-CLI](#fundamentos-do-wp-cli)
+6. [Comandos Básicos Essenciais](#comandos-basicos-essenciais)
+7. [Criar Comandos WP-CLI Customizados](#criar-comandos-wp-cli-customizados)
+8. [Subcomandos e Estrutura Hierárquica](#subcomandos-e-estrutura-hierarquica)
+9. [Comandos com Interatividade](#comandos-com-interatividade)
+10. [Comandos de Database](#comandos-de-database)
+11. [Scaffolding com WP-CLI](#scaffolding-com-wp-cli)
+12. [Boas Práticas](#boas-praticas)
+13. [Resumo da Fase 7](#resumo-da-fase-7)
 
 ---
 
+<a id="objetivos-de-aprendizado"></a>
 ## 🎯 Objetivos de Aprendizado
 
 Ao final desta fase, você será capaz de:
@@ -37,6 +43,7 @@ Ao final desta fase, você será capaz de:
 7. ✅ Integrar comandos WP-CLI em scripts de automação
 8. ✅ Aplicar boas práticas e tratamento de erros do WP-CLI
 
+<a id="autoavaliacao"></a>
 ## 📝 Autoavaliação
 
 Teste seu entendimento:
@@ -50,6 +57,7 @@ Teste seu entendimento:
 - [ ] Como você usa WP-CLI em scripts shell para automação?
 - [ ] Quais são as considerações de segurança ao usar comandos WP-CLI?
 
+<a id="projeto-pratico"></a>
 ## 🛠️ Projeto Prático
 
 **Construir:** Gerenciador de Plugin WP-CLI
@@ -67,6 +75,7 @@ Crie um plugin com comandos WP-CLI customizados que:
 
 ---
 
+<a id="equivocos-comuns"></a>
 ## ❌ Equívocos Comuns
 
 ### Equívoco 1: "WP-CLI requer acesso SSH"
@@ -92,6 +101,7 @@ Crie um plugin com comandos WP-CLI customizados que:
 
 ---
 
+<a id="fundamentos-do-wp-cli"></a>
 ## Fundamentos do WP-CLI
 
 ### O que é WP-CLI?
@@ -145,6 +155,7 @@ WP-CLI version: 2.8.0
 
 ---
 
+<a id="comandos-basicos-essenciais"></a>
 ## Comandos Básicos Essenciais
 
 ### WordPress Core
@@ -411,6 +422,7 @@ wp search-replace 'old' 'new' --all-tables --verbose
 
 ---
 
+<a id="criar-comandos-wp-cli-customizados"></a>
 ## Criar Comandos WP-CLI Customizados
 
 ### Estrutura Básica
@@ -632,6 +644,7 @@ WP_CLI::add_command('exemplo', 'Meu_Plugin_CLI_Output_Command');
 
 ---
 
+<a id="subcomandos-e-estrutura-hierarquica"></a>
 ## Subcomandos e Estrutura Hierárquica
 
 ### Criar Subcomandos
@@ -737,6 +750,7 @@ WP_CLI::add_command('meu-plugin db', 'Meu_Plugin_DB_CLI_Command');
 
 ---
 
+<a id="comandos-com-interatividade"></a>
 ## Comandos com Interatividade
 
 ### Prompts e Confirmações
@@ -824,6 +838,7 @@ WP_CLI::add_command('meu-plugin setup', 'Meu_Plugin_Interactive_CLI_Command');
 
 ---
 
+<a id="comandos-de-database"></a>
 ## Comandos de Database
 
 ### CRUD Completo
@@ -1029,6 +1044,7 @@ WP_CLI::add_command('meu-plugin data', 'Meu_Plugin_Data_CLI_Command');
 
 ---
 
+<a id="scaffolding-com-wp-cli"></a>
 ## Scaffolding com WP-CLI
 
 ### Gerar Estrutura de Código
@@ -1282,6 +1298,7 @@ WP_CLI::add_command('meu-plugin scaffold', 'Meu_Plugin_Scaffold_CLI_Command');
 
 ---
 
+<a id="boas-praticas"></a>
 ## Boas Práticas
 
 ### Checklist de Comandos de Qualidade
@@ -1370,6 +1387,7 @@ if (defined('WP_CLI') && WP_CLI) {
 
 ---
 
+<a id="resumo-da-fase-7"></a>
 ## Resumo da Fase 7
 
 ### ✅ Tópicos Abordados

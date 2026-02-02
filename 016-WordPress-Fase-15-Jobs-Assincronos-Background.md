@@ -13,17 +13,24 @@
 
 ## 📑 Índice
 
-1. [Por Que Async Jobs?](#por-que-async-jobs)
-2. [Limitações do WP-Cron](#limitações-do-wp-cron)
-3. [Action Scheduler (Production-Ready)](#action-scheduler-production-ready)
-4. [Queue Patterns (Enterprise)](#queue-patterns-enterprise)
-5. [Webhook Receivers (Inbound)](#webhook-receivers-inbound)
-6. [Integração com Docker](#integração-com-docker)
-7. [Monitoramento em Produção](#monitoramento-em-produção)
-8. [Case Studies Práticos](#case-studies-práticos)
+1. [Objetivos de Aprendizado](#objetivos-de-aprendizado)
+2. [Autoavaliação](#autoavaliacao)
+3. [Projeto Prático](#projeto-pratico)
+4. [Equívocos Comuns](#equivocos-comuns)
+5. [Por Que Async Jobs?](#por-que-async-jobs)
+6. [Limitações do WP-Cron](#limitacoes-do-wp-cron)
+7. [Action Scheduler (Production-Ready)](#action-scheduler-production-ready)
+8. [Queue Patterns (Enterprise)](#queue-patterns-enterprise)
+9. [Webhook Receivers (Inbound)](#webhook-receivers-inbound)
+10. [Integração com Docker](#integracao-com-docker)
+11. [Monitoramento em Produção](#monitoramento-em-producao)
+12. [Error Handling em Async Jobs](#error-handling-em-async-jobs)
+13. [Case Studies Práticos](#case-studies-praticos)
+14. [Resumo e Próximos Passos](#resumo-e-proximos-passos)
 
 ---
 
+<a id="objetivos-de-aprendizado"></a>
 ## 🎯 Objetivos de Aprendizado
 
 Ao final desta fase, você será capaz de:
@@ -37,6 +44,7 @@ Ao final desta fase, você será capaz de:
 7. ✅ Tratar falhas de jobs, retries e dead letter queues adequadamente
 8. ✅ Aplicar padrões de async jobs a cenários do mundo real (e-commerce, processamento de mídia)
 
+<a id="autoavaliacao"></a>
 ## 📝 Autoavaliação
 
 Teste seu entendimento:
@@ -50,6 +58,7 @@ Teste seu entendimento:
 - [ ] Quais estratégias você pode usar para tratar falhas de jobs?
 - [ ] Como você escala processamento de async jobs horizontalmente?
 
+<a id="projeto-pratico"></a>
 ## 🛠️ Projeto Prático
 
 **Construir:** Sistema de Processamento de Async Jobs
@@ -69,6 +78,7 @@ Crie um sistema completo de processamento de async jobs que:
 
 ---
 
+<a id="equivocos-comuns"></a>
 ## ❌ Equívocos Comuns
 
 ### Equívoco 1: "WP-Cron é confiável para produção"
@@ -108,6 +118,7 @@ Crie um sistema completo de processamento de async jobs que:
 
 ---
 
+<a id="por-que-async-jobs"></a>
 ## Por Que Async Jobs?
 
 ### Problema Real: Requisições HTTP Bloqueantes
@@ -203,6 +214,7 @@ add_action('sync_post_external_api', function($post_id) {
 
 ---
 
+<a id="limitacoes-do-wp-cron"></a>
 ## Limitações do WP-Cron
 
 ### Problema Fundamental
@@ -303,6 +315,7 @@ define('DISABLE_WP_CRON', true);
 
 ---
 
+<a id="action-scheduler-production-ready"></a>
 ## Action Scheduler (Production-Ready)
 
 ### O Que É Action Scheduler?
@@ -819,6 +832,7 @@ add_action('wp_dashboard_setup', function() {
 
 ---
 
+<a id="queue-patterns-enterprise"></a>
 ## Queue Patterns (Enterprise)
 
 Para aplicações mais complexas, você pode implementar padrões de queue avançados sobre o Action Scheduler.
@@ -1841,6 +1855,7 @@ register_activation_hook(__FILE__, [DeadLetterQueue::class, 'createTable']);
 
 ---
 
+<a id="webhook-receivers-inbound"></a>
 ## Webhook Receivers (Inbound)
 
 ### Padrão Seguro para Receber Webhooks
@@ -2278,6 +2293,7 @@ async function createOrder(orderData) {
 
 ---
 
+<a id="integracao-com-docker"></a>
 ## Integração com Docker
 
 ### Docker Compose com Workers
@@ -2453,6 +2469,7 @@ WORKDIR /var/www/html
 
 ---
 
+<a id="monitoramento-em-producao"></a>
 ## Monitoramento em Produção
 
 ### Monitoring com Prometheus/Grafana
@@ -2896,6 +2913,7 @@ add_action('wp_dashboard_setup', function() {
 
 ---
 
+<a id="error-handling-em-async-jobs"></a>
 ## Error Handling em Async Jobs
 
 ### Error Handling Patterns para Background Jobs
@@ -3289,6 +3307,7 @@ class GenericJobHandler {
 
 ---
 
+<a id="case-studies-praticos"></a>
 ## Case Studies Práticos
 
 ### Case Study 1: E-commerce Order Processing
@@ -3409,6 +3428,7 @@ add_action('generate_metadata', function($attachment_id) {
 
 ---
 
+<a id="resumo-e-proximos-passos"></a>
 ## Resumo e Próximos Passos
 
 ### O Que Você Aprendeu

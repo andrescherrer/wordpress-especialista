@@ -13,18 +13,24 @@
 
 ## 📑 Índice
 
-1. [Fundamentos de Shortcodes](#fundamentos-de-shortcodes)
-2. [Criar Shortcodes Básicos](#criar-shortcodes-básicos)
-3. [Shortcodes Avançados](#shortcodes-avançados)
-4. [Widgets API Clássica](#widgets-api-clássica)
-5. [Criar Widgets Customizados](#criar-widgets-customizados)
-6. [Fundamentos de Gutenberg Blocks](#fundamentos-de-gutenberg-blocks)
-7. [Criar Custom Blocks](#criar-custom-blocks)
-8. [Dynamic Blocks e Block Patterns](#dynamic-blocks-e-block-patterns)
-9. [Boas Práticas](#boas-práticas)
+1. [Objetivos de Aprendizado](#objetivos-de-aprendizado)
+2. [Autoavaliação](#autoavaliacao)
+3. [Projeto Prático](#projeto-pratico)
+4. [Equívocos Comuns](#equivocos-comuns)
+5. [Fundamentos de Shortcodes](#fundamentos-de-shortcodes)
+6. [Criar Shortcodes Básicos](#criar-shortcodes-basicos)
+7. [Shortcodes Avançados](#shortcodes-avancados)
+8. [Widgets API Clássica](#widgets-api-classica)
+9. [Criar Widgets Customizados](#criar-widgets-customizados)
+10. [Fundamentos de Gutenberg Blocks](#fundamentos-de-gutenberg-blocks)
+11. [Criar Custom Blocks](#criar-custom-blocks)
+12. [Dynamic Blocks e Block Patterns](#dynamic-blocks-e-block-patterns)
+13. [Boas Práticas](#boas-praticas)
+14. [Resumo da Fase 6](#resumo-da-fase-6)
 
 ---
 
+<a id="objetivos-de-aprendizado"></a>
 ## 🎯 Objetivos de Aprendizado
 
 Ao final desta fase, você será capaz de:
@@ -38,6 +44,7 @@ Ao final desta fase, você será capaz de:
 7. ✅ Enfileirar scripts e estilos adequadamente para blocos
 8. ✅ Aplicar boas práticas para desenvolvimento de shortcodes, widgets e blocos
 
+<a id="autoavaliacao"></a>
 ## 📝 Autoavaliação
 
 Teste seu entendimento:
@@ -51,6 +58,7 @@ Teste seu entendimento:
 - [ ] Qual é a diferença entre Widgets API e blocos Gutenberg?
 - [ ] Como você trata depreciações de blocos ao atualizar atributos de bloco?
 
+<a id="projeto-pratico"></a>
 ## 🛠️ Projeto Prático
 
 **Construir:** Plugin de Exibição de Conteúdo
@@ -67,6 +75,7 @@ Crie um plugin que inclua:
 
 ---
 
+<a id="equivocos-comuns"></a>
 ## ❌ Equívocos Comuns
 
 ### Equívoco 1: "Shortcodes executam código PHP diretamente"
@@ -99,6 +108,7 @@ Crie um plugin que inclua:
 
 ---
 
+<a id="fundamentos-de-shortcodes"></a>
 ## Fundamentos de Shortcodes
 
 ### O que são Shortcodes?
@@ -122,6 +132,7 @@ Crie um plugin que inclua:
 
 ---
 
+<a id="criar-shortcodes-basicos"></a>
 ## Criar Shortcodes Básicos
 
 ### 6.2.1 Registrar Shortcodes
@@ -336,6 +347,7 @@ public function shortcode_posts_recentes($atts) {
 
 ---
 
+<a id="shortcodes-avancados"></a>
 ## Shortcodes Avançados
 
 ### 6.3.1 Shortcodes com Processamento de Formulários
@@ -471,6 +483,7 @@ public function shortcode_tab($atts, $content = '') {
 
 ---
 
+<a id="widgets-api-classica"></a>
 ## Widgets API Clássica
 
 ### O que são Widgets?
@@ -486,6 +499,7 @@ public function shortcode_tab($atts, $content = '') {
 
 ---
 
+<a id="criar-widgets-customizados"></a>
 ## Criar Widgets Customizados
 
 ### 6.5.1 Widget Básico - Posts Recentes
@@ -814,6 +828,7 @@ add_action('widgets_init', function() {
 
 ---
 
+<a id="fundamentos-de-gutenberg-blocks"></a>
 ## Fundamentos de Gutenberg Blocks
 
 ### O que são Gutenberg Blocks?
@@ -834,6 +849,7 @@ add_action('widgets_init', function() {
 
 ---
 
+<a id="criar-custom-blocks"></a>
 ## Criar Custom Blocks
 
 ### 6.7.1 Estrutura Básica de um Gutenberg Block
@@ -1053,6 +1069,7 @@ registerBlockType('meu-plugin/latest-posts', {
 
 ---
 
+<a id="dynamic-blocks-e-block-patterns"></a>
 ## Dynamic Blocks e Block Patterns
 
 ### 6.8.1 Block Patterns
@@ -1135,6 +1152,7 @@ new Meu_Plugin_Block_Patterns();
 
 ---
 
+<a id="boas-praticas"></a>
 ## Boas Práticas
 
 ### ✅ Segurança
@@ -1201,6 +1219,7 @@ if (is_plugin_active('woocommerce/woocommerce.php')) {
 
 ---
 
+<a id="resumo-da-fase-6"></a>
 ## 📚 Resumo da Fase 6
 
 Você aprendeu:

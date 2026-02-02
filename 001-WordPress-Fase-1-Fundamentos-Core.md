@@ -13,17 +13,23 @@
 
 ## 📑 Índice
 
-1. [Arquitetura e Estrutura](#arquitetura-e-estrutura)
-2. [Hook System](#hook-system-actions-e-filters)
-3. [Estrutura do Banco de Dados](#estrutura-do-banco-de-dados)
-4. [WordPress Database API](#wordpress-database-api-wpdb)
-5. [Posts, Pages e Custom Content](#posts-pages-e-custom-content)
-6. [Template Hierarchy](#template-hierarchy)
-7. [The Loop](#the-loop)
-8. [WordPress Coding Standards](#wordpress-coding-standards)
+1. [Objetivos de Aprendizado](#objetivos-de-aprendizado)
+2. [Autoavaliação](#autoavaliacao)
+3. [Projeto Prático](#projeto-pratico)
+4. [Equívocos Comuns](#equivocos-comuns)
+5. [Arquitetura e Estrutura](#arquitetura-e-estrutura)
+6. [Hook System (Actions e Filters)](#hook-system-actions-e-filters)
+7. [Estrutura do Banco de Dados](#estrutura-do-banco-de-dados)
+8. [WordPress Database API ($wpdb)](#wordpress-database-api-wpdb)
+9. [Posts, Pages e Custom Content](#posts-pages-e-custom-content)
+10. [Template Hierarchy](#template-hierarchy)
+11. [The Loop](#the-loop)
+12. [WordPress Coding Standards](#wordpress-coding-standards)
+13. [Resumo da Fase 1](#resumo-da-fase-1)
 
 ---
 
+<a id="objetivos-de-aprendizado"></a>
 ## 🎯 Objetivos de Aprendizado
 
 Ao final desta fase, você será capaz de:
@@ -37,6 +43,7 @@ Ao final desta fase, você será capaz de:
 7. ✅ Aplicar os WordPress Coding Standards no seu código customizado
 8. ✅ Lidar com a ordem de bootstrap do WordPress e disponibilidade de funções corretamente
 
+<a id="autoavaliacao"></a>
 ## 📝 Autoavaliação
 
 Teste seu entendimento:
@@ -50,6 +57,7 @@ Teste seu entendimento:
 - [ ] Qual é a diferença entre `wp_insert_post()` e `$wpdb->insert()`?
 - [ ] Como você remove um hook específico com uma prioridade conhecida?
 
+<a id="projeto-pratico"></a>
 ## 🛠️ Projeto Prático
 
 **Construir:** Plugin Gerenciador de Custom Post Types
@@ -66,6 +74,7 @@ Crie um plugin que:
 
 ---
 
+<a id="equivocos-comuns"></a>
 ## ❌ Equívocos Comuns
 
 ### Equívoco 1: "Actions e Filters são a mesma coisa"
@@ -105,6 +114,7 @@ Crie um plugin que:
 
 ---
 
+<a id="arquitetura-e-estrutura"></a>
 ## 🏗️ Arquitetura e Estrutura
 
 ### 1.1 Estrutura de Diretórios do WordPress
@@ -359,6 +369,7 @@ define('FORCE_SSL_LOGIN', true);
 
 ---
 
+<a id="hook-system-actions-e-filters"></a>
 ## 🔌 Hook System (Actions e Filters)
 
 ### 2.1 Fundamentos de Actions
@@ -782,6 +793,7 @@ add_filter('the_content', function($content) {
 
 ---
 
+<a id="estrutura-do-banco-de-dados"></a>
 ## 🗄️ Estrutura do Banco de Dados
 
 ### 3.1 Tabelas Principais do WordPress
@@ -955,6 +967,7 @@ $posts = $wpdb->get_results(
 
 ---
 
+<a id="wordpress-database-api-wpdb"></a>
 ## 🛠️ WordPress Database API ($wpdb)
 
 ### 4.1 Global $wpdb
@@ -1359,6 +1372,7 @@ function safe_transaction() {
 
 ---
 
+<a id="posts-pages-e-custom-content"></a>
 ## 📄 Posts, Pages e Custom Content
 
 ### 5.1 Post Types Nativos
@@ -1467,6 +1481,7 @@ $parent = get_post_parent(123);                    // Post pai
 
 ---
 
+<a id="template-hierarchy"></a>
 ## 🎨 Template Hierarchy
 
 ### 6.1 Ordem de Resolução de Templates
@@ -1561,6 +1576,7 @@ is_page_template('full-width.php') // Verifica template específico
 
 ---
 
+<a id="the-loop"></a>
 ## 🔄 The Loop
 
 ### 7.1 Conceito Básico
@@ -1763,6 +1779,7 @@ foreach ($main_posts as $main_post) {
 
 ---
 
+<a id="wordpress-coding-standards"></a>
 ## 📐 WordPress Coding Standards
 
 ### 8.1 PHPDoc Padrão
@@ -1957,6 +1974,7 @@ add_action('plugins_loaded', function() {
 
 ---
 
+<a id="resumo-da-fase-1"></a>
 ## 🎓 Resumo da Fase 1
 
 Ao dominar a **Fase 1**, você entenderá:

@@ -13,17 +13,22 @@
 
 ## 📑 Índice
 
-1. [Fundamentos de Custom Post Types (CPT)](#fundamentos-de-custom-post-types-cpt)
-2. [Registrar Custom Post Types](#registrar-custom-post-types)
-3. [Custom Post Type Avançado](#custom-post-type-avançado)
-4. [Fundamentos de Taxonomias](#fundamentos-de-taxonomias)
-5. [Registrar Taxonomias Customizadas](#registrar-taxonomias-customizadas)
-6. [Integração de CPT e Taxonomias](#integração-de-cpt-e-taxonomias)
-7. [Funções Essenciais](#funções-essenciais)
-8. [Boas Práticas](#boas-práticas)
+1. [Objetivos de Aprendizado](#objetivos-de-aprendizado)
+2. [Autoavaliação](#autoavaliacao)
+3. [Projeto Prático](#projeto-pratico)
+4. [Equívocos Comuns](#equivocos-comuns)
+5. [Fundamentos de Custom Post Types (CPT)](#fundamentos-de-custom-post-types-cpt)
+6. [Registrar Custom Post Types](#registrar-custom-post-types)
+7. [Custom Post Type Avançado](#custom-post-type-avancado)
+8. [Fundamentos de Taxonomias](#fundamentos-de-taxonomias)
+9. [Registrar Taxonomias Customizadas](#registrar-taxonomias-customizadas)
+10. [Integração de CPT e Taxonomias](#integracao-de-cpt-e-taxonomias)
+11. [Funções Essenciais](#funcoes-essenciais)
+12. [Boas Práticas](#boas-praticas)
 
 ---
 
+<a id="objetivos-de-aprendizado"></a>
 ## 🎯 Objetivos de Aprendizado
 
 Ao final desta fase, você será capaz de:
@@ -37,6 +42,7 @@ Ao final desta fase, você será capaz de:
 7. ✅ Tratar arquivos e templates single de CPTs no tema
 8. ✅ Aplicar verificações de capability adequadas para ações de CPT (edit, delete, publish)
 
+<a id="autoavaliacao"></a>
 ## 📝 Autoavaliação
 
 Teste seu entendimento:
@@ -50,6 +56,7 @@ Teste seu entendimento:
 - [ ] Qual é a diferença entre `register_post_type()` e o filter `register_post_type_args`?
 - [ ] Como você remove meta boxes padrão e adiciona customizadas?
 
+<a id="projeto-pratico"></a>
 ## 🛠️ Projeto Prático
 
 **Construir:** Sistema de Gerenciamento de Eventos
@@ -68,6 +75,7 @@ Crie um sistema completo de gerenciamento de eventos com:
 
 ---
 
+<a id="equivocos-comuns"></a>
 ## ❌ Equívocos Comuns
 
 ### Equívoco 1: "Custom Post Types precisam de tabelas de banco de dados customizadas"
@@ -107,6 +115,7 @@ Crie um sistema completo de gerenciamento de eventos com:
 
 ---
 
+<a id="fundamentos-de-custom-post-types-cpt"></a>
 ## Fundamentos de Custom Post Types (CPT)
 
 ### 1.1 O que são Custom Post Types?
@@ -146,6 +155,7 @@ wp_block      - Blocos reutilizáveis (block editor)
 
 ---
 
+<a id="registrar-custom-post-types"></a>
 ## Registrar Custom Post Types
 
 ### 2.1 CPT Simples - Portfólio
@@ -350,6 +360,7 @@ $args = [
 
 ---
 
+<a id="custom-post-type-avancado"></a>
 ## Custom Post Type Avançado
 
 ### 3.1 CPT com Suporte Completo e Hooks
@@ -431,6 +442,7 @@ new Advanced_CPT();
 
 ---
 
+<a id="fundamentos-de-taxonomias"></a>
 ## Fundamentos de Taxonomias
 
 ### 4.1 O que são Taxonomias?
@@ -461,6 +473,7 @@ Hierárquica (como Categorias)      Não-Hierárquica (como Tags)
 
 ---
 
+<a id="registrar-taxonomias-customizadas"></a>
 ## Registrar Taxonomias Customizadas
 
 ### 5.1 Taxonomia Básica - Categoria de Produtos
@@ -582,6 +595,7 @@ $args = [
 
 ---
 
+<a id="integracao-de-cpt-e-taxonomias"></a>
 ## Integração de CPT e Taxonomias
 
 ### 6.1 Queryar CPT com Taxonomia
@@ -650,6 +664,7 @@ $args = [
 
 ---
 
+<a id="funcoes-essenciais"></a>
 ## Funções Essenciais
 
 ### 7.1 Funções de Taxonomias
@@ -692,6 +707,7 @@ wp_insert_term('Novo Produto', 'product_cat', [
 
 ---
 
+<a id="boas-praticas"></a>
 ## Boas Práticas
 
 ### 8.1 Checklist

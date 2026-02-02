@@ -14,22 +14,24 @@
 ## 📑 Índice
 
 1. [Por Que Testing Throughout?](#por-que-testing-throughout)
-2. [Setup Básico de Testes](#setup-básico-de-testes)
+2. [Setup Básico de Testes](#setup-basico-de-testes)
 3. [Fase 1: Testando Hook System](#fase-1-testando-hook-system)
 4. [Fase 2: Testando REST API](#fase-2-testando-rest-api)
-5. [Fase 3: Testando REST API Avançado](#fase-3-testando-rest-api-avançado)
+5. [Fase 3: Testando REST API Avançado](#fase-3-testando-rest-api-avancado)
 6. [Fase 4: Testando Settings API](#fase-4-testando-settings-api)
 7. [Fase 5: Testando Custom Post Types](#fase-5-testando-custom-post-types)
 8. [Fase 6: Testando Shortcodes e Blocks](#fase-6-testando-shortcodes-e-blocks)
 9. [Fase 7: Testando WP-CLI Commands](#fase-7-testando-wp-cli-commands)
 10. [Fase 8: Testando Performance e Cache](#fase-8-testando-performance-e-cache)
-11. [Fase 12: Testando Segurança](#fase-12-testando-segurança)
+11. [Fase 12: Testando Segurança](#fase-12-testando-seguranca)
 12. [Fase 13: Testando Arquitetura](#fase-13-testando-arquitetura)
 13. [Fase 15: Testando Async Jobs](#fase-15-testando-async-jobs)
-14. [Boas Práticas](#boas-práticas)
+14. [Boas Práticas](#boas-praticas)
+15. [Resumo](#resumo)
 
 ---
 
+<a id="por-que-testing-throughout"></a>
 ## Por Que Testing Throughout?
 
 ### Problema: Testing como Tema Isolado
@@ -69,6 +71,7 @@
 
 ---
 
+<a id="setup-basico-de-testes"></a>
 ## Setup Básico de Testes
 
 ### Instalação PHPUnit
@@ -160,6 +163,7 @@ require getenv('WP_TESTS_DIR') . '/includes/bootstrap.php';
 
 ---
 
+<a id="fase-1-testando-hook-system"></a>
 ## Fase 1: Testando Hook System
 
 ### Mocking WordPress Functions
@@ -567,6 +571,7 @@ class ProductManagerTest extends WP_UnitTestCase {
 
 ---
 
+<a id="fase-2-testando-rest-api"></a>
 ## Fase 2: Testando REST API
 
 ### Setup para Testes REST
@@ -871,6 +876,7 @@ class RestErrorHandlingTest extends WP_UnitTestCase {
 
 ---
 
+<a id="fase-3-testando-rest-api-avancado"></a>
 ## Fase 3: Testando REST API Avançado
 
 ### Testando Schema Validation Completo
@@ -1118,6 +1124,7 @@ class RestErrorHandlingTest extends WP_UnitTestCase {
 
 ---
 
+<a id="fase-4-testando-settings-api"></a>
 ## Fase 4: Testando Settings API
 
 ### Testando Settings Registration
@@ -1328,6 +1335,7 @@ class MetaBoxTest extends WP_UnitTestCase {
 
 ---
 
+<a id="fase-5-testando-custom-post-types"></a>
 ## Fase 5: Testando Custom Post Types
 
 ### Testando CPT Registration
@@ -1538,6 +1546,7 @@ class TaxonomyTest extends WP_UnitTestCase {
 
 ---
 
+<a id="fase-6-testando-shortcodes-e-blocks"></a>
 ## Fase 6: Testando Shortcodes e Blocks
 
 ### Testando Shortcodes
@@ -1658,6 +1667,7 @@ class BlockTest extends WP_UnitTestCase {
 
 ---
 
+<a id="fase-7-testando-wp-cli-commands"></a>
 ## Fase 7: Testando WP-CLI Commands
 
 ### Testando Custom WP-CLI Commands
@@ -1703,6 +1713,7 @@ class WpCliCommandTest extends WP_UnitTestCase {
 
 ---
 
+<a id="fase-8-testando-performance-e-cache"></a>
 ## Fase 8: Testando Performance e Cache
 
 ### Testando Transients
@@ -1801,6 +1812,7 @@ class QueryPerformanceTest extends WP_UnitTestCase {
 
 ---
 
+<a id="fase-12-testando-seguranca"></a>
 ## Fase 12: Testando Segurança
 
 ### Testando Sanitização
@@ -1887,6 +1899,7 @@ class SecurityTest extends WP_UnitTestCase {
 
 ---
 
+<a id="fase-13-testando-arquitetura"></a>
 ## Fase 13: Testando Arquitetura
 
 ### Testando SOLID Principles
@@ -2147,6 +2160,7 @@ class DIContainerTest extends WP_UnitTestCase {
 
 ---
 
+<a id="fase-15-testando-async-jobs"></a>
 ## Fase 15: Testando Async Jobs
 
 ### Testando Action Scheduler
@@ -2409,6 +2423,7 @@ class BackgroundProcessingTest extends WP_UnitTestCase {
 
 ---
 
+<a id="boas-praticas"></a>
 ## Boas Práticas
 
 ### 1. Nomenclatura de Testes
@@ -2525,6 +2540,7 @@ public function test_user_cannot_access_admin_without_permission(): void {
 
 ---
 
+<a id="resumo"></a>
 ## Resumo
 
 ### O Que Você Aprendeu

@@ -13,15 +13,18 @@
 
 ## 📑 Índice
 
-1. [Princípios Fundamentais](#princípios-fundamentais)
-2. [Padrões de Error Handling](#padrões-de-error-handling)
+1. [Princípios Fundamentais](#principios-fundamentais)
+2. [Padrões de Error Handling](#padroes-de-error-handling)
 3. [Error Handling por Contexto](#error-handling-por-contexto)
 4. [Logging e Monitoramento](#logging-e-monitoramento)
 5. [Error Recovery Strategies](#error-recovery-strategies)
 6. [Best Practices](#best-practices)
+7. [Checklist de Error Handling](#checklist-de-error-handling)
+8. [Recursos Adicionais](#recursos-adicionais)
 
 ---
 
+<a id="principios-fundamentais"></a>
 ## Princípios Fundamentais
 
 ### 1. Fail Fast, Fail Loud
@@ -99,6 +102,7 @@ if (!current_user_can('edit_post', $post_id)) {
 
 ---
 
+<a id="padroes-de-error-handling"></a>
 ## Padrões de Error Handling
 
 ### Padrão 1: Try-Catch com Contexto
@@ -358,6 +362,7 @@ WordPressErrorHandler::register();
 
 ---
 
+<a id="error-handling-por-contexto"></a>
 ## Error Handling por Contexto
 
 ### REST API
@@ -462,6 +467,7 @@ class FileOperation {
 
 ---
 
+<a id="logging-e-monitoramento"></a>
 ## Logging e Monitoramento
 
 ### Structured Logging
@@ -523,6 +529,7 @@ class StructuredLogger {
 
 ---
 
+<a id="error-recovery-strategies"></a>
 ## Error Recovery Strategies
 
 ### Retry Logic
@@ -548,6 +555,7 @@ class StructuredLogger {
 
 ---
 
+<a id="best-practices"></a>
 ## Best Practices
 
 ### ✅ DO
@@ -663,6 +671,7 @@ class StructuredLogger {
 
 ---
 
+<a id="checklist-de-error-handling"></a>
 ## Checklist de Error Handling
 
 - [ ] Todos os erros são logados com contexto suficiente
@@ -684,6 +693,7 @@ class StructuredLogger {
 
 ---
 
+<a id="recursos-adicionais"></a>
 ## Recursos Adicionais
 
 - [Fase 2 - REST API Error Handling](./002-WordPress-Fase-2-REST-API-Fundamentos.md#2121-error-handling-patterns-completos)

@@ -13,19 +13,25 @@
 
 ## 📑 Índice
 
-1. [Conceitos Básicos da REST API](#conceitos-básicos-da-rest-api)
-2. [Registrar Rotas Customizadas](#registrar-rotas-customizadas)
-3. [REST Controllers (OOP)](#rest-controllers-oop)
-4. [Validação e Sanitização](#validação-e-sanitização)
-5. [Security Essentials](#security-essentials)
-6. [REST Authentication](#rest-authentication)
-7. [REST Permissions](#rest-permissions)
-8. [REST Response e Error Handling](#rest-response-e-error-handling)
-9. [Documentação e Schema](#documentação-e-schema)
-10. [REST Filters Avançados](#rest-filters-avançados)
+1. [Objetivos de Aprendizado](#objetivos-de-aprendizado)
+2. [Autoavaliação](#autoavaliacao)
+3. [Projeto Prático](#projeto-pratico)
+4. [Equívocos Comuns](#equivocos-comuns)
+5. [Conceitos Básicos da REST API](#conceitos-basicos-da-rest-api)
+6. [Registrar Rotas Customizadas](#registrar-rotas-customizadas)
+7. [REST Controllers (OOP)](#rest-controllers-oop)
+8. [Validação e Sanitização](#validacao-e-sanitizacao)
+9. [Security Essentials](#security-essentials)
+10. [REST Authentication](#rest-authentication)
+11. [REST Permissions](#rest-permissions)
+12. [REST Response e Error Handling](#rest-response-e-error-handling)
+13. [Documentação e Schema](#documentacao-e-schema)
+14. [REST Filters Avançados](#rest-filters-avancados)
+15. [Resumo da Fase 2](#resumo-da-fase-2)
 
 ---
 
+<a id="objetivos-de-aprendizado"></a>
 ## 🎯 Objetivos de Aprendizado
 
 Ao final desta fase, você será capaz de:
@@ -39,6 +45,7 @@ Ao final desta fase, você será capaz de:
 7. ✅ Documentar APIs usando schemas OpenAPI/Swagger
 8. ✅ Usar filters REST para customizar parâmetros de coleção e comportamento de queries
 
+<a id="autoavaliacao"></a>
 ## 📝 Autoavaliação
 
 Teste seu entendimento:
@@ -52,6 +59,7 @@ Teste seu entendimento:
 - [ ] Qual é a diferença entre `WP_REST_Response` e `WP_Error`?
 - [ ] Como você implementa idempotência em endpoints da REST API?
 
+<a id="projeto-pratico"></a>
 ## 🛠️ Projeto Prático
 
 **Construir:** API de Produtos E-commerce
@@ -69,6 +77,7 @@ Crie uma REST API para gerenciar produtos que:
 
 ---
 
+<a id="equivocos-comuns"></a>
 ## ❌ Equívocos Comuns
 
 ### Equívoco 1: "Endpoints da REST API são automaticamente seguros"
@@ -108,6 +117,7 @@ Crie uma REST API para gerenciar produtos que:
 
 ---
 
+<a id="conceitos-basicos-da-rest-api"></a>
 ## 📚 Conceitos Básicos da REST API
 
 ### 2.1 O que é REST?
@@ -232,6 +242,7 @@ curl -X POST https://seusite.com/wp-json/wp/v2/posts \
 
 ---
 
+<a id="registrar-rotas-customizadas"></a>
 ## 🛣️ Registrar Rotas Customizadas
 
 ### 2.5 Função `register_rest_route()`
@@ -690,6 +701,7 @@ function verificar_permissao_deletar(WP_REST_Request $request) {
 
 ---
 
+<a id="rest-controllers-oop"></a>
 ## 🏗️ REST Controllers (OOP)
 
 ### 2.7 Classe Base WP_REST_Controller
@@ -992,6 +1004,7 @@ new Product_Controller();
 
 ---
 
+<a id="validacao-e-sanitizacao"></a>
 ## ✅ Validação e Sanitização
 
 ### 2.8 Conceitos Essenciais
@@ -1151,6 +1164,7 @@ $args = [
 
 ---
 
+<a id="security-essentials"></a>
 ## 🔒 Security Essentials
 
 ### 2.9 Por Que Segurança Desde o Início?
@@ -1986,6 +2000,7 @@ Veja exemplos completos de formulário de contato, upload de arquivo e busca na 
 
 ---
 
+<a id="rest-authentication"></a>
 ## 🔐 REST Authentication
 
 ### 2.10 Métodos de Autenticação
@@ -2513,6 +2528,7 @@ async function refreshToken() {
 
 ---
 
+<a id="rest-permissions"></a>
 ## 👮 REST Permissions
 
 ### 2.11 Verificação de Permissões
@@ -2658,6 +2674,7 @@ if (current_user_can('manage_preco')) {
 
 ---
 
+<a id="rest-response-e-error-handling"></a>
 ## 📦 REST Response e Error Handling
 
 ### 2.12 WP_REST_Response e WP_Error
@@ -2963,6 +2980,7 @@ if (is_wp_error($result)) {
 
 ---
 
+<a id="documentacao-e-schema"></a>
 ## 📖 Documentação e Schema
 
 ### 2.13 Schema JSON e Documentação
@@ -3206,6 +3224,7 @@ add_action('rest_api_init', function() {
 
 ---
 
+<a id="rest-filters-avancados"></a>
 ## 🎨 REST Filters Avançados
 
 ### 2.14 Modificar Respostas com Filters
@@ -3468,6 +3487,7 @@ add_action('rest_post_dispatch', function($result, $server, $request) {
 
 ---
 
+<a id="resumo-da-fase-2"></a>
 ## 🎓 Resumo da Fase 2
 
 Ao dominar a **Fase 2**, você entenderá:

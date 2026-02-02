@@ -13,25 +13,31 @@
 
 ## 📑 Índice
 
-1. [Fundamentos de Segurança WordPress](#fundamentos-de-segurança-wordpress)
-2. [Input Validation e Sanitization](#input-validation-e-sanitization)
-3. [Escapando Output](#escapando-output)
-4. [Nonces para Proteção CSRF](#nonces-para-proteção-csrf)
-5. [Capabilities e Permissões](#capabilities-e-permissões)
-6. [Prepared Statements](#prepared-statements)
-7. [Authentication e Password Security](#authentication-e-password-security)
-8. [File Upload Security](#file-upload-security)
-9. [REST API Security](#rest-api-security)
-10. [Security Headers](#security-headers)
-11. [Logging & Monitoring](#logging--monitoring)
-12. [Environment Configuration](#environment-configuration)
-13. [Incident Response](#incident-response)
-14. [Server Security](#server-security)
-15. [Code Review Checklist](#code-review-checklist)
-16. [Best Practices Finais](#best-practices-finais)
+1. [Objetivos de Aprendizado](#objetivos-de-aprendizado)
+2. [Autoavaliação](#autoavaliacao)
+3. [Projeto Prático](#projeto-pratico)
+4. [Equívocos Comuns](#equivocos-comuns)
+5. [Fundamentos de Segurança WordPress](#fundamentos-de-seguranca-wordpress)
+6. [Input Validation e Sanitization](#input-validation-e-sanitization)
+7. [Escapando Output](#escapando-output)
+8. [Nonces para Proteção CSRF](#nonces-para-protecao-csrf)
+9. [Capabilities e Permissões](#capabilities-e-permissoes)
+10. [Prepared Statements](#prepared-statements)
+11. [Authentication e Password Security](#authentication-e-password-security)
+12. [File Upload Security](#file-upload-security)
+13. [REST API Security](#rest-api-security)
+14. [Security Headers](#security-headers)
+15. [Logging & Monitoring](#logging-monitoring)
+16. [Environment Configuration](#environment-configuration)
+17. [Incident Response](#incident-response)
+18. [Code Review Checklist](#code-review-checklist)
+19. [Best Practices Finais](#best-practices-finais)
+20. [Servidor Web Security](#servidor-web-security)
+21. [Resumo da Fase 12](#resumo-da-fase-12)
 
 ---
 
+<a id="objetivos-de-aprendizado"></a>
 ## 🎯 Objetivos de Aprendizado
 
 Ao final desta fase, você será capaz de:
@@ -45,6 +51,7 @@ Ao final desta fase, você será capaz de:
 7. ✅ Proteger uploads de arquivos com validação e armazenamento adequados
 8. ✅ Aplicar security headers e seguir boas práticas de segurança do WordPress
 
+<a id="autoavaliacao"></a>
 ## 📝 Autoavaliação
 
 Teste seu entendimento:
@@ -58,6 +65,7 @@ Teste seu entendimento:
 - [ ] Quais security headers você deve implementar para sites WordPress?
 - [ ] O que deve ser incluído em um checklist de revisão de código de segurança?
 
+<a id="projeto-pratico"></a>
 ## 🛠️ Projeto Prático
 
 **Construir:** Plugin Seguro Primeiro
@@ -77,6 +85,7 @@ Crie um plugin que:
 
 ---
 
+<a id="equivocos-comuns"></a>
 ## ❌ Equívocos Comuns
 
 ### Equívoco 1: "WordPress é inseguro por padrão"
@@ -116,6 +125,7 @@ Crie um plugin que:
 
 ---
 
+<a id="fundamentos-de-seguranca-wordpress"></a>
 ## 🔓 Fundamentos de Segurança WordPress
 
 ### Principais Vulnerabilidades
@@ -142,6 +152,7 @@ Crie um plugin que:
 
 ---
 
+<a id="input-validation-e-sanitization"></a>
 ## ✅ Input Validation e Sanitization
 
 ### Exemplo 1: Sistema Completo de Validação
@@ -361,6 +372,7 @@ class Meu_Plugin_Advanced_Validator {
 
 ---
 
+<a id="escapando-output"></a>
 ## 🏷️ Escapando Output
 
 ### Exemplo: Contextos de Escape
@@ -454,6 +466,7 @@ class Meu_Plugin_Output_Escape {
 
 ---
 
+<a id="nonces-para-protecao-csrf"></a>
 ## 🛡️ Nonces para Proteção CSRF
 
 ### Exemplo: Nonces em Formulários
@@ -544,6 +557,7 @@ class Meu_Plugin_Nonce_Security {
 
 ---
 
+<a id="capabilities-e-permissoes"></a>
 ## 👤 Capabilities e Permissões
 
 ### Exemplo: Sistema de Capacidades
@@ -629,6 +643,7 @@ class Meu_Plugin_Capabilities {
 
 ---
 
+<a id="prepared-statements"></a>
 ## 🔒 Prepared Statements
 
 ### Exemplo: Queries Seguras
@@ -734,6 +749,7 @@ class Meu_Plugin_Database_Security {
 
 ---
 
+<a id="authentication-e-password-security"></a>
 ## 🔑 Authentication e Password Security
 
 ### Exemplo: Autenticação Segura
@@ -826,6 +842,7 @@ class Meu_Plugin_Authentication {
 
 ---
 
+<a id="file-upload-security"></a>
 ## 📁 File Upload Security
 
 ### Exemplo: Upload Seguro
@@ -929,6 +946,7 @@ class Meu_Plugin_File_Upload {
 
 ---
 
+<a id="rest-api-security"></a>
 ## 🔌 REST API Security
 
 ### Exemplo: Endpoints Seguros
@@ -1033,6 +1051,7 @@ class Meu_Plugin_REST_Security {
 
 ---
 
+<a id="security-headers"></a>
 ## 🔐 Security Headers
 
 ### Exemplo: Headers de Segurança
@@ -1116,6 +1135,7 @@ new Meu_Plugin_Security_Headers();
 
 ---
 
+<a id="logging-monitoring"></a>
 ## 📊 Logging & Monitoring
 
 ### Exemplo: Sistema de Logs
@@ -1238,6 +1258,7 @@ class Meu_Plugin_Security_Logger {
 
 ---
 
+<a id="environment-configuration"></a>
 ## 🔧 Environment Configuration
 
 ### Exemplo: Gerenciamento de Secrets
@@ -1315,6 +1336,7 @@ MEU_PLUGIN_ENV=production
 
 ---
 
+<a id="incident-response"></a>
 ## 🚨 Incident Response
 
 ### Plano de Resposta a Incidentes
@@ -1373,6 +1395,7 @@ class Meu_Plugin_Incident_Response {
 
 ---
 
+<a id="code-review-checklist"></a>
 ## ✅ Code Review Checklist
 
 ```php
@@ -1437,6 +1460,7 @@ GENERAL:
 
 ---
 
+<a id="best-practices-finais"></a>
 ## 🎯 Best Practices Finais
 
 ### 20 Mantras de Segurança
@@ -1498,6 +1522,7 @@ GENERAL:
 
 ---
 
+<a id="servidor-web-security"></a>
 ## 📋 Servidor Web Security
 
 ### Nginx Configuration
@@ -1546,6 +1571,7 @@ location = /wp-login.php {
 
 ---
 
+<a id="resumo-da-fase-12"></a>
 ## 🎉 Resumo da Fase 12
 
 ### ✅ Tópicos Abordados

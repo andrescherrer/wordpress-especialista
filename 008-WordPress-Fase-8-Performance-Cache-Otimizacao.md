@@ -13,12 +13,12 @@
 
 ## 📑 Índice
 
-1. [Fundamentos de Performance](#fundamentos-de-performance)
-2. [Object Cache](#object-cache)
-3. [Cache Invalidation Patterns](#84-cache-invalidation-patterns)
-4. [Cache Warming Strategies](#85-cache-warming-strategies)
-5. [Cache Monitoring e Debugging](#86-cache-monitoring-e-debugging)
-6. [Exemplos Reais: WooCommerce, Blog, etc.](#87-exemplos-reais-woocommerce-blog-etc)
+1. [Objetivos de Aprendizado](#objetivos-de-aprendizado)
+2. [Autoavaliação](#autoavaliacao)
+3. [Projeto Prático](#projeto-pratico)
+4. [Equívocos Comuns](#equivocos-comuns)
+5. [Fundamentos de Performance no WordPress](#fundamentos-de-performance-no-wordpress)
+6. [Object Cache](#object-cache)
 7. [Transients API](#transients-api)
 8. [Fragment Caching](#fragment-caching)
 9. [Query Optimization](#query-optimization)
@@ -27,10 +27,11 @@
 12. [Asset Optimization](#asset-optimization)
 13. [Database Optimization](#database-optimization)
 14. [Performance Monitoring](#performance-monitoring)
-15. [Boas Práticas](#boas-práticas)
+15. [Boas Práticas de Performance](#boas-praticas-de-performance)
 
 ---
 
+<a id="objetivos-de-aprendizado"></a>
 ## 🎯 Objetivos de Aprendizado
 
 Ao final desta fase, você será capaz de:
@@ -44,6 +45,7 @@ Ao final desta fase, você será capaz de:
 7. ✅ Implementar page caching e integração CDN
 8. ✅ Aplicar boas práticas de monitoramento e otimização de performance
 
+<a id="autoavaliacao"></a>
 ## 📝 Autoavaliação
 
 Teste seu entendimento:
@@ -57,6 +59,7 @@ Teste seu entendimento:
 - [ ] Qual é a diferença entre page caching e object caching?
 - [ ] Como você mede e monitora performance de cache?
 
+<a id="projeto-pratico"></a>
 ## 🛠️ Projeto Prático
 
 **Construir:** Plugin de Otimização de Performance
@@ -75,6 +78,7 @@ Crie um plugin que:
 
 ---
 
+<a id="equivocos-comuns"></a>
 ## ❌ Equívocos Comuns
 
 ### Equívoco 1: "Mais cache é sempre melhor"
@@ -107,6 +111,7 @@ Crie um plugin que:
 
 ---
 
+<a id="fundamentos-de-performance-no-wordpress"></a>
 ## 🔍 Fundamentos de Performance no WordPress
 
 ### Principais Gargalos de Performance
@@ -130,6 +135,7 @@ Crie um plugin que:
 
 ---
 
+<a id="object-cache"></a>
 ## 💾 Object Cache - Cache de Objetos
 
 ### Exemplo 1: Cache Simples de Query
@@ -614,6 +620,7 @@ add_action('regenerate_cache_expensive_products', function($key, $group, $expira
 
 ---
 
+<a id="transients-api"></a>
 ## ⏱️ Transients API - Cache em Banco de Dados
 
 ### Exemplo 1: Transient Simples
@@ -1692,6 +1699,7 @@ add_action('meu_plugin_cleanup_transients', 'meu_plugin_cleanup_expired_transien
 
 ---
 
+<a id="fragment-caching"></a>
 ## 🎨 Fragment Caching - Cache de HTML
 
 ### Exemplo 1: Cache de Sidebar
@@ -1800,6 +1808,7 @@ public function get_related_posts_html($post_id) {
 
 ---
 
+<a id="query-optimization"></a>
 ## 🔍 Query Optimization - Otimização de Queries
 
 ### Evitar N+1 Queries
@@ -1895,6 +1904,7 @@ class Meu_Plugin_Query_Optimization {
 
 ---
 
+<a id="page-caching"></a>
 ## 📄 Page Caching - Cache de Página Completa
 
 ### Implementar Page Cache Manual
@@ -2005,6 +2015,7 @@ new Meu_Plugin_Page_Cache();
 
 ---
 
+<a id="cdn-integration"></a>
 ## 🌐 CDN Integration - Integração com CDN
 
 ### Reescrever URLs para CDN
@@ -2091,6 +2102,7 @@ new Meu_Plugin_CDN_Integration();
 
 ---
 
+<a id="asset-optimization"></a>
 ## ✂️ Asset Optimization - Otimização de Assets
 
 ### Minificação e Concatenação
@@ -2161,6 +2173,7 @@ new Meu_Plugin_Asset_Optimization();
 
 ---
 
+<a id="database-optimization"></a>
 ## 🗄️ Database Optimization - Otimização de Banco de Dados
 
 ### Análise e Otimização de Queries
@@ -2241,6 +2254,7 @@ new Meu_Plugin_Database_Optimization();
 
 ---
 
+<a id="performance-monitoring"></a>
 ## 📊 Performance Monitoring - Monitoramento de Performance
 
 ### Sistema de Profiling
@@ -2318,6 +2332,7 @@ class Meu_Plugin_Profiler {
 
 ---
 
+<a id="boas-praticas-de-performance"></a>
 ## ✅ Boas Práticas de Performance
 
 ### Checklist de Performance
