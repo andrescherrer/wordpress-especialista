@@ -8,4 +8,6 @@
 6. **Checklist:** Revise código com a lista DO/DON'T e o checklist antes de merge.
 7. **Recursos:** Consulte Fase 2 (REST errors), 3 (retry/fallback), 13 (arquitetura), 16 (async jobs).
 
+**Arquivos 08–10:** WP_Error em REST (08), finally recursos (09), log com contexto (10).
+
 **Teoria rápida:** [../REFERENCIA-RAPIDA.md](../REFERENCIA-RAPIDA.md).

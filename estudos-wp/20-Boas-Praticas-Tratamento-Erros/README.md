@@ -15,6 +15,9 @@
 | 5 | [05-logging-estruturado.php](pratica/05-logging-estruturado.php) | Structured logging com contexto, níveis e integração com monitoramento |
 | 6 | [06-best-practices-checklist.md](pratica/06-best-practices-checklist.md) | DO/DON'T e checklist de error handling |
 | 7 | [07-resumo-recursos.md](pratica/07-resumo-recursos.md) | Resumo e links para Fase 2, 3, 13, 16 |
+| 8 | [08-wp-error-rest.php](pratica/08-wp-error-rest.php) | WP_Error em REST + try/catch convertendo para WP_Error |
+| 9 | [09-finally-recursos.php](pratica/09-finally-recursos.php) | finally (fechar handle, limpar recurso) em try/catch |
+| 10 | [10-log-contexto-exemplo.php](pratica/10-log-contexto-exemplo.php) | Log com contexto (order_id, user_id) em JSON |
 
 **Como usar:** execute os trechos PHP em ambiente de desenvolvimento (WP_DEBUG); use os .md para revisão e checklist. Detalhes em [pratica/README.md](pratica/README.md).
 
