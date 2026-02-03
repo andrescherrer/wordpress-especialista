@@ -10,4 +10,10 @@
 
 **Arquivos 08–10:** WooCommerce hooks (08), ACF campos (09), headless endpoint (10).
 
+**Arquivos 11–16 (WooCommerce):** hooks tabela (11), checkout custom (12), gateway esqueleto (13), produto variável (14), relatórios REST (15), checklist WooCommerce (16).
+
+**Arquivos 17–21 (GraphQL):** WPGraphQL instalação (17), query básica (18), CPT e mutations (19), headless consumir GraphQL (20), REST vs GraphQL (21).
+
+**Arquivos 22–26 (contribuição):** contribuir core (22), publicar plugin .org (23), PHPCS WordPress (24), code review checklist (25), comunidade Slack/Make (26).
+
 **Teoria rápida:** no topo de cada `.php` há **REFERÊNCIA RÁPIDA**; uma página: [../REFERENCIA-RAPIDA.md](../REFERENCIA-RAPIDA.md).

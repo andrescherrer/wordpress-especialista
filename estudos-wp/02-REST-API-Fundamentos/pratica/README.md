@@ -9,3 +9,5 @@
 **Permalinks:** a REST API exige estrutura de links diferente de "Simples"; use "Nome do post" ou equivalente.
 
 **Arquivos 06–09:** endpoints GET/POST (06), erros e status HTTP (07), auth Application Password (08), tabela de args (09).
+
+**Arquivos 10–11 (JWT):** endpoint de login que emite JWT (10), permission_callback que valida JWT (11). Requer `composer require firebase/php-jwt`. Comparação JWT vs App Password vs OAuth2: ver 03-REST-API-Avancado/pratica/14-auth-jwt-vs-app-password-vs-oauth2.md.

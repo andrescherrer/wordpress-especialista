@@ -6,4 +6,6 @@
 
 **Arquivos 08–11:** shortcode box (08), widget completo (09), block mínimo (10), quando usar qual (11).
 
+**Arquivos 12–17 (blocos JS/React):** estrutura do bloco JS (12), block.json (13), edit.js (14), save.js (15), build @wordpress/scripts (16), checklist primeiro bloco JS (17).
+
 **Teoria rápida:** no topo de cada `.php` há um bloco **REFERÊNCIA RÁPIDA**. Tudo em uma página: [../REFERENCIA-RAPIDA.md](../REFERENCIA-RAPIDA.md).

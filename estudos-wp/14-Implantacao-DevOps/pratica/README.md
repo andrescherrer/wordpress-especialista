@@ -9,4 +9,6 @@
 
 **Arquivos 08–10:** docker worker/cron (08), GitHub Actions teste+deploy (09), backup/restore passos (10).
 
+**Arquivos 11–13 (escalabilidade):** fila externa SQS/RabbitMQ (11), banco read replica (12), checklist escala horizontal (13).
+
 **Teoria rápida:** comentários no topo dos arquivos e [../REFERENCIA-RAPIDA.md](../REFERENCIA-RAPIDA.md).
