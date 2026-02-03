@@ -7,4 +7,6 @@
 5. **Backup:** Automatize backup de DB + arquivos; envie cópia para outro servidor ou S3; teste restore com frequência; para RPO curto, considere PITR com binlog.
 6. **Monitoring:** Sentry (ou similar) para erros; logs estruturados; endpoint /health e uptime check; defina RTO/RPO e documente procedimentos de DR.
 
+**Arquivos 08–10:** docker worker/cron (08), GitHub Actions teste+deploy (09), backup/restore passos (10).
+
 **Teoria rápida:** comentários no topo dos arquivos e [../REFERENCIA-RAPIDA.md](../REFERENCIA-RAPIDA.md).

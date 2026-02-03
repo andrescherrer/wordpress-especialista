@@ -15,6 +15,9 @@
 | 5 | [05-deploy-rollback.md](pratica/05-deploy-rollback.md) | Script de deploy, migrations com WP-CLI, estratégia de rollback |
 | 6 | [06-backup-restore.md](pratica/06-backup-restore.md) | Script de backup, PITR (binlog), teste de restore |
 | 7 | [07-boas-praticas.md](pratica/07-boas-praticas.md) | Monitoring (Sentry, logs), RTO/RPO, checklist e equívocos |
+| 8 | [08-docker-worker-cron.md](pratica/08-docker-worker-cron.md) | Docker: worker e cron (fila e agendamento) |
+| 9 | [09-github-actions-teste-deploy.yml](pratica/09-github-actions-teste-deploy.yml) | GitHub Actions: teste (PHPUnit) + deploy (exemplo) |
+| 10 | [10-backup-restore-passos.md](pratica/10-backup-restore-passos.md) | Backup (DB + arquivos) e restore (passos) |
 
 **Como usar:** adapte os YAML/shell/PHP ao seu projeto. Nunca commitar `.env` ou credenciais; usar secrets no CI e .env local. Detalhes em [pratica/README.md](pratica/README.md).
 
