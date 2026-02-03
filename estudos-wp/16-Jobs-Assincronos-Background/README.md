@@ -15,6 +15,9 @@
 | 5 | [05-error-handling-retry.md](pratica/05-error-handling-retry.md) | Retry com exponential backoff, DLQ, circuit breaker, compensação |
 | 6 | [06-wpcron-dlq-equívocos.md](pratica/06-wpcron-dlq-equívocos.md) | Limitações do WP-Cron, DISABLE_WP_CRON, equívocos comuns |
 | 7 | [07-boas-praticas.md](pratica/07-boas-praticas.md) | Resumo, próximos passos e recursos |
+| 8 | [08-recurring-cancel.php](pratica/08-recurring-cancel.php) | Recurring (as_schedule_recurring_action) e cancelar série |
+| 9 | [09-retry-no-callback.php](pratica/09-retry-no-callback.php) | Retry manual no callback (tentativas, backoff) |
+| 10 | [10-webhook-receiver.php](pratica/10-webhook-receiver.php) | Webhook: assinatura HMAC e idempotência (X-Idempotency-Key) |
 
 **Como usar:** requer Action Scheduler (`composer require woocommerce/action-scheduler` ou plugin). Copie classes/trechos para seu plugin; adapte hooks e grupos. Detalhes em [pratica/README.md](pratica/README.md).
 

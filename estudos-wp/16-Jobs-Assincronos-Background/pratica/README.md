@@ -6,4 +6,6 @@
 4. **Erros:** Retry com exponential backoff; distinga erros temporários (retentar) de permanentes (DLQ); considere circuit breaker para APIs externas.
 5. **WP-Cron:** Em produção use `DISABLE_WP_CRON` e cron real; para jobs assíncronos e filas use Action Scheduler.
 
+**Arquivos 08–10:** recurring e cancelar (08), retry no callback (09), webhook receiver (10).
+
 **Teoria rápida:** no topo de cada `.php` há **REFERÊNCIA RÁPIDA**; uma página: [../REFERENCIA-RAPIDA.md](../REFERENCIA-RAPIDA.md).
