@@ -15,6 +15,9 @@
 | 5 | [05-migrations.php](pratica/05-migrations.php) | migrate, rollback, list (sistema de migrations) |
 | 6 | [06-debug-report.php](pratica/06-debug-report.php) | debug report, performance, clear (ferramentas de debug) |
 | 7 | [07-automacao-boas-praticas.md](pratica/07-automacao-boas-praticas.md) | Scripts de deploy, CI/CD (GitHub Actions), documentação e erros |
+| 8 | [08-progress-bar.php](pratica/08-progress-bar.php) | Progress bar (make_progress_bar, tick, finish) |
+| 9 | [09-db-export-import.md](pratica/09-db-export-import.md) | db export/import no deploy |
+| 10 | [10-subcomandos-tabela.md](pratica/10-subcomandos-tabela.md) | Tabela subcomandos (list, get, create, delete) |
 
 **Como usar:** copie as classes para seu plugin; carregue apenas quando `defined('WP_CLI') && WP_CLI`. Requer Fase 7 (fundamentos). Detalhes em [pratica/README.md](pratica/README.md).
 
