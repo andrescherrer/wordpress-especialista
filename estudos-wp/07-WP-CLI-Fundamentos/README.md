@@ -15,6 +15,9 @@
 | 5 | [05-comando-crud-data.php](pratica/05-comando-crud-data.php) | Subcomando `data`: list, create, update, delete (CRUD) |
 | 6 | [06-comandos-essenciais.md](pratica/06-comandos-essenciais.md) | Referência rápida: core, plugin, theme, post, user, db |
 | 7 | [07-boas-praticas.md](pratica/07-boas-praticas.md) | Checklist, estrutura de projeto e registro no plugin |
+| 8 | [08-comando-args-assoc.php](pratica/08-comando-args-assoc.php) | Argumento posicional e assoc (--vezes, --quiet) |
+| 9 | [09-when-wp-load.php](pratica/09-when-wp-load.php) | When (after_wp_load) e mensagem amigável |
+| 10 | [10-comandos-uteis-tabela.md](pratica/10-comandos-uteis-tabela.md) | Tabela comandos úteis (core, plugin, db, user, option) |
 
 **Como usar:** copie as classes para um plugin e registre com `WP_CLI::add_command()`. Carregue os arquivos apenas quando `defined('WP_CLI') && WP_CLI`. Detalhes em [pratica/README.md](pratica/README.md).
 
