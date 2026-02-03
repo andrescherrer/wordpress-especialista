@@ -8,4 +8,6 @@
 6. **Action Scheduler:** as_has_scheduled_action após enqueue; as_unschedule_action e assertFalse(has_scheduled); do_action('action_scheduler_run_queue') para executar e assert callback.
 7. **Boas práticas:** Nome descritivo; AAA; testes independentes; mock só o necessário; coverage em código crítico.
 
+**Arquivos 08–10:** teste REST completo (08), repository mock (09), data provider validação (10).
+
 **Teoria rápida:** [../REFERENCIA-RAPIDA.md](../REFERENCIA-RAPIDA.md).

@@ -15,6 +15,9 @@
 | 5 | [05-testando-arquitetura-async.php](pratica/05-testando-arquitetura-async.php) | Repository/Service com mock; Action Scheduler (agendado, cancelado) |
 | 6 | [06-boas-praticas-testes.md](pratica/06-boas-praticas-testes.md) | Nomenclatura, AAA, um assertion, testes independentes, mocking, coverage |
 | 7 | [07-resumo-recursos.md](pratica/07-resumo-recursos.md) | Resumo do que foi aprendido e recursos |
+| 8 | [08-rest-test-completo.php](pratica/08-rest-test-completo.php) | Teste REST (status 200/400/403, body) |
+| 9 | [09-repository-mock.php](pratica/09-repository-mock.php) | Teste de Repository com mock |
+| 10 | [10-data-provider-validacao.php](pratica/10-data-provider-validacao.php) | Data provider (PHPUnit) para validação |
 
 **Como usar:** testes de integração exigem WordPress test suite (WP_TESTS_DIR). Unitários com mocks podem rodar só com PHPUnit. Detalhes em [pratica/README.md](pratica/README.md).
 
