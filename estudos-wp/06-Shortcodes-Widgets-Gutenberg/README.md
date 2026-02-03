@@ -1,0 +1,36 @@
+# 06 – Shortcodes, Widgets e Gutenberg
+
+**Foco: prática.** Teoria só quando precisar, sempre à mão.
+
+---
+
+## Comece pela prática
+
+| # | Arquivo | O que você vai fazer |
+|---|---------|----------------------|
+| 1 | [01-shortcode-basico.php](pratica/01-shortcode-basico.php) | add_shortcode, shortcode_atts, sanitize e escape |
+| 2 | [02-shortcode-atributos-conteudo.php](pratica/02-shortcode-atributos-conteudo.php) | Shortcode com conteúdo interno e atributos (alert) |
+| 3 | [03-widget-classico.php](pratica/03-widget-classico.php) | WP_Widget: construct, widget(), form(), update(), register_widget |
+| 4 | [04-bloco-dinamico-php.php](pratica/04-bloco-dinamico-php.php) | register_block_type com render_callback (bloco dinâmico em PHP) |
+| 5 | [05-block-patterns.md](pratica/05-block-patterns.md) | register_block_pattern com conteúdo HTML dos blocos |
+| 6 | [06-boas-praticas.md](pratica/06-boas-praticas.md) | Segurança, performance e equívocos comuns |
+
+**Como usar:** copie trechos para um plugin ou tema. Shortcodes/widgets em init ou plugins_loaded; blocos em init com function_exists('register_block_type'). Detalhes em [pratica/README.md](pratica/README.md).
+
+---
+
+## Teoria quando precisar
+
+- **No código:** cada arquivo `.php` tem no topo um bloco **Referência rápida** com a sintaxe daquele tópico.
+- **Uma página:** [REFERENCIA-RAPIDA.md](REFERENCIA-RAPIDA.md) – shortcodes, widgets, blocos (Ctrl+F).
+- **Fonte completa:** [006-WordPress-Fase-6-Shortcodes-Widgets-Gutenberg.md](../../006-WordPress-Fase-6-Shortcodes-Widgets-Gutenberg.md) na raiz do repositório.
+
+---
+
+## Objetivos da Fase 6
+
+- Criar shortcodes (simples, com atributos, com conteúdo) usando shortcode_atts e escape
+- Construir widget clássico com WP_Widget (widget, form, update)
+- Registrar bloco Gutenberg dinâmico com render_callback em PHP
+- Conhecer block patterns (register_block_pattern)
+- Aplicar sanitização e escape em shortcodes/widgets
