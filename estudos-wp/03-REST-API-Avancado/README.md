@@ -14,6 +14,10 @@
 | 4 | [04-tratamento-erros.php](pratica/04-tratamento-erros.php) | Error handler centralizado, validation_error, not_found |
 | 5 | [05-testes-api.md](pratica/05-testes-api.md) | Testar com curl e PHPUnit (WP_REST_Request, dispatch) |
 | 6 | [06-boas-praticas.md](pratica/06-boas-praticas.md) | Checklist e estrutura de projeto |
+| 7 | [08-schema-response.php](pratica/08-schema-response.php) | Schema (tipos, properties) em register_rest_route |
+| 8 | [09-paginacao-headers.php](pratica/09-paginacao-headers.php) | Paginação (page, per_page) + X-WP-Total, X-WP-TotalPages |
+| 9 | [10-retry-fallback.md](pratica/10-retry-fallback.md) | Retry e fallback em chamadas externas |
+| 10 | [11-checklist-rest-avancado.md](pratica/11-checklist-rest-avancado.md) | Checklist REST avançado (schema, permissions, pagination) |
 
 **Como usar:** copie trechos para um plugin; controllers usam `rest_api_init`. Detalhes em [pratica/README.md](pratica/README.md).
 
