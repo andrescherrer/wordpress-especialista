@@ -15,6 +15,9 @@
 | 5 | [05-arquitetura-di-events-repository.php](pratica/05-arquitetura-di-events-repository.php) | DI com type hint/interface, eventos com logging seguro, repository com sanitização |
 | 6 | [06-devops-secrets-ssl-database.md](pratica/06-devops-secrets-ssl-database.md) | Secrets (env, .gitignore), SSL/TLS e HSTS, DB em rede interna/socket |
 | 7 | [07-checklist-code-review.md](pratica/07-checklist-code-review.md) | Checklist de revisão: input, output, SQL, auth, dados sensíveis, uploads, REST, erros, secrets, infra |
+| 8 | [08-upload-errado-vs-correto.php](pratica/08-upload-errado-vs-correto.php) | Upload inseguro vs seguro (tipo, tamanho, wp_handle_upload) |
+| 9 | [09-rest-permission-errado-vs-correto.php](pratica/09-rest-permission-errado-vs-correto.php) | REST sem permission vs com capability por recurso |
+| 10 | [10-anti-padroes-por-fase.md](pratica/10-anti-padroes-por-fase.md) | Resumo anti-padrões por fase (Core, REST, Settings, CPT, Arquitetura, DevOps) |
 
 **Como usar:** os `.php` mostram anti-padrão vs solução correta; use os `.md` para revisão e checklist. Detalhes em [pratica/README.md](pratica/README.md).
 

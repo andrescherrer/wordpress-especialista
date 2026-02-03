@@ -8,4 +8,6 @@
 6. **DevOps:** Secrets em env; .env no .gitignore; HTTPS e HSTS; DB em rede interna ou socket.
 7. **Checklist:** Use o checklist em 07-checklist-code-review.md em todo code review de segurança.
 
+**Arquivos 08–10:** upload errado vs correto (08), REST permission errado vs correto (09), anti-padrões por fase (10).
+
 **Teoria rápida:** [../REFERENCIA-RAPIDA.md](../REFERENCIA-RAPIDA.md). **Segurança avançada:** Fase 12.
