@@ -1,0 +1,107 @@
+# REFERÊNCIA RÁPIDA – Docker Compose desenvolvimento WordPress
+#
+# Serviços: db (MySQL), php (PHP-FPM), nginx, redis, wp-cli.
+# Health checks em db e redis; depends_on com condition: service_healthy no php.
+# Volumes: código no host montado em /var/www/html; dados em named volumes.
+# .env: use para MYSQL_ROOT_PASSWORD, DB_NAME, etc.; não versionar .env.
+#
+# Uso: cp para raiz do projeto como docker-compose.yml; docker compose up -d
+# Para extensões (pdo_mysql, gd, redis): use build com Dockerfile (ver fonte).
+# Fonte: 014-WordPress-Fase-14-Implantacao-DevOps.md (14.1)
+
+version: '3.9'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: wp_db_dev
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
+      MYSQL_DATABASE: ${DB_NAME:-wordpress_dev}
+      MYSQL_USER: ${DB_USER:-wordpress}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-wordpress}
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - wp_network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  php:
+    # Para usar Dockerfile local: build: context: . ; dockerfile: docker/php/Dockerfile
+    image: php:8.2-fpm-alpine
+    container_name: wp_php_dev
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_NAME: ${DB_NAME:-wordpress_dev}
+      DB_USER: ${DB_USER:-wordpress}
+      DB_PASSWORD: ${DB_PASSWORD:-wordpress}
+      WP_ENV: development
+      WP_DEBUG: "true"
+    volumes:
+      - .:/var/www/html
+    networks:
+      - wp_network
+    user: "1000:1000"
+
+  nginx:
+    image: nginx:alpine
+    container_name: wp_nginx_dev
+    depends_on:
+      - php
+    ports:
+      - "80:80"
+    volumes:
+      - .:/var/www/html
+      # Montar config PHP-FPM: ./docker/nginx/default.conf -> /etc/nginx/conf.d/default.conf:ro
+    networks:
+      - wp_network
+
+  redis:
+    image: redis:7-alpine
+    container_name: wp_redis_dev
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - wp_network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  wp-cli:
+    image: wordpress:cli
+    container_name: wp_cli_dev
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - .:/var/www/html
+    environment:
+      DB_HOST: db
+      DB_NAME: ${DB_NAME:-wordpress_dev}
+      DB_USER: ${DB_USER:-wordpress}
+      DB_PASSWORD: ${DB_PASSWORD:-wordpress}
+    networks:
+      - wp_network
+    user: "33:33"
+    entrypoint: wp
+
+volumes:
+  db_data:
+  redis_data:
+
+networks:
+  wp_network:
+    driver: bridge
