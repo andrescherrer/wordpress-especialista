@@ -15,6 +15,10 @@
 | 5 | [05-query-optimization.php](pratica/05-query-optimization.php) | Evitar N+1 (update_postmeta_cache), no_found_rows, update_post_term_cache |
 | 6 | [06-page-cache-cdn-assets.md](pratica/06-page-cache-cdn-assets.md) | Referência: page cache, CDN, otimização de assets |
 | 7 | [07-boas-praticas.md](pratica/07-boas-praticas.md) | Checklist, métricas (Core Web Vitals), ferramentas |
+| 8 | [09-object-cache-grupo-ttl.php](pratica/09-object-cache-grupo-ttl.php) | Object cache com grupo e TTL |
+| 9 | [10-transients-expiracao.php](pratica/10-transients-expiracao.php) | Transients com expiração e invalidação |
+| 10 | [11-enqueue-condicional.php](pratica/11-enqueue-condicional.php) | Enqueue condicional e defer |
+| 11 | [12-checklist-performance.md](pratica/12-checklist-performance.md) | Checklist performance (cache, queries, assets) |
 
 **Como usar:** copie as classes/funções para seu plugin ou tema. Object cache e transients exigem apenas o WordPress; cache persistente (Redis/Memcached) melhora em produção. Detalhes em [pratica/README.md](pratica/README.md).
 
