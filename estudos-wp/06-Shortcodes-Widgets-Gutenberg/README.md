@@ -14,6 +14,10 @@
 | 4 | [04-bloco-dinamico-php.php](pratica/04-bloco-dinamico-php.php) | register_block_type com render_callback (bloco dinâmico em PHP) |
 | 5 | [05-block-patterns.md](pratica/05-block-patterns.md) | register_block_pattern com conteúdo HTML dos blocos |
 | 6 | [06-boas-praticas.md](pratica/06-boas-praticas.md) | Segurança, performance e equívocos comuns |
+| 7 | [08-shortcode-box-conteudo.php](pratica/08-shortcode-box-conteudo.php) | Shortcode com conteúdo envolto [box]content[/box] |
+| 8 | [09-widget-classe-completa.php](pratica/09-widget-classe-completa.php) | Widget completo (form, update, widget) |
+| 9 | [10-block-minimo.php](pratica/10-block-minimo.php) | Block mínimo (attributes, render_callback) |
+| 10 | [11-quando-usar-qual.md](pratica/11-quando-usar-qual.md) | Tabela shortcode vs widget vs block (quando usar) |
 
 **Como usar:** copie trechos para um plugin ou tema. Shortcodes/widgets em init ou plugins_loaded; blocos em init com function_exists('register_block_type'). Detalhes em [pratica/README.md](pratica/README.md).
 
