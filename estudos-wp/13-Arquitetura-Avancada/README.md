@@ -15,6 +15,10 @@
 | 5 | [05-trade-offs-quando-usar.md](pratica/05-trade-offs-quando-usar.md) | Quando NÃO usar SOLID; decisão e regra prática |
 | 6 | [06-error-handling.md](pratica/06-error-handling.md) | Domain exceptions, tratamento em Service/Repository |
 | 7 | [07-boas-praticas.md](pratica/07-boas-praticas.md) | Resumo dos padrões, checklist, equívocos comuns |
+| 8 | [08-repository-completo.php](pratica/08-repository-completo.php) | Repository completo (find, findById, save, delete) |
+| 9 | [09-service-fluxo-completo.php](pratica/09-service-fluxo-completo.php) | Service com Repository + Validator (create/update) |
+| 10 | [10-container-pimple.php](pratica/10-container-pimple.php) | Container Pimple (bind, get, singleton) |
+| 11 | [11-tabela-padroes.md](pratica/11-tabela-padroes.md) | Tabela quando usar Repository, Service, Event, Factory |
 
 **Como usar:** copie classes/trechos para seu plugin. Use SOLID e padrões onde a complexidade do problema justifica; evite over-engineering em projetos pequenos. Detalhes em [pratica/README.md](pratica/README.md).
 

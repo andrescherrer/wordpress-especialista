@@ -9,4 +9,6 @@
 7. **Adapter/Strategy/Factory:** Adapter para APIs externas; Strategy para trocar algoritmo (desconto); Factory para criação centralizada.
 8. **Trade-offs:** Não aplicar SOLID onde não compensa (projeto pequeno, MVP, performance crítica). Preferir simplicidade quando a solução ficar mais complexa que o problema.
 
+**Arquivos 08–11:** repository completo (08), service fluxo completo (09), container Pimple (10), tabela padrões (11).
+
 **Teoria rápida:** no topo de cada `.php` há um bloco **REFERÊNCIA RÁPIDA**. Tudo em uma página: [../REFERENCIA-RAPIDA.md](../REFERENCIA-RAPIDA.md).
