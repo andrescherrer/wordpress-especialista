@@ -15,6 +15,9 @@
 | 5 | [05-data-providers.php](pratica/05-data-providers.php) | @dataProvider com array de casos de teste |
 | 6 | [06-integration-debug-deploy.md](pratica/06-integration-debug-deploy.md) | Integração, Query Monitor, Sentry, checklist e scripts de deploy |
 | 7 | [07-boas-praticas.md](pratica/07-boas-praticas.md) | Checklist: testes, qualidade, deploy, monitoramento |
+| 8 | [08-bootstrap-wp-unit.md](pratica/08-bootstrap-wp-unit.md) | Bootstrap e WP_UnitTestCase (integração WordPress) |
+| 9 | [09-testes-hooks.php](pratica/09-testes-hooks.php) | Testar action e filter (assert chamada, valor) |
+| 10 | [10-debug-ferramentas.md](pratica/10-debug-ferramentas.md) | WP_DEBUG, SCRIPT_DEBUG, Query Monitor |
 
 **Como usar:** arquivos `.php` de teste vão em `tests/Unit/` (ou `tests/`) do seu plugin e são executados com `./vendor/bin/phpunit`. Detalhes em [pratica/README.md](pratica/README.md).
 

@@ -5,4 +5,6 @@
 3. **Executar:** na raiz do plugin, `./vendor/bin/phpunit` ou `./vendor/bin/phpunit tests/Unit/NomeDoArquivoTest.php`.
 4. **Query Monitor / Sentry:** trechos em 06-integration-debug-deploy.md são para integrar em functions.php ou classe do plugin.
 
+**Arquivos 08–10:** bootstrap WP_UnitTestCase (08), testes de hooks (09), debug ferramentas (10).
+
 **Teoria rápida:** no topo de cada arquivo de teste há um bloco **REFERÊNCIA RÁPIDA**. Tudo em uma página: [../REFERENCIA-RAPIDA.md](../REFERENCIA-RAPIDA.md).
