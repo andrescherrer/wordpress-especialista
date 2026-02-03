@@ -14,6 +14,10 @@
 | 4 | [04-funcoes-termos.php](pratica/04-funcoes-termos.php) | get_terms, get_term, wp_get_post_terms, wp_set_post_terms |
 | 5 | [05-template-single-archive.md](pratica/05-template-single-archive.md) | single-{cpt}.php, archive-{cpt}.php na Template Hierarchy |
 | 6 | [06-boas-praticas.md](pratica/06-boas-praticas.md) | Checklist e equívocos comuns |
+| 7 | [07-cpt-rest-gutenberg.php](pratica/07-cpt-rest-gutenberg.php) | CPT com show_in_rest e rest_base (Gutenberg + REST) |
+| 8 | [08-cpt-meta-box.php](pratica/08-cpt-meta-box.php) | Meta box para CPT (nonce, capability, update_post_meta) |
+| 9 | [09-archive-filtro-tax.php](pratica/09-archive-filtro-tax.php) | Archive com filtro por termo (tax_query na URL) |
+| 10 | [10-cpt-parametros-tabela.md](pratica/10-cpt-parametros-tabela.md) | Tabela register_post_type (supports, capabilities, labels) |
 
 **Como usar:** copie trechos para um plugin ou tema; registrar no hook **init**. Detalhes em [pratica/README.md](pratica/README.md).
 
