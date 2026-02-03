@@ -14,6 +14,10 @@
 | 4 | [04-admin-notices-scripts.php](pratica/04-admin-notices-scripts.php) | admin_notices, admin_enqueue_scripts, wp_localize_script |
 | 5 | [05-validacao-settings-error.md](pratica/05-validacao-settings-error.md) | add_settings_error no sanitize_callback |
 | 6 | [06-boas-praticas.md](pratica/06-boas-praticas.md) | Checklist e equívocos comuns |
+| 7 | [08-settings-tabs.php](pratica/08-settings-tabs.php) | Tabs em página de settings (Geral / Avançado) |
+| 8 | [09-campos-tipos.php](pratica/09-campos-tipos.php) | Tipos de campo (text, number, checkbox, textarea, select) |
+| 9 | [10-admin-ajax.php](pratica/10-admin-ajax.php) | Admin AJAX (wp_ajax_*, nonce, wp_send_json_success) |
+| 10 | [11-sanitize-tabela.md](pratica/11-sanitize-tabela.md) | Tabela sanitize/validate por tipo de campo |
 
 **Como usar:** copie trechos para um plugin; menu em `admin_menu`, settings em `admin_init`. Detalhes em [pratica/README.md](pratica/README.md).
 
