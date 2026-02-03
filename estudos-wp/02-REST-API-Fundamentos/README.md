@@ -13,6 +13,10 @@
 | 3 | [03-validacao-sanitizacao.php](pratica/03-validacao-sanitizacao.php) | sanitize_callback, validate_callback, enum |
 | 4 | [04-permissoes-response.php](pratica/04-permissoes-response.php) | permission_callback, WP_Error, rest_ensure_response |
 | 5 | [05-autenticacao-seguranca.md](pratica/05-autenticacao-seguranca.md) | Cookie, Application Passwords, nonce, capability |
+| 6 | [06-endpoints-get-post.php](pratica/06-endpoints-get-post.php) | GET (listar) e POST (criar) em rotas separadas |
+| 7 | [07-erros-status-http.php](pratica/07-erros-status-http.php) | WP_Error + status HTTP (400, 401, 403, 404) |
+| 8 | [08-auth-application-password.php](pratica/08-auth-application-password.php) | Rota que exige autenticação (Application Password) |
+| 9 | [09-args-validacao-tabela.md](pratica/09-args-validacao-tabela.md) | Tabela de args (validate_callback, sanitize_callback, type) |
 
 **Como usar:** copie trechos para um plugin (REST API usa `rest_api_init`). Detalhes em [pratica/README.md](pratica/README.md).
 

@@ -7,3 +7,5 @@
 **Teoria rápida:** no topo de cada `.php` há um bloco **REFERÊNCIA RÁPIDA**. Tudo em uma página: [../REFERENCIA-RAPIDA.md](../REFERENCIA-RAPIDA.md).
 
 **Permalinks:** a REST API exige estrutura de links diferente de "Simples"; use "Nome do post" ou equivalente.
+
+**Arquivos 06–09:** endpoints GET/POST (06), erros e status HTTP (07), auth Application Password (08), tabela de args (09).

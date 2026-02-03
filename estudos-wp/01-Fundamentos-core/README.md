@@ -14,6 +14,10 @@
 | 4 | [04-bootstrap-hooks.php](pratica/04-bootstrap-hooks.php) | Quando usar `init`, `plugins_loaded`, `wp`, etc. |
 | 5 | [05-plugin-demo-standards.php](pratica/05-plugin-demo-standards.php) | Plugin completo + Coding Standards |
 | 6 | [06-template-hierarchy.md](pratica/06-template-hierarchy.md) | Qual template o WP carrega; conditional tags |
+| 7 | [07-wpdb-transacoes.php](pratica/07-wpdb-transacoes.php) | Transações com $wpdb (START TRANSACTION, COMMIT, ROLLBACK) |
+| 8 | [08-filters-cascata.php](pratica/08-filters-cascata.php) | Múltiplos filters em cascata (prioridade, remoção) |
+| 9 | [09-estrutura-constantes.md](pratica/09-estrutura-constantes.md) | Estrutura de diretórios WP e constantes |
+| 10 | [10-hooks-bootstrap-tabela.md](pratica/10-hooks-bootstrap-tabela.md) | Tabela de hooks de bootstrap (quando usar cada um) |
 
 **Como usar:** copie trechos para `functions.php` do tema ou vire plugin (o 05 já é plugin). Detalhes em [pratica/README.md](pratica/README.md).
 
