@@ -7,4 +7,6 @@
 5. **Banco:** sempre $wpdb->prepare() para valores vindos do usuário; nunca concatenar em SQL.
 6. **Upload:** validar MIME real, tamanho e extensão (whitelist); sanitizar nome do arquivo.
 
+**Arquivos 08–11:** capability por recurso (08), security headers/CORS (09), upload seguro (10), checklist segurança (11).
+
 **Teoria rápida:** no topo de cada `.php` há um bloco **REFERÊNCIA RÁPIDA**. Tudo em uma página: [../REFERENCIA-RAPIDA.md](../REFERENCIA-RAPIDA.md).

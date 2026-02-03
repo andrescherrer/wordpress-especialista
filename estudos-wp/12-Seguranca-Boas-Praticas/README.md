@@ -15,6 +15,10 @@
 | 5 | [05-security-headers-rest.md](pratica/05-security-headers-rest.md) | Security headers (send_headers); REST args e rate limit |
 | 6 | [06-checklist-code-review.md](pratica/06-checklist-code-review.md) | Checklist: input/output, nonces, capabilities, arquivos, acesso direto |
 | 7 | [07-boas-praticas.md](pratica/07-boas-praticas.md) | Princípios, ferramentas e equívocos comuns |
+| 8 | [08-capability-recurso.php](pratica/08-capability-recurso.php) | Capability por recurso (edit_post, $post_id) em REST e admin |
+| 9 | [09-security-headers-cors.md](pratica/09-security-headers-cors.md) | Security headers (X-Frame-Options, CSP) e CORS |
+| 10 | [10-upload-seguro.php](pratica/10-upload-seguro.php) | Upload seguro (MIME, tamanho, wp_handle_upload) |
+| 11 | [11-checklist-seguranca.md](pratica/11-checklist-seguranca.md) | Checklist segurança (input, output, SQL, nonces, upload) |
 
 **Como usar:** copie as classes/trechos para seu plugin. Sempre: validar entrada, sanitizar, escapar saída, nonce em formulários, capability antes de ações. Detalhes em [pratica/README.md](pratica/README.md).
 
