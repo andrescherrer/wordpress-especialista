@@ -15,6 +15,8 @@
 | 5 | [05-perfil-tempo-como-usar.md](pratica/05-perfil-tempo-como-usar.md) | Recomendações por perfil, tempo estimado e como usar o documento |
 | 6 | [06-dicas-aprendizado.md](pratica/06-dicas-aprendizado.md) | Dicas de aprendizado (prática, testing throughout, security, projetos) |
 | 7 | [07-resumo.md](pratica/07-resumo.md) | Resumo e próximos passos |
+| 8 | [08-cronograma-exemplo.md](pratica/08-cronograma-exemplo.md) | Cronograma semanal (2h/dia, 5 dias) para um path |
+| 9 | [09-exercicios-por-path.md](pratica/09-exercicios-por-path.md) | Lista de exercícios por path (1–2 por fase) |
 
 **Como usar:** identifique seu objetivo, escolha o path que mais se alinha, siga as fases na ordem recomendada e ajuste (incluir opcionais ou pular o que não for relevante). Detalhes em [pratica/README.md](pratica/README.md).
 

@@ -6,5 +6,6 @@
 4. **Perfil/Tempo:** Use [05-perfil-tempo-como-usar.md](05-perfil-tempo-como-usar.md) para conferir recomendação por perfil e tempo estimado.
 5. **Dicas:** Aplique [06-dicas-aprendizado.md](06-dicas-aprendizado.md) (prática, Testing Throughout, Security First, projetos, comunidade).
 6. **Ajuste:** Inclua fases opcionais ou pule as que não forem relevantes para você.
+7. **Arquivos 08–09:** cronograma semanal (08), exercícios por path (09).
 
 **Referência em uma página:** [../REFERENCIA-RAPIDA.md](../REFERENCIA-RAPIDA.md).
