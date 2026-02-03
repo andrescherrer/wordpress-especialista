@@ -5,4 +5,6 @@
 3. **i18n:** defina um text domain único (ex.: `meu-plugin`). Chame `load_plugin_textdomain()` em `plugins_loaded`. Todas as strings visíveis devem usar `__()`, `_e()`, etc. com o mesmo domain.
 4. **POT/PO/MO:** gere o POT com `wp i18n make-pot`; crie/edite .po por idioma; compile para .mo (Poedit ou msgfmt).
 
+**Arquivos 08–10:** switch_to_blog (08), i18n em template (09), fluxo POT/PO/MO (10).
+
 **Teoria rápida:** no topo de cada `.php` há um bloco **REFERÊNCIA RÁPIDA**. Tudo em uma página: [../REFERENCIA-RAPIDA.md](../REFERENCIA-RAPIDA.md).

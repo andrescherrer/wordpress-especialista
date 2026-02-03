@@ -15,6 +15,9 @@
 | 5 | [05-pot-wpcli-i18n.md](pratica/05-pot-wpcli-i18n.md) | Gerar POT (wp i18n make-pot), estrutura languages, WP-CLI |
 | 6 | [06-site-vs-network-options.md](pratica/06-site-vs-network-options.md) | get_option vs get_site_option; quando usar cada um |
 | 7 | [07-boas-praticas.md](pratica/07-boas-praticas.md) | Checklist i18n e Multisite; equívocos comuns |
+| 8 | [08-multisite-switch-blog.php](pratica/08-multisite-switch-blog.php) | switch_to_blog / restore_current_blog com get_option |
+| 9 | [09-i18n-funcoes-template.php](pratica/09-i18n-funcoes-template.php) | __(), _e(), esc_html__() em template |
+| 10 | [10-pot-po-mo-fluxo.md](pratica/10-pot-po-mo-fluxo.md) | Fluxo POT → PO → MO (wp i18n make-pot) |
 
 **Como usar:** copie as classes/trechos para seu plugin. Header do plugin: `Network: true` para ativação em rede. Detalhes em [pratica/README.md](pratica/README.md).
 
