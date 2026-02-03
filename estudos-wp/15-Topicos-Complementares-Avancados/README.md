@@ -15,6 +15,9 @@
 | 5 | [05-code-review-docs.md](pratica/05-code-review-docs.md) | Checklist de code review, PHPDoc, README e ferramentas (PHPCS, PHPStan) |
 | 6 | [06-community.md](pratica/06-community.md) | Contribuição, repositório de plugins, código de conduta |
 | 7 | [07-boas-praticas.md](pratica/07-boas-praticas.md) | Resumo, recomendações e recursos úteis |
+| 8 | [08-woocommerce-hooks.php](pratica/08-woocommerce-hooks.php) | WooCommerce: hooks em pedido (woocommerce_new_order) |
+| 9 | [09-acf-campos.php](pratica/09-acf-campos.php) | ACF: get_field, the_field, have_rows em template |
+| 10 | [10-headless-endpoint-exemplo.php](pratica/10-headless-endpoint-exemplo.php) | Headless: endpoint REST para front externo |
 
 **Como usar:** copie classes/trechos para seu plugin ou tema; adapte rate limits, headers e rotas ao seu namespace. Detalhes em [pratica/README.md](pratica/README.md).
 

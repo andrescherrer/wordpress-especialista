@@ -8,4 +8,6 @@
 6. **Headless:** Exponha CPT e endpoints customizados (homepage, blog, categories); formate resposta em rest_prepare_*; frontend consome REST ou GraphQL.
 7. **Code review:** Use o checklist (funcionalidade, qualidade, segurança, testes, documentação); PHPCS e PHPStan no pipeline; documente com PHPDoc e README.
 
+**Arquivos 08–10:** WooCommerce hooks (08), ACF campos (09), headless endpoint (10).
+
 **Teoria rápida:** no topo de cada `.php` há **REFERÊNCIA RÁPIDA**; uma página: [../REFERENCIA-RAPIDA.md](../REFERENCIA-RAPIDA.md).
